@@ -4,93 +4,127 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bahniman Talukdar — The Trust Layer for the Agent Economy</title>
-<meta name="description" content="Five working prototypes exploring the infrastructure AI agents will need: authorization, verification, memory, commerce, and decision rehearsal.">
+<meta name="description" content="Five working prototypes of the infrastructure the AI-agent economy is missing: authorization, verification-backed finance, organizational memory, agent commerce, and decision rehearsal.">
 <link rel="stylesheet" href="style.css">
+<style>
+.hero { padding: 46px 0 8px; }
+.hero .kicker { color: var(--accent); font: 600 14px Inter; letter-spacing: .14em; text-transform: uppercase; }
+.hero h1 {
+  background: linear-gradient(92deg, #eaf0f8 30%, var(--accent) 70%, var(--violet));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  margin-bottom: 14px;
+}
+.hero p.lead { color: var(--muted); font-size: 19px; max-width: 720px; }
+.thesis { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 8px; }
+.thesis span { background: var(--panel2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 14px; font-size: 13.5px; color: var(--muted); }
+.thesis b { color: var(--text); font-weight: 600; }
+.metric-row { display: flex; gap: 26px; flex-wrap: wrap; margin: 26px 0 6px; }
+.metric-row .m { font: 700 15px "Space Grotesk"; color: var(--text); }
+.metric-row .m small { display: block; font: 400 12.5px Inter; color: var(--dim); }
+</style>
 </head>
 <body>
 <div class="wrap">
 
-<h1>The Trust Layer for the Agent Economy</h1>
-<p class="tagline">Five working prototypes. Live demos in your browser, no installation. By
-<a href="https://github.com/Bahniman">Bahniman Talukdar</a>.</p>
-
-<div class="plain">
-<b>The idea in plain English.</b> AI assistants ("agents") are starting to do real things
-for people: spending money, booking services, checking work, making records. That creates a
-new problem nobody has solved: <b>how do we trust what software does in the real world?</b>
-Each prototype below answers one piece of that question, with working code you can try
-right now.
+<div class="hero">
+  <div class="kicker">Working prototypes · live demos · open source</div>
+  <h1>The Trust Layer for the<br>Agent Economy</h1>
+  <p class="lead">AI agents are beginning to spend money, certify work, hold institutional
+  memory, and transact — and the trust infrastructure for all of it is missing. These are five
+  working prototypes of that missing layer, each with a live demo and an explicit business
+  model.</p>
+  <div class="metric-row">
+    <div class="m">5<small>working prototypes</small></div>
+    <div class="m">5<small>in-browser demos, zero setup</small></div>
+    <div class="m">MIT<small>all code open source</small></div>
+    <div class="m"><a href="https://github.com/Bahniman">github.com/Bahniman</a><small>all repositories</small></div>
+  </div>
 </div>
 
-<h2>The five prototypes</h2>
+<div class="thesis">
+  <span><b>Authority</b> — who allowed this agent to act?</span>
+  <span><b>Reality</b> — did the physical work actually happen?</span>
+  <span><b>Memory</b> — who owns what the AI has learned?</span>
+  <span><b>Commerce</b> — who is actually buying?</span>
+  <span><b>Consequences</b> — what happens if we do this?</span>
+</div>
 
-<div class="grid">
-  <div class="card projcard">
-    <h3>Surety</h3>
-    <p class="one"><b>Plain English:</b> a permission slip for your AI assistant. You sign what
-    it may spend and where; anything else gets blocked or waits for your approval — with a
-    tamper-proof record of everything.</p>
-    <a class="btn" href="surety.html">Try the live demo</a>
-    <a class="btn secondary" href="https://github.com/Bahniman/surety">Code on GitHub</a>
-  </div>
+<h2>The prototypes</h2>
+<div class="projgrid">
 
-  <div class="card projcard">
+  <a class="proj" href="groundtruth.html">
+    <div class="rays"></div>
+    <div class="em">🛰️</div>
     <h3>GroundTruth</h3>
-    <p class="one"><b>Plain English:</b> when real-world work (like a road being built) is
-    verified with photos + AI + an accountable engineer's signature, the payment can happen in
-    days instead of months. Watch a measurement become money.</p>
-    <a class="btn" href="groundtruth.html">Try the live demo</a>
-    <a class="btn secondary" href="https://github.com/Bahniman/groundtruth">Code on GitHub</a>
-  </div>
+    <p>Verification-backed invoice financing for public works. AI + an accountable engineer
+    certify completed work; a bank advances <b>60% by the next morning</b> against the verified
+    receivable, instead of the contractor waiting 6–18 months for the treasury.</p>
+    <span class="go">Run the money-flow demo →</span>
+  </a>
 
-  <div class="card projcard">
+  <a class="proj" href="surety.html">
+    <div class="rays"></div>
+    <div class="em">🛡️</div>
+    <h3>Surety</h3>
+    <p>The authorization and liability rail for AI agents: signed spending mandates, in-line
+    enforcement, human approval above thresholds, and a tamper-evident action log — the
+    compliance layer that unblocks enterprise agent deployment.</p>
+    <span class="go">Watch an agent get caught →</span>
+  </a>
+
+  <a class="proj" href="heirloom.html">
+    <div class="rays"></div>
+    <div class="em">🏛️</div>
     <h3>Heirloom</h3>
-    <p class="one"><b>Plain English:</b> a company's memory (decisions, reasons, meeting notes)
-    stored in one safe place the company owns — so it survives when employees leave or AI
-    vendors change. Ask the same question as three different roles and see the difference.</p>
-    <a class="btn" href="heirloom.html">Try the live demo</a>
-    <a class="btn secondary" href="https://github.com/Bahniman/heirloom">Code on GitHub</a>
-  </div>
+    <p>Organizational memory as an asset the firm owns: role-scoped answers with sources,
+    knowledge that survives partner exits, and an open export format so switching AI vendors
+    never means corporate amnesia.</p>
+    <span class="go">Ask as three different roles →</span>
+  </a>
 
-  <div class="card projcard">
+  <a class="proj" href="turnstile.html">
+    <div class="rays"></div>
+    <div class="em">🚪</div>
     <h3>Turnstile</h3>
-    <p class="one"><b>Plain English:</b> a growing share of online shoppers are not people —
-    they are AI assistants shopping on someone's behalf. Turnstile tells a store how many, from
-    where, and helps the store sell to them properly.</p>
-    <a class="btn" href="turnstile.html">Try the live demo</a>
-    <a class="btn secondary" href="https://github.com/Bahniman/turnstile">Code on GitHub</a>
-  </div>
+    <p>Commerce analytics for the agent era: detect the AI shoppers in your traffic, stop
+    declining their orders as "fraud", attribute their revenue, and serve them a
+    machine-readable storefront that converts.</p>
+    <span class="go">Run a day of traffic →</span>
+  </a>
 
-  <div class="card projcard">
+  <a class="proj" href="windtunnel.html">
+    <div class="rays"></div>
+    <div class="em">🌪️</div>
     <h3>Windtunnel</h3>
-    <p class="one"><b>Plain English:</b> pilots rehearse landings in simulators; companies
-    change prices with a spreadsheet and hope. Windtunnel rehearses a price change against
-    thousands of simulated customers first. Move the slider, see the outcome.</p>
-    <a class="btn" href="windtunnel.html">Try the live demo</a>
-    <a class="btn secondary" href="https://github.com/Bahniman/windtunnel">Code on GitHub</a>
-  </div>
+    <p>A rehearsal room for irreversible decisions: simulate a price change against thousands
+    of customers modeled from real behavioral data, see the outcome distribution and the
+    breaking segment — before any real customer feels it.</p>
+    <span class="go">Rehearse a price change →</span>
+  </a>
 
-  <div class="card projcard">
-    <h3>Why these five together?</h3>
-    <p class="one">Agents acting in the world create a trust vacuum: <b>authority</b> (Surety),
-    <b>physical reality</b> (GroundTruth), <b>memory</b> (Heirloom), <b>commerce</b>
-    (Turnstile), and <b>consequences</b> (Windtunnel). One thesis, five working answers.</p>
-  </div>
+  <a class="proj" href="https://github.com/Bahniman">
+    <div class="rays"></div>
+    <div class="em">🧩</div>
+    <h3>Why these five together</h3>
+    <p>Agents acting in the world create one trust vacuum with five faces: authority,
+    physical reality, memory, commerce, and consequences. One thesis, five working answers —
+    each independently a company, together a portfolio.</p>
+    <span class="go">All code on GitHub →</span>
+  </a>
 </div>
 
 <h2>About</h2>
 <div class="card">
-<p>I'm a product analyst turned MBA student (XLRI Jamshedpur, PGDM-GM). Before this I spent
-3.5 years building and measuring enterprise software workflows. These prototypes were designed
-by me and built in partnership with AI development tools — which is itself the point: this is
-what one person with product judgment and AI leverage can ship.</p>
-<p>Every prototype is honest about what it is: a working concept, with the gap to production
-documented in each repository. If any of these ideas interests you — as a collaborator,
-critic, or early user — reach out.</p>
-<p><a href="https://github.com/Bahniman">github.com/Bahniman</a></p>
+<p style="margin-top:0">I'm a product analyst turned MBA student (XLRI Jamshedpur). Before this I spent 3.5 years
+building and instrumenting enterprise software workflows. These prototypes were designed by me
+and built in partnership with AI development tools — which is itself the demonstration: this
+is what one person with product judgment and AI leverage ships in days, not quarters.</p>
+<p style="margin-bottom:0">Each repository documents honestly what is prototype and what the production design would be.
+If any of these interests you — as a collaborator, critic, pilot customer, or investor —
+<a href="https://github.com/Bahniman">reach out</a>.</p>
 </div>
 
-<div class="footer">Bahniman Talukdar · 2026 · All prototypes MIT-licensed ·
+<div class="footer">Bahniman Talukdar · 2026 · MIT-licensed ·
 <a href="https://github.com/Bahniman">GitHub</a></div>
 </div>
 </body>
