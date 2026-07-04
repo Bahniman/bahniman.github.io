@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surety — live demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<p class="crumb"><a href="index.html">&larr; All prototypes</a></p>
+<h1>Surety</h1>
+<p class="tagline">A permission slip for your AI assistant — enforced, and provable.</p>
+
+<div class="plain">
+<b>What is this, in plain English?</b> Imagine giving your assistant your credit card and a
+note: "up to ₹5,000, flights only, these two websites, ask me first above ₹2,500." Surety is
+that note, made digital and enforceable. The AI cannot exceed it, and every action is written
+into a record that cannot be quietly edited — like a diary where tearing out a page leaves
+visible damage.
+</div>
+
+<details><summary>Jargon decoder (tap to open)</summary>
+<table class="decoder">
+<tr><th>Term</th><th>What it actually means</th></tr>
+<tr><td>Agent</td><td>An AI assistant that can take actions (spend, book, post), not just chat.</td></tr>
+<tr><td>Delegation certificate</td><td>The digital permission slip: what the agent may do, signed by you.</td></tr>
+<tr><td>Escrow</td><td>"Hold it and ask the human." The action waits until you approve or deny it.</td></tr>
+<tr><td>Audit log</td><td>The diary of everything the agent tried. Hash-chained = each entry is mathematically linked to the previous one, so editing any entry visibly breaks the chain.</td></tr>
+<tr><td>Blocked</td><td>The action was outside the permission slip, so it simply never happened.</td></tr>
+</table>
+</details>
+
+<h2>Your permission slip (the certificate)</h2>
+<div class="card">
+Budget: <b>₹5,000</b> &nbsp;|&nbsp; Allowed actions: <b>search flights, book flights</b>
+&nbsp;|&nbsp; Allowed sites: <b>makemytrip.com, airindia.com</b> &nbsp;|&nbsp;
+Ask me first above: <b>₹2,500</b>
+<div style="margin-top:8px">Spent so far: <b id="spent">₹0</b> &nbsp;·&nbsp; Remaining: <b id="left">₹5,000</b></div>
+</div>
+
+<h2>Now be the agent — try some actions</h2>
+<div class="card">
+<button class="btn" onclick="attempt('search_flights','makemytrip.com',0,'search flights BLR-DEL')">Search flights</button>
+<button class="btn" onclick="attempt('book_flight','airindia.com',2100,'book flight ₹2,100')">Book flight ₹2,100</button>
+<button class="btn" onclick="attempt('book_hotel','makemytrip.com',1800,'book hotel ₹1,800')">Book hotel ₹1,800</button>
+<button class="btn" onclick="attempt('book_flight','shady-travel.biz',900,'book via shady-travel.biz ₹900')">Book via shady site ₹900</button>
+<button class="btn" onclick="attempt('book_flight','makemytrip.com',2600,'book return flight ₹2,600')">Book return ₹2,600</button>
+<div id="escrowBox" style="display:none; margin-top:10px">
+  <span class="pill hold">WAITING FOR YOU</span> The agent wants to spend <b id="escAmt"></b>.
+  <button class="btn" onclick="resolveEscrow(true)">Approve</button>
+  <button class="btn secondary" onclick="resolveEscrow(false)">Deny</button>
+</div>
+</div>
+
+<h2>What happened (the tamper-proof log)</h2>
+<div class="log" id="log">The log is empty. Try an action above.</div>
+<div style="margin-top:10px">
+<button class="btn secondary" onclick="tamper()">Now try to secretly edit the log</button>
+<button class="btn secondary" onclick="resetAll()">Reset demo</button>
+</div>
+
+<h2>Why this matters</h2>
+<div class="card">
+Millions of AI assistants are about to hold people's delegated authority, and today there is
+no proof of who authorized what, no limits that travel with the agent, and no record that
+stands up afterward. Companies stall AI deployments at the pilot stage for exactly this
+reason. Surety is the missing permission-and-accountability layer — and at scale, its logs
+become the data an insurer needs to <i>insure</i> agent mistakes, the way contractors are
+bonded today.
+</div>
+
+<div class="footer">
+<a href="https://github.com/Bahniman/surety">Full code and technical docs on GitHub</a> ·
+This page runs the same logic as the repository's <code>demo.py</code>, in your browser. ·
+<a href="index.html">All prototypes</a>
+</div>
+</div>
+
+<script>
+const CERT = { budget: 5000, tools: ["search_flights","book_flight"],
+  domains: ["makemytrip.com","airindia.com"], threshold: 2500 };
+let spent = 0, chain = [], pendingEscrow = null, lastHash = "0000000000";
+
+function fakeHash(s){ let h=0; for (let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; }
+  return h.toString(16).padStart(8,"0"); }
+
+function addEntry(text, cls){
+  const body = chain.length + "|" + text + "|" + lastHash;
+  const h = fakeHash(body);
+  chain.push({ text, cls, prev: lastHash, hash: h, body });
+  lastHash = h;
+  render();
+}
+
+function render(extra){
+  const el = document.getElementById("log");
+  el.innerHTML = chain.map((e,i) =>
+    `#${i} <span class="${e.cls}">${e.text}</span>  <span style="color:#5b6d84">[${e.hash}]</span>`
+  ).join("\n") + (extra ? "\n\n" + extra : "");
+  document.getElementById("spent").textContent = "₹" + spent.toLocaleString("en-IN");
+  document.getElementById("left").textContent = "₹" + (CERT.budget - spent).toLocaleString("en-IN");
+}
+
+function attempt(tool, domain, amount, label){
+  if (pendingEscrow){ addEntry(`agent tried '${label}' while an approval was pending -> BLOCKED`, "no"); return; }
+  if (!CERT.tools.includes(tool)){
+    addEntry(`${label} -> BLOCKED: '${tool.replace("_"," ")}' is not on the permission slip`, "no"); return; }
+  if (!CERT.domains.some(d => domain.endsWith(d))){
+    addEntry(`${label} -> BLOCKED: ${domain} is not an allowed site`, "no"); return; }
+  if (amount && spent + amount > CERT.budget){
+    addEntry(`${label} -> BLOCKED: would exceed the ₹${CERT.budget.toLocaleString("en-IN")} budget (spent ₹${spent.toLocaleString("en-IN")})`, "no"); return; }
+  if (amount > CERT.threshold){
+    pendingEscrow = { amount, label };
+    document.getElementById("escrowBox").style.display = "block";
+    document.getElementById("escAmt").textContent = "₹" + amount.toLocaleString("en-IN");
+    addEntry(`${label} -> ON HOLD: above your ₹2,500 ask-me-first limit`, "hold"); return; }
+  spent += amount;
+  addEntry(`${label} -> ALLOWED${amount ? " (₹" + amount.toLocaleString("en-IN") + " spent)" : ""}`, "ok");
+}
+
+function resolveEscrow(approved){
+  document.getElementById("escrowBox").style.display = "none";
+  if (approved){
+    if (spent + pendingEscrow.amount <= CERT.budget){
+      spent += pendingEscrow.amount;
+      addEntry(`you APPROVED '${pendingEscrow.label}' -> executed`, "ok");
+    } else {
+      addEntry(`you approved, but budget re-check failed -> BLOCKED`, "no");
+    }
+  } else {
+    addEntry(`you DENIED '${pendingEscrow.label}' -> never executed`, "no");
+  }
+  pendingEscrow = null;
+}
+
+function tamper(){
+  if (chain.length < 2){ render("Run a few actions first, then try tampering."); return; }
+  const victim = chain.findIndex(e => e.cls === "no");
+  const idx = victim >= 0 ? victim : 1;
+  chain[idx].text = chain[idx].text.replace(/BLOCKED.*/, "ALLOWED (edited to hide the block)");
+  // verify the chain
+  let prev = "0000000000", broken = -1;
+  for (let i = 0; i < chain.length; i++){
+    const expect = fakeHash(i + "|" + chain[i].text + "|" + prev);
+    if (expect !== chain[i].hash){ broken = i; break; }
+    prev = chain[i].hash;
+  }
+  render(`TAMPER CHECK: entry #${idx} was edited to hide a blocked action...\n` +
+    (broken >= 0
+      ? `The math no longer adds up: the chain BREAKS at entry #${broken}. The edit is exposed.`
+      : `Chain intact (unexpected).`));
+}
+
+function resetAll(){ spent = 0; chain = []; lastHash = "0000000000"; pendingEscrow = null;
+  document.getElementById("escrowBox").style.display = "none";
+  document.getElementById("log").textContent = "The log is empty. Try an action above.";
+  render(); document.getElementById("log").textContent = "The log is empty. Try an action above."; }
+</script>
+</body>
+</html>

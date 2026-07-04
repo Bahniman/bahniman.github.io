@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turnstile — live demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<p class="crumb"><a href="index.html">&larr; All prototypes</a></p>
+<h1>Turnstile</h1>
+<p class="tagline">How much of your online store's traffic is actually AI, not people?</p>
+
+<div class="plain">
+<b>What is this, in plain English?</b> More and more online shopping is done by AI assistants
+on people's behalf — they browse, compare, and buy. But every store's analytics assumes
+visitors are humans. So stores can't answer a basic question: <b>how many of my visitors are
+software?</b> Turnstile spots the AI visitors, shows the store the real breakdown, and then
+serves those AI visitors a clean price list instead of a human web page. Press "Run a day of
+traffic" to see it work.
+</div>
+
+<details><summary>Jargon decoder (tap to open)</summary>
+<table class="decoder">
+<tr><th>Term</th><th>What it actually means</th></tr>
+<tr><td>Agent traffic</td><td>Website visits made by AI software, not a human clicking around.</td></tr>
+<tr><td>Classifier</td><td>The logic that decides "human or AI?" from clues in how the visit behaves.</td></tr>
+<tr><td>Signals</td><td>The clues: does the mouse move? did it load images? how fast did it act? does it announce itself?</td></tr>
+<tr><td>Attribution</td><td>Correctly crediting a sale to where it came from — e.g. "this purchase came via an AI assistant."</td></tr>
+<tr><td>AEO (Agent Experience Optimization)</td><td>Like SEO was for Google, but for AI shoppers: giving agents a clean, machine-readable offer instead of a human web page.</td></tr>
+<tr><td>Offer feed</td><td>A simple price+stock list built for machines to read, at a fixed address on the site.</td></tr>
+</table>
+</details>
+
+<h2>A day at a small online store</h2>
+<div class="card">
+<button class="btn" onclick="run()">Run a day of traffic</button>
+<button class="btn secondary" onclick="reset()">Reset</button>
+</div>
+<div class="log" id="log">Press "Run a day of traffic" to classify each visitor.</div>
+
+<div id="dash" style="display:none">
+<h2>The dashboard no store has today</h2>
+<div class="grid">
+  <div class="card"><div class="stat" id="s1">–<small>agent share of traffic</small></div></div>
+  <div class="card"><div class="stat" id="s2">–<small>agent-driven revenue</small></div></div>
+  <div class="card"><div class="stat" id="s3">–<small>human revenue</small></div></div>
+  <div class="card"><div class="stat" id="s4">–<small>AI platforms detected</small></div></div>
+</div>
+<div class="plain" id="insight"></div>
+</div>
+
+<h2>The clever part: sell to the agents (AEO)</h2>
+<div class="card">
+Instead of showing an AI a carousel and a cookie banner, Turnstile serves it this, at
+<code>/.well-known/agent-offers.json</code>:
+<div class="log" style="margin-top:8px">{
+  "store": "Demo D2C Store", "currency": "INR",
+  "products": [
+    { "name": "Insulated bottle 750ml", "price": 1499,
+      "in_stock": true, "ships_in_days": 3, "buy_endpoint": "/api/checkout?sku=BTL-01" },
+    { "name": "Insulated bottle 1L", "price": 2199,
+      "in_stock": true, "ships_in_days": 5, "buy_endpoint": "/api/checkout?sku=BTL-02" }
+  ]
+}</div>
+The agent gets clean data (fewer wrong orders); the store gets a correctly-attributed sale.
+Both sides win — which is why the standard would stick.
+</div>
+
+<h2>Why this matters</h2>
+<div class="card">
+Search traffic built an $80 billion optimization industry (SEO). Agent traffic is at the same
+starting line today — measurable, growing, and unmeasured by anyone. Whoever builds the tool
+that measures it gets to define the category, and the more stores join, the better the
+detection gets — a data advantage a latecomer can't simply copy.
+</div>
+
+<div class="footer">
+<a href="https://github.com/Bahniman/turnstile">Full code and technical docs on GitHub</a> ·
+This page mirrors the repository's <code>demo.py</code>. ·
+<a href="index.html">All prototypes</a>
+</div>
+</div>
+
+<script>
+const VISITORS = [
+  ["Person on Chrome, browsing", "human", null, "browse", 0, "mouse moving, loaded images"],
+  ["Person on iPhone, buys a bottle", "human", null, "buy", 1499, "mouse moving, normal timing"],
+  ["OpenClaw AI assistant, price-checking", "agent", "OpenClaw", "browse", 0, "announces itself; acted in 220 ms; no mouse"],
+  ["Automated browser, instant add-to-cart", "agent", "HeadlessChrome", "buy", 2199, "no mouse; skipped images; acted in 180 ms"],
+  ["Price-scraping script", "agent", "python-requests", "browse", 0, "never ran the page; no images"],
+  ["Browser-Use AI, completes a purchase", "agent", "BrowserUse", "buy", 3499, "announces itself; no mouse; instant"],
+  ["Person on Firefox, long browse", "human", null, "browse", 0, "22 mouse moves; slow, human timing"],
+  ["Unknown bot, no fingerprint", "agent", "unknown", "browse", 0, "no page run; no images loaded"],
+];
+let done = false;
+
+function run(){
+  const el = document.getElementById("log"); el.innerHTML = "";
+  VISITORS.forEach(v => {
+    const [label, verdict, plat, intent, rev, why] = v;
+    const cls = verdict === "human" ? "ok" : "no";
+    const tag = verdict === "human" ? "HUMAN" : "AGENT" + (plat ? " (" + plat + ")" : "");
+    el.innerHTML += `${label}\n   &rarr; <span class="${cls}">${tag}</span>  ·  ${why}\n\n`;
+  });
+  const agents = VISITORS.filter(v => v[1] === "agent");
+  const humans = VISITORS.filter(v => v[1] === "human");
+  const aRev = agents.reduce((s,v)=>s+v[4],0);
+  const hRev = humans.reduce((s,v)=>s+v[4],0);
+  const share = Math.round(agents.length / VISITORS.length * 100);
+  const plats = [...new Set(agents.map(v=>v[2]).filter(Boolean))];
+  document.getElementById("s1").innerHTML = share + "%<small>agent share of traffic</small>";
+  document.getElementById("s2").innerHTML = "₹" + aRev.toLocaleString("en-IN") + "<small>agent-driven revenue</small>";
+  document.getElementById("s3").innerHTML = "₹" + hRev.toLocaleString("en-IN") + "<small>human revenue</small>";
+  document.getElementById("s4").innerHTML = plats.length + "<small>AI platforms detected</small>";
+  document.getElementById("insight").innerHTML =
+    `<b>The punchline:</b> ${share}% of visits and ₹${aRev.toLocaleString("en-IN")} of the day's ₹${(aRev+hRev).toLocaleString("en-IN")} in revenue came from software — and every ad, pop-up and A/B test on the site was invisible to all of it.`;
+  document.getElementById("dash").style.display = "block";
+  done = true;
+}
+function reset(){ document.getElementById("log").textContent = 'Press "Run a day of traffic" to classify each visitor.';
+  document.getElementById("dash").style.display = "none"; }
+</script>
+</body>
+</html>

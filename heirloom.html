@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heirloom — live demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<p class="crumb"><a href="index.html">&larr; All prototypes</a></p>
+<h1>Heirloom</h1>
+<p class="tagline">A company's memory, owned by the company — not by its AI vendor.</p>
+
+<div class="plain">
+<b>What is this, in plain English?</b> Companies are pouring their decisions, meeting notes
+and hard-won lessons into AI tools — and each tool keeps that knowledge inside itself. Switch
+tools in three years, or lose the employee who knew "why we did it this way", and the memory
+is gone. Heirloom is a <b>memory vault the company owns</b>: every AI tool reads from it (only
+what each person is allowed to see), and the memory survives both resignations and vendor
+switches. Try it: ask the same question as three different employees.
+</div>
+
+<details><summary>Jargon decoder (tap to open)</summary>
+<table class="decoder">
+<tr><th>Term</th><th>What it actually means</th></tr>
+<tr><td>Context / memory</td><td>Everything an AI tool has learned about your company: decisions, reasons, notes, corrections.</td></tr>
+<tr><td>Vendor lock-in</td><td>When leaving a software provider is painful because they hold something you can't take with you. Here: your own company's memory.</td></tr>
+<tr><td>Role-based permissions</td><td>The intern's AI and the CFO's AI see different things — automatically, by job role.</td></tr>
+<tr><td>Provenance</td><td>Where a memory came from ("partner meeting notes, 12 Mar 2025"). An answer without a source is just a rumor.</td></tr>
+<tr><td>Export / exit rights</td><td>A standard file format the memory can leave in, so changing vendors is a settings change, not amnesia.</td></tr>
+</table>
+</details>
+
+<h2>The question everyone asks</h2>
+<div class="card">
+<p style="margin-top:0">"<b>Why did we choose VendorX, and what should I know about its pricing?</b>"</p>
+Ask as:
+<button class="btn" onclick="ask('intern')">The intern</button>
+<button class="btn" onclick="ask('manager')">A manager</button>
+<button class="btn" onclick="ask('exec')">An executive</button>
+</div>
+<div class="log" id="log">Pick a role above. Same question — watch the answer change.</div>
+
+<h2>Then the hard moments</h2>
+<div class="card">
+<button class="btn secondary" onclick="leaver()">The author resigns</button>
+<button class="btn secondary" onclick="exportMem()">Switch AI vendors</button>
+<button class="btn secondary" onclick="supersede()">A memory gets corrected</button>
+</div>
+<div class="log" id="log2">These are the three moments that destroy institutional memory today.</div>
+
+<h2>Why this matters</h2>
+<div class="card">
+When every app needed logins, the winner wasn't any app — it was the neutral identity layer
+they all plugged into (Okta). Memory is having that moment now. Companies signing multi-year
+AI contracts today aren't asking "can our knowledge leave with us?" — in three years they
+will ask it loudly, and the answer will be set by whoever built the neutral vault first.
+First customers: firms whose product <i>is</i> knowledge and whose people churn — consulting,
+law, agencies — where every resignation is currently a write-off.
+</div>
+
+<div class="footer">
+<a href="https://github.com/Bahniman/heirloom">Full code and technical docs on GitHub</a> ·
+This page mirrors the repository's <code>demo.py</code>. ·
+<a href="index.html">All prototypes</a>
+</div>
+</div>
+
+<script>
+const MEMORIES = [
+  { kind: "decision", minRole: 0, text: "We chose VendorX for the data platform over VendorY.",
+    src: "steering committee, 12 Mar 2025", author: "S. Rao" },
+  { kind: "rationale", minRole: 2, text: "Real reason: VendorY's pricing tripled at renewal for Client K; we could not risk the same mid-engagement. Their demo was actually better.",
+    src: "partner sync notes, 12 Mar 2025", author: "S. Rao" },
+  { kind: "contract fact", minRole: 3, text: "VendorX contract has a 40% discount locked until 2027 in exchange for a case study; do not resell at list price internally.",
+    src: "MSA appendix C", author: "finance" },
+  { kind: "meeting", minRole: 1, text: "Data migration to VendorX is two weeks behind; blocker is Client K's security review.",
+    src: "standup, 02 Jun 2025", author: "pm-bot", superseded: false },
+];
+const RANK = { intern: 0, manager: 2, exec: 3 };
+
+function ask(role){
+  const r = RANK[role];
+  const visible = MEMORIES.filter(m => r >= m.minRole && !m.superseded);
+  const el = document.getElementById("log");
+  el.innerHTML = `<b>[${role}]</b> asks: "Why did we choose VendorX...?"\n\n` +
+    visible.map(m =>
+      `<span class="ok">(${m.kind})</span> ${m.text}\n    <span style="color:#5b6d84">source: ${m.src} — ${m.author}</span>`
+    ).join("\n\n") +
+    `\n\n<i>${visible.length} of ${MEMORIES.length} memories visible at this role. The filter runs BEFORE search — a junior role never even learns a hidden memory exists.</i>`;
+}
+function leaver(){
+  document.getElementById("log2").innerHTML =
+    `S. Rao resigns.\n\n<span class="ok">Her decision AND her reasoning stay queryable</span>, with sources attached\n("partner sync notes, 12 Mar 2025") — instead of evaporating with her seat.\n\nToday, in most firms, this knowledge lives in her head and her DMs.`;
+}
+function exportMem(){
+  document.getElementById("log2").innerHTML =
+    `The company switches AI vendors.\n\n<span class="ok">exported &rarr; acme_memory.openmemory.json</span>  (open format: open-memory/v1)\n<span class="ok">re-imported into the new vendor's tools: all ${MEMORIES.length} memories intact</span>, permissions intact.\n\nChanging vendors became a settings change, not corporate amnesia. This export\nformat is the whole point of the product.`;
+}
+function supersede(){
+  MEMORIES[3].superseded = true;
+  document.getElementById("log2").innerHTML =
+    `New standup note: "Migration back on track; security review cleared 20 Jun."\n\n<span class="ok">The old 'two weeks behind' memory stops surfacing in answers</span> — but is NOT deleted.\nHistory stays in the record (audits and disputes need it); answers show current truth.\n\nAsk as a manager again to see the corrected picture.`;
+}
+</script>
+</body>
+</html>

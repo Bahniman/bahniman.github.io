@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GroundTruth — live demo</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+<div class="wrap">
+<p class="crumb"><a href="index.html">&larr; All prototypes</a></p>
+<h1>GroundTruth</h1>
+<p class="tagline">Watch a road measurement become money — in days, not months.</p>
+
+<div class="plain">
+<b>What is this, in plain English?</b> When a contractor builds a government road in India,
+an engineer measures the work <i>by hand in a paper register</i>, and the contractor then
+waits 6–18 months to be paid while that register crawls through approvals. GroundTruth
+replaces the register: photos and AI measure the work, the engineer signs it digitally, and
+that signed record is solid enough for a bank to pay the contractor <b>within two days</b>
+(the bank collects from the government later). Follow the five steps below.
+</div>
+
+<details><summary>Jargon decoder (tap to open)</summary>
+<table class="decoder">
+<tr><th>Term</th><th>What it actually means</th></tr>
+<tr><td>Measurement Book</td><td>The physical register where a government engineer hand-writes how much work was done. Every payment depends on it.</td></tr>
+<tr><td>Evidence</td><td>Geotagged photos/drone captures of the site — proof with location and time stamped in.</td></tr>
+<tr><td>Dual-key certificate</td><td>Two locks on one door: the AI's evidence AND the engineer's signature. Neither alone can release money.</td></tr>
+<tr><td>Receivable</td><td>Money someone owes you. Here: what the government owes the contractor for certified work.</td></tr>
+<tr><td>Discounting</td><td>A bank pays you ~98-99% of that money today and collects the full amount later. You get cash now; the bank earns the difference.</td></tr>
+<tr><td>Tamper-evident ledger</td><td>A record where entries are mathematically linked — editing any one visibly breaks the link.</td></tr>
+</table>
+</details>
+
+<h2>The work item</h2>
+<div class="card">
+<b>WBM road, village approach, km 3.2–3.5</b> · sanctioned: 300 metres at ₹1,450/metre ·
+site location: 26.1445 N, 91.7362 E
+</div>
+
+<h2>Walk it through</h2>
+<div class="card">
+<button class="btn" id="b1" onclick="step1()">1. Capture site evidence</button>
+<button class="btn" id="b2" onclick="step2()" disabled>2. Try a FAKE photo</button>
+<button class="btn" id="b3" onclick="step3()" disabled>3. AI measures + engineer signs</button>
+<button class="btn" id="b4" onclick="step4()" disabled>4. Bank pays the contractor</button>
+<button class="btn" id="b5" onclick="step5()" disabled>5. Try to inflate the record</button>
+</div>
+<div class="log" id="log">Press step 1 to begin.</div>
+
+<h2>The public map (what any citizen would see)</h2>
+<div id="map"></div>
+
+<h2>Why this matters</h2>
+<div class="card">
+An estimated <b>₹1–3 lakh crore</b> is stuck in delayed payments and disputes on Indian
+public projects; disputes take 7–8 years to resolve; small contractors borrow at 18–24% just
+to survive the wait — and the government overpays because bids price all that in. The
+central government already runs an electronic measurement book (proof the direction works);
+GroundTruth completes it with the two layers nobody built: independent evidence, and
+same-week financing. The same "AI observes, human signs, money moves" pattern then extends
+to insurance claims, crop-loss assessment, and trade documents worldwide.
+</div>
+
+<div class="footer">
+<a href="https://github.com/Bahniman/groundtruth">Full code and technical docs on GitHub</a> ·
+This page mirrors the repository's <code>demo.py</code>. ·
+<a href="index.html">All prototypes</a>
+</div>
+</div>
+
+<script>
+const SITE = [26.1445, 91.7362];
+let map = L.map('map').setView(SITE, 15);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  { attribution: '&copy; OpenStreetMap' }).addTo(map);
+let marker = L.circleMarker(SITE, { radius: 11, color: 'gray', fillOpacity: .7 }).addTo(map)
+  .bindPopup('<b>WBM road km 3.2-3.5</b><br>Status: SANCTIONED (no work certified yet)');
+
+const log = document.getElementById("log");
+function say(t){ log.innerHTML += t + "\n"; log.scrollTop = log.scrollHeight; }
+function enable(id){ document.getElementById(id).disabled = false; }
+
+function step1(){
+  document.getElementById("b1").disabled = true;
+  log.innerHTML = "";
+  say('<span class="ok">site photo captured</span>   30 m from the sanctioned site  (span: 238 m)  fingerprint cd3373a4...');
+  say('<span class="ok">drone pass captured</span>   33 m from the sanctioned site  (span: 242 m)  fingerprint df98a0ed...');
+  say('Each capture carries its location, time, and a digital fingerprint of the image.');
+  enable("b2");
+}
+function step2(){
+  document.getElementById("b2").disabled = true;
+  say('');
+  say('Someone submits a photo taken <b>39 km away</b> claiming it shows this road...');
+  say('<span class="no">REJECTED automatically</span> — the location check throws it out before any human even sees it.');
+  enable("b3");
+}
+function step3(){
+  document.getElementById("b3").disabled = true;
+  say('');
+  say('AI estimate from the two captures: <b>240 metres</b> completed (confidence 0.85).');
+  say('Junior Engineer R. Sharma reviews the evidence and signs.');
+  say('<span class="ok">CERTIFICATE issued</span>: 240 m x ₹1,450 = <b>₹3,48,000</b>, evidence fingerprints locked inside the signature.');
+  say('Dual-key holds: the AI could not certify alone; the engineer could not certify without evidence.');
+  marker.setStyle({ color: 'orange' });
+  marker.bindPopup('<b>WBM road km 3.2-3.5</b><br>240 m certified by JE R. Sharma<br>Amount: ₹3,48,000<br>Status: <b>CERTIFIED</b>');
+  enable("b4");
+}
+function step4(){
+  document.getElementById("b4").disabled = true;
+  say('');
+  say('The certificate is now a verified <b>receivable</b>: the government owes ₹3,48,000, provably.');
+  say('Bank of Example discounts it at 9% per year for the ~45-day wait:');
+  say('<span class="ok">contractor receives ₹3,44,139 within 2 days</span> (instead of borrowing at 18-24% for months).');
+  marker.setStyle({ color: 'green' });
+  marker.bindPopup('<b>WBM road km 3.2-3.5</b><br>240 m certified<br>₹3,44,139 paid at T+2<br>Status: <b>PAID</b>');
+  marker.openPopup();
+  enable("b5");
+}
+function step5(){
+  document.getElementById("b5").disabled = true;
+  say('');
+  say('Someone edits the record to claim <b>300 m</b> instead of 240 m...');
+  say('<span class="no">LEDGER CHECK FAILS</span> — entries are mathematically chained; the edit breaks the chain at exactly that entry and is exposed.');
+  say('');
+  say('<b>Observe (AI) &rarr; Attest (accountable human) &rarr; Act (money moves).</b> That is GroundTruth.');
+}
+</script>
+</body>
+</html>
