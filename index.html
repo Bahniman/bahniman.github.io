@@ -3,175 +3,143 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GroundTruth × Surety — trust rails for money that moves on real-world events</title>
-<meta name="description" content="A combined platform: GroundTruth certifies physical work into bank-financeable instruments; Surety governs every actor with signed, enforceable mandates. Working code, live demos, verifiable numbers.">
+<title>Realium — money that moves at the speed of verified reality</title>
+<meta name="description" content="Realium turns certified physical work into next-morning bank capital. Three layers — Evidence, Authority, Liquidity — on one rail. Working code, live demos, sourced numbers. Built for ReEnvision 5.0.">
 <link rel="stylesheet" href="style.css">
 <style>
-.hero { padding: 44px 0 6px; }
+.hero { padding: 40px 0 6px; }
 .hero .kicker { color: var(--accent); font: 600 13.5px Inter; letter-spacing: .16em; text-transform: uppercase; }
 .hero h1 {
   background: linear-gradient(92deg, #eaf0f8 25%, var(--accent) 62%, var(--violet));
-  -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 14px;
+  -webkit-background-clip: text; background-clip: text; color: transparent; margin: 8px 0 14px;
 }
 .hero p.lead { color: var(--muted); font-size: 19px; max-width: 760px; }
-.railgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
-@media (max-width: 780px){ .railgrid { grid-template-columns: 1fr; } }
-.rail { border-radius: 16px; padding: 22px; border: 1px solid var(--border); position: relative; overflow: hidden; }
-.rail.gt { background: linear-gradient(180deg, rgba(52,211,153,.08), rgba(52,211,153,.015)); border-color: rgba(52,211,153,.35); }
-.rail.su { background: linear-gradient(180deg, rgba(92,200,255,.08), rgba(92,200,255,.015)); border-color: rgba(92,200,255,.35); }
-.rail h3 { margin: 4px 0 4px; font-size: 22px; }
-.rail .role { font: 700 12px Inter; letter-spacing: .12em; text-transform: uppercase; }
-.rail.gt .role { color: var(--good); } .rail.su .role { color: var(--accent); }
-.rail p { color: var(--muted); font-size: 14.5px; }
-.rail ul { margin: 10px 0 14px; padding-left: 18px; color: var(--muted); font-size: 14px; }
-.rail li { margin: 4px 0; }
-.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 16px 0; }
-@media (max-width: 820px){ .flow { grid-template-columns: 1fr 1fr; } }
-.fstep { background: var(--panel2); border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; }
-.fstep .n { font: 700 11px Inter; color: var(--accent); letter-spacing: .1em; }
-.fstep .t { font: 600 13.5px Inter; margin-top: 4px; }
-.fstep .s { font-size: 12px; color: var(--dim); margin-top: 3px; }
-.stackrow { display: grid; grid-template-columns: 170px 1fr; gap: 0; border-bottom: 1px solid var(--border); padding: 11px 0; font-size: 14.5px; }
-.stackrow b { color: var(--accent); font-family: "Space Grotesk"; }
-.stackrow span { color: var(--muted); }
-.stackrow code { background: var(--panel2); border: 1px solid var(--border); border-radius: 5px; padding: 1px 7px; font-size: 12.5px; color: var(--text); }
-.numgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-@media (max-width: 800px){ .numgrid { grid-template-columns: 1fr 1fr; } }
-.numgrid .stat { font-size: 26px; }
-.numgrid sup { color: var(--accent); }
-.sources { font-size: 13px; color: var(--muted); }
-.sources li { margin: 5px 0; }
+.livebar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 22px 0 4px; }
 .proofrow { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 4px; }
 .proofrow span { background: var(--panel2); border: 1px solid var(--border); border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--muted); }
 .proofrow b { color: var(--good); }
+.numgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media (max-width: 800px){ .numgrid { grid-template-columns: 1fr 1fr; } }
+.numgrid .stat { font-size: 26px; }
+.numgrid sup a { color: var(--accent); }
+.layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+@media (max-width: 820px){ .layers { grid-template-columns: 1fr; } }
+.layer { border-radius: 16px; padding: 20px; border: 1px solid var(--border); background: var(--panel2); }
+.layer .role { font: 700 11.5px Inter; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.layer h3 { margin: 6px 0 6px; font-size: 20px; }
+.layer p { color: var(--muted); font-size: 14px; margin: 0; }
+.sources { font-size: 13px; color: var(--muted); }
+.sources li { margin: 5px 0; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <div class="hero">
-  <div class="kicker">ReEnvision 5.0 · Human–AI Synergy · working prototypes, live demos</div>
-  <h1>Money that moves at the speed<br>of verified reality</h1>
-  <p class="lead">India's public works run on a handwritten register; contractors wait
-  6–18 months for money the state already owes them. We built the two missing rails as
-  working software: <b style="color:var(--good)">GroundTruth</b> turns physical work into a
-  bank-financeable instrument the next morning, and <b style="color:var(--accent)">Surety</b>
-  makes every actor in that chain — human or AI — operate under signed, enforceable,
-  auditable authority.</p>
+  <div class="kicker">Built for ReEnvision 5.0 · Human–AI Synergy · XLRI Jamshedpur</div>
+  <h1>Realium: money that moves at<br>the speed of verified reality</h1>
+  <p class="lead">India's public works run on a handwritten register; contractors wait 6–18
+  months for money the state already owes them. Realium turns a certified site measurement into
+  a bank-financeable instrument — advanced the next morning — across three layers on one rail:
+  <b style="color:var(--text)">Evidence</b>, <b style="color:var(--text)">Authority</b>, and
+  <b style="color:var(--text)">Liquidity</b>.</p>
+
+  <div class="livebar">
+    <a class="btn" href="https://realium-core.lovable.app" style="font-size:16px; padding:13px 22px">▶ &nbsp;Visit the live site</a>
+    <span style="color:var(--dim); font-size:14px">realium-core.lovable.app</span>
+  </div>
+
   <div class="proofrow">
     <span><b>47</b> unit tests passing across both engines</span>
-    <span><b>2</b> live in-browser demos</span>
-    <span><b>0</b> unverifiable claims — every number sourced below</span>
+    <span><b>2</b> live in-browser demos below</span>
+    <span><b>0</b> unverifiable claims — every number sourced</span>
     <span>MIT-licensed code on <a href="https://github.com/Bahniman">GitHub</a></span>
   </div>
 </div>
 
 <h2>The problem, in four verifiable numbers</h2>
 <div class="numgrid">
-  <div class="card" style="margin:0"><div class="stat">₹96,000 cr<sup><a href="#src">1</a></sup><small>contractor dues reported in Maharashtra alone (2025)</small></div></div>
-  <div class="card" style="margin:0"><div class="stat">₹1–3 lakh cr<sup><a href="#src">2</a></sup><small>estimated stuck nationally in delayed payments & disputes</small></div></div>
-  <div class="card" style="margin:0"><div class="stat">7–8 years<sup><a href="#src">3</a></sup><small>average construction arbitration; 85%+ of claims pending</small></div></div>
-  <div class="card" style="margin:0"><div class="stat">18–24%<small>informal bridge rates small contractors pay while waiting</small></div></div>
+  <div class="card" style="margin:0"><div class="stat">₹96,000 cr<sup><a href="#sources">1</a></sup><small>contractor dues reported in Maharashtra alone (2025)</small></div></div>
+  <div class="card" style="margin:0"><div class="stat">₹1–3 lakh cr<sup><a href="#sources">2</a></sup><small>estimated stuck nationally in delays &amp; disputes</small></div></div>
+  <div class="card" style="margin:0"><div class="stat">7–8 years<sup><a href="#sources">3</a></sup><small>average construction arbitration; 85%+ claims pending</small></div></div>
+  <div class="card" style="margin:0"><div class="stat">18–24%<small>informal bridge rates contractors pay while they wait</small></div></div>
 </div>
 <div class="plain">
-The root cause is one document: the <b>Measurement Book</b>, the handwritten register in
-which an engineer records completed work and on which every payment depends. The government
-knows the direction — CPWD already runs an electronic measurement book paying ~₹20,000 crore
-a year digitally<sup><a href="#src">4</a></sup> — but state departments remain on paper, and
-even the digitized register produces a <i>record</i>, not a <i>financial instrument</i>.
-Digitizing a document is not the transformation. Changing what the document can <i>do</i> is.
+The root cause is one document: the <b>Measurement Book</b>, the handwritten register on which
+every payment depends. CPWD already runs an electronic version on PFMS, paying ~₹20,000 crore a
+year digitally<sup><a href="#sources">4</a></sup> — and the money is still slow, because a
+digital record is still just a record. Realium changes what the measurement can <i>do</i>:
+makes it financeable, and makes the approval queue attributable.
 </div>
 
-<h2>One platform, two rails</h2>
-<div class="railgrid">
-  <div class="rail gt">
-    <div class="role">Rail 1 · certifies the facts</div>
-    <h3>🛰️ GroundTruth</h3>
-    <p>Physical work becomes a verified, bank-grade e-invoice: geo-fenced evidence, AI quantity
-    estimation, an accountable engineer's dual-key signature, a tamper-evident ledger.</p>
-    <ul>
-      <li>Bank advances <b>60% at T+1</b> against the instrument; 40% holdback is its buffer</li>
-      <li>Treasury settles later; balance released minus itemized charges — contractor nets ~97% with day-1 liquidity</li>
-      <li><b>The flywheel:</b> clean settlement history raises the reliability score, which raises the advance rate (50% → 85%). Implemented, tested.</li>
-    </ul>
-    <a class="btn" href="groundtruth.html">Run the money-flow demo</a>
-    <a class="btn secondary" href="https://github.com/Bahniman/groundtruth">Code + financial model</a>
+<h2>Three layers, one rail</h2>
+<div class="layers">
+  <div class="layer">
+    <div class="role">Layer 1 · Evidence</div>
+    <h3>🛰️ Certify the facts</h3>
+    <p>Geo-fenced site capture, AI quantity estimation, and a dual-key certificate — machine
+    evidence plus an accountable engineer's signature — on a tamper-evident ledger.</p>
   </div>
-  <div class="rail su">
-    <div class="role">Rail 2 · governs the actors</div>
-    <h3>🛡️ Surety</h3>
-    <p>Every actor with authority in the chain — the certifying engineer, the approving officer,
-    the AI agents doing the paperwork — operates under a signed, scoped, revocable mandate,
-    enforced on every action.</p>
-    <ul>
-      <li>Ed25519-signed mandates verify <b>offline</b> — no API, no shared secret</li>
-      <li>Category budgets, thresholds with human escrow, rate limits, kill switch</li>
-      <li>Hash-chained audit log: editing any entry visibly breaks the chain — court-grade history, and eventually actuarial data for insuring agent actions</li>
-    </ul>
-    <a class="btn" href="surety.html">Watch enforcement live</a>
-    <a class="btn secondary" href="https://github.com/Bahniman/surety">Code + threat model</a>
+  <div class="layer">
+    <div class="role">Layer 2 · Authority</div>
+    <h3>🛡️ Govern the actors</h3>
+    <p>Every certifier and approver acts under a signed, scoped, revocable mandate. Every approval
+    is a timestamped, signed event — so the queue itself becomes attributable.</p>
+  </div>
+  <div class="layer">
+    <div class="role">Layer 3 · Liquidity</div>
+    <h3>💸 Move the money</h3>
+    <p>The verified e-invoice is financed: a bank advances 60% the next morning, holds 40% as
+    buffer, and settles the balance when the treasury pays — contractor nets ~97% with day-1 cash.</p>
   </div>
 </div>
 
-<h2>How they compose: one work item, end to end</h2>
-<div class="flow">
-  <div class="fstep"><div class="n">DAY 0 · SITE</div><div class="t">Capture</div><div class="s">geo-fenced photos + drone; fakes rejected before any human sees them</div></div>
-  <div class="fstep"><div class="n">DAY 0</div><div class="t">Certify</div><div class="s">AI prefills quantity; engineer signs under a Surety mandate; dual-key</div></div>
-  <div class="fstep"><div class="n">DAY 0 · EVE</div><div class="t">Instrument</div><div class="s">verified e-invoice issued; bank validates signature chain offline</div></div>
-  <div class="fstep"><div class="n">DAY 1 · 9AM</div><div class="t">Advance</div><div class="s">60% credited; contractor's crew moves to the next site</div></div>
-  <div class="fstep"><div class="n">DAY ~148</div><div class="t">Settle</div><div class="s">treasury pays; holdback released minus itemized charges; history feeds the score</div></div>
-</div>
-<div class="plain">
-<b>Human–AI synergy is the architecture, not the theme.</b> AI does what scales: observing
-sites, estimating quantities, enforcing policy on every call. Humans do what carries legal
-weight: authorizing mandates, attesting measurements, approving above thresholds. Neither
-can move money alone — that dual-key property is enforced in code on both rails.
-</div>
-
-<h2>Tech stack (all real, most of it already in the repos)</h2>
-<div class="card">
-  <div class="stackrow"><b>Capture</b><span>Offline-first Android capture with geotagged EXIF + device attestation; drone imagery where sanctioned under India's Drone Rules 2021. <code>prototype: geo-fence check implemented & tested</code></span></div>
-  <div class="stackrow"><b>Vision</b><span>Photogrammetry + segmentation-based quantity estimation against Schedule-of-Rates item classes, with calibrated confidence; cross-checks against open satellite (Sentinel-2) and OpenStreetMap basemaps. <code>prototype: interface + confidence model; vision = roadmap</code></span></div>
-  <div class="stackrow"><b>Trust core</b><span>Ed25519 signatures (RFC 8032 — implemented pure-Python and validated against RFC test vectors), dual-key certificates binding evidence hashes, append-only hash-chained ledger. <code>implemented, 47 tests across repos</code></span></div>
-  <div class="stackrow"><b>Policy</b><span>Surety engine: 10 ordered checks — signature, revocation, validity, active hours, tool→category map, domain allow-list, rate limit, category & total budgets, escrow threshold. Every decision ships its evidence list. <code>implemented + threat model</code></span></div>
-  <div class="stackrow"><b>Finance</b><span>Advance-rate curve keyed to verification reliability; settlement waterfall with holdback-first deduction absorption and conservation checks; TReDS-pattern discounting as the bank-side model. <code>implemented + financial model doc</code></span></div>
-  <div class="stackrow"><b>Integration</b><span>PFMS / e-MB adapter path (the rail CPWD already uses), bank APIs, and MCP for agent-side tooling — integration work, not research risk. <code>roadmap, documented</code></span></div>
-  <div class="stackrow" style="border-bottom:0"><b>Data layer</b><span>PostgreSQL + PostGIS for geospatial state at scale (prototype uses SQLite by design — zero-dependency, runs anywhere in 10 seconds).</span></div>
-</div>
-
-<h2>Why this wins on the judging criteria</h2>
+<h2>See it run — two working demos</h2>
 <div class="grid">
-  <div class="card" style="margin:0"><b>Depth & honesty of problem.</b><p style="color:var(--muted); font-size:14.5px; margin:6px 0 0">A single named document as the point of failure, verifiable stuck-capital numbers, and the uncomfortable truth said plainly: discretion without evidence is where both delay and rent-seeking live.</p></div>
-  <div class="card" style="margin:0"><b>DT centrality.</b><p style="color:var(--muted); font-size:14.5px; margin:6px 0 0">The operating model changes: what a measurement <i>is</i> (a financial instrument), who can act (mandated actors), when money moves (T+1). Remove the AI and the rails still function — AI makes them cheap, not possible.</p></div>
-  <div class="card" style="margin:0"><b>Novelty.</b><p style="color:var(--muted); font-size:14.5px; margin:6px 0 0">Construction pitches are productivity tools; ours is the cash-flow ledger of the state plus the authority layer nobody builds. The advance-rate flywheel — verification history as a priceable credit asset — is the unobvious part, and it's implemented.</p></div>
-  <div class="card" style="margin:0"><b>Feasibility & scale.</b><p style="color:var(--muted); font-size:14.5px; margin:6px 0 0">Every layer has a working Indian precedent: CPWD e-MB on PFMS, UPI, GST e-invoicing, TReDS, Drone Rules 2021. Pilot: one PWD division, six months, measurement-to-payment days 90→15. Scale: an open protocol, the UPI/ONDC playbook — then the same primitive prices insurance claims, agri lending and trade documents globally.</p></div>
+  <a class="card" href="groundtruth.html" style="text-decoration:none; color:inherit; display:block">
+    <b style="color:var(--accent)">▶ The money flow (Evidence + Liquidity)</b>
+    <p style="color:var(--muted); font-size:14.5px; margin:6px 0 0">Watch a certified measurement
+    become a next-morning bank advance, with the settlement waterfall and the reliability
+    flywheel (50%→85% advance rate). Mirrors the Python financing engine.</p>
+  </a>
+  <a class="card" href="surety.html" style="text-decoration:none; color:inherit; display:block">
+    <b style="color:var(--accent)">▶ The authority layer (mandates + audit)</b>
+    <p style="color:var(--muted); font-size:14.5px; margin:6px 0 0">Watch signed mandates enforced
+    on every action — category budgets, human escrow, a kill switch, and a hash-chained log that
+    breaks visibly when tampered. Mirrors the Python policy engine.</p>
+  </a>
 </div>
 
-<h2 id="src">Sources</h2>
+<h2>The code (open source, tested)</h2>
+<div class="grid">
+  <div class="card" style="margin:0">
+    <b>groundtruth</b> — financing engine, reliability flywheel, dual-key certificates, 22 tests
+    + financial-model doc. <a href="https://github.com/Bahniman/groundtruth">repo →</a>
+  </div>
+  <div class="card" style="margin:0">
+    <b>surety</b> — Ed25519 (RFC 8032, validated against test vectors), 10-check policy engine,
+    SQLite persistence, 25 tests + threat model. <a href="https://github.com/Bahniman/surety">repo →</a>
+  </div>
+</div>
+<p style="color:var(--dim); font-size:13.5px">These two engines are the Evidence/Liquidity and
+Authority layers of Realium. Earlier standalone explorations live in the
+<a href="lab.html">lab archive</a>.</p>
+
+<h2 id="sources">Sources</h2>
 <div class="card sources">
 <ol style="margin:0; padding-left:20px">
-<li>Maharashtra contractor dues ≈ ₹96,000 crore: press reports of the contractors' associations' 2025 strike notice (e.g. <a href="https://www.whalesbook.com/news/English/industrial-goodsservices/Maharashtra-Contractors-Set-to-Strike-Over-indian-rupee96000-Crore-Payment-Backlog/69d0c4e969ec081354e6a6d7">Whalesbook coverage</a>).</li>
-<li>National estimates: ₹1 lakh crore per a NITI Aayog member's public estimate; up to ₹3 lakh crore in industry analyses of public-project dues and disputes (e.g. <a href="https://www.linkedin.com/pulse/construction-disputes-india-issues-mitigation-kankipati">Kankipati, Construction Disputes in India</a>). We present the range, not a point.</li>
-<li>Construction arbitration duration and pendency: <a href="https://globalarbitrationreview.com/insight/know-how/construction-arbitration/report/india">Global Arbitration Review, Construction Arbitration: India</a>.</li>
-<li>CPWD electronic Measurement Book on PFMS and ~₹20,000 crore/year digital payments: <a href="https://www.pib.gov.in/newsite/PrintRelease.aspx?relid=178664">PIB release</a>; <a href="https://www.business-standard.com/article/news-cm/cpwd-goes-digital-all-rs-20-000-cr-payments-per-year-now-online-117083000522_1.html">Business Standard</a>. State adoption examples: <a href="https://pwd.tripura.gov.in/index.php/government/circulars/32-circulars/works/716-implementation-of-e-mb-electronic-measurement-book-and-generation-of-online-bill">Tripura PWD</a>, <a href="https://pwd.py.gov.in/computerized-measurement-book-and-bills-be-submitted-contractor">Puducherry PWD</a>.</li>
-<li>Adjacent market proof (private-side contractor financing): Powerplay crossing $10M annualized run rate, March 2026 (<a href="https://www.epcworld.in/powerplay-launches-procurement-linked-credit-amid-rising-cash-flow-pressures-in-construction/">EPC World</a>).</li>
+<li>Maharashtra contractor dues ≈ ₹96,000 cr: 2025 contractors' strike-notice coverage (<a href="https://www.whalesbook.com/news/English/industrial-goodsservices/Maharashtra-Contractors-Set-to-Strike-Over-indian-rupee96000-Crore-Payment-Backlog/69d0c4e969ec081354e6a6d7">Whalesbook</a>).</li>
+<li>National estimates ₹1 lakh cr (NITI Aayog member) to ₹3 lakh cr (industry analyses); range, not a point (<a href="https://www.linkedin.com/pulse/construction-disputes-india-issues-mitigation-kankipati">Construction Disputes in India</a>).</li>
+<li>Arbitration duration &amp; pendency: <a href="https://globalarbitrationreview.com/insight/know-how/construction-arbitration/report/india">Global Arbitration Review — India</a>.</li>
+<li>CPWD e-MB on PFMS, ~₹20,000 cr/yr digital: <a href="https://www.pib.gov.in/newsite/PrintRelease.aspx?relid=178664">PIB</a>; <a href="https://www.business-standard.com/article/news-cm/cpwd-goes-digital-all-rs-20-000-cr-payments-per-year-now-online-117083000522_1.html">Business Standard</a>.</li>
 </ol>
-<p style="margin:10px 0 0">Demo figures (invoice values, rates, dates) are illustrative and follow real Schedule-of-Rates structures; financing terms (11% p.a., 0.35% fee, the advance curve) are stated assumptions, documented in <a href="https://github.com/Bahniman/groundtruth/blob/main/docs/FINANCIAL_MODEL.md">the financial model</a>.</p>
+<p style="margin:12px 0 0; color:var(--dim); font-size:12.5px">Demo figures are illustrative and
+follow real Schedule-of-Rates structures; financing terms (11% p.a., 0.35% fee, the advance
+curve) are stated assumptions, documented in the <a href="https://github.com/Bahniman/groundtruth/blob/main/docs/FINANCIAL_MODEL.md">financial model</a>.</p>
 </div>
 
-<h2>Team & build</h2>
-<div class="card">
-<p style="margin-top:0">Built by the ReEnvision team at XLRI Jamshedpur (PGDM-GM Co'27). Both engines are open
-source with test suites and honest prototype-vs-production notes —
-<a href="https://github.com/Bahniman/groundtruth">groundtruth</a> ·
-<a href="https://github.com/Bahniman/surety">surety</a>. Designed with product judgment,
-built in partnership with AI development tools — which is the thesis demonstrated: human
-judgment plus AI leverage, dual-key.</p>
-<p style="margin-bottom:0; color:var(--dim); font-size:13.5px">Other explorations from the same lab live in the <a href="lab.html">archive</a>.</p>
-</div>
-
-<div class="footer">GroundTruth × Surety · 2026 · MIT-licensed ·
-<a href="https://github.com/Bahniman">github.com/Bahniman</a> · <a href="lab.html">Lab archive</a></div>
+<div class="footer">Realium · Team Realium · XLRI Jamshedpur · ReEnvision 5.0 · MIT-licensed ·
+<a href="https://github.com/Bahniman">github.com/Bahniman</a> · <a href="https://realium-core.lovable.app">live site</a></div>
 </div>
 </body>
 </html>
