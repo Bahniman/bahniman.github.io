@@ -30,8 +30,9 @@
   --glass-border: #d4d4d4;
   --grid-line: rgba(0, 0, 0, 0.06);
   --grid-dot: rgba(0, 0, 0, 0.10);
-  --blob-emerald: rgba(11, 219, 0, 0.08);
-  --blob-indigo: rgba(0, 13, 255, 0.06);
+  --blob-emerald: rgba(11, 219, 0, 0.14);
+  --blob-indigo: rgba(0, 13, 255, 0.12);
+  --blob-rose: rgba(236, 72, 153, 0.12);
 }
 
 .dark {
@@ -57,8 +58,9 @@
   --glass-border: #2D2D2D;
   --grid-line: rgba(255, 255, 255, 0.04);
   --grid-dot: rgba(255, 255, 255, 0.08);
-  --blob-emerald: rgba(11, 219, 0, 0.06);
-  --blob-indigo: rgba(85, 102, 255, 0.06);
+  --blob-emerald: rgba(11, 219, 0, 0.09);
+  --blob-indigo: rgba(85, 102, 255, 0.08);
+  --blob-rose: rgba(236, 72, 153, 0.08);
 }
 
 * {
@@ -160,34 +162,47 @@ body {
 
 .blob {
   position: fixed;
-  width: 650px;
-  height: 650px;
+  width: 750px;
+  height: 750px;
   border-radius: 50%;
   pointer-events: none;
-  filter: blur(150px);
+  filter: blur(140px);
   z-index: -30;
+  opacity: 0.85;
 }
 .blob-emerald {
   background-color: var(--blob-emerald);
-  top: -10%;
-  left: -15%;
-  animation: float-1 22s ease-in-out infinite;
+  top: -15%;
+  left: -20%;
+  animation: float-1 20s ease-in-out infinite;
 }
 .blob-indigo {
   background-color: var(--blob-indigo);
-  bottom: -10%;
-  right: -15%;
-  animation: float-2 26s ease-in-out infinite;
+  bottom: -15%;
+  right: -20%;
+  animation: float-2 24s ease-in-out infinite;
+}
+.blob-rose {
+  background-color: var(--blob-rose);
+  top: 35%;
+  left: 45%;
+  width: 500px;
+  height: 500px;
+  animation: float-3 28s ease-in-out infinite;
 }
 
 @keyframes float-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(40px, -60px) scale(1.1); }
-  66% { transform: translate(-30px, 30px) scale(0.9); }
+  33% { transform: translate(60px, -80px) scale(1.15); }
+  66% { transform: translate(-40px, 40px) scale(0.9); }
 }
 @keyframes float-2 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-50px, 50px) scale(1.15); }
+  50% { transform: translate(-70px, 80px) scale(1.2); }
+}
+@keyframes float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(80px, -60px) scale(1.1); }
 }
 
 /* Glassmorphism Navigation */
