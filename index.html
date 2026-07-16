@@ -1,145 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Realium — money that moves at the speed of verified reality</title>
-<meta name="description" content="Realium turns certified physical work into next-morning bank capital. Three layers — Evidence, Authority, Liquidity — on one rail. Working code, live demos, sourced numbers. Built for ReEnvision 5.0.">
-<link rel="stylesheet" href="style.css">
-<style>
-.hero { padding: 40px 0 6px; }
-.hero .kicker { color: var(--accent); font: 600 13.5px Inter; letter-spacing: .16em; text-transform: uppercase; }
-.hero h1 {
-  background: linear-gradient(92deg, #eaf0f8 25%, var(--accent) 62%, var(--violet));
-  -webkit-background-clip: text; background-clip: text; color: transparent; margin: 8px 0 14px;
-}
-.hero p.lead { color: var(--muted); font-size: 19px; max-width: 760px; }
-.livebar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 22px 0 4px; }
-.proofrow { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 4px; }
-.proofrow span { background: var(--panel2); border: 1px solid var(--border); border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--muted); }
-.proofrow b { color: var(--good); }
-.numgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-@media (max-width: 800px){ .numgrid { grid-template-columns: 1fr 1fr; } }
-.numgrid .stat { font-size: 26px; }
-.numgrid sup a { color: var(--accent); }
-.layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-@media (max-width: 820px){ .layers { grid-template-columns: 1fr; } }
-.layer { border-radius: 16px; padding: 20px; border: 1px solid var(--border); background: var(--panel2); }
-.layer .role { font: 700 11.5px Inter; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
-.layer h3 { margin: 6px 0 6px; font-size: 20px; }
-.layer p { color: var(--muted); font-size: 14px; margin: 0; }
-.sources { font-size: 13px; color: var(--muted); }
-.sources li { margin: 5px 0; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Startup Lab — The Trust Layer for the Agent Economy</title>
+  <meta name="description" content="Secure evidence, scoped authority, and fluid liquidity for autonomous AI transactions. Open-source research and protocols by Bahniman.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="wrap">
+  <!-- Grid Backgrounds & Ambient Blobs -->
+  <div class="grid-bg"></div>
+  <div class="blob blob-emerald"></div>
+  <div class="blob blob-indigo"></div>
 
-<div class="hero">
-  <div class="kicker">Built for ReEnvision 5.0 · Human–AI Synergy · XLRI Jamshedpur</div>
-  <h1>Realium: money that moves at<br>the speed of verified reality</h1>
-  <p class="lead">India's public works run on a handwritten register; contractors wait 6–18
-  months for money the state already owes them. Realium turns a certified site measurement into
-  a bank-financeable instrument — advanced the next morning — across three layers on one rail:
-  <b style="color:var(--text)">Evidence</b>, <b style="color:var(--text)">Authority</b>, and
-  <b style="color:var(--text)">Liquidity</b>.</p>
+  <!-- Structural layout rails on left and right margins for widescreen gaps -->
+  <div class="side-rails">
+    <!-- Left rail vertical details -->
+    <div class="rail-left">
+      <span>
+        <span class="text-foreground font-semibold uppercase">Startup Lab</span>
+        <span class="rail-line"></span>
+        <span style="font-size: 8px; opacity: 0.8;">SYS_LOC: LAT 22.8020° N</span>
+      </span>
+      <span>
+        <span class="text-emerald-500 font-bold uppercase">LEDGER: SECURE</span>
+        <span class="rail-line"></span>
+        <span style="font-size: 8px; opacity: 0.8;">MANDATE_V1.02</span>
+      </span>
+    </div>
 
-  <div class="livebar">
-    <a class="btn" href="https://realium-core.lovable.app" style="font-size:16px; padding:13px 22px">▶ &nbsp;Visit the live site</a>
-    <span style="color:var(--dim); font-size:14px">realium-core.lovable.app</span>
+    <!-- Right rail vertical details -->
+    <div class="rail-right">
+      <span>
+        <span class="text-foreground font-semibold uppercase">Scroll Progress</span>
+        <span class="rail-line"></span>
+        <span class="text-indigo-500 font-bold" id="progressPercent">0%</span>
+      </span>
+      <span>
+        <span style="font-size: 8px; uppercase;" id="activeLabel">Active: INTRO</span>
+      </span>
+    </div>
   </div>
 
-  <div class="proofrow">
-    <span><b>47</b> unit tests passing across both engines</span>
-    <span><b>2</b> live in-browser demos below</span>
-    <span><b>0</b> unverifiable claims — every number sourced</span>
-    <span>MIT-licensed code on <a href="https://github.com/Bahniman">GitHub</a></span>
-  </div>
-</div>
+  <div class="wrap">
+    <!-- Header / Navigation -->
+    <header>
+      <div class="nav-wrap">
+        <div class="nav-container glass">
+          <a href="#" class="logo">Startup<span>Lab</span></a>
+          <div class="nav-links">
+            <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">
+              🌙
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
 
-<h2>The problem, in four verifiable numbers</h2>
-<div class="numgrid">
-  <div class="card" style="margin:0"><div class="stat">₹96,000 cr<sup><a href="#sources">1</a></sup><small>contractor dues reported in Maharashtra alone (2025)</small></div></div>
-  <div class="card" style="margin:0"><div class="stat">₹1–3 lakh cr<sup><a href="#sources">2</a></sup><small>estimated stuck nationally in delays &amp; disputes</small></div></div>
-  <div class="card" style="margin:0"><div class="stat">7–8 years<sup><a href="#sources">3</a></sup><small>average construction arbitration; 85%+ claims pending</small></div></div>
-  <div class="card" style="margin:0"><div class="stat">18–24%<small>informal bridge rates contractors pay while they wait</small></div></div>
-</div>
-<div class="plain">
-The root cause is one document: the <b>Measurement Book</b>, the handwritten register on which
-every payment depends. CPWD already runs an electronic version on PFMS, paying ~₹20,000 crore a
-year digitally<sup><a href="#sources">4</a></sup> — and the money is still slow, because a
-digital record is still just a record. Realium changes what the measurement can <i>do</i>:
-makes it financeable, and makes the approval queue attributable.
-</div>
+    <!-- Hero Section -->
+    <section class="hero" id="intro">
+      <div class="hero-badge">
+        🏆 <span class="font-semibold">Top 3 Conclave Winner</span> · ReEnvision 5.0 · XLRI Jamshedpur
+      </div>
+      <h1>The Trust Layer for<br>the Agent Economy</h1>
+      <p>Secure evidence, scoped authority, and fluid liquidity. A suite of open-source protocols and platforms designed to govern transactions made by autonomous AI software, connecting site verification, institutional memory, and machine commerce.</p>
+    </section>
 
-<h2>Three layers, one rail</h2>
-<div class="layers">
-  <div class="layer">
-    <div class="role">Layer 1 · Evidence</div>
-    <h3>🛰️ Certify the facts</h3>
-    <p>Geo-fenced site capture, AI quantity estimation, and a dual-key certificate — machine
-    evidence plus an accountable engineer's signature — on a tamper-evident ledger.</p>
-  </div>
-  <div class="layer">
-    <div class="role">Layer 2 · Authority</div>
-    <h3>🛡️ Govern the actors</h3>
-    <p>Every certifier and approver acts under a signed, scoped, revocable mandate. Every approval
-    is a timestamped, signed event — so the queue itself becomes attributable.</p>
-  </div>
-  <div class="layer">
-    <div class="role">Layer 3 · Liquidity</div>
-    <h3>💸 Move the money</h3>
-    <p>The verified e-invoice is financed: a bank advances 60% the next morning, holds 40% as
-    buffer, and settles the balance when the treasury pays — contractor nets ~97% with day-1 cash.</p>
-  </div>
-</div>
+    <!-- Protocol Integration Pipeline -->
+    <div class="pipeline-card glass">
+      <div class="pipeline-title">Protocol Integration Pipeline</div>
+      <svg class="pipeline-svg" viewBox="0 0 800 240" id="flowSvg">
+        <!-- Connecting Paths -->
+        <path d="M 120,120 L 260,120" class="flow-path" id="path1" />
+        <path d="M 260,120 L 400,120" class="flow-path" id="path2" />
+        <path d="M 400,120 L 540,120" class="flow-path" id="path3" />
+        <path d="M 540,120 L 680,120" class="flow-path" id="path4" />
+        
+        <path d="M 260,120 C 260,60 540,60 540,120" class="flow-path" id="path-heirloom" />
+        <path d="M 400,120 C 400,180 680,180 680,120" class="flow-path" id="path-tunnel" />
 
-<h2>See it run — two working demos</h2>
-<div class="grid">
-  <a class="card" href="groundtruth.html" style="text-decoration:none; color:inherit; display:block">
-    <b style="color:var(--accent)">▶ The money flow (Evidence + Liquidity)</b>
-    <p style="color:var(--muted); font-size:14.5px; margin:6px 0 0">Watch a certified measurement
-    become a next-morning bank advance, with the settlement waterfall and the reliability
-    flywheel (50%→85% advance rate). Mirrors the Python financing engine.</p>
-  </a>
-  <a class="card" href="surety.html" style="text-decoration:none; color:inherit; display:block">
-    <b style="color:var(--accent)">▶ The authority layer (mandates + audit)</b>
-    <p style="color:var(--muted); font-size:14.5px; margin:6px 0 0">Watch signed mandates enforced
-    on every action — category budgets, human escrow, a kill switch, and a hash-chained log that
-    breaks visibly when tampered. Mirrors the Python policy engine.</p>
-  </a>
-</div>
+        <!-- Nodes -->
+        <g class="flow-node node-realium" onclick="focusCard('realium')" id="node-realium">
+          <circle cx="120" cy="120" r="32" />
+          <text x="120" y="116">REALIUM</text>
+          <text x="120" y="128" style="font-size: 7.5px; fill: var(--muted-foreground)">SETTLEMENT</text>
+        </g>
 
-<h2>The code (open source, tested)</h2>
-<div class="grid">
-  <div class="card" style="margin:0">
-    <b>groundtruth</b> — financing engine, reliability flywheel, dual-key certificates, 22 tests
-    + financial-model doc. <a href="https://github.com/Bahniman/groundtruth">repo →</a>
+        <g class="flow-node node-heirloom" onclick="focusCard('heirloom')" id="node-heirloom">
+          <circle cx="260" cy="120" r="32" />
+          <text x="260" y="116">HEIRLOOM</text>
+          <text x="260" y="128" style="font-size: 7.5px; fill: var(--muted-foreground)">MEMORY</text>
+        </g>
+
+        <g class="flow-node node-turnstile" onclick="focusCard('turnstile')" id="node-turnstile">
+          <circle cx="400" cy="120" r="32" />
+          <text x="400" y="116">TURNSTILE</text>
+          <text x="400" y="128" style="font-size: 7.5px; fill: var(--muted-foreground)">ANALYTICS</text>
+        </g>
+
+        <g class="flow-node node-windtunnel" onclick="focusCard('windtunnel')" id="node-windtunnel">
+          <circle cx="540" cy="120" r="32" />
+          <text x="540" y="116">WINDTUNNEL</text>
+          <text x="540" y="128" style="font-size: 7.5px; fill: var(--muted-foreground)">SIMULATOR</text>
+        </g>
+        
+        <g class="flow-node" style="stroke-dasharray: 4 4;" id="node-agent">
+          <circle cx="680" cy="120" r="32" />
+          <text x="680" y="116">AGENT APIS</text>
+          <text x="680" y="128" style="font-size: 7.5px; fill: var(--muted-foreground)">INTERFACE</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Project Cards Grid -->
+    <div class="proj-grid">
+      <!-- Realium Card -->
+      <div class="proj-card realium-card" id="card-realium" onmousemove="handleCardGlow(event, this)">
+        <div class="card-glow" style="background: radial-gradient(300px circle at var(--x, 0px) var(--y, 0px), rgba(11, 219, 0, 0.15), transparent 60%); padding: 1px;"></div>
+        <div class="bracket bracket-tl"></div>
+        <div class="bracket bracket-tr"></div>
+        <div class="bracket bracket-bl"></div>
+        <div class="bracket bracket-br"></div>
+
+        <div class="proj-icon-row">
+          <span class="proj-emoji">🛰️</span>
+          <span class="proj-pill">Settlement Rail</span>
+        </div>
+        <h2>Realium</h2>
+        <p>A settlement rail for public works. Turns physical, site-verified construction progress (e-MB logs) into a bank-grade, financeable receivable, reducing contractor dues wait times from 148 days to 1 day. Consolidates both Groundtruth & Surety engines.</p>
+        <ul class="proj-bullets">
+          <li>Evidence Layer: Geo-tagged photo attestation & Ed25519 signatures.</li>
+          <li>Authority Layer: Signed, revocable, state-scoped certifier mandates.</li>
+          <li>Liquidity Layer: Automated banking waterfall & reliability flywheels.</li>
+        </ul>
+        <div class="proj-actions">
+          <a href="https://bahniman.github.io/realium/" class="btn btn-primary btn-press">▶ &nbsp;Explore protocol</a>
+          <a href="https://github.com/Bahniman/realium" target="_blank" class="btn btn-secondary btn-press">GitHub</a>
+        </div>
+      </div>
+
+      <!-- Heirloom Card -->
+      <div class="proj-card heirloom-card" id="card-heirloom" onmousemove="handleCardGlow(event, this)">
+        <div class="card-glow" style="background: radial-gradient(300px circle at var(--x, 0px) var(--y, 0px), rgba(237, 255, 0, 0.15), transparent 60%); padding: 1px;"></div>
+        <div class="bracket bracket-tl"></div>
+        <div class="bracket bracket-tr"></div>
+        <div class="bracket bracket-bl"></div>
+        <div class="bracket bracket-br"></div>
+
+        <div class="proj-icon-row">
+          <span class="proj-emoji">🏛️</span>
+          <span class="proj-pill">Secure Vault</span>
+        </div>
+        <h2>Heirloom</h2>
+        <p>Organizational memory as an asset the firm owns. Scopes database queries through role-based cryptography, ensuring context is model-independent and survives vendor switches or partner departures.</p>
+        <ul class="proj-bullets">
+          <li>Access Guard: Pre-retrieval scope filtering based on user credentials.</li>
+          <li>Provenance Chain: Hard-coded audit citations linked to document nodes.</li>
+          <li>Open Portability: Vendor-free export schemas in neutral JSON structures.</li>
+        </ul>
+        <div class="proj-actions">
+          <a href="https://bahniman.github.io/heirloom/" class="btn btn-primary btn-press">▶ &nbsp;Explore protocol</a>
+          <a href="https://github.com/Bahniman/heirloom" target="_blank" class="btn btn-secondary btn-press">GitHub</a>
+        </div>
+      </div>
+
+      <!-- Turnstile Card -->
+      <div class="proj-card turnstile-card" id="card-turnstile" onmousemove="handleCardGlow(event, this)">
+        <div class="card-glow" style="background: radial-gradient(300px circle at var(--x, 0px) var(--y, 0px), rgba(0, 13, 255, 0.15), transparent 60%); padding: 1px;"></div>
+        <div class="bracket bracket-tl"></div>
+        <div class="bracket bracket-tr"></div>
+        <div class="bracket bracket-bl"></div>
+        <div class="bracket bracket-br"></div>
+
+        <div class="proj-icon-row">
+          <span class="proj-emoji">🚪</span>
+          <span class="proj-pill">Store Analytics</span>
+        </div>
+        <h2>Turnstile</h2>
+        <p>Commerce analytics and interface negotiation for the AI agent economy. Classifies user sessions (human vs AI agents), recovers falsely declined bot checkouts, and serves machine-readable API storefronts.</p>
+        <ul class="proj-bullets">
+          <li>Gate Classifier: Behavioral signal processing (mouse traces, load cadences).</li>
+          <li>Attribution Flow: Accurate routing of automated delegated purchases.</li>
+          <li>Agent Storefront: Clean JSON well-known feeds skipping HTML clutter.</li>
+        </ul>
+        <div class="proj-actions">
+          <a href="https://bahniman.github.io/turnstile/" class="btn btn-primary btn-press">▶ &nbsp;Explore protocol</a>
+          <a href="https://github.com/Bahniman/turnstile" target="_blank" class="btn btn-secondary btn-press">GitHub</a>
+        </div>
+      </div>
+
+      <!-- Windtunnel Card -->
+      <div class="proj-card windtunnel-card" id="card-windtunnel" onmousemove="handleCardGlow(event, this)">
+        <div class="card-glow" style="background: radial-gradient(300px circle at var(--x, 0px) var(--y, 0px), rgba(255, 77, 0, 0.15), transparent 60%); padding: 1px;"></div>
+        <div class="bracket bracket-tl"></div>
+        <div class="bracket bracket-tr"></div>
+        <div class="bracket bracket-bl"></div>
+        <div class="bracket bracket-br"></div>
+
+        <div class="proj-header">
+          <span class="proj-icon-row">
+            <span class="proj-emoji">🌪️</span>
+            <span class="proj-pill">Monte Carlo Simulator</span>
+          </span>
+        </div>
+        <h2>Windtunnel</h2>
+        <p>A Monte Carlo simulator for testing strategic price and plan changes. Generates synthetic customer populations modeled from real support histories, reviews, and transaction counts to estimate risks.</p>
+        <ul class="proj-bullets">
+          <li>Synthetic Cohorts: Friction sensitivity fitted to customer review text.</li>
+          <li>Monte Carlo runs: Runs 400 iterations per pricing shock adjustment.</li>
+          <li>Falsifiable recommendations: Outlines cost-effective test pilots.</li>
+        </ul>
+        <div class="proj-actions">
+          <a href="https://bahniman.github.io/windtunnel/" class="btn btn-primary btn-press">▶ &nbsp;Explore protocol</a>
+          <a href="https://github.com/Bahniman/windtunnel" target="_blank" class="btn btn-secondary btn-press">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Telemetry Monitor -->
+    <div class="console-card">
+      <div class="console-header">
+        <div class="console-title"><div class="console-dot"></div> Live Telemetry Monitor</div>
+        <div style="font-size: 9px; color: #888888">SECURE TELEMETRY FEED</div>
+      </div>
+      <div class="console-body" id="consoleBody">Initializing telemetry console...
+[MONITOR] Startup Lab Protocol Stack loaded.
+[MONITOR] Listening on all ports...</div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      Startup Lab © 2026 · Designed by <a href="https://github.com/Bahniman" target="_blank">Bahniman</a> · Built in synergy with Antigravity
+    </footer>
   </div>
-  <div class="card" style="margin:0">
-    <b>surety</b> — Ed25519 (RFC 8032, validated against test vectors), 10-check policy engine,
-    SQLite persistence, 25 tests + threat model. <a href="https://github.com/Bahniman/surety">repo →</a>
-  </div>
-</div>
-<p style="color:var(--dim); font-size:13.5px">These two engines are the Evidence/Liquidity and
-Authority layers of Realium. Earlier standalone explorations live in the
-<a href="lab.html">lab archive</a>.</p>
 
-<h2 id="sources">Sources</h2>
-<div class="card sources">
-<ol style="margin:0; padding-left:20px">
-<li>Maharashtra contractor dues ≈ ₹96,000 cr: 2025 contractors' strike-notice coverage (<a href="https://www.whalesbook.com/news/English/industrial-goodsservices/Maharashtra-Contractors-Set-to-Strike-Over-indian-rupee96000-Crore-Payment-Backlog/69d0c4e969ec081354e6a6d7">Whalesbook</a>).</li>
-<li>National estimates ₹1 lakh cr (NITI Aayog member) to ₹3 lakh cr (industry analyses); range, not a point (<a href="https://www.linkedin.com/pulse/construction-disputes-india-issues-mitigation-kankipati">Construction Disputes in India</a>).</li>
-<li>Arbitration duration &amp; pendency: <a href="https://globalarbitrationreview.com/insight/know-how/construction-arbitration/report/india">Global Arbitration Review — India</a>.</li>
-<li>CPWD e-MB on PFMS, ~₹20,000 cr/yr digital: <a href="https://www.pib.gov.in/newsite/PrintRelease.aspx?relid=178664">PIB</a>; <a href="https://www.business-standard.com/article/news-cm/cpwd-goes-digital-all-rs-20-000-cr-payments-per-year-now-online-117083000522_1.html">Business Standard</a>.</li>
-</ol>
-<p style="margin:12px 0 0; color:var(--dim); font-size:12.5px">Demo figures are illustrative and
-follow real Schedule-of-Rates structures; financing terms (11% p.a., 0.35% fee, the advance
-curve) are stated assumptions, documented in the <a href="https://github.com/Bahniman/groundtruth/blob/main/docs/FINANCIAL_MODEL.md">financial model</a>.</p>
-</div>
+  <script>
+    // Theme Management
+    let isDark = false; // Default Light Mode to match Realium
+    function toggleTheme() {
+      isDark = !isDark;
+      document.documentElement.classList.toggle("dark", isDark);
+      const btn = document.getElementById("themeBtn");
+      btn.innerHTML = isDark ? "☀️" : "🌙";
+    }
 
-<div class="footer">Realium · Team Realium · XLRI Jamshedpur · ReEnvision 5.0 · MIT-licensed ·
-<a href="https://github.com/Bahniman">github.com/Bahniman</a> · <a href="https://realium-core.lovable.app">live site</a></div>
-</div>
+    // Card spotlight mouse coordinate tracker
+    function handleCardGlow(e, card) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty("--x", x + "px");
+      card.style.setProperty("--y", y + "px");
+    }
+
+    // Scroll progress indicator
+    window.addEventListener("scroll", () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = Math.round((winScroll / height) * 100) || 0;
+      
+      const percentEl = document.getElementById("progressPercent");
+      if (percentEl) percentEl.innerText = scrolled + "%";
+
+      const activeLabelEl = document.getElementById("activeLabel");
+      if (activeLabelEl) {
+        if (winScroll < 300) activeLabelEl.innerText = "Active: INTRO";
+        else if (winScroll < 800) activeLabelEl.innerText = "Active: PIPELINE";
+        else activeLabelEl.innerText = "Active: PROJECTS";
+      }
+    });
+
+    // Local environment link corrector
+    document.addEventListener("DOMContentLoaded", () => {
+      const isLocal = window.location.protocol === "file:";
+      const links = {
+        realium: isLocal ? "../realium/docs/index.html" : "/realium/",
+        heirloom: isLocal ? "../heirloom/docs/index.html" : "/heirloom/",
+        turnstile: isLocal ? "../turnstile/docs/index.html" : "/turnstile/",
+        windtunnel: isLocal ? "../windtunnel/docs/index.html" : "/windtunnel/"
+      };
+      
+      for (const [id, url] of Object.entries(links)) {
+        const card = document.getElementById(`card-${id}`);
+        if (card) {
+          const btn = card.querySelector(".btn-primary");
+          if (btn) btn.setAttribute("href", url);
+        }
+      }
+    });
+
+    // Interactive SVG Pipeline focus highlights
+    function focusCard(id) {
+      const cards = ["realium", "heirloom", "turnstile", "windtunnel"];
+      cards.forEach(c => {
+        const el = document.getElementById("card-" + c);
+        if (c === id) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          el.style.transform = "translate(-4px, -4px)";
+          el.style.borderColor = "var(--color)";
+          el.style.boxShadow = "6px 6px 0px var(--border)";
+        } else {
+          el.style.transform = "";
+          el.style.borderColor = "";
+          el.style.boxShadow = "";
+        }
+      });
+
+      cards.forEach(c => {
+        const node = document.getElementById("node-" + c);
+        node.classList.toggle("active", c === id);
+      });
+      document.getElementById("path-heirloom").classList.toggle("active", id === "heirloom");
+      document.getElementById("path-tunnel").classList.toggle("active", id === "windtunnel");
+    }
+
+    // Live Telemetry Feed Mock logger
+    const logs = [
+      { text: "[REALIUM] Geo-verification scan complete: e-MB Entry #402. Status: verified.", cls: "c-green" },
+      { text: "[REALIUM] Attestation primitive Ed25519 sign: 0x8a92f... Authority mandate checked: valid.", cls: "c-green" },
+      { text: "[REALIUM] Pushing transaction to financing waterfall. Liquid advance rate: 60%.", cls: "c-green" },
+      { text: "[HEIRLOOM] Role-query validation request from partner-agent. Key verified.", cls: "c-yellow" },
+      { text: "[HEIRLOOM] Scoping database memory nodes. Pre-retrieval query filter: OK.", cls: "c-yellow" },
+      { text: "[HEIRLOOM] Serving 3 verified dossiers with citations. Blocked 4 unauthorized files.", cls: "c-yellow" },
+      { text: "[TURNSTILE] Inbound HTTP session classification started... webdriver checks passed.", cls: "c-blue" },
+      { text: "[TURNSTILE] Session marked as AI agent (BrowserUse). Serving well-known JSON storefront feed.", cls: "c-blue" },
+      { text: "[TURNSTILE] Whitelisted delegated agent order: #1043. Attributed sale to OpenClaw.", cls: "c-blue" },
+      { text: "[WINDTUNNEL] Running subscriber pricing shock Monte Carlo simulation (400 runs)...", cls: "c-orange" },
+      { text: "[WINDTUNNEL] Expected median ARR shift: +4.2%. Churn warning: Deal Hunters cohort spikes to 14.8%.", cls: "c-orange" },
+      { text: "[WINDTUNNEL] Recommendation generated: rollout +12% hike on Coffee Enthusiasts first.", cls: "c-orange" }
+    ];
+
+    const consoleBody = document.getElementById("consoleBody");
+    let logIdx = 0;
+
+    function addLog() {
+      const log = logs[logIdx];
+      const div = document.createElement("div");
+      div.className = log.cls;
+      div.innerText = `[${new Date().toLocaleTimeString()}] ${log.text}`;
+      consoleBody.appendChild(div);
+      consoleBody.scrollTop = consoleBody.scrollHeight;
+      
+      logIdx = (logIdx + 1) % logs.length;
+      
+      while (consoleBody.children.length > 20) {
+        consoleBody.removeChild(consoleBody.firstChild);
+      }
+    }
+
+    // Log loop
+    setInterval(addLog, 4000);
+  </script>
 </body>
 </html>
