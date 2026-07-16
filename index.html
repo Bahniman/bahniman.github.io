@@ -82,32 +82,32 @@
         <!-- Nodes -->
         <g class="flow-node node-realium" onclick="focusCard('realium')" id="node-realium">
           <circle cx="120" cy="120" r="32" />
-          <text x="120" y="116">REALIUM</text>
-          <text x="120" y="128" style="font-size: 7.5px; fill: var(--muted-foreground)">SETTLEMENT</text>
+          <text x="120" y="114" class="node-title">REALIUM</text>
+          <text x="120" y="127" class="node-subtitle">SETTLEMENT</text>
         </g>
 
         <g class="flow-node node-heirloom" onclick="focusCard('heirloom')" id="node-heirloom">
           <circle cx="260" cy="120" r="32" />
-          <text x="260" y="116">HEIRLOOM</text>
-          <text x="260" y="128" style="font-size: 7.5px; fill: var(--muted-foreground)">MEMORY</text>
+          <text x="260" y="114" class="node-title">HEIRLOOM</text>
+          <text x="260" y="127" class="node-subtitle">MEMORY</text>
         </g>
 
         <g class="flow-node node-turnstile" onclick="focusCard('turnstile')" id="node-turnstile">
           <circle cx="400" cy="120" r="32" />
-          <text x="400" y="116">TURNSTILE</text>
-          <text x="400" y="128" style="font-size: 7.5px; fill: var(--muted-foreground)">ANALYTICS</text>
+          <text x="400" y="114" class="node-title">TURNSTILE</text>
+          <text x="400" y="127" class="node-subtitle">ANALYTICS</text>
         </g>
 
         <g class="flow-node node-windtunnel" onclick="focusCard('windtunnel')" id="node-windtunnel">
           <circle cx="540" cy="120" r="32" />
-          <text x="540" y="116">WINDTUNNEL</text>
-          <text x="540" y="128" style="font-size: 7.5px; fill: var(--muted-foreground)">SIMULATOR</text>
+          <text x="540" y="114" class="node-title">WINDTUNNEL</text>
+          <text x="540" y="127" class="node-subtitle">SIMULATOR</text>
         </g>
         
-        <g class="flow-node" style="stroke-dasharray: 4 4;" id="node-agent">
+        <g class="flow-node node-agent" style="stroke-dasharray: 4 4;" onclick="focusCard('turnstile')" id="node-agent">
           <circle cx="680" cy="120" r="32" />
-          <text x="680" y="116">AGENT APIS</text>
-          <text x="680" y="128" style="font-size: 7.5px; fill: var(--muted-foreground)">INTERFACE</text>
+          <text x="680" y="114" class="node-title">AGENT APIS</text>
+          <text x="680" y="127" class="node-subtitle">INTERFACE</text>
         </g>
       </svg>
     </div>
@@ -308,10 +308,14 @@
 
       cards.forEach(c => {
         const node = document.getElementById("node-" + c);
-        node.classList.toggle("active", c === id);
+        if (node) node.classList.toggle("active", c === id);
       });
+      
+      const agentNode = document.getElementById("node-agent");
+      if (agentNode) agentNode.classList.toggle("active", id === "turnstile");
+
       document.getElementById("path-heirloom").classList.toggle("active", id === "heirloom");
-      document.getElementById("path-tunnel").classList.toggle("active", id === "windtunnel");
+      document.getElementById("path-tunnel").classList.toggle("active", id === "turnstile");
     }
 
     // Live Telemetry Feed Mock logger

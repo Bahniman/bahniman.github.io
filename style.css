@@ -340,17 +340,26 @@ svg.pipeline-svg {
 .node-heirloom { --color: var(--heirloom); }
 .node-turnstile { --color: var(--turnstile); }
 .node-windtunnel { --color: var(--windtunnel); }
+.node-agent { --color: var(--turnstile); }
 
 .node-realium.active circle, .node-realium:hover circle { stroke: var(--realium); }
 .node-heirloom.active circle, .node-heirloom:hover circle { stroke: var(--heirloom); }
 .node-turnstile.active circle, .node-turnstile:hover circle { stroke: var(--turnstile); }
 .node-windtunnel.active circle, .node-windtunnel:hover circle { stroke: var(--windtunnel); }
+.node-agent.active circle, .node-agent:hover circle { stroke: var(--turnstile); }
 
 .flow-node text {
-  font-size: 9.5px;
-  font-weight: 700;
-  fill: var(--foreground);
   text-anchor: middle;
+}
+.flow-node text.node-title {
+  font-size: 8.5px;
+  font-weight: 800;
+  fill: var(--foreground);
+}
+.flow-node text.node-subtitle {
+  font-size: 6.5px;
+  font-weight: 600;
+  fill: var(--muted-foreground);
 }
 .flow-path {
   fill: none;
