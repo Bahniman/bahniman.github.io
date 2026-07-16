@@ -2,9 +2,9 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #FFFFFF;
+  --background: #FAF8F6; /* Warm sand canvas */
   --foreground: #161616;
-  --card: #FFFFFF;
+  --card: rgba(255, 255, 255, 0.60); /* Semi-transparent white card */
   --card-foreground: #161616;
   --popover: #FFFFFF;
   --popover-foreground: #161616;
@@ -14,7 +14,7 @@
   --secondary-foreground: #161616;
   --muted: #f5f5f5;
   --muted-foreground: #707070;
-  --border: #d4d4d4;
+  --border: rgba(22, 22, 22, 0.12); /* Softer card borders */
   --border-focus: #161616;
   --ring: #000DFF;
 
@@ -24,21 +24,24 @@
   --turnstile: #000DFF;
   --windtunnel: #FF4D00;
 
-  --scene-bg: #FFFFFF;
-  --scene-bg-gradient: #f5f5f5;
-  --glass-bg: rgba(255, 255, 255, 0.80);
-  --glass-border: #d4d4d4;
-  --grid-line: rgba(0, 0, 0, 0.06);
-  --grid-dot: rgba(0, 0, 0, 0.10);
-  --blob-emerald: rgba(11, 219, 0, 0.14);
-  --blob-indigo: rgba(0, 13, 255, 0.12);
-  --blob-rose: rgba(236, 72, 153, 0.12);
+  --scene-bg: #FAF8F6;
+  --scene-bg-gradient: #EAE6DF; /* Rich warmer background gradient */
+  --glass-bg: rgba(255, 255, 255, 0.40); /* Hyper glassmorphism */
+  --glass-border: rgba(22, 22, 22, 0.08);
+  --grid-line: rgba(0, 0, 0, 0.04);
+  --grid-dot: rgba(0, 0, 0, 0.08);
+  
+  /* Rich, saturated background gels for light mode */
+  --blob-emerald: rgba(11, 219, 0, 0.22);
+  --blob-indigo: rgba(0, 13, 255, 0.18);
+  --blob-rose: rgba(236, 72, 153, 0.20);
+  --blob-amber: rgba(245, 158, 11, 0.18);
 }
 
 .dark {
-  --background: #0A0A0A;
+  --background: #060608; /* Deep obsidian space */
   --foreground: #EDEDED;
-  --card: #161616;
+  --card: rgba(15, 15, 22, 0.65); /* Semi-transparent black card */
   --card-foreground: #EDEDED;
   --popover: #161616;
   --popover-foreground: #EDEDED;
@@ -48,19 +51,22 @@
   --secondary-foreground: #EDEDED;
   --muted: #222222;
   --muted-foreground: #888888;
-  --border: #2D2D2D;
+  --border: rgba(255, 255, 255, 0.10); /* Softer dark borders */
   --border-focus: #EDEDED;
   --ring: #5566FF;
 
-  --scene-bg: #0A0A0A;
-  --scene-bg-gradient: #121212;
-  --glass-bg: rgba(22, 22, 22, 0.80);
-  --glass-border: #2D2D2D;
-  --grid-line: rgba(255, 255, 255, 0.04);
-  --grid-dot: rgba(255, 255, 255, 0.08);
-  --blob-emerald: rgba(11, 219, 0, 0.09);
-  --blob-indigo: rgba(85, 102, 255, 0.08);
-  --blob-rose: rgba(236, 72, 153, 0.08);
+  --scene-bg: #060608;
+  --scene-bg-gradient: #0D0D14; /* Deep indigo gradient */
+  --glass-bg: rgba(15, 15, 22, 0.45); /* Hyper glassmorphism */
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --grid-line: rgba(255, 255, 255, 0.02);
+  --grid-dot: rgba(255, 255, 255, 0.06);
+  
+  /* Rich, saturated background gels for dark mode */
+  --blob-emerald: rgba(11, 219, 0, 0.14);
+  --blob-indigo: rgba(85, 102, 255, 0.12);
+  --blob-rose: rgba(236, 72, 153, 0.12);
+  --blob-amber: rgba(245, 158, 11, 0.10);
 }
 
 * {
@@ -162,47 +168,59 @@ body {
 
 .blob {
   position: fixed;
-  width: 750px;
-  height: 750px;
+  width: 800px;
+  height: 800px;
   border-radius: 50%;
   pointer-events: none;
-  filter: blur(140px);
+  filter: blur(130px);
   z-index: -30;
-  opacity: 0.85;
+  opacity: 0.90;
 }
 .blob-emerald {
   background-color: var(--blob-emerald);
-  top: -15%;
-  left: -20%;
+  top: -10%;
+  left: -15%;
   animation: float-1 20s ease-in-out infinite;
 }
 .blob-indigo {
   background-color: var(--blob-indigo);
-  bottom: -15%;
-  right: -20%;
+  bottom: -10%;
+  right: -15%;
   animation: float-2 24s ease-in-out infinite;
 }
 .blob-rose {
   background-color: var(--blob-rose);
-  top: 35%;
-  left: 45%;
+  top: 25%;
+  left: 30%;
+  width: 600px;
+  height: 600px;
+  animation: float-3 28s ease-in-out infinite;
+}
+.blob-amber {
+  background-color: var(--blob-amber);
+  bottom: 25%;
+  left: 10%;
   width: 500px;
   height: 500px;
-  animation: float-3 28s ease-in-out infinite;
+  animation: float-4 32s ease-in-out infinite;
 }
 
 @keyframes float-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(60px, -80px) scale(1.15); }
-  66% { transform: translate(-40px, 40px) scale(0.9); }
+  33% { transform: translate(70px, -90px) scale(1.2); }
+  66% { transform: translate(-50px, 50px) scale(0.85); }
 }
 @keyframes float-2 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-70px, 80px) scale(1.2); }
+  50% { transform: translate(-80px, 90px) scale(1.25); }
 }
 @keyframes float-3 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(80px, -60px) scale(1.1); }
+  50% { transform: translate(90px, -70px) scale(1.15); }
+}
+@keyframes float-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-70px, -80px) scale(1.2); }
 }
 
 /* Glassmorphism Navigation */
@@ -412,6 +430,8 @@ svg.pipeline-svg {
   position: relative;
   overflow: hidden;
   background-color: var(--card);
+  backdrop-filter: blur(24px) saturate(160%); /* Dynamic backdrop blur */
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid var(--border);
   border-radius: 1rem;
   padding: 32px;
