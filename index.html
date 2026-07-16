@@ -235,14 +235,28 @@
   </div>
 
   <script>
-    // Theme Management
-    let isDark = false; // Default Light Mode to match Realium
-    function toggleTheme() {
-      isDark = !isDark;
+    // Theme Management - follow system preference by default, support toggling
+    let isDark = false;
+    
+    function applyTheme(dark) {
+      isDark = dark;
       document.documentElement.classList.toggle("dark", isDark);
       const btn = document.getElementById("themeBtn");
-      btn.innerHTML = isDark ? "☀️" : "🌙";
+      if (btn) btn.innerHTML = isDark ? "☀️" : "🌙";
     }
+
+    function toggleTheme() {
+      applyTheme(!isDark);
+    }
+
+    // Set initial theme based on system preference
+    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+    applyTheme(systemPrefersDark.matches);
+
+    // Listen to changes in system preference
+    systemPrefersDark.addEventListener("change", (e) => {
+      applyTheme(e.matches);
+    });
 
     // Card spotlight mouse coordinate tracker
     function handleCardGlow(e, card) {
