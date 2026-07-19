@@ -10,28 +10,38 @@
 <body>
   
   <!-- M3 Top App Bar -->
-  <header class="m3-top-app-bar">
+  <header class="m3-top-app-bar" id="appBar">
     <div class="title">Startup Lab</div>
-    <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">
-      🌙
+    <button class="m3-icon-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">
+      <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
     </button>
   </header>
 
   <div class="wrap">
-    
+
     <!-- M3 Hero Section -->
     <section class="hero" id="intro">
-      <div style="display: inline-flex; align-items: center; gap: 8px; font-size: var(--md-sys-typescale-label-large-size); font-weight: var(--md-sys-typescale-label-large-weight); color: var(--md-sys-color-primary); background: var(--md-sys-color-surface-container-high); padding: 4px 12px; border-radius: var(--md-sys-shape-corner-full); margin-bottom: 24px;">
-        🏆 Top 3 Conclave Winner · ReEnvision 5.0
+      <div class="m3-chip">
+        <span class="material-symbols-outlined">trophy</span>
+        Top 3 Conclave Winner · ReEnvision 5.0
       </div>
       <h1>The Trust Layer for<br>the Agent Economy</h1>
       <p>Secure evidence, scoped authority, and fluid liquidity. A suite of open-source protocols and platforms designed to govern transactions made by autonomous AI software, connecting site verification, institutional memory, and machine commerce.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="m3-button-filled">
+          <span class="material-symbols-outlined" style="font-size:18px;">arrow_downward</span>
+          Explore the projects
+        </a>
+        <a href="https://github.com/Bahniman" target="_blank" class="m3-button-outlined" style="border-color: color-mix(in srgb, var(--md-sys-color-on-primary-container) 50%, transparent); color: var(--md-sys-color-on-primary-container);">
+          GitHub Profile
+        </a>
+      </div>
     </section>
 
     <!-- M3 Section: Protocol Integration Pipeline -->
     <section class="m3-section">
       <h2 class="m3-section-title">Protocol Integration Pipeline</h2>
-      <div class="m3-card-filled" style="padding: 48px 24px; align-items: center; background-color: var(--md-sys-color-surface-container-low);">
+      <div class="pipeline-card">
         <svg class="pipeline-svg" viewBox="0 0 800 240" id="flowSvg">
           <!-- Connecting Paths -->
           <path d="M 120,120 L 260,120" class="flow-path" id="path1" />
@@ -77,13 +87,13 @@
     </section>
 
     <!-- M3 Section: Projects Grid -->
-    <section class="m3-section">
+    <section class="m3-section" id="projects">
       <h2 class="m3-section-title">Core Subprojects</h2>
       <div class="m3-cards-grid">
         
         <!-- Realium Card -->
         <div class="m3-card-outlined card-realium" id="card-realium">
-          <div style="font-size: 24px; margin-bottom: 8px;">🛰️</div>
+          <div class="card-icon"><span class="material-symbols-outlined">satellite_alt</span></div>
           <div class="title">Realium</div>
           <div class="body">A settlement rail for public works. Turns physical, site-verified construction progress (e-MB logs) into a bank-grade, financeable receivable, reducing contractor dues wait times from 148 days to 1 day.</div>
           <div style="margin-top: auto; display: flex; gap: 12px;">
@@ -94,7 +104,7 @@
   
         <!-- Heirloom Card -->
         <div class="m3-card-outlined card-heirloom" id="card-heirloom">
-          <div style="font-size: 24px; margin-bottom: 8px;">🏛️</div>
+          <div class="card-icon"><span class="material-symbols-outlined">account_balance</span></div>
           <div class="title">Heirloom</div>
           <div class="body">Organizational memory as an asset the firm owns. Scopes database queries through role-based cryptography, ensuring context is model-independent and survives vendor switches or partner departures.</div>
           <div style="margin-top: auto; display: flex; gap: 12px;">
@@ -105,7 +115,7 @@
   
         <!-- Turnstile Card -->
         <div class="m3-card-outlined card-turnstile" id="card-turnstile">
-          <div style="font-size: 24px; margin-bottom: 8px;">🚪</div>
+          <div class="card-icon"><span class="material-symbols-outlined">door_open</span></div>
           <div class="title">Turnstile</div>
           <div class="body">Commerce analytics and interface negotiation for the AI agent economy. Classifies user sessions (human vs AI agents), recovers falsely declined bot checkouts, and serves machine-readable API storefronts.</div>
           <div style="margin-top: auto; display: flex; gap: 12px;">
@@ -116,7 +126,7 @@
   
         <!-- Windtunnel Card -->
         <div class="m3-card-outlined card-windtunnel" id="card-windtunnel">
-          <div style="font-size: 24px; margin-bottom: 8px;">🌪️</div>
+          <div class="card-icon"><span class="material-symbols-outlined">cyclone</span></div>
           <div class="title">Windtunnel</div>
           <div class="body">A Monte Carlo simulator for testing strategic price and plan changes. Generates synthetic customer populations modeled from real support histories, reviews, and transaction counts to estimate risks.</div>
           <div style="margin-top: auto; display: flex; gap: 12px;">
@@ -134,7 +144,7 @@
       <div class="console-card">
         <div class="console-header">
           <div>Live Telemetry Monitor</div>
-          <div>SECURE FEED</div>
+          <div class="console-live-badge">LIVE</div>
         </div>
         <div class="console-body" id="consoleBody">Initializing telemetry console...
   [MONITOR] Startup Lab Protocol Stack loaded.
@@ -155,9 +165,14 @@
     function applyTheme(dark) {
       isDark = dark;
       document.documentElement.classList.toggle("dark", isDark);
-      const btn = document.getElementById("themeBtn");
-      if (btn) btn.innerHTML = isDark ? "☀️" : "🌙";
+      const icon = document.getElementById("themeIcon");
+      if (icon) icon.textContent = isDark ? "light_mode" : "dark_mode";
     }
+
+    // Elevate app bar on scroll (M3 on-scroll container color)
+    window.addEventListener("scroll", () => {
+      document.getElementById("appBar").classList.toggle("scrolled", window.scrollY > 8);
+    }, { passive: true });
 
     function toggleTheme() {
       applyTheme(!isDark);
@@ -218,18 +233,18 @@
 
     // Live Telemetry Feed Mock logger
     const logs = [
-      { text: "[REALIUM] Geo-verification scan complete: e-MB Entry #402. Status: verified.", cls: "c-green" },
-      { text: "[REALIUM] Attestation primitive Ed25519 sign: 0x8a92f... Authority mandate checked: valid.", cls: "c-green" },
-      { text: "[REALIUM] Pushing transaction to financing waterfall. Liquid advance rate: 60%.", cls: "c-green" },
-      { text: "[HEIRLOOM] Role-query validation request from partner-agent. Key verified.", cls: "c-yellow" },
-      { text: "[HEIRLOOM] Scoping database memory nodes. Pre-retrieval query filter: OK.", cls: "c-yellow" },
-      { text: "[HEIRLOOM] Serving 3 verified dossiers with citations. Blocked 4 unauthorized files.", cls: "c-yellow" },
-      { text: "[TURNSTILE] Inbound HTTP session classification started... webdriver checks passed.", cls: "c-blue" },
-      { text: "[TURNSTILE] Session marked as AI agent (BrowserUse). Serving well-known JSON storefront feed.", cls: "c-blue" },
-      { text: "[TURNSTILE] Whitelisted delegated agent order: #1043. Attributed sale to OpenClaw.", cls: "c-blue" },
-      { text: "[WINDTUNNEL] Running subscriber pricing shock Monte Carlo simulation (400 runs)...", cls: "c-orange" },
-      { text: "[WINDTUNNEL] Expected median ARR shift: +4.2%. Churn warning: Deal Hunters cohort spikes to 14.8%.", cls: "c-orange" },
-      { text: "[WINDTUNNEL] Recommendation generated: rollout +12% hike on Coffee Enthusiasts first.", cls: "c-orange" }
+      { text: "[REALIUM] Geo-verification scan complete: e-MB Entry #402. Status: verified.", cls: "c-realium" },
+      { text: "[REALIUM] Attestation primitive Ed25519 sign: 0x8a92f... Authority mandate checked: valid.", cls: "c-realium" },
+      { text: "[REALIUM] Pushing transaction to financing waterfall. Liquid advance rate: 60%.", cls: "c-realium" },
+      { text: "[HEIRLOOM] Role-query validation request from partner-agent. Key verified.", cls: "c-heirloom" },
+      { text: "[HEIRLOOM] Scoping database memory nodes. Pre-retrieval query filter: OK.", cls: "c-heirloom" },
+      { text: "[HEIRLOOM] Serving 3 verified dossiers with citations. Blocked 4 unauthorized files.", cls: "c-heirloom" },
+      { text: "[TURNSTILE] Inbound HTTP session classification started... webdriver checks passed.", cls: "c-turnstile" },
+      { text: "[TURNSTILE] Session marked as AI agent (BrowserUse). Serving well-known JSON storefront feed.", cls: "c-turnstile" },
+      { text: "[TURNSTILE] Whitelisted delegated agent order: #1043. Attributed sale to OpenClaw.", cls: "c-turnstile" },
+      { text: "[WINDTUNNEL] Running subscriber pricing shock Monte Carlo simulation (400 runs)...", cls: "c-windtunnel" },
+      { text: "[WINDTUNNEL] Expected median ARR shift: +4.2%. Churn warning: Deal Hunters cohort spikes to 14.8%.", cls: "c-windtunnel" },
+      { text: "[WINDTUNNEL] Recommendation generated: rollout +12% hike on Coffee Enthusiasts first.", cls: "c-windtunnel" }
     ];
 
     const consoleBody = document.getElementById("consoleBody");
