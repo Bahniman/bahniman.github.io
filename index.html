@@ -8,227 +8,139 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Grid Backgrounds & Ambient Blobs -->
-  <div class="grid-bg"></div>
-  <div class="blob blob-emerald"></div>
-  <div class="blob blob-indigo"></div>
-  <div class="blob blob-rose"></div>
-  <div class="blob blob-amber"></div>
-
-  <!-- Structural layout rails on left and right margins for widescreen gaps -->
-  <div class="side-rails">
-    <!-- Left rail vertical details -->
-    <div class="rail-left">
-      <span>
-        <span class="text-foreground font-semibold uppercase">Startup Lab</span>
-        <span class="rail-line"></span>
-        <span style="font-size: 8px; opacity: 0.8;">SYS_LOC: LAT 22.8020° N</span>
-      </span>
-      <span>
-        <span class="text-emerald-500 font-bold uppercase">LEDGER: SECURE</span>
-        <span class="rail-line"></span>
-        <span style="font-size: 8px; opacity: 0.8;">MANDATE_V1.02</span>
-      </span>
-    </div>
-
-    <!-- Right rail vertical details -->
-    <div class="rail-right">
-      <span>
-        <span class="text-foreground font-semibold uppercase">Scroll Progress</span>
-        <span class="rail-line"></span>
-        <span class="text-indigo-500 font-bold" id="progressPercent">0%</span>
-      </span>
-      <span>
-        <span style="font-size: 8px; uppercase;" id="activeLabel">Active: INTRO</span>
-      </span>
-    </div>
-  </div>
+  
+  <!-- M3 Top App Bar -->
+  <header class="m3-top-app-bar">
+    <div class="title">Startup Lab</div>
+    <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">
+      🌙
+    </button>
+  </header>
 
   <div class="wrap">
-    <!-- Header / Navigation -->
-    <header>
-      <div class="nav-wrap">
-        <div class="nav-container glass">
-          <a href="#" class="logo">Startup<span>Lab</span></a>
-          <div class="nav-links">
-            <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">
-              🌙
-            </button>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- Hero Section -->
+    
+    <!-- M3 Hero Section -->
     <section class="hero" id="intro">
-      <div class="hero-badge">
-        🏆 <span class="font-semibold">Top 3 Conclave Winner</span> · ReEnvision 5.0 · XLRI Jamshedpur
+      <div style="display: inline-flex; align-items: center; gap: 8px; font-size: var(--md-sys-typescale-label-large-size); font-weight: var(--md-sys-typescale-label-large-weight); color: var(--md-sys-color-primary); background: var(--md-sys-color-surface-container-high); padding: 4px 12px; border-radius: var(--md-sys-shape-corner-full); margin-bottom: 24px;">
+        🏆 Top 3 Conclave Winner · ReEnvision 5.0
       </div>
       <h1>The Trust Layer for<br>the Agent Economy</h1>
       <p>Secure evidence, scoped authority, and fluid liquidity. A suite of open-source protocols and platforms designed to govern transactions made by autonomous AI software, connecting site verification, institutional memory, and machine commerce.</p>
     </section>
 
-    <!-- Protocol Integration Pipeline -->
-    <div class="pipeline-card glass">
-      <div class="pipeline-title">Protocol Integration Pipeline</div>
-      <svg class="pipeline-svg" viewBox="0 0 800 240" id="flowSvg">
-        <!-- Connecting Paths -->
-        <path d="M 120,120 L 260,120" class="flow-path" id="path1" />
-        <path d="M 260,120 L 400,120" class="flow-path" id="path2" />
-        <path d="M 400,120 L 540,120" class="flow-path" id="path3" />
-        <path d="M 540,120 L 680,120" class="flow-path" id="path4" />
+    <!-- M3 Section: Protocol Integration Pipeline -->
+    <section class="m3-section">
+      <h2 class="m3-section-title">Protocol Integration Pipeline</h2>
+      <div class="m3-card-filled" style="padding: 48px 24px; align-items: center; background-color: var(--md-sys-color-surface-container-low);">
+        <svg class="pipeline-svg" viewBox="0 0 800 240" id="flowSvg">
+          <!-- Connecting Paths -->
+          <path d="M 120,120 L 260,120" class="flow-path" id="path1" />
+          <path d="M 260,120 L 400,120" class="flow-path" id="path2" />
+          <path d="M 400,120 L 540,120" class="flow-path" id="path3" />
+          <path d="M 540,120 L 680,120" class="flow-path" id="path4" />
+          
+          <path d="M 260,120 C 260,60 540,60 540,120" class="flow-path" id="path-heirloom" />
+          <path d="M 400,120 C 400,180 680,180 680,120" class="flow-path" id="path-tunnel" />
+  
+          <!-- Nodes -->
+          <g class="flow-node node-realium" onclick="focusCard('realium')" id="node-realium">
+            <circle cx="120" cy="120" r="32" />
+            <text x="120" y="114" class="node-title">REALIUM</text>
+            <text x="120" y="127" class="node-subtitle">SETTLEMENT</text>
+          </g>
+  
+          <g class="flow-node node-heirloom" onclick="focusCard('heirloom')" id="node-heirloom">
+            <circle cx="260" cy="120" r="32" />
+            <text x="260" y="114" class="node-title">HEIRLOOM</text>
+            <text x="260" y="127" class="node-subtitle">MEMORY</text>
+          </g>
+  
+          <g class="flow-node node-turnstile" onclick="focusCard('turnstile')" id="node-turnstile">
+            <circle cx="400" cy="120" r="32" />
+            <text x="400" y="114" class="node-title">TURNSTILE</text>
+            <text x="400" y="127" class="node-subtitle">ANALYTICS</text>
+          </g>
+  
+          <g class="flow-node node-windtunnel" onclick="focusCard('windtunnel')" id="node-windtunnel">
+            <circle cx="540" cy="120" r="32" />
+            <text x="540" y="114" class="node-title">WINDTUNNEL</text>
+            <text x="540" y="127" class="node-subtitle">SIMULATOR</text>
+          </g>
+          
+          <g class="flow-node node-agent" style="stroke-dasharray: 4 4;" onclick="focusCard('turnstile')" id="node-agent">
+            <circle cx="680" cy="120" r="32" />
+            <text x="680" y="114" class="node-title">AGENT APIS</text>
+            <text x="680" y="127" class="node-subtitle">INTERFACE</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- M3 Section: Projects Grid -->
+    <section class="m3-section">
+      <h2 class="m3-section-title">Core Subprojects</h2>
+      <div class="m3-cards-grid">
         
-        <path d="M 260,120 C 260,60 540,60 540,120" class="flow-path" id="path-heirloom" />
-        <path d="M 400,120 C 400,180 680,180 680,120" class="flow-path" id="path-tunnel" />
-
-        <!-- Nodes -->
-        <g class="flow-node node-realium" onclick="focusCard('realium')" id="node-realium">
-          <circle cx="120" cy="120" r="32" />
-          <text x="120" y="114" class="node-title">REALIUM</text>
-          <text x="120" y="127" class="node-subtitle">SETTLEMENT</text>
-        </g>
-
-        <g class="flow-node node-heirloom" onclick="focusCard('heirloom')" id="node-heirloom">
-          <circle cx="260" cy="120" r="32" />
-          <text x="260" y="114" class="node-title">HEIRLOOM</text>
-          <text x="260" y="127" class="node-subtitle">MEMORY</text>
-        </g>
-
-        <g class="flow-node node-turnstile" onclick="focusCard('turnstile')" id="node-turnstile">
-          <circle cx="400" cy="120" r="32" />
-          <text x="400" y="114" class="node-title">TURNSTILE</text>
-          <text x="400" y="127" class="node-subtitle">ANALYTICS</text>
-        </g>
-
-        <g class="flow-node node-windtunnel" onclick="focusCard('windtunnel')" id="node-windtunnel">
-          <circle cx="540" cy="120" r="32" />
-          <text x="540" y="114" class="node-title">WINDTUNNEL</text>
-          <text x="540" y="127" class="node-subtitle">SIMULATOR</text>
-        </g>
-        
-        <g class="flow-node node-agent" style="stroke-dasharray: 4 4;" onclick="focusCard('turnstile')" id="node-agent">
-          <circle cx="680" cy="120" r="32" />
-          <text x="680" y="114" class="node-title">AGENT APIS</text>
-          <text x="680" y="127" class="node-subtitle">INTERFACE</text>
-        </g>
-      </svg>
-    </div>
-
-    <!-- Project Cards Grid -->
-    <div class="proj-grid">
-      <!-- Realium Card -->
-      <div class="proj-card realium-card" id="card-realium" onmousemove="handleCardGlow(event, this)">
-        <div class="card-glow" style="background: radial-gradient(300px circle at var(--x, 0px) var(--y, 0px), rgba(11, 219, 0, 0.15), transparent 60%); padding: 1px;"></div>
-        <div class="bracket bracket-tl"></div>
-        <div class="bracket bracket-tr"></div>
-        <div class="bracket bracket-bl"></div>
-        <div class="bracket bracket-br"></div>
-
-        <div class="proj-icon-row">
-          <span class="proj-emoji">🛰️</span>
-          <span class="proj-pill">Settlement Rail</span>
+        <!-- Realium Card -->
+        <div class="m3-card-outlined card-realium" id="card-realium">
+          <div style="font-size: 24px; margin-bottom: 8px;">🛰️</div>
+          <div class="title">Realium</div>
+          <div class="body">A settlement rail for public works. Turns physical, site-verified construction progress (e-MB logs) into a bank-grade, financeable receivable, reducing contractor dues wait times from 148 days to 1 day.</div>
+          <div style="margin-top: auto; display: flex; gap: 12px;">
+            <a href="https://bahniman.github.io/realium/" class="m3-button-filled">Explore Protocol</a>
+            <a href="https://github.com/Bahniman/realium" target="_blank" class="m3-button-outlined">GitHub</a>
+          </div>
         </div>
-        <h2>Realium</h2>
-        <p>A settlement rail for public works. Turns physical, site-verified construction progress (e-MB logs) into a bank-grade, financeable receivable, reducing contractor dues wait times from 148 days to 1 day. Consolidates both Groundtruth & Surety engines.</p>
-        <ul class="proj-bullets">
-          <li>Evidence Layer: Geo-tagged photo attestation & Ed25519 signatures.</li>
-          <li>Authority Layer: Signed, revocable, state-scoped certifier mandates.</li>
-          <li>Liquidity Layer: Automated banking waterfall & reliability flywheels.</li>
-        </ul>
-        <div class="proj-actions">
-          <a href="https://bahniman.github.io/realium/" class="btn btn-primary btn-press">▶ &nbsp;Explore protocol</a>
-          <a href="https://github.com/Bahniman/realium" target="_blank" class="btn btn-secondary btn-press">GitHub</a>
+  
+        <!-- Heirloom Card -->
+        <div class="m3-card-outlined card-heirloom" id="card-heirloom">
+          <div style="font-size: 24px; margin-bottom: 8px;">🏛️</div>
+          <div class="title">Heirloom</div>
+          <div class="body">Organizational memory as an asset the firm owns. Scopes database queries through role-based cryptography, ensuring context is model-independent and survives vendor switches or partner departures.</div>
+          <div style="margin-top: auto; display: flex; gap: 12px;">
+            <a href="https://bahniman.github.io/heirloom/" class="m3-button-filled">Explore Protocol</a>
+            <a href="https://github.com/Bahniman/heirloom" target="_blank" class="m3-button-outlined">GitHub</a>
+          </div>
         </div>
+  
+        <!-- Turnstile Card -->
+        <div class="m3-card-outlined card-turnstile" id="card-turnstile">
+          <div style="font-size: 24px; margin-bottom: 8px;">🚪</div>
+          <div class="title">Turnstile</div>
+          <div class="body">Commerce analytics and interface negotiation for the AI agent economy. Classifies user sessions (human vs AI agents), recovers falsely declined bot checkouts, and serves machine-readable API storefronts.</div>
+          <div style="margin-top: auto; display: flex; gap: 12px;">
+            <a href="https://bahniman.github.io/turnstile/" class="m3-button-filled">Explore Protocol</a>
+            <a href="https://github.com/Bahniman/turnstile" target="_blank" class="m3-button-outlined">GitHub</a>
+          </div>
+        </div>
+  
+        <!-- Windtunnel Card -->
+        <div class="m3-card-outlined card-windtunnel" id="card-windtunnel">
+          <div style="font-size: 24px; margin-bottom: 8px;">🌪️</div>
+          <div class="title">Windtunnel</div>
+          <div class="body">A Monte Carlo simulator for testing strategic price and plan changes. Generates synthetic customer populations modeled from real support histories, reviews, and transaction counts to estimate risks.</div>
+          <div style="margin-top: auto; display: flex; gap: 12px;">
+            <a href="https://bahniman.github.io/windtunnel/" class="m3-button-filled">Explore Protocol</a>
+            <a href="https://github.com/Bahniman/windtunnel" target="_blank" class="m3-button-outlined">GitHub</a>
+          </div>
+        </div>
+
       </div>
-
-      <!-- Heirloom Card -->
-      <div class="proj-card heirloom-card" id="card-heirloom" onmousemove="handleCardGlow(event, this)">
-        <div class="card-glow" style="background: radial-gradient(300px circle at var(--x, 0px) var(--y, 0px), rgba(237, 255, 0, 0.15), transparent 60%); padding: 1px;"></div>
-        <div class="bracket bracket-tl"></div>
-        <div class="bracket bracket-tr"></div>
-        <div class="bracket bracket-bl"></div>
-        <div class="bracket bracket-br"></div>
-
-        <div class="proj-icon-row">
-          <span class="proj-emoji">🏛️</span>
-          <span class="proj-pill">Secure Vault</span>
+    </section>
+    
+    <!-- M3 Section: Live Telemetry -->
+    <section class="m3-section">
+      <h2 class="m3-section-title">System Telemetry</h2>
+      <div class="console-card">
+        <div class="console-header">
+          <div>Live Telemetry Monitor</div>
+          <div>SECURE FEED</div>
         </div>
-        <h2>Heirloom</h2>
-        <p>Organizational memory as an asset the firm owns. Scopes database queries through role-based cryptography, ensuring context is model-independent and survives vendor switches or partner departures.</p>
-        <ul class="proj-bullets">
-          <li>Access Guard: Pre-retrieval scope filtering based on user credentials.</li>
-          <li>Provenance Chain: Hard-coded audit citations linked to document nodes.</li>
-          <li>Open Portability: Vendor-free export schemas in neutral JSON structures.</li>
-        </ul>
-        <div class="proj-actions">
-          <a href="https://bahniman.github.io/heirloom/" class="btn btn-primary btn-press">▶ &nbsp;Explore protocol</a>
-          <a href="https://github.com/Bahniman/heirloom" target="_blank" class="btn btn-secondary btn-press">GitHub</a>
-        </div>
+        <div class="console-body" id="consoleBody">Initializing telemetry console...
+  [MONITOR] Startup Lab Protocol Stack loaded.
+  [MONITOR] Listening on all ports...</div>
       </div>
-
-      <!-- Turnstile Card -->
-      <div class="proj-card turnstile-card" id="card-turnstile" onmousemove="handleCardGlow(event, this)">
-        <div class="card-glow" style="background: radial-gradient(300px circle at var(--x, 0px) var(--y, 0px), rgba(0, 13, 255, 0.15), transparent 60%); padding: 1px;"></div>
-        <div class="bracket bracket-tl"></div>
-        <div class="bracket bracket-tr"></div>
-        <div class="bracket bracket-bl"></div>
-        <div class="bracket bracket-br"></div>
-
-        <div class="proj-icon-row">
-          <span class="proj-emoji">🚪</span>
-          <span class="proj-pill">Store Analytics</span>
-        </div>
-        <h2>Turnstile</h2>
-        <p>Commerce analytics and interface negotiation for the AI agent economy. Classifies user sessions (human vs AI agents), recovers falsely declined bot checkouts, and serves machine-readable API storefronts.</p>
-        <ul class="proj-bullets">
-          <li>Gate Classifier: Behavioral signal processing (mouse traces, load cadences).</li>
-          <li>Attribution Flow: Accurate routing of automated delegated purchases.</li>
-          <li>Agent Storefront: Clean JSON well-known feeds skipping HTML clutter.</li>
-        </ul>
-        <div class="proj-actions">
-          <a href="https://bahniman.github.io/turnstile/" class="btn btn-primary btn-press">▶ &nbsp;Explore protocol</a>
-          <a href="https://github.com/Bahniman/turnstile" target="_blank" class="btn btn-secondary btn-press">GitHub</a>
-        </div>
-      </div>
-
-      <!-- Windtunnel Card -->
-      <div class="proj-card windtunnel-card" id="card-windtunnel" onmousemove="handleCardGlow(event, this)">
-        <div class="card-glow" style="background: radial-gradient(300px circle at var(--x, 0px) var(--y, 0px), rgba(255, 77, 0, 0.15), transparent 60%); padding: 1px;"></div>
-        <div class="bracket bracket-tl"></div>
-        <div class="bracket bracket-tr"></div>
-        <div class="bracket bracket-bl"></div>
-        <div class="bracket bracket-br"></div>
-
-        <div class="proj-header">
-          <span class="proj-icon-row">
-            <span class="proj-emoji">🌪️</span>
-            <span class="proj-pill">Monte Carlo Simulator</span>
-          </span>
-        </div>
-        <h2>Windtunnel</h2>
-        <p>A Monte Carlo simulator for testing strategic price and plan changes. Generates synthetic customer populations modeled from real support histories, reviews, and transaction counts to estimate risks.</p>
-        <ul class="proj-bullets">
-          <li>Synthetic Cohorts: Friction sensitivity fitted to customer review text.</li>
-          <li>Monte Carlo runs: Runs 400 iterations per pricing shock adjustment.</li>
-          <li>Falsifiable recommendations: Outlines cost-effective test pilots.</li>
-        </ul>
-        <div class="proj-actions">
-          <a href="https://bahniman.github.io/windtunnel/" class="btn btn-primary btn-press">▶ &nbsp;Explore protocol</a>
-          <a href="https://github.com/Bahniman/windtunnel" target="_blank" class="btn btn-secondary btn-press">GitHub</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Live Telemetry Monitor -->
-    <div class="console-card">
-      <div class="console-header">
-        <div class="console-title"><div class="console-dot"></div> Live Telemetry Monitor</div>
-        <div style="font-size: 9px; color: #888888">SECURE TELEMETRY FEED</div>
-      </div>
-      <div class="console-body" id="consoleBody">Initializing telemetry console...
-[MONITOR] Startup Lab Protocol Stack loaded.
-[MONITOR] Listening on all ports...</div>
-    </div>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -260,32 +172,6 @@
       applyTheme(e.matches);
     });
 
-    // Card spotlight mouse coordinate tracker
-    function handleCardGlow(e, card) {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty("--x", x + "px");
-      card.style.setProperty("--y", y + "px");
-    }
-
-    // Scroll progress indicator
-    window.addEventListener("scroll", () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = Math.round((winScroll / height) * 100) || 0;
-      
-      const percentEl = document.getElementById("progressPercent");
-      if (percentEl) percentEl.innerText = scrolled + "%";
-
-      const activeLabelEl = document.getElementById("activeLabel");
-      if (activeLabelEl) {
-        if (winScroll < 300) activeLabelEl.innerText = "Active: INTRO";
-        else if (winScroll < 800) activeLabelEl.innerText = "Active: PIPELINE";
-        else activeLabelEl.innerText = "Active: PROJECTS";
-      }
-    });
-
     // Local environment link corrector
     document.addEventListener("DOMContentLoaded", () => {
       const isLocal = window.location.protocol === "file:";
@@ -299,7 +185,7 @@
       for (const [id, url] of Object.entries(links)) {
         const card = document.getElementById(`card-${id}`);
         if (card) {
-          const btn = card.querySelector(".btn-primary");
+          const btn = card.querySelector(".m3-button-filled");
           if (btn) btn.setAttribute("href", url);
         }
       }
@@ -312,13 +198,9 @@
         const el = document.getElementById("card-" + c);
         if (c === id) {
           el.scrollIntoView({ behavior: "smooth", block: "center" });
-          el.style.transform = "translate(-4px, -4px)";
-          el.style.borderColor = "var(--color)";
-          el.style.boxShadow = "6px 6px 0px var(--border)";
+          el.style.backgroundColor = "var(--md-sys-color-surface-container-high)";
         } else {
-          el.style.transform = "";
-          el.style.borderColor = "";
-          el.style.boxShadow = "";
+          el.style.backgroundColor = "";
         }
       });
 
