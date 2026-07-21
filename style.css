@@ -194,7 +194,7 @@ a { text-decoration: none; color: inherit; }
   background: transparent; border: none; cursor: pointer;
   color: var(--md-sys-color-on-surface-variant);
   display: inline-flex; align-items: center; justify-content: center;
-  height: 44px; width: 44px; border-radius: var(--shape-full);
+  height: 40px; width: 40px; border-radius: var(--shape-full);
   transition: background-color .2s var(--ease-standard), color .2s, transform .4s var(--ease-spring);
 }
 .m3-icon-btn:hover {
@@ -238,7 +238,7 @@ a { text-decoration: none; color: inherit; }
 /* ============================== chips ============================ */
 .m3-chip {
   display: inline-flex; align-items: center; gap: 8px;
-  height: 34px; padding: 0 14px;
+  height: 32px; padding: 0 16px;
   border-radius: var(--shape-s);
   border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
   background: color-mix(in srgb, currentColor 8%, transparent);
@@ -246,18 +246,34 @@ a { text-decoration: none; color: inherit; }
   transition: background-color .2s var(--ease-standard);
 }
 .m3-chip:hover { background: color-mix(in srgb, currentColor 14%, transparent); }
-.m3-chip .material-symbols-outlined { font-size: 17px; }
+.m3-chip .material-symbols-outlined { font-size: 18px; }
 
 /* ============================= buttons =========================== */
-.m3-button-filled, .m3-button-outlined, .m3-button-tonal {
+/* Buttons — Material 3 Design Kit, node 57994:2227.
+   Sizes: XS 32 · S 40 · M 56 · L 96 · XL 136, inside a 48dp touch target.
+   Small  : padding 16/10, icon 20, Label Large 14/20/500/0.1
+   Medium : padding 24/16, icon 24, Title Medium 16/24/500/0.15
+   Corner : 100px (round) for every size. */
+.m3-button-filled, .m3-button-outlined, .m3-button-tonal,
+.m3-button-elevated, .m3-button-text {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  height: 48px; padding: 0 26px;
-  border-radius: var(--shape-full);
-  font-family: var(--font); font-size: 15px; font-weight: 500; letter-spacing: .1px;
+  height: 40px; padding: 10px 16px;
+  border-radius: 100px;
+  font-family: var(--font); font-size: 14px; line-height: 20px;
+  font-weight: 500; letter-spacing: .1px;
   border: none; cursor: pointer;
   transition: background-color .2s var(--ease-standard), box-shadow .3s var(--ease-standard),
               border-radius .45s var(--ease-spring), transform .45s var(--ease-spring);
 }
+/* Medium (56dp) — used for hero calls to action */
+.m3-button-md {
+  height: 56px; padding: 16px 24px;
+  font-size: 16px; line-height: 24px; letter-spacing: .15px;
+}
+.m3-button-md .material-symbols-outlined { font-size: 24px; }
+.m3-button-filled .material-symbols-outlined,
+.m3-button-outlined .material-symbols-outlined,
+.m3-button-tonal .material-symbols-outlined { font-size: 20px; }
 .m3-button-filled:active, .m3-button-outlined:active, .m3-button-tonal:active {
   border-radius: var(--shape-m);      /* shape morph on press, per M3 Expressive */
   transform: scale(.96);
@@ -274,6 +290,19 @@ a { text-decoration: none; color: inherit; }
 }
 .m3-button-outlined:hover { background-color: color-mix(in srgb, var(--md-sys-color-primary) var(--state-hover), transparent); }
 .m3-button-tonal { background-color: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.m3-button-elevated {
+  background-color: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-primary);
+  box-shadow: var(--elev-1);
+}
+.m3-button-elevated:hover {
+  background-color: color-mix(in srgb, var(--md-sys-color-primary) var(--state-hover), var(--md-sys-color-surface-container-low));
+  box-shadow: var(--elev-2);
+}
+.m3-button-text {
+  background-color: transparent; color: var(--md-sys-color-primary); padding: 10px 12px;
+}
+.m3-button-text:hover { background-color: color-mix(in srgb, var(--md-sys-color-primary) var(--state-hover), transparent); }
 .m3-button-tonal:hover {
   background-color: color-mix(in srgb, var(--md-sys-color-on-secondary-container) var(--state-hover), var(--md-sys-color-secondary-container));
   box-shadow: var(--elev-1);
@@ -301,7 +330,7 @@ a { text-decoration: none; color: inherit; }
 @media (min-width: 760px) { .stat-band { grid-template-columns: repeat(4, 1fr); } }
 .stat {
   background: var(--md-sys-color-surface-container-low);
-  border-radius: var(--shape-l);
+  border-radius: var(--shape-m);
   padding: 22px 20px;
   transition: background-color .3s var(--ease-standard), border-radius .5s var(--ease-spring), transform .5s var(--ease-spring);
 }
@@ -311,7 +340,7 @@ a { text-decoration: none; color: inherit; }
 
 /* ============================ pipeline =========================== */
 .pipeline-card {
-  border-radius: var(--shape-xl);
+  border-radius: var(--shape-l);
   background: var(--md-sys-color-surface-container-low);
   padding: clamp(24px, 4vw, 40px);
 }
@@ -322,7 +351,7 @@ a { text-decoration: none; color: inherit; }
   position: relative;
   display: flex; align-items: center; gap: 14px;
   padding: 18px 16px;
-  border-radius: var(--shape-l);
+  border-radius: var(--shape-m);
   background: var(--md-sys-color-surface-container-high);
   border: 1.5px solid transparent;
   cursor: pointer; text-align: left; width: 100%;
@@ -359,9 +388,9 @@ a { text-decoration: none; color: inherit; }
 .m3-card-outlined {
   position: relative; overflow: hidden;
   display: flex; flex-direction: column; gap: 14px;
-  padding: 26px;
-  border-radius: var(--shape-xl);
-  background: var(--md-sys-color-surface-container-low);
+  padding: 24px;
+  border-radius: var(--shape-m);            /* Cards = 12dp, per the kit */
+  background: var(--md-sys-color-surface);  /* Outlined card = surface + outline-variant */
   border: 1px solid var(--md-sys-color-outline-variant);
   transition: background-color .3s var(--ease-standard), box-shadow .35s var(--ease-standard),
               transform .5s var(--ease-spring), border-color .3s;
@@ -400,11 +429,11 @@ a { text-decoration: none; color: inherit; }
   color: var(--md-sys-color-on-surface);
 }
 .card-actions { display: flex; gap: 10px; margin-top: auto; padding-top: 6px; flex-wrap: wrap; }
-.card-actions .m3-button-filled, .card-actions .m3-button-outlined { height: 42px; padding: 0 20px; font-size: 14px; }
+
 
 /* =========================== telemetry =========================== */
 .console-card {
-  border-radius: var(--shape-xl);
+  border-radius: var(--shape-m);
   overflow: hidden;
   background: var(--md-sys-color-surface-container-lowest);
   border: 1px solid var(--md-sys-color-outline-variant);
