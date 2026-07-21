@@ -319,7 +319,10 @@ strong { font-weight: 700; color: var(--ink); }
 .m-windtunnel { --mark: var(--windtunnel); }
 
 /* ============================= tables ============================ */
-.table-wrap { width: 100%; overflow-x: auto; }
+.table-wrap { width: 100%; min-width: 0; max-width: 100%; overflow-x: auto; }
+/* the ledger is a JS-sized grid; its children must be allowed to shrink
+   or the table's min-width widens the whole page on small screens */
+#ledgerGrid > * { min-width: 0; }
 .table { width: 100%; border-collapse: collapse; min-width: 30rem; }
 .table th {
   font-family: var(--mono); font-size: 0.6875rem; font-weight: 500;
