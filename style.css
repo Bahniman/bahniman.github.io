@@ -37,6 +37,8 @@
   --md-sys-color-surface-variant: #E7E0EC;
   --md-sys-color-on-surface-variant: #49454F;
 
+  --md-sys-color-surface-dim: #DED8E1;
+  --md-sys-color-surface-bright: #FEF7FF;
   --md-sys-color-surface-container-lowest: #FFFFFF;
   --md-sys-color-surface-container-low: #F7F2FA;
   --md-sys-color-surface-container: #F3EDF7;
@@ -107,6 +109,8 @@
   --md-sys-color-surface-variant: #49454F;
   --md-sys-color-on-surface-variant: #CAC4D0;
 
+  --md-sys-color-surface-dim: #141218;
+  --md-sys-color-surface-bright: #3B383E;
   --md-sys-color-surface-container-lowest: #0F0D13;
   --md-sys-color-surface-container-low: #1D1B20;
   --md-sys-color-surface-container: #211F26;
@@ -145,12 +149,16 @@ a { text-decoration: none; color: inherit; }
   -webkit-font-smoothing: antialiased; user-select: none;
 }
 
-/* M3 type scale (emphasized weights per M3 Expressive) */
-.display-lg { font-size: clamp(40px, 6.2vw, 64px); line-height: 1.08; font-weight: 500; letter-spacing: -1px; }
-.headline-lg{ font-size: clamp(28px, 3.4vw, 36px); line-height: 1.18; font-weight: 500; letter-spacing: -.25px; }
-.title-lg   { font-size: 22px; line-height: 28px; font-weight: 500; letter-spacing: 0; }
-.body-lg    { font-size: 16px; line-height: 26px; font-weight: 400; letter-spacing: .3px; }
-.body-md    { font-size: 14px; line-height: 21px; font-weight: 400; letter-spacing: .2px; }
+/* M3 type scale — values taken from the Material 3 Design Kit variables.
+   Emphasized styles use Medium (500), per the kit's Weight-emphasized token. */
+.display-lg { font-size: clamp(36px, 5vw, 57px); line-height: 1.122; font-weight: 500; letter-spacing: -.25px; }
+.display-sm { font-size: 36px; line-height: 44px; font-weight: 400; letter-spacing: 0; }
+.headline-lg{ font-size: clamp(26px, 2.6vw, 32px); line-height: 1.25; font-weight: 500; letter-spacing: 0; }
+.headline-sm{ font-size: 24px; line-height: 32px; font-weight: 500; letter-spacing: 0; }
+.title-lg   { font-size: 22px; line-height: 28px; font-weight: 400; letter-spacing: 0; }
+.title-md   { font-size: 16px; line-height: 24px; font-weight: 500; letter-spacing: .15px; }
+.body-lg    { font-size: 16px; line-height: 24px; font-weight: 400; letter-spacing: .5px; }
+.body-md    { font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: .25px; }
 .label-lg   { font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: .1px; }
 .label-sm   { font-size: 11px; line-height: 16px; font-weight: 500; letter-spacing: .5px; }
 
@@ -172,7 +180,7 @@ a { text-decoration: none; color: inherit; }
   background-color: color-mix(in srgb, var(--md-sys-color-surface-container) 88%, transparent);
   border-bottom-color: var(--md-sys-color-outline-variant);
 }
-.brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 500; letter-spacing: -.2px; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 500; letter-spacing: 0; }
 .brand-mark {
   width: 30px; height: 30px; border-radius: 10px 16px 10px 16px;
   background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
@@ -219,7 +227,7 @@ a { text-decoration: none; color: inherit; }
   background: var(--md-sys-color-secondary-container);
 }
 .hero-inner { position: relative; max-width: 860px; }
-.hero h1 { margin: 20px 0 20px; }
+.hero h1 { margin: 20px 0 20px; letter-spacing: -.25px; }
 .hero .lede {
   font-size: clamp(16px, 1.6vw, 19px); line-height: 1.6; letter-spacing: .2px;
   color: color-mix(in srgb, var(--md-sys-color-on-primary-container) 82%, transparent);
@@ -298,7 +306,7 @@ a { text-decoration: none; color: inherit; }
   transition: background-color .3s var(--ease-standard), border-radius .5s var(--ease-spring), transform .5s var(--ease-spring);
 }
 .stat:hover { background: var(--md-sys-color-surface-container-high); transform: translateY(-3px); }
-.stat .n { font-size: 30px; line-height: 1.1; font-weight: 500; letter-spacing: -.5px; color: var(--md-sys-color-primary); }
+.stat .n { font-size: 32px; line-height: 40px; font-weight: 500; letter-spacing: 0; color: var(--md-sys-color-primary); }
 .stat .l { font-size: 13px; color: var(--md-sys-color-on-surface-variant); margin-top: 6px; letter-spacing: .2px; }
 
 /* ============================ pipeline =========================== */
@@ -381,7 +389,7 @@ a { text-decoration: none; color: inherit; }
 }
 .m3-card-outlined:hover .card-icon { border-radius: var(--shape-full); }
 .card-icon .material-symbols-outlined { font-size: 26px; }
-.m3-card-outlined .title { font-size: 24px; font-weight: 500; letter-spacing: -.2px; }
+.m3-card-outlined .title { font-size: 24px; line-height: 32px; font-weight: 500; letter-spacing: 0; }
 .m3-card-outlined .kicker { font-size: 11.5px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; color: var(--md-sys-color-primary); }
 .m3-card-outlined .body { font-size: 14.5px; line-height: 22px; letter-spacing: .2px; color: var(--md-sys-color-on-surface-variant); }
 .card-metrics { display: flex; flex-wrap: wrap; gap: 8px; }
