@@ -290,7 +290,10 @@ strong { font-weight: 700; color: var(--ink); }
 .rows { border-top: 1px solid var(--rule); }
 .row {
   display: grid; grid-template-columns: 1fr; gap: 1rem;
-  padding: clamp(1.5rem, 3vw, 2.25rem) 0;
+  /* horizontal padding gives the hover highlight room; the negative margin
+     pulls it back so the text still lines up with the rest of the page */
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(0.75rem, 1.5vw, 1.25rem);
+  margin-inline: clamp(-1.25rem, -1.5vw, -0.75rem);
   border-bottom: 1px solid var(--rule);
   position: relative;
   transition: background-color .25s var(--ease);
