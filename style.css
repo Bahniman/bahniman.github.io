@@ -235,9 +235,9 @@ a { text-decoration: none; color: inherit; }
   border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
   background: color-mix(in srgb, currentColor 8%, transparent);
   font-size: 13px; font-weight: 500; letter-spacing: .3px;
-  transition: background-color .2s, border-radius .4s var(--ease-spring);
+  transition: background-color .2s var(--ease-standard);
 }
-.m3-chip:hover { border-radius: var(--shape-full); }
+.m3-chip:hover { background: color-mix(in srgb, currentColor 14%, transparent); }
 .m3-chip .material-symbols-outlined { font-size: 17px; }
 
 /* ============================= buttons =========================== */
@@ -250,8 +250,10 @@ a { text-decoration: none; color: inherit; }
   transition: background-color .2s var(--ease-standard), box-shadow .3s var(--ease-standard),
               border-radius .45s var(--ease-spring), transform .45s var(--ease-spring);
 }
-.m3-button-filled:hover, .m3-button-outlined:hover, .m3-button-tonal:hover { border-radius: var(--shape-m); }
-.m3-button-filled:active, .m3-button-outlined:active, .m3-button-tonal:active { transform: scale(.96); }
+.m3-button-filled:active, .m3-button-outlined:active, .m3-button-tonal:active {
+  border-radius: var(--shape-m);      /* shape morph on press, per M3 Expressive */
+  transform: scale(.96);
+}
 
 .m3-button-filled { background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); }
 .m3-button-filled:hover {
@@ -295,7 +297,7 @@ a { text-decoration: none; color: inherit; }
   padding: 22px 20px;
   transition: background-color .3s var(--ease-standard), border-radius .5s var(--ease-spring), transform .5s var(--ease-spring);
 }
-.stat:hover { background: var(--md-sys-color-surface-container-high); border-radius: var(--shape-xl); transform: translateY(-3px); }
+.stat:hover { background: var(--md-sys-color-surface-container-high); transform: translateY(-3px); }
 .stat .n { font-size: 30px; line-height: 1.1; font-weight: 500; letter-spacing: -.5px; color: var(--md-sys-color-primary); }
 .stat .l { font-size: 13px; color: var(--md-sys-color-on-surface-variant); margin-top: 6px; letter-spacing: .2px; }
 
@@ -321,7 +323,7 @@ a { text-decoration: none; color: inherit; }
               border-radius .5s var(--ease-spring), transform .5s var(--ease-spring);
 }
 @media (min-width: 900px) { .node { flex-direction: column; align-items: flex-start; gap: 12px; min-height: 148px; } }
-.node:hover { transform: translateY(-4px); border-radius: var(--shape-xl); background: var(--md-sys-color-surface-container-highest); }
+.node:hover { transform: translateY(-4px); background: var(--md-sys-color-surface-container-highest); }
 .node.active { border-color: var(--md-sys-color-primary); background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
 .node-ico {
   width: 42px; height: 42px; flex: none; border-radius: 14px;
@@ -329,7 +331,7 @@ a { text-decoration: none; color: inherit; }
   background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
   transition: border-radius .5s var(--ease-spring);
 }
-.node:hover .node-ico { border-radius: var(--shape-full); }
+
 .node-name { display: block; font-size: 15px; font-weight: 700; letter-spacing: .2px; }
 .node-role { display: block; font-size: 11.5px; letter-spacing: .6px; text-transform: uppercase; color: var(--md-sys-color-on-surface-variant); margin-top: 3px; }
 .node.active .node-role { color: inherit; opacity: .8; }
@@ -377,7 +379,7 @@ a { text-decoration: none; color: inherit; }
   color: var(--md-sys-color-on-primary-container);
   transition: border-radius .55s var(--ease-spring), transform .55s var(--ease-spring);
 }
-.m3-card-outlined:hover .card-icon { border-radius: var(--shape-full); transform: rotate(-6deg); }
+.m3-card-outlined:hover .card-icon { border-radius: var(--shape-full); }
 .card-icon .material-symbols-outlined { font-size: 26px; }
 .m3-card-outlined .title { font-size: 24px; font-weight: 500; letter-spacing: -.2px; }
 .m3-card-outlined .kicker { font-size: 11.5px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; color: var(--md-sys-color-primary); }
@@ -388,9 +390,7 @@ a { text-decoration: none; color: inherit; }
   padding: 5px 11px; border-radius: var(--shape-s);
   background: color-mix(in srgb, var(--md-sys-color-primary) 14%, transparent);
   color: var(--md-sys-color-on-surface);
-  transition: border-radius .4s var(--ease-spring);
 }
-.m3-card-outlined:hover .metric { border-radius: var(--shape-full); }
 .card-actions { display: flex; gap: 10px; margin-top: auto; padding-top: 6px; flex-wrap: wrap; }
 .card-actions .m3-button-filled, .card-actions .m3-button-outlined { height: 42px; padding: 0 20px; font-size: 14px; }
 
