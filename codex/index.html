@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Codex — why legacy modernisation keeps failing</title>
+<meta name="description" content="A consulting case for FULCRUM 2026. Machines can read legacy code now. The code still does not say why. The reasoning was never recorded, and that is the actual failure.">
+<meta name="theme-color" content="#1F4E79">
+<link rel="stylesheet" href="codex.css">
+<script>
+  (function () {
+    var s = null;
+    try { s = localStorage.getItem('theme'); } catch (e) {}
+    var d = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (d) document.documentElement.classList.add('dark');
+  })();
+</script>
+</head>
+<body>
+
+<div class="page-edge l"></div>
+<div class="page-edge r"></div>
+
+<header class="bar">
+  <div class="bar-in">
+    <a href="#top" class="mark"><span class="sq"></span>THE&nbsp;CODEX</a>
+    <nav>
+      <a href="https://bahniman.github.io">&larr; Portfolio</a>
+      <a href="#chain">The chain</a>
+      <a href="#sources">Sources</a>
+      <button class="tog" id="tog" aria-label="Switch between light and dark">&#9680;</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============================== opening ============================== -->
+  <section class="shell sect open">
+    <div>
+      <p class="lbl" style="margin-bottom:1.25rem">FULCRUM 2026 &middot; Consulting Challenge &middot; Legacy systems and AI</p>
+      <h1>Machines can read the code now.<br>The code still does not say&nbsp;why.</h1>
+      <p class="lede" style="margin-top:1.75rem">
+        Every modernisation pitch is sold on reading old code. That capability is now a
+        commodity: the best tool and a general-purpose model are one point apart on the
+        industry benchmark. The thing that actually breaks the project was never in the code
+        to begin with, and no extraction tool can recover it.
+      </p>
+      <div style="display:flex;gap:0.7rem;flex-wrap:wrap;margin-top:2.25rem">
+        <a href="#chain" class="btn">Read the chain</a>
+        <a href="#sources" class="btn ghost">Check the sources</a>
+      </div>
+    </div>
+
+    <dl class="card">
+      <div><dt>Case</dt><dd>FULCRUM 2026, Kautilya Consulting Club</dd></div>
+      <div><dt>Subject</dt><dd>Legacy modernisation and AI</dd></div>
+      <div><dt>Format</dt><dd>Nine slides, submitted</dd></div>
+      <div><dt>Team</dt><dd>With Nandini; deck audit and rebuild by me</dd></div>
+      <div><dt>Status</dt><dd>Submitted 22 July 2026</dd></div>
+    </dl>
+  </section>
+
+  <!-- ============================= statement ============================= -->
+  <section class="stmt">
+    <div class="shell">
+      <p class="l">The benchmark everyone quotes to prove differentiated capability is the evidence that it has been commoditised.</p>
+      <p class="s">
+        Legacy Insights 94. Claude Sonnet 93. One point. On the January release of the same
+        benchmark, the general model beat the specialist tool on the hardest tier.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================== estate =============================== -->
+  <section class="shell sect">
+    <div class="head">
+      <span class="seq">000100</span>
+      <h2>The estate</h2>
+      <p class="note">Bigger than the number usually quoted, which strengthens the case rather than weakening it.</p>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Measure</th><th>Source</th><th class="n">Figure</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lines of COBOL still in production<span class="sub">Independent survey, n=1,104 across 49 countries. The widely repeated 220 billion is superseded.</span></td>
+            <td>Micro Focus / Vanson Bourne, 2022</td>
+            <td class="n">775&ndash;850bn</td>
+          </tr>
+          <tr>
+            <td>Accumulated technical debt in the US<span class="sub">The technical-debt component specifically, not the wider cost of poor software quality.</span></td>
+            <td>CISQ, 2022</td>
+            <td class="n">$1.52T</td>
+          </tr>
+          <tr>
+            <td>Organisations reporting data quality as a barrier to AI adoption</td>
+            <td>Deloitte, 2026</td>
+            <td class="n">72%</td>
+          </tr>
+          <tr>
+            <td>Average age of a working COBOL developer<span class="sub">2014 data. Treated as vintage, not current, and the direction is the point.</span></td>
+            <td>Micro Focus, 2014</td>
+            <td class="n">55</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================== ruling =============================== -->
+  <section class="shell sect">
+    <div class="head">
+      <span class="seq">000200</span>
+      <h2>Ruling causes in and out</h2>
+      <p class="note">Three findings, in the order a diagnosis has to take them.</p>
+    </div>
+
+    <div class="rows">
+      <article class="row">
+        <span class="n">000210</span>
+        <div>
+          <p class="t">Machines can read the code now</p>
+          <p class="k">Extraction is a commodity</p>
+        </div>
+        <div>
+          <p class="d">
+            On LegacyCodeBench, Legacy Insights scores 94, Claude Sonnet 93, Opus 91, AWS
+            Transform 90. The specialist tool leads a general-purpose model by a single point,
+            and in the January 2026 release of the same benchmark Claude Sonnet beat it on the
+            hardest tier, 92 to 90. The benchmark was built by Kalmantic with Hexaview, whose
+            own product tops it. Extraction is not where the differentiated value sits.
+          </p>
+        </div>
+      </article>
+
+      <article class="row">
+        <span class="n">000220</span>
+        <div>
+          <p class="t">But the code does not say why</p>
+          <p class="k">The reasoning was never written down</p>
+        </div>
+        <div>
+          <p class="d">
+            A tool can tell you that a routine applies a 4.5 percent adjustment on a particular
+            branch. It cannot tell you that the figure came from a 1998 regulator settlement,
+            that it was meant to expire, or which of three business owners agreed to it. That
+            was decided in a meeting, and the meeting was not the artefact. The people who
+            remember it are the ones now retiring.
+          </p>
+        </div>
+      </article>
+
+      <article class="row">
+        <span class="n">000230</span>
+        <div>
+          <p class="t">And the usual fix rebuilds the same problem</p>
+          <p class="k">Java is the standard destination</p>
+        </div>
+        <div>
+          <p class="d">
+            COBOL to Java is the industry default. In Veracode&rsquo;s Spring 2026 update, Java
+            scored 29 percent on secure code generation, the worst of the four languages tested,
+            because models trained heavily on legacy Java reproduce the insecure idioms that
+            corpus contains. A migration that converts an unverified specification into a
+            language the model writes worst is not modernisation, it is a re-run.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =============================== chain =============================== -->
+  <section class="shell sect" id="chain">
+    <div class="head">
+      <span class="seq">000300</span>
+      <h2>The chain</h2>
+      <p class="note">Six steps. Only the first is a cause. The other five are consequences that get reported as the cause.</p>
+    </div>
+
+    <ol class="chain">
+      <li class="cause">
+        <span class="step">Cause</span>
+        <p class="txt">The reasoning behind a decision was never recorded. Only its implementation was.</p>
+      </li>
+      <li>
+        <span class="step">Consequence 01</span>
+        <p class="txt">So every change re-derives that behaviour by hand, from the code, one engineer at a time.</p>
+      </li>
+      <li>
+        <span class="step">Consequence 02</span>
+        <p class="txt">So the re-derivation is unverifiable. Nobody can confirm the reading is right, because there is nothing to check it against.</p>
+      </li>
+      <li>
+        <span class="step">Consequence 03</span>
+        <p class="txt">So teams avoid touching the parts they cannot verify, and route around them instead.</p>
+      </li>
+      <li>
+        <span class="step">Consequence 04</span>
+        <p class="txt">So untouched code accumulates, and gets reported upward as technical debt.</p>
+      </li>
+      <li>
+        <span class="step">Consequence 05</span>
+        <p class="txt">So the migration converts a specification nobody verified, and fails for reasons the post-mortem records as complexity.</p>
+      </li>
+    </ol>
+
+    <p style="margin-top:2.25rem">
+      Read the chain backwards and the standard remedies all attach to consequences. Buying a
+      better extraction tool attacks step one of the wrong sequence. Rewriting in a modern
+      language attacks step five. Neither touches the cause, which is why the failure rate has
+      not moved despite the tooling getting dramatically better.
+    </p>
+  </section>
+
+  <!-- ============================ the offer ============================== -->
+  <section class="shell sect">
+    <div class="head">
+      <span class="seq">000400</span>
+      <h2>What the firm should sell</h2>
+      <p class="note">Buy the reading. Sell the record. Put a name on the sign-off.</p>
+    </div>
+
+    <p>
+      Extraction is bought, not built, because it is a commodity input and the market is
+      already competing it to zero. What the client keeps afterwards is the asset: a verified,
+      attributed record of why each rule exists, who confirmed it, and on what date. That
+      record is what makes the next change cheap, and it is the only artefact that survives the
+      retirement of the people who remember.
+    </p>
+    <p style="margin-top:1.1rem">
+      Governance is the licence to operate. Someone has to sign that a reading of a rule is
+      correct, and be accountable for it, or the record is just another undocumented
+      assumption with better formatting.
+    </p>
+    <p style="margin-top:1.1rem">
+      <strong>The arithmetic that makes this a business-model question, not a delivery
+      question:</strong> the published effort reduction on this work is around 70 percent.
+      Billing that scope by time and materials means deleting roughly 0.70 of your own revenue
+      on it. A retainer against the maintained record only works where the retainer is smaller
+      than the volume of change requests multiplied by what re-deriving the reasoning costs
+      each time. That is a condition to be tested per client, not a number to be asserted.
+    </p>
+  </section>
+
+  <!-- ============================== sources ============================== -->
+  <section class="shell sect" id="sources">
+    <div class="head">
+      <span class="seq">000500</span>
+      <h2>Sources</h2>
+      <p class="note">Every figure above, with its vintage.</p>
+    </div>
+
+    <ol class="src">
+      <li>COBOL estate, 775 to 850 billion lines. Micro Focus and Vanson Bourne independent survey, 2022, n=1,104 across 49 countries.</li>
+      <li>US technical debt $1.52 trillion. CISQ, <em>The Cost of Poor Software Quality in the US</em>, 2022. The $2.41 trillion figure in circulation is the wider poor-quality total, not technical debt.</li>
+      <li>LegacyCodeBench scores and the January 2026 hardest-tier result. Benchmark published by Kalmantic with Hexaview, open source, MIT licensed.</li>
+      <li>Java secure-code generation at 29 percent, worst of four languages. Veracode GenAI Code Security Report, Spring 2026 update.</li>
+      <li>Data quality as a barrier to AI adoption, 72 percent. Deloitte, 2026.</li>
+      <li>Modernisation failure rates. NRI Digital, 2026, and Bain, 2024.</li>
+      <li>Average COBOL developer age 55. Micro Focus, 2014. Vintage data, cited as direction of travel.</li>
+    </ol>
+
+    <div class="corr">
+      <p class="lbl">Claims withdrawn during the audit</p>
+      <p>
+        Two figures from the earlier draft did not survive checking and are not used here. The
+        $2.41 trillion was attributed to the wrong organisation and measured the wrong thing.
+        The claim that roughly a third of modernisation spend is AI-accelerated traced only to
+        a vendor blog citing a Medium post, with no primary source behind it.
+      </p>
+    </div>
+  </section>
+
+  <footer class="shell">
+    <p class="lbl" style="margin-bottom:0.9rem">Bahniman Talukdar</p>
+    <p style="color:var(--ink-2);font-size:0.95rem;max-width:56ch">
+      A consulting case built for FULCRUM 2026 with Nandini. I audited the claims, found the
+      inversion in the benchmark data, and rebuilt the argument around it.
+    </p>
+    <p style="display:flex;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap">
+      <a class="lnk" href="https://bahniman.github.io">Portfolio</a>
+      <a class="lnk" href="https://github.com/Bahniman">GitHub</a>
+    </p>
+  </footer>
+</main>
+
+<script>
+  var t = document.getElementById('tog');
+  function paint() { t.innerHTML = document.documentElement.classList.contains('dark') ? '&#9681;' : '&#9680;'; }
+  paint();
+  t.addEventListener('click', function () {
+    var d = document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('theme', d ? 'dark' : 'light'); } catch (e) {}
+    paint();
+  });
+</script>
+</body>
+</html>
