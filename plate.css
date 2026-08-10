@@ -1,0 +1,258 @@
+/* ============================================================
+   Bahniman Talukdar, portfolio
+   Plate book: bone / ink / ultramarine, Bricolage Grotesque + Newsreader.
+   Structure comes from full-bleed colour fields, not from borders.
+   ============================================================ */
+
+:root {
+  --bone: #efe9df;
+  --ink: #14161a;
+  --ultramarine: #1b2ad9;
+
+  /* the two roles the page actually paints with, swapped in dark mode */
+  --ground: var(--bone);
+  --figure: var(--ink);
+
+  --font-display: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
+  --font-prose: "Newsreader", Georgia, "Times New Roman", serif;
+}
+
+html.dark {
+  --ground: var(--ink);
+  --figure: var(--bone);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--figure);
+  font-family: var(--font-display);
+  font-weight: 600;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ---------------------------- plates ------------------------ */
+
+.plate {
+  position: relative;
+  overflow: hidden; /* clips the oversized numerals so they never widen the document */
+  isolation: isolate;
+  padding: clamp(4.5rem, 9vw, 8rem) clamp(1.25rem, 5vw, 5rem);
+}
+
+.plate-tall {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.p-bone {
+  background: var(--ground);
+  color: var(--figure);
+}
+
+.p-ink {
+  background: var(--figure);
+  color: var(--ground);
+}
+
+.p-ultra {
+  background: var(--ultramarine);
+  color: var(--bone);
+}
+
+/* --------------------------- numerals ----------------------- */
+
+.numeral {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 34vw;
+  line-height: 0.75;
+  letter-spacing: -0.05em;
+  color: currentColor;
+  opacity: 0.1;
+}
+
+.n-tr { top: 2vw; right: -6vw; }
+.n-bl { bottom: -7vw; left: -4vw; }
+.n-tr2 { top: 9vw; right: -10vw; }
+.n-l { top: 16vw; left: -5vw; }
+.n-r { top: 6vw; right: -5vw; }
+
+/* ------------------------- type scale ----------------------- */
+
+.d-xl {
+  font-size: clamp(44px, 11vw, 168px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+}
+
+.d-lg {
+  font-size: clamp(32px, 6vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+.d-md {
+  font-size: clamp(22px, 2.6vw, 38px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.prose {
+  font-family: var(--font-prose);
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.65;
+  max-width: 62ch;
+  letter-spacing: 0;
+}
+
+.quiet {
+  opacity: 0.72;
+}
+
+/* --------------------------- links -------------------------- */
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* --------------------------- marker ------------------------- */
+
+.marker {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  mix-blend-mode: difference;
+  color: var(--bone);
+}
+
+.marker button {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* -------------------------- rhythm -------------------------- */
+
+.stack > * + * { margin-top: 1.75rem; }
+.stack-lg > * + * { margin-top: clamp(3.5rem, 6vw, 6rem); }
+.stack-xl > * + * { margin-top: clamp(5rem, 9vw, 9rem); }
+
+.indent { margin-left: 0; }
+
+@media (min-width: 900px) {
+  .indent { margin-left: 14%; }
+  .step-1 { margin-left: 0; }
+  .step-2 { margin-left: 10%; }
+  .step-3 { margin-left: 22%; }
+  .step-4 { margin-left: 34%; }
+  .body-indent { margin-left: 12%; }
+}
+
+.proto-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 2rem;
+}
+
+.proto-n {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(56px, 9vw, 132px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.record-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .record-row {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+  .record-row .d-md { max-width: 26ch; }
+  .record-row .label { flex-shrink: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
