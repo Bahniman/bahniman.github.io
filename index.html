@@ -32,7 +32,11 @@
 <div class="progress" id="progress" aria-hidden="true"></div>
 
 <div class="marker">
-  <span class="marker-name" id="plateName"><span>Opening</span></span>
+  <button type="button" class="marker-nav" id="plateNav" aria-expanded="false" aria-controls="sectionMenu">
+    <span class="marker-name" id="plateName"><span>Opening</span></span>
+    <svg class="chev" viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+  </button>
+  <nav id="sectionMenu" class="menu" hidden aria-label="Sections"></nav>
   <button type="button" id="themeBtn" aria-label="Switch between light and dark">Light</button>
 </div>
 
@@ -274,25 +278,7 @@
     </div>
   </section>
 
-  <!-- PLATE 6 : THE CODEX -->
-  <section class="plate plate-tall lift-2" id="codex" data-name="The Codex">
-    <div class="inner">
-      <h2 class="d-xl wipe"><span><span class="line-in">The Codex</span></span></h2>
-      <p class="label rise" style="margin-top:1.25rem">FULCRUM 2026, legacy systems and AI, with Nandini</p>
-      <p class="prose rise" style="margin-top:clamp(1.75rem,3.5vw,2.5rem)">
-        Modernisation gets sold on the ability to read old code, and that ability has
-        commoditised. The leading specialist tool beats a general-purpose model by one
-        point on the industry benchmark, and loses to it on the hardest tier. I audited
-        every claim in our draft, found two that did not survive checking, and rebuilt the
-        argument around what the benchmark actually showed. The failure that matters sits
-        elsewhere: the reasoning behind each rule was never written down, so every change
-        re-derives it by hand and the migration converts a specification nobody verified.
-        <a href="https://bahniman.github.io/codex/">Read the case</a>.
-      </p>
-    </div>
-  </section>
-
-  <!-- PLATE 7 : AURORA -->
+  <!-- PLATE 6 : AURORA -->
   <section class="plate lift-1" id="aurora" data-name="AURORA 4.0">
     <div class="numeral n-l" aria-hidden="true">08</div>
     <div class="inner">
@@ -324,9 +310,9 @@
     </div>
   </section>
 
-  <!-- PLATE 8 : RECORD -->
+  <!-- PLATE 7 : RECORD -->
   <section class="plate" id="record" data-name="Record">
-    <div class="numeral n-r" aria-hidden="true">7</div>
+    <div class="numeral n-r" aria-hidden="true">6</div>
     <div class="inner">
       <h2 class="d-lg wipe"><span><span class="line-in">Record</span></span></h2>
       <div class="stack-lg" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
@@ -351,10 +337,6 @@
           <span class="label">Delivered</span>
         </div>
         <div class="record-row rise">
-          <span class="d-md">FULCRUM 2026 consulting challenge, Kautilya Consulting Club, Jul 2026</span>
-          <span class="label">Submitted</span>
-        </div>
-        <div class="record-row rise">
           <span class="d-md">ReEnvision 5.0 conclave, team Realium, Jul 2026</span>
           <span class="label">Top 3</span>
         </div>
@@ -367,7 +349,7 @@
     </div>
   </section>
 
-  <!-- PLATE 9 : CONTACT -->
+  <!-- PLATE 8 : CONTACT -->
   <section class="plate plate-tall lift-2" id="contact" data-name="Contact">
     <div class="inner">
       <h2 class="d-xl wipe" style="max-width:15ch">
@@ -419,6 +401,38 @@ btn.addEventListener('click', () => {
 const plates = [...document.querySelectorAll('.plate')];
 const nameEl = document.getElementById('plateName');
 const progressEl = document.getElementById('progress');
+
+/* ------------------------ section menu -------------------------- */
+/* The current section name is also the way to jump to any other one.
+   Built from the plates themselves, so it can never fall out of step
+   with the page. */
+const navBtn = document.getElementById('plateNav');
+const menu = document.getElementById('sectionMenu');
+
+menu.innerHTML = plates.map((p, i) =>
+  `<a href="#${p.id}" data-id="${p.id}">${p.dataset.name}<span class="n">${String(i + 1).padStart(2, '0')}</span></a>`
+).join('');
+
+function setMenu(open) {
+  menu.hidden = !open;
+  navBtn.setAttribute('aria-expanded', String(open));
+}
+
+navBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  setMenu(menu.hidden);
+});
+
+menu.addEventListener('click', e => {
+  const a = e.target.closest('a');
+  if (!a) return;
+  setMenu(false);
+});
+
+addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+addEventListener('click', e => {
+  if (!menu.hidden && !menu.contains(e.target)) setMenu(false);
+});
 let currentName = 'Opening', ticking = false;
 
 /* ------------------------- the stack ---------------------------- */
@@ -465,6 +479,9 @@ function onScrollTick() {
     if (name !== currentName) {
       currentName = name;
       nameEl.innerHTML = `<span>${name}</span>`;
+      menu.querySelectorAll('a').forEach(a => {
+        a.setAttribute('aria-current', String(a.textContent.startsWith(name)));
+      });
       if (window.__anime) {
         window.__anime.animate(nameEl.firstElementChild, {
           y: ['100%', '0%'], duration: 420, ease: 'outExpo'
@@ -589,9 +606,12 @@ try {
       .add(hero.querySelectorAll('.line-in'), {
         y: ['105%', '0%'], duration: 1000, delay: stagger(110)
       })
+      // same start, same duration, same curve as the wipe above, so the
+      // width axis lands with the words instead of moving on after them
       .add(axis, {
-        w: [78, 104], duration: 1400, ease: 'outQuart',
-        onUpdate: () => { root.style.setProperty('--wdth', axis.w.toFixed(1)); }
+        w: [78, 104], duration: 1000, ease: 'outExpo',
+        onUpdate: () => { root.style.setProperty('--wdth', axis.w.toFixed(1)); },
+        onComplete: () => { root.style.setProperty('--wdth', '104'); }
       }, '<')
       .add('#opening .rise', {
         opacity: [0, 1], y: [14, 0], duration: 720, delay: stagger(90)

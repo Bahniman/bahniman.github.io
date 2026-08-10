@@ -259,6 +259,66 @@ html.light a { color: var(--u-4); }
 .marker-name { position: relative; display: inline-block; overflow: hidden; height: 1.45em; }
 .marker-name span { display: block; }
 
+/* the current section name is the way into the section list */
+.marker-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 0;
+  padding: 0.2rem 0.1rem;
+  color: var(--figure-2);
+  font: inherit;
+  cursor: pointer;
+  transition: color 160ms linear;
+}
+
+.marker-nav:hover { color: var(--figure); }
+
+.chev {
+  width: 12px;
+  height: 8px;
+  flex: none;
+  transition: transform 220ms var(--ease-out-quart);
+}
+
+.marker-nav[aria-expanded="true"] .chev { transform: rotate(180deg); }
+
+.menu {
+  position: fixed;
+  top: 3.1rem;
+  left: clamp(1.25rem, 5vw, 4.5rem);
+  z-index: var(--z-marker);
+  display: flex;
+  flex-direction: column;
+  min-width: 15rem;
+  padding: 0.4rem;
+  background: var(--bg-3);
+  border: 1px solid var(--rule);
+}
+
+.menu[hidden] { display: none; }
+
+.menu a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.55rem 0.7rem;
+  color: var(--figure);
+  background-image: none;
+  font-size: 14px;
+  transition: background-color 140ms linear, color 140ms linear;
+}
+
+.menu a:hover { background-color: var(--u-8); color: var(--fg-1); }
+html.light .menu a:hover { background-color: #dcdce0; color: #0b0c10; }
+
+.menu a[aria-current="true"] { color: var(--u-1); }
+html.light .menu a[aria-current="true"] { color: var(--u-4); }
+
+.menu a .n { font-size: 12px; color: var(--figure-2); font-variant-numeric: tabular-nums; }
+
 .marker button {
   background: none;
   border: 1px solid var(--rule);
