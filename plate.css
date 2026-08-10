@@ -1,36 +1,74 @@
 /* ============================================================
    Bahniman Talukdar, portfolio
-   Plate book: bone / ink / ultramarine, Bricolage Grotesque + Newsreader.
-   Structure comes from full-bleed colour fields, not from borders.
+   A dark stage with one lit object, an 8-step ultramarine ramp,
+   restrained type, and anime.js driving the motion.
    ============================================================ */
 
 :root {
-  --bone: #efe9df;
-  --ink: #14161a;
-  --ultramarine: #1b2ad9;
+  /* stage */
+  --bg-1: #0b0c10;
+  --bg-2: #101218;
+  --bg-3: #161923;
+  --bg-4: #1d2130;
 
-  /* the two roles the page actually paints with, swapped in dark mode */
-  --ground: var(--bone);
-  --figure: var(--ink);
+  /* foreground ramp */
+  --fg-1: #f2f1ef;
+  --fg-2: #cfcedb;
+  --fg-3: #9d9db0;
+  --fg-4: #6f7189;
+  --fg-5: #4a4c60;
+
+  /* ultramarine, 8 steps, bright to nearly-ground */
+  --u-1: #8b93ff;
+  --u-2: #6b78ff;
+  --u-3: #4d5cf5;
+  --u-4: #3543e6;
+  --u-5: #2130c9;
+  --u-6: #1b2597;
+  --u-7: #171d63;
+  --u-8: #141733;
+
+  --ground: var(--bg-1);
+  --figure: var(--fg-1);
+  --figure-2: var(--fg-3);
+  --accent: var(--u-2);
+  --rule: #23273a;
 
   --font-display: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
-  --font-prose: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-prose: "Spectral", Georgia, serif;
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --z-page: 1;
+  --z-rule: 20;
+  --z-marker: 40;
+
+  /* the two variable axes on the display face, animated on load */
+  --wdth: 100;
+  --wght: 800;
 }
 
-html.dark {
-  --ground: var(--ink);
-  --figure: var(--bone);
+html.light {
+  --ground: #ededed;
+  --figure: #0b0c10;
+  --figure-2: #4a4c60;
+  --accent: var(--u-4);
+  --rule: #d3d4da;
+  --bg-2: #e4e4e6;
+  --bg-3: #dcdce0;
 }
 
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
-}
+*::after { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* clip, not hidden: hidden makes html a scroll container and kills
+     position: sticky on the plates below */
+  overflow-x: clip;
 }
 
 body {
@@ -38,66 +76,66 @@ body {
   background: var(--ground);
   color: var(--figure);
   font-family: var(--font-display);
-  font-weight: 600;
-  overflow-x: hidden;
+  font-weight: 500;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-h1,
-h2,
-h3 {
+h1, h2, h3 {
   margin: 0;
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 0.95;
+  line-height: 1;
+  text-wrap: balance;
+  font-variation-settings: "wdth" var(--wdth), "wght" var(--wght);
 }
 
-p {
-  margin: 0;
-}
+p { margin: 0; text-wrap: pretty; }
 
-:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 3px;
-}
+:focus-visible { outline: 2px solid var(--u-2); outline-offset: 3px; }
 
 /* ---------------------------- plates ------------------------ */
 
+/* Stacked plates. Each one pins, and the next scrolls up over it, so the
+   outgoing section never has to travel off screen. `top` is set per plate
+   by script: 0 for plates that fit the viewport, and 100svh minus the
+   plate's own height for taller ones, so a tall plate stays readable to
+   its last line and only pins once its bottom edge reaches the fold. */
 .plate {
-  position: relative;
-  overflow: hidden; /* clips the oversized numerals so they never widen the document */
+  position: sticky;
+  top: 0;
+  z-index: var(--z-page);
+  overflow: hidden;
   isolation: isolate;
-  padding: clamp(4.5rem, 9vw, 8rem) clamp(1.25rem, 5vw, 5rem);
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--rule);
+  background: var(--ground);          /* opaque, or the plate beneath shows through */
+  transform-origin: 50% 0;
 }
 
+.plate:first-of-type { border-top: 0; }
+
+/* The last plate must not pin, or the page cannot reach its own end. */
+.plate:last-of-type { position: relative; }
+
 .plate-tall {
-  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
 }
+
+/* every second plate lifts one step off the stage, so the page has
+   depth instead of nine identical grounds */
+.lift-1 { background: var(--bg-2); }
+.lift-2 { background: var(--bg-3); }
 
 .inner {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 1500px;
+  max-width: 1320px;
   margin: 0 auto;
-}
-
-.p-bone {
-  background: var(--ground);
-  color: var(--figure);
-}
-
-.p-ink {
-  background: var(--figure);
-  color: var(--ground);
-}
-
-.p-ultra {
-  background: var(--ultramarine);
-  color: var(--bone);
 }
 
 /* --------------------------- numerals ----------------------- */
@@ -109,136 +147,201 @@ p {
   user-select: none;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 34vw;
+  font-size: 26vw;
   line-height: 0.75;
   letter-spacing: -0.05em;
-  color: currentColor;
-  opacity: 0.1;
+  color: var(--u-7);
 }
 
-.n-tr { top: 2vw; right: -6vw; }
-.n-bl { bottom: -7vw; left: -4vw; }
-.n-tr2 { top: 9vw; right: -10vw; }
-.n-l { top: 16vw; left: -5vw; }
-.n-r { top: 6vw; right: -5vw; }
+html.light .numeral { color: var(--u-1); opacity: 0.5; }
+
+.n-tr  { top: 3vw;    right: -3vw; }
+.n-bl  { bottom: -5vw; left: -2vw; }
+.n-tr2 { top: 8vw;    right: -5vw; }
+.n-l   { top: 14vw;   left: -3vw; }
+.n-r   { top: 6vw;    right: -3vw; }
 
 /* ------------------------- type scale ----------------------- */
 
 .d-xl {
-  font-size: clamp(44px, 11vw, 168px);
-  line-height: 0.92;
-  letter-spacing: -0.035em;
+  font-size: clamp(34px, 5.6vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.032em;
   font-weight: 800;
 }
 
 .d-lg {
-  font-size: clamp(32px, 6vw, 84px);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
+  font-size: clamp(27px, 3.9vw, 50px);
+  line-height: 1.04;
+  letter-spacing: -0.028em;
   font-weight: 800;
 }
 
 .d-md {
-  font-size: clamp(22px, 2.6vw, 38px);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  font-size: clamp(19px, 1.85vw, 26px);
+  line-height: 1.18;
+  letter-spacing: -0.018em;
   font-weight: 700;
 }
 
 .label {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 13px;
   line-height: 1.5;
+  color: var(--figure-2);
 }
 
 .prose {
   font-family: var(--font-prose);
   font-weight: 400;
-  font-size: 19px;
-  line-height: 1.65;
-  max-width: 62ch;
-  letter-spacing: 0;
+  font-size: 17px;
+  line-height: 1.72;
+  max-width: 66ch;
+  color: var(--fg-2);
 }
 
-.quiet {
-  opacity: 0.72;
+html.light .prose { color: #2a2c38; }
+
+.lede {
+  font-family: var(--font-prose);
+  font-weight: 400;
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.6;
+  max-width: 48ch;
+  color: var(--fg-2);
 }
+
+html.light .lede { color: #2a2c38; }
+
+.quiet { color: var(--figure-2); }
 
 /* --------------------------- links -------------------------- */
 
 a {
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
+  color: var(--u-1);
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 320ms var(--ease-out-quart);
+  padding-bottom: 2px;
 }
 
-a:hover {
-  text-decoration-thickness: 2px;
-}
+a:hover { background-size: 100% 1px; }
 
-/* --------------------------- marker ------------------------- */
+html.light a { color: var(--u-4); }
+
+/* --------------------------- canvas ------------------------- */
+
+.stage { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.stage canvas { display: block; width: 100%; height: 100%; }
+
+/* --------------------------- chrome ------------------------- */
 
 .marker {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 50;
+  top: 0; left: 0; right: 0;
+  z-index: var(--z-marker);
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  mix-blend-mode: difference;
-  color: var(--bone);
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem clamp(1.25rem, 5vw, 4.5rem);
+  font-size: 13px;
+  color: var(--figure-2);
+  background: color-mix(in oklab, var(--ground) 82%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
 }
+
+.marker-name { position: relative; display: inline-block; overflow: hidden; height: 1.45em; }
+.marker-name span { display: block; }
 
 .marker button {
   background: none;
-  border: 0;
-  padding: 0;
-  color: inherit;
+  border: 1px solid var(--rule);
+  padding: 0.3rem 0.7rem;
+  color: var(--figure-2);
   font: inherit;
   cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  transition: color 160ms linear, border-color 160ms linear;
+}
+
+.marker button:hover { color: var(--figure); border-color: var(--u-3); }
+
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: var(--u-2);
+  z-index: var(--z-rule);
 }
 
 /* -------------------------- rhythm -------------------------- */
 
-.stack > * + * { margin-top: 1.75rem; }
-.stack-lg > * + * { margin-top: clamp(3.5rem, 6vw, 6rem); }
-.stack-xl > * + * { margin-top: clamp(5rem, 9vw, 9rem); }
-
-.indent { margin-left: 0; }
+.stack > * + * { margin-top: 1.6rem; }
+.stack-lg > * + * { margin-top: clamp(2.5rem, 4vw, 4rem); }
+.stack-xl > * + * { margin-top: clamp(3.5rem, 6vw, 6rem); }
 
 @media (min-width: 900px) {
-  .indent { margin-left: 14%; }
-  .step-1 { margin-left: 0; }
-  .step-2 { margin-left: 10%; }
-  .step-3 { margin-left: 22%; }
-  .step-4 { margin-left: 34%; }
-  .body-indent { margin-left: 12%; }
+  .indent { margin-left: 11%; }
+  .step-2 { margin-left: 7%; }
+  .step-3 { margin-left: 15%; }
+  .step-4 { margin-left: 23%; }
+  .body-indent { margin-left: 9%; }
 }
 
-.proto-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.5rem 2rem;
-}
+/* -------------------------- protocols ----------------------- */
+
+.proto { position: relative; padding-top: 0.25rem; }
+
+.proto-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1.5rem; }
 
 .proto-n {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(56px, 9vw, 132px);
+  font-size: clamp(38px, 5vw, 66px);
   line-height: 1;
   letter-spacing: -0.03em;
+  color: var(--u-6);
 }
+
+html.light .proto-n { color: var(--u-2); }
+
+/* --------------------------- ledger ------------------------- */
+
+.money { display: block; font-variant-numeric: tabular-nums; }
+
+.bar-track {
+  height: 4px;
+  margin-top: 0.9rem;
+  background: var(--u-8);
+  overflow: hidden;
+}
+
+html.light .bar-track { background: #d3d4da; }
+
+.bar {
+  height: 100%;
+  width: 100%;
+  background: var(--u-2);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+/* --------------------------- record ------------------------- */
 
 .record-row {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.2rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--rule);
 }
 
 @media (min-width: 640px) {
@@ -248,11 +351,39 @@ a:hover {
     justify-content: space-between;
     gap: 2.5rem;
   }
-  .record-row .d-md { max-width: 26ch; }
+  .record-row .d-md { max-width: 28ch; }
   .record-row .label { flex-shrink: 0; }
 }
 
+/* ============================================================
+   MOTION
+   anime.js owns the choreography. CSS only sets the pre-state,
+   and only when html.motion is present, which the head script
+   adds solely when IntersectionObserver exists and the user has
+   not asked for reduced motion. No script, no motion class, no
+   hidden content. A failsafe in the script clears it regardless.
+   ============================================================ */
+
+/* the stack recedes: set by script as the next plate covers this one */
+.plate > .inner,
+.plate > .stage,
+.plate > .numeral {
+  transform: scale(var(--recede-s, 1));
+  opacity: var(--recede-o, 1);
+  transform-origin: 50% 30%;
+}
+
+html.motion .rise { opacity: 0; }
+html.motion .wipe > span { display: block; }
+html.motion .wipe .line-in { display: block; transform: translateY(105%); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  html.motion .rise { opacity: 1; }
+  html.motion .wipe .line-in { transform: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

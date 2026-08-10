@@ -5,44 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bahniman Talukdar, Product Analyst</title>
 <meta name="description" content="Product analyst. Three and a half years writing the specs behind an enterprise HR product at Darwinbox, now PGDM-GM at XLRI Jamshedpur. Four open-source protocols for the agent economy.">
-<meta name="theme-color" content="#1B2AD9">
+<meta name="theme-color" content="#0B0C10">
 <meta property="og:title" content="Bahniman Talukdar, Product Analyst">
-<meta property="og:description" content="I plan how things get built before anyone builds them.">
+<meta property="og:description" content="Somebody has to write down what gets built. For 45 months that was my job.">
 <meta property="og:type" content="profile">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Spectral:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="plate.css">
 <script>
-  // set the theme before first paint so there is no flash
+  // theme and motion flag before first paint. dark is the default stage.
   (function () {
-    var s = null;
+    var d = document.documentElement, s = null;
     try { s = localStorage.getItem('theme'); } catch (e) {}
-    var dark = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (dark) document.documentElement.classList.add('dark');
+    var light = s ? s === 'light' : matchMedia('(prefers-color-scheme: light)').matches;
+    if (light) d.classList.add('light');
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+      d.classList.add('motion');
+    }
   })();
 </script>
 </head>
 <body>
 
+<div class="progress" id="progress" aria-hidden="true"></div>
+
 <div class="marker">
-  <span class="label" id="plateName">Opening</span>
-  <button type="button" id="themeBtn" class="label" aria-label="Switch between light and dark">Dark</button>
+  <span class="marker-name" id="plateName"><span>Opening</span></span>
+  <button type="button" id="themeBtn" aria-label="Switch between light and dark">Light</button>
 </div>
 
 <main>
 
   <!-- PLATE 1 : OPENING -->
-  <section class="plate plate-tall p-bone" id="opening" data-name="Opening">
+  <section class="plate plate-tall" id="opening" data-name="Opening">
+    <div class="stage" aria-hidden="true"><canvas id="lattice"></canvas></div>
     <div class="inner">
-      <h1 class="d-xl" style="max-width:16ch">I plan how things get built before anyone builds them.</h1>
-      <p class="prose" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
-        I spent three and a half years at Darwinbox writing the specs behind an enterprise
-        HR product used across 50+ languages. I am at XLRI now for the layer of judgement I
-        could see my manager and director using and could not copy yet. The four protocols
-        further down are what I build when nobody assigns the problem.
+      <h1 class="d-xl wipe" id="hero">
+        <span><span class="line-in">Somebody has to write down</span></span>
+        <span><span class="line-in">what gets built.</span></span>
+      </h1>
+      <p class="lede rise" style="margin-top:clamp(1.75rem,3.5vw,2.5rem)">
+        For 45 months that was my job at Darwinbox, an HR platform running in more than
+        50 languages. More than 200 of those documents were mine.
       </p>
-      <div class="label quiet" style="margin-top:clamp(3.5rem,7vw,5rem);line-height:1.9">
+      <p class="prose rise" style="margin-top:1.25rem">
+        I am at XLRI now for the layer of judgement I could see my manager and director
+        using and could not copy yet. The four protocols further down are what I build
+        when nobody assigns the problem.
+      </p>
+      <div class="label rise" style="margin-top:clamp(2.5rem,5vw,3.5rem);line-height:1.9">
         <div>Bahniman Talukdar</div>
         <div>Guwahati, Assam</div>
         <div>PGDM General Management, XLRI Jamshedpur, 2026 to 27</div>
@@ -52,89 +65,94 @@
   </section>
 
   <!-- PLATE 2 : STATEMENT -->
-  <section class="plate plate-tall p-ultra" id="statement" data-name="Statement">
+  <section class="plate plate-tall lift-2" id="statement" data-name="Statement">
     <div class="inner">
-      <h2 class="d-xl" style="max-width:14ch">Work that is planned properly closes inside office hours.</h2>
-      <p class="prose" style="margin-top:clamp(2.5rem,5vw,3.5rem);opacity:.9">
-        Why my PRDs carried the edge cases and the test notes, and why the calls after 7pm
-        mostly stopped
+      <h2 class="d-xl wipe" style="max-width:17ch">
+        <span><span class="line-in">Work that is planned properly</span></span>
+        <span><span class="line-in">closes inside office hours.</span></span>
+      </h2>
+      <p class="prose rise" style="margin-top:clamp(1.75rem,3.5vw,2.5rem)">
+        Most late calls I sat through were someone discovering a case the document never
+        covered. So I started writing the edge cases and the test notes into the spec
+        itself. The questions got answered where they were raised, and the calls after
+        7pm mostly stopped.
       </p>
     </div>
   </section>
 
   <!-- PLATE 3 : DARWINBOX -->
-  <section class="plate p-bone" id="darwinbox" data-name="Darwinbox">
+  <section class="plate" id="darwinbox" data-name="Darwinbox">
     <div class="numeral n-tr" aria-hidden="true">45</div>
     <div class="inner">
-      <h2 class="d-lg">Darwinbox</h2>
-      <p class="prose" style="margin-top:2rem">
-        Enterprise HRMS, serving clients across APAC, MENA, Europe and North America. July
-        2022 to March 2026. Product Analyst, then Senior Product Analyst from April 2025.
-        Forty five months, one promotion, three junior analysts mentored, and an Exemplary
-        Contributor award.
+      <h2 class="d-lg wipe"><span><span class="line-in">Darwinbox</span></span></h2>
+      <p class="lede rise" style="margin-top:1.5rem">
+        Forty five months on an enterprise HRMS used by clients across APAC, MENA, Europe
+        and North America. I joined as a Product Analyst and left as a Senior one, having
+        mentored three juniors and picked up an Exemplary Contributor award along the way.
       </p>
 
-      <div class="stack-xl indent" style="margin-top:clamp(4.5rem,8vw,7rem);max-width:62ch">
-        <article>
+      <div class="stack-xl indent" style="margin-top:clamp(3.5rem,6vw,5.5rem);max-width:66ch">
+        <article class="rise">
           <h3 class="d-md">The document is the job</h3>
-          <p class="prose" style="margin-top:1.5rem">
-            I wrote the spec engineering built from, across the employee lifecycle, org
-            structure, access controls and bulk data flows. The ones that worked carried the
-            edge cases and the test notes, so questions got answered in the document instead
-            of in a call three weeks later. I tracked which developer would pick up which
-            spec in the coming sprint and ran the handover before anyone was blocked. Across
-            45 months that came to more than 200 engineering-ready documents. Features
-            released this way landed between 5 and 60 percent account-level adoption in the
-            quarters after launch, and I benchmarked what we were building against the top
-            five HRMS platforms on the Gartner Magic Quadrant, so parity was a design input
-            rather than a gap someone found later.
+          <p class="prose" style="margin-top:1.15rem">
+            A spec that works answers the question before anyone has to ask it. Mine
+            carried the edge cases and the test notes, so the answer sat in the document
+            instead of in a call three weeks later. I also tracked which developer would
+            pick up which spec next sprint and ran the handover before anyone was blocked.
+            Across 45 months that came to more than 200 engineering-ready documents,
+            covering the employee lifecycle, org structure, access controls and bulk data.
+            Features released this way landed between 5 and 60 percent account-level
+            adoption in the quarters after launch. I benchmarked what we were building
+            against the top five HRMS platforms on the Gartner Magic Quadrant, so parity
+            was an input to the design rather than a gap someone found later.
           </p>
         </article>
 
-        <article>
-          <h3 class="d-md">I built the company&rsquo;s eyesight</h3>
-          <p class="prose" style="margin-top:1.5rem">
-            Pendo was already paid for when I joined, but two or three people used it and
-            only to float in-app surveys. Nobody used the analytics. I dug into it out of
-            curiosity and found it could show what people actually did: click paths, funnel
-            drop-offs, how often a feature got touched. So I built the usage-analytics
-            function from nothing. Several genuinely good features turned out to be barely
-            used. They were buried, or the setting had a name that meant nothing to the
-            person reading it. Nobody reads release notes, so the product has to explain
-            itself. I rewrote configuration names in plain language, added help text, and
-            moved settings to where people would actually look, then used Pendo to prove
-            usage climbed. I contributed to the dashboard revamp that reached over 322,000
-            enterprise users, where time spent on key actions fell 45 percent.
+        <article class="rise">
+          <h3 class="d-md">Nobody was looking at the data we already paid for</h3>
+          <p class="prose" style="margin-top:1.15rem">
+            Pendo was already bought and barely used. Two or three people ran in-app
+            surveys on it and nobody touched the analytics. I dug in out of curiosity and
+            found it could show what people actually did: click paths, funnel drop-offs,
+            how often a feature got touched. So I built the usage-analytics function from
+            nothing. The first thing it told us was uncomfortable. Several genuinely good
+            features were barely being used, because they were buried, or the setting had
+            a name that meant nothing to the person reading it. Nobody reads release
+            notes, so the product has to explain itself. I rewrote configuration names in
+            plain language, added help text, moved settings to where people would look,
+            then used Pendo to prove usage climbed. I contributed to the dashboard revamp
+            that reached over 322,000 enterprise users, where time spent on key actions
+            fell 45 percent.
           </p>
         </article>
 
-        <article>
-          <h3 class="d-md">Lost in literal translation</h3>
-          <p class="prose" style="margin-top:1.5rem">
-            Every new string was hard-coded and translated by pasting it into ChatGPT, by
-            developers who did not speak the language. Clients who did speak it kept
-            flagging translations that were technically correct and meaningless in context.
-            The company brought in a tech architect and shipped a central page for editing
-            translations, which leadership read as done. It was not. The URL was per-client
-            and hidden with no clear owner, strings sat in different files per module across
-            a mixed PHP and Angular codebase, and finding the broken one was painful. I went
-            looking myself, wrote up what was actually wrong, and it became a roadmap item I
-            owned the PRD for. The product now runs across more than 50 languages without
-            engineering in the loop. Being in product is what let me fix the system instead
-            of one string at a time.
+        <article class="rise">
+          <h3 class="d-md">Translated by people who did not speak the language</h3>
+          <p class="prose" style="margin-top:1.15rem">
+            Every new string was hard-coded, then translated by pasting it into ChatGPT.
+            The developers doing the pasting did not speak the language. Clients who did
+            kept flagging translations that were technically correct and meaningless in
+            context. Leadership believed this was already solved, because a tech architect
+            had shipped a central page for editing translations. It was not solved. The
+            URL was per-client and hidden with no clear owner, strings sat in different
+            files per module across a mixed PHP and Angular codebase, and finding the
+            broken one was painful. I went looking myself, wrote up what was actually
+            wrong, and it became a roadmap item I owned the PRD for. The product now runs
+            in more than 50 languages without engineering in the loop.
           </p>
         </article>
 
-        <article>
-          <h3 class="d-md">Make the import survive first contact</h3>
-          <p class="prose" style="margin-top:1.5rem">
+        <article class="rise">
+          <h3 class="d-md">Where enterprise data actually enters the system</h3>
+          <p class="prose" style="margin-top:1.15rem">
             Bulk import is where enterprise HR data actually enters the system, and it was
-            where admins failed most often. I redesigned it around validation, format
-            handling and field-level guidance so the first attempt succeeded and neither
-            support nor the client had to clean up afterwards. I also specified a
-            conversational import assistant, where an admin describes the intent in plain
-            language and the system generates the file, catches the errors and routes
-            approvals. It was specified in full and never built.
+            where admins failed most often. A failed import does not stay failed quietly:
+            either support cleans it up or the client does. I redesigned it around
+            validation, format handling and field-level guidance so the first attempt
+            succeeded. I also specified a conversational import assistant, where an admin
+            describes what they want in plain language and the system generates the file,
+            catches the errors and routes the approvals. It was specified in full and
+            never built.
           </p>
         </article>
       </div>
@@ -142,70 +160,75 @@
   </section>
 
   <!-- PLATE 4 : PROTOCOLS -->
-  <section class="plate p-ink" id="protocols" data-name="Protocols">
+  <section class="plate lift-1" id="protocols" data-name="Protocols">
     <div class="numeral n-bl" aria-hidden="true">4</div>
     <div class="inner">
-      <h2 class="d-lg" style="max-width:18ch">The trust layer for the agent economy</h2>
-      <p class="prose" style="margin-top:2rem">
-        Four open-source protocols, built in order. Software is starting to transact on our
-        behalf, and each one covers a step that has to hold up.
+      <h2 class="d-lg wipe" style="max-width:20ch">
+        <span><span class="line-in">The trust layer for</span></span>
+        <span><span class="line-in">the agent economy</span></span>
+      </h2>
+      <p class="lede rise" style="margin-top:1.5rem">
+        Software is starting to spend money on our behalf. These four protocols, built in
+        order, cover the steps that have to hold when it does.
       </p>
 
-      <div class="stack-xl" style="margin-top:clamp(4.5rem,8vw,7rem)">
-        <article class="step-1">
+      <div class="stack-xl" style="margin-top:clamp(3.5rem,6vw,5.5rem)">
+        <article class="proto rise">
           <div class="proto-head">
             <span class="proto-n">01</span>
-            <h3 class="d-md">Realium, Settlement</h3>
+            <h3 class="d-md">Realium, settlement</h3>
           </div>
-          <p class="prose body-indent" style="margin-top:1.5rem">
-            A settlement rail for public works. It turns site-verified construction progress
-            into a receivable a bank will actually lend against, so contractors stop waiting
-            out the payment cycle. Sixty percent of the invoice reaches the contractor on
-            day one instead of day 148, against an Ed25519 attestation signed on site.
-            Placed top 3 at the ReEnvision 5.0 conclave, judged by senior technology
-            leaders. See the <a href="https://bahniman.github.io/realium/">demo</a> or the
-            <a href="https://github.com/Bahniman/realium" target="_blank" rel="noreferrer">source</a>.
+          <p class="prose body-indent" style="margin-top:1.15rem">
+            A contractor finishes verified work on day zero and then waits out the payment
+            cycle. Realium turns that site-verified progress into a receivable a bank will
+            actually lend against, so sixty percent reaches the contractor on day one
+            instead of day 148, against an Ed25519 attestation signed on site. It placed
+            top 3 at the ReEnvision 5.0 conclave, judged by senior technology leaders. See
+            the <a href="https://bahniman.github.io/realium/">demo</a>
+            or the <a href="https://github.com/Bahniman/realium" target="_blank" rel="noreferrer">source</a>.
           </p>
         </article>
 
-        <article class="step-2">
+        <article class="proto step-2 rise">
           <div class="proto-head">
             <span class="proto-n">02</span>
-            <h3 class="d-md">Heirloom, Memory</h3>
+            <h3 class="d-md">Heirloom, memory</h3>
           </div>
-          <p class="prose body-indent" style="margin-top:1.5rem">
-            Institutional memory that stays with the firm. Queries are scoped by role-based
-            cryptography and the schema is portable and model independent, so the context
-            survives the partner who leaves and the vendor you switch away from. See the
-            <a href="https://bahniman.github.io/heirloom/">demo</a> or the
+          <p class="prose body-indent" style="margin-top:1.15rem">
+            A firm loses context when a partner leaves, and loses it again when it
+            switches vendors. Heirloom keeps that memory with the firm instead: queries
+            scoped by role-based cryptography, and a schema that is portable and model
+            independent. See the <a href="https://bahniman.github.io/heirloom/">demo</a> or the
             <a href="https://github.com/Bahniman/heirloom" target="_blank" rel="noreferrer">source</a>.
           </p>
         </article>
 
-        <article class="step-3">
+        <article class="proto step-3 rise">
           <div class="proto-head">
             <span class="proto-n">03</span>
-            <h3 class="d-md">Turnstile, Commerce</h3>
+            <h3 class="d-md">Turnstile, commerce</h3>
           </div>
-          <p class="prose body-indent" style="margin-top:1.5rem">
-            Commerce analytics for the agent era. It tells human sessions apart from AI
-            agents. That lets it recover checkouts bot defences decline by mistake, and
-            serve agents a machine-readable storefront instead of a page they have to guess
-            at. See the <a href="https://bahniman.github.io/turnstile/">demo</a> or the
+          <p class="prose body-indent" style="margin-top:1.15rem">
+            Bot defences were built for a web where every visitor was a person. Turnstile
+            tells human sessions apart from AI agents, which lets it recover the checkouts
+            those defences decline by mistake, and serve agents a machine-readable
+            storefront instead of a page they have to guess at. See the
+            <a href="https://bahniman.github.io/turnstile/">demo</a> or the
             <a href="https://github.com/Bahniman/turnstile" target="_blank" rel="noreferrer">source</a>.
           </p>
         </article>
 
-        <article class="step-4">
+        <article class="proto step-4 rise">
           <div class="proto-head">
             <span class="proto-n">04</span>
-            <h3 class="d-md">Windtunnel, Simulation</h3>
+            <h3 class="d-md">Windtunnel, simulation</h3>
           </div>
-          <p class="prose body-indent" style="margin-top:1.5rem">
-            A way to test a pricing change before customers feel it. It builds synthetic
-            cohorts from real support and transaction history, then runs the change
-            thousands of times, so you find where retention breaks before anyone real is
-            affected. See the <a href="https://bahniman.github.io/windtunnel/">demo</a> or the
+          <p class="prose body-indent" style="margin-top:1.15rem">
+            You usually learn a pricing change was wrong from the customers who leave over
+            it. Windtunnel builds synthetic cohorts out of real support and transaction
+            history and runs the change thousands of times first, so the breakage shows up
+            before anyone real is affected. See the
+            <a href="https://bahniman.github.io/windtunnel/">demo</a> or the
             <a href="https://github.com/Bahniman/windtunnel" target="_blank" rel="noreferrer">source</a>.
           </p>
         </article>
@@ -214,196 +237,440 @@
   </section>
 
   <!-- PLATE 5 : SETTLEMENT -->
-  <section class="plate p-ultra" id="settlement" data-name="Settlement">
+  <section class="plate" id="settlement" data-name="Settlement">
     <div class="numeral n-tr2" aria-hidden="true">148</div>
     <div class="inner">
-      <h2 class="d-lg">One invoice, all the way through</h2>
-      <p class="prose" style="margin-top:2rem;opacity:.9">
-        The Realium settlement path on one measurement book entry, using the same figures as
-        the live demo. Financing terms are stated assumptions, not committed rates.
+      <h2 class="d-lg wipe"><span><span class="line-in">One invoice, all the way through</span></span></h2>
+      <p class="lede rise" style="margin-top:1.5rem">
+        The work is signed off on day zero. The money arrives in full on day 148. This is
+        the same invoice with that wait taken out, using the figures from the Realium
+        demo. Financing terms are stated assumptions, not committed rates.
       </p>
 
-      <div class="stack-lg" style="margin-top:clamp(4.5rem,8vw,7rem)">
-        <div>
-          <div class="d-lg">&#8377;18,63,900</div>
-          <p class="prose" style="margin-top:0.75rem;opacity:.9">signed on site on day zero, geo-tagged and quantity checked</p>
+      <div class="stack-lg" style="margin-top:clamp(3.5rem,6vw,5.5rem)">
+        <div class="rise">
+          <span class="d-lg money">&#8377;18,63,900</span>
+          <div class="bar-track"><div class="bar" data-w="1"></div></div>
+          <p class="prose" style="margin-top:0.9rem">signed on site on day zero, geo-tagged and quantity checked</p>
         </div>
-        <div>
-          <div class="d-lg">&#8377;11,18,340</div>
-          <p class="prose" style="margin-top:0.75rem;opacity:.9">released by the bank on day one, sixty percent against the verified receivable</p>
+        <div class="rise">
+          <span class="d-lg money">&#8377;11,18,340</span>
+          <div class="bar-track"><div class="bar" data-w="0.6"></div></div>
+          <p class="prose" style="margin-top:0.9rem">released by the bank on day one, sixty percent against the verified receivable</p>
         </div>
-        <div>
-          <div class="d-lg">&#8377;6,89,156</div>
-          <p class="prose" style="margin-top:0.75rem;opacity:.9">the remainder, once treasury settles and the holdback waterfall clears on day 148</p>
+        <div class="rise">
+          <span class="d-lg money">&#8377;6,89,156</span>
+          <div class="bar-track"><div class="bar" data-w="0.37"></div></div>
+          <p class="prose" style="margin-top:0.9rem">the remainder, once treasury settles and the holdback waterfall clears on day 148</p>
         </div>
-        <div>
-          <div class="d-lg">&#8377;18,07,496</div>
-          <p class="prose" style="margin-top:0.75rem;opacity:.9">reaching the contractor after charges, 97.0 percent of face value</p>
+        <div class="rise">
+          <span class="d-lg money">&#8377;18,07,496</span>
+          <div class="bar-track"><div class="bar" data-w="0.97"></div></div>
+          <p class="prose" style="margin-top:0.9rem">reaching the contractor after charges, 97.0 percent of face value</p>
         </div>
       </div>
 
-      <div class="d-xl" style="margin-top:clamp(5rem,9vw,8rem)"><span id="dayCount">147</span> days removed</div>
+      <div class="d-xl rise" style="margin-top:clamp(3.5rem,6vw,5.5rem)"><span id="dayCount">147</span> days removed</div>
     </div>
   </section>
 
   <!-- PLATE 6 : THE CODEX -->
-  <section class="plate plate-tall p-bone" id="codex" data-name="The Codex">
+  <section class="plate plate-tall lift-2" id="codex" data-name="The Codex">
     <div class="inner">
-      <h2 class="d-xl">The Codex</h2>
-      <p class="label quiet" style="margin-top:1.5rem">FULCRUM 2026, legacy systems and AI, with Nandini</p>
-      <p class="prose" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
-        Modernisation is sold on reading old code, and that capability has commoditised: the
-        leading specialist tool beats a general-purpose model by one point on the industry
-        benchmark, and loses to it on the hardest tier. I audited every claim in our draft,
-        found two that did not survive checking, and rebuilt the argument around what the
-        benchmark actually showed. The failure is that the reasoning behind each rule was
-        never recorded, so every change re-derives it by hand and the migration converts a
-        specification nobody verified.
+      <h2 class="d-xl wipe"><span><span class="line-in">The Codex</span></span></h2>
+      <p class="label rise" style="margin-top:1.25rem">FULCRUM 2026, legacy systems and AI, with Nandini</p>
+      <p class="prose rise" style="margin-top:clamp(1.75rem,3.5vw,2.5rem)">
+        Modernisation gets sold on the ability to read old code, and that ability has
+        commoditised. The leading specialist tool beats a general-purpose model by one
+        point on the industry benchmark, and loses to it on the hardest tier. I audited
+        every claim in our draft, found two that did not survive checking, and rebuilt the
+        argument around what the benchmark actually showed. The failure that matters sits
+        elsewhere: the reasoning behind each rule was never written down, so every change
+        re-derives it by hand and the migration converts a specification nobody verified.
         <a href="https://bahniman.github.io/codex/">Read the case</a>.
       </p>
     </div>
   </section>
 
   <!-- PLATE 7 : AURORA -->
-  <section class="plate p-ink" id="aurora" data-name="AURORA 4.0">
+  <section class="plate lift-1" id="aurora" data-name="AURORA 4.0">
     <div class="numeral n-l" aria-hidden="true">08</div>
     <div class="inner">
-      <h2 class="d-lg">AURORA 4.0</h2>
-      <p class="label quiet" style="margin-top:1.5rem">
+      <h2 class="d-lg wipe"><span><span class="line-in">AURORA 4.0</span></span></h2>
+      <p class="label rise" style="margin-top:1.25rem">
         Product management symposium, Prodzion, XLRI Jamshedpur, 8 August 2026
       </p>
 
-      <div class="stack" style="margin-top:clamp(3rem,6vw,4.5rem);max-width:62ch">
+      <div class="stack rise" style="margin-top:clamp(2rem,4vw,3rem);max-width:66ch">
         <p class="prose">
-          AURORA 4.0 ran on a Saturday in August, four panels of senior product and
-          technology leaders across a single day, on product management in a polycrisis. I
-          was one of the organising team, and my share of it was the content and the people
-          on stage.
+          Four panels of senior product and technology leaders, one Saturday, on product
+          management in a polycrisis. I was one of the organising team, and my share of it
+          was the content and the people on stage.
         </p>
         <p class="prose">
-          I wrote the question sets the panels ran on and the scripts the hosts worked from,
-          ran the dry runs, and prepared and handled the hosts and moderators through the
-          run-up and on the day. I was the point of contact for two Panel 1 speakers, Sapan
-          Behera of ServiceNow and Rabindra Sah, CTO of the Indian Register of Shipping, and
-          I looked after speakers at the guest house. The promo script and shoot guide were
-          mine as well.
+          I wrote the question sets the panels ran on and the scripts the hosts worked
+          from, ran the dry runs, and prepared and handled the hosts and moderators through
+          the run-up and on the day. I was the point of contact for two Panel 1 speakers,
+          Sapan Behera of ServiceNow and Rabindra Sah, CTO of the Indian Register of
+          Shipping, and I looked after speakers at the guest house. The promo script and
+          shoot guide were mine as well.
         </p>
         <p class="prose">
-          It ran to time and the response from guests and faculty was good. The part I would
-          claim is the least visible one: a panel only sounds unscripted when the questions
-          were written properly and the host has already been through them.
+          It ran to time and the response from guests and faculty was good. Most of that
+          work was invisible on the day itself: the questions, and the hosts having
+          already been through them.
         </p>
       </div>
     </div>
   </section>
 
   <!-- PLATE 8 : RECORD -->
-  <section class="plate p-bone" id="record" data-name="Record">
+  <section class="plate" id="record" data-name="Record">
     <div class="numeral n-r" aria-hidden="true">7</div>
     <div class="inner">
-      <h2 class="d-lg">Record</h2>
-      <div class="stack-lg" style="margin-top:clamp(3.5rem,7vw,5rem)">
-        <div class="record-row">
+      <h2 class="d-lg wipe"><span><span class="line-in">Record</span></span></h2>
+      <div class="stack-lg" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
+        <div class="record-row rise">
           <span class="d-md">PGDM, General Management, XLRI Jamshedpur, 2026 to 27</span>
-          <span class="label quiet">XAT 94.88, 99.67 QA&amp;DI</span>
+          <span class="label">XAT 94.88, 99.67 QA&amp;DI</span>
         </div>
-        <div class="record-row">
+        <div class="record-row rise">
           <span class="d-md">Senior Product Analyst, Darwinbox, Apr 2025 to Mar 2026</span>
-          <span class="label quiet">Promoted</span>
+          <span class="label">Promoted</span>
         </div>
-        <div class="record-row">
+        <div class="record-row rise">
           <span class="d-md">Product Analyst, Darwinbox, Jul 2022 to Mar 2025</span>
-          <span class="label quiet">Exemplary Contributor</span>
+          <span class="label">Exemplary Contributor</span>
         </div>
-        <div class="record-row">
+        <div class="record-row rise">
           <span class="d-md">B.Tech, Civil Engineering, NIT Silchar, 2022</span>
-          <span class="label quiet">8.99 / 10</span>
+          <span class="label">8.99 / 10</span>
         </div>
-        <div class="record-row">
+        <div class="record-row rise">
           <span class="d-md">AURORA 4.0 symposium, Prodzion, Aug 2026</span>
-          <span class="label quiet">Delivered</span>
+          <span class="label">Delivered</span>
         </div>
-        <div class="record-row">
+        <div class="record-row rise">
           <span class="d-md">FULCRUM 2026 consulting challenge, Kautilya Consulting Club, Jul 2026</span>
-          <span class="label quiet">Submitted</span>
+          <span class="label">Submitted</span>
         </div>
-        <div class="record-row">
+        <div class="record-row rise">
           <span class="d-md">ReEnvision 5.0 conclave, team Realium, Jul 2026</span>
-          <span class="label quiet">Top 3</span>
+          <span class="label">Top 3</span>
         </div>
       </div>
-      <p class="prose" style="margin-top:clamp(4.5rem,8vw,7rem)">
+      <p class="prose rise" style="margin-top:clamp(3rem,5vw,4.5rem)">
         Civil engineering was the family trade, and I picked it knowing that. What carried
-        over was the habit of drawing something properly before anyone pours concrete, which
-        is close to what a PRD is for.
+        over was the habit of drawing something properly before anyone pours concrete,
+        which is close to what a PRD is for.
       </p>
     </div>
   </section>
 
   <!-- PLATE 9 : CONTACT -->
-  <section class="plate plate-tall p-ultra" id="contact" data-name="Contact">
+  <section class="plate plate-tall lift-2" id="contact" data-name="Contact">
     <div class="inner">
-      <h2 class="d-xl" style="max-width:12ch">What I am looking for next.</h2>
-      <p class="prose" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
-        Product management, product analytics, business analysis. Happiest where the problem
-        is still ambiguous and somebody has to write down what should actually get built.
+      <h2 class="d-xl wipe" style="max-width:15ch">
+        <span><span class="line-in">What I am</span></span>
+        <span><span class="line-in">looking for next.</span></span>
+      </h2>
+      <p class="prose rise" style="margin-top:clamp(1.75rem,3.5vw,2.5rem)">
+        Product management, product analytics, business analysis. Happiest where the
+        problem is still ambiguous and somebody has to write down what should actually get
+        built.
       </p>
-      <p class="prose" style="margin-top:2.5rem">
+      <p class="prose rise" style="margin-top:1.5rem">
         Write to <a href="mailto:bahniman30@gmail.com">bahniman30@gmail.com</a>, or find me on
         <a href="https://www.linkedin.com/in/bahniman-talukdar-ab97a416a" target="_blank" rel="noreferrer">LinkedIn</a>
         and <a href="https://github.com/Bahniman" target="_blank" rel="noreferrer">GitHub</a>.
       </p>
-      <p class="label" style="margin-top:clamp(4.5rem,8vw,7rem);opacity:.75">
-        Set in Bricolage Grotesque and Newsreader. Written and built by me.
+      <p class="label rise" style="margin-top:clamp(3rem,5vw,4.5rem)">
+        Set in Bricolage Grotesque and Spectral. Motion by anime.js. Written and built by me.
       </p>
     </div>
   </section>
 
 </main>
 
-<script>
-  /* ---------------------------- theme ---------------------------- */
-  var btn = document.getElementById('themeBtn');
-  function paintBtn() {
-    btn.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark';
-  }
-  paintBtn();
-  btn.addEventListener('click', function () {
-    var dark = document.documentElement.classList.toggle('dark');
-    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
-    paintBtn();
+<script type="module">
+const root = document.documentElement;
+const motion = root.classList.contains('motion');
+
+/* Nothing on this page is allowed to stay invisible because an animation
+   did not run. This clears every pre-state, and it runs whether anime.js
+   loads or not. */
+function revealAll() {
+  document.querySelectorAll('.rise').forEach(el => { el.style.opacity = '1'; });
+  document.querySelectorAll('.line-in').forEach(el => { el.style.transform = 'none'; });
+}
+const failsafe = setTimeout(revealAll, 2500);
+
+/* ---------------------------- theme ---------------------------- */
+const btn = document.getElementById('themeBtn');
+const paint = () => { btn.textContent = root.classList.contains('light') ? 'Dark' : 'Light'; };
+paint();
+btn.addEventListener('click', () => {
+  const light = root.classList.toggle('light');
+  try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {}
+  paint();
+});
+
+/* ---------------------- marker and progress --------------------- */
+const plates = [...document.querySelectorAll('.plate')];
+const nameEl = document.getElementById('plateName');
+const progressEl = document.getElementById('progress');
+let currentName = 'Opening', ticking = false;
+
+/* ------------------------- the stack ---------------------------- */
+/* Each plate pins and the next scrolls over it. A plate shorter than the
+   viewport pins at the top. A plate taller than the viewport pins at
+   100svh minus its own height, so its last line is readable before it
+   locks. Without that second case a tall section pins immediately and
+   everything below its first screen becomes unreachable. */
+function measureStack() {
+  const vh = innerHeight;
+  plates.forEach((p, i) => {
+    if (i === plates.length - 1) { p.style.top = ''; return; }
+    const h = p.offsetHeight;
+    p.style.top = h <= vh ? '0px' : `${Math.round(vh - h)}px`;
   });
+}
 
-  /* --------------------------- marker ---------------------------- */
-  var plates = Array.prototype.slice.call(document.querySelectorAll('.plate'));
-  var nameEl = document.getElementById('plateName');
-  addEventListener('scroll', function () {
-    var name = plates[0].dataset.name;
-    for (var i = 0; i < plates.length; i++) {
-      if (plates[i].getBoundingClientRect().top <= innerHeight * 0.35) name = plates[i].dataset.name;
+function recede() {
+  const vh = innerHeight;
+  for (let i = 0; i < plates.length - 1; i++) {
+    const next = plates[i + 1].getBoundingClientRect().top;
+    if (next > vh) {                       // next plate has not started covering yet
+      plates[i].style.setProperty('--recede-s', '1');
+      plates[i].style.setProperty('--recede-o', '1');
+      continue;
     }
-    if (nameEl.textContent !== name) nameEl.textContent = name;
-  }, { passive: true });
-
-  /* ------------------- the one piece of motion ------------------- */
-  var countEl = document.getElementById('dayCount');
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) {
-    countEl.textContent = '147';
-  } else {
-    countEl.textContent = '0';
-    var io = new IntersectionObserver(function (entries) {
-      if (!entries.some(function (e) { return e.isIntersecting; })) return;
-      io.disconnect();
-      var start = performance.now();
-      (function tick(now) {
-        var t = Math.min(1, (now - start) / 900);
-        countEl.textContent = String(Math.round(147 * t));
-        if (t < 1) requestAnimationFrame(tick);
-      })(start);
-    }, { threshold: 0.2 });
-    io.observe(document.getElementById('settlement'));
+    const t = Math.min(1, Math.max(0, 1 - next / vh));
+    plates[i].style.setProperty('--recede-s', (1 - t * 0.055).toFixed(4));
+    plates[i].style.setProperty('--recede-o', (1 - t * 0.55).toFixed(3));
   }
+}
+
+function onScrollTick() {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    progressEl.style.transform = `scaleX(${h > 0 ? Math.min(1, scrollY / h) : 0})`;
+    if (motion) recede();
+    let name = plates[0].dataset.name;
+    for (const p of plates) {
+      if (p.getBoundingClientRect().top <= innerHeight * 0.35) name = p.dataset.name;
+    }
+    if (name !== currentName) {
+      currentName = name;
+      nameEl.innerHTML = `<span>${name}</span>`;
+      if (window.__anime) {
+        window.__anime.animate(nameEl.firstElementChild, {
+          y: ['100%', '0%'], duration: 420, ease: 'outExpo'
+        });
+      }
+    }
+    ticking = false;
+  });
+}
+addEventListener('scroll', onScrollTick, { passive: true });
+measureStack();
+onScrollTick();
+// plate heights change with fonts loading and with wrapping, so remeasure
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureStack);
+addEventListener('load', measureStack);
+
+/* --------------------------- the stage -------------------------- */
+/* A set-out grid: surveyed points joined in the order a site engineer
+   would peg them, lit by a single moving source. It is the one image on
+   the page, and it is what the site claims: the plan before the build. */
+const cv = document.getElementById('lattice');
+const ctx = cv.getContext('2d');
+let pts = [], W = 0, H = 0, cols = 0, drawn = 0, lx = 0, ly = 0, tx = 0, ty = 0, raf = null;
+
+function build() {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const r = cv.parentNode.getBoundingClientRect();
+  W = r.width; H = r.height;
+  if (!W || !H) return;
+  cv.width = Math.round(W * dpr);
+  cv.height = Math.round(H * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const step = W < 700 ? 68 : 96;
+  cols = Math.ceil(W / step) + 1;
+  const rows = Math.ceil(H / step) + 1;
+  pts = [];
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const n = Math.sin((x * 12.9898 + y * 78.233) * 43758.5453);
+      pts.push({
+        x: x * step + (n - Math.floor(n) - 0.5) * step * 0.3,
+        y: y * step + Math.cos(n * 7.13) * step * 0.15,
+        c: x
+      });
+    }
+  }
+  if (!lx) { lx = tx = W * 0.62; ly = ty = H * 0.34; }
+}
+
+function paintStage() {
+  if (!pts.length) return;
+  const light = root.classList.contains('light');
+  ctx.clearRect(0, 0, W, H);
+  ctx.lineWidth = 1;
+  const reach = Math.max(W, H) * 0.55;
+  const shown = Math.floor(pts.length * drawn);
+
+  for (let i = 0; i < shown; i++) {
+    const p = pts[i];
+    const d = Math.hypot(p.x - lx, p.y - ly);
+    const lit = Math.max(0, 1 - d / reach);          // one light source, falling off
+    const a = 0.05 + lit * 0.42;
+
+    ctx.strokeStyle = light
+      ? `rgba(27,42,217,${a * 0.55})`
+      : `rgba(107,120,255,${a})`;
+
+    const right = (p.c + 1 < cols) ? pts[i + 1] : null;
+    const down = pts[i + cols];
+    if (right && i + 1 < shown) {
+      ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(right.x, right.y); ctx.stroke();
+    }
+    if (down && i + cols < shown) {
+      ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(down.x, down.y); ctx.stroke();
+    }
+    if (lit > 0.45) {
+      ctx.fillStyle = light ? `rgba(11,12,16,${lit * 0.5})` : `rgba(242,241,239,${lit * 0.75})`;
+      ctx.fillRect(p.x - 1.5, p.y - 1.5, 3, 3);
+    }
+  }
+}
+
+function loop() {
+  lx += (tx - lx) * 0.045;                            // the light trails the pointer
+  ly += (ty - ly) * 0.045;
+  paintStage();
+  raf = requestAnimationFrame(loop);
+}
+
+/* ------------------------- anime.js layer ------------------------ */
+try {
+  const anime = await import('https://cdn.jsdelivr.net/npm/animejs@4/+esm');
+  const { animate, stagger, createTimeline, utils } = anime;
+  window.__anime = anime;
+
+  if (motion) {
+    clearTimeout(failsafe);
+
+    build();
+    if (W && H) {
+      // the grid sets itself out, then the light keeps moving.
+      // reading from our own object, never from the callback's shape
+      const setOut = { v: 0 };
+      animate(setOut, {
+        v: 1, duration: 2200, ease: 'inOutQuad',
+        onUpdate: () => { drawn = setOut.v; },
+        onComplete: () => { drawn = 1; }
+      });
+      raf = requestAnimationFrame(loop);
+      addEventListener('pointermove', e => {
+        const r = cv.getBoundingClientRect();
+        if (e.clientY > r.bottom) return;
+        tx = e.clientX - r.left; ty = e.clientY - r.top;
+      }, { passive: true });
+    }
+
+    // the hero: lines wipe up, and the display face widens as they land
+    const hero = document.getElementById('hero');
+    const axis = { w: 78 };
+    createTimeline({ defaults: { ease: 'outExpo' } })
+      .add(hero.querySelectorAll('.line-in'), {
+        y: ['105%', '0%'], duration: 1000, delay: stagger(110)
+      })
+      .add(axis, {
+        w: [78, 104], duration: 1400, ease: 'outQuart',
+        onUpdate: () => { root.style.setProperty('--wdth', axis.w.toFixed(1)); }
+      }, '<')
+      .add('#opening .rise', {
+        opacity: [0, 1], y: [14, 0], duration: 720, delay: stagger(90)
+      }, '-=700');
+
+    // every other plate reveals on entry, and each headline wipes rather than fades
+    const io = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        io.unobserve(e.target);
+        const lines = e.target.querySelectorAll('.wipe .line-in');
+        if (lines.length) {
+          animate(lines, { y: ['105%', '0%'], duration: 900, ease: 'outExpo', delay: stagger(90) });
+        }
+        const risers = e.target.querySelectorAll('.rise');
+        if (risers.length) {
+          animate(risers, {
+            opacity: [0, 1], y: [16, 0], duration: 700, ease: 'outQuart',
+            delay: stagger(70, { start: 120 })
+          });
+        }
+        const bars = e.target.querySelectorAll('.bar');
+        if (bars.length) {
+          bars.forEach((b, i) => animate(b, {
+            scaleX: [0, parseFloat(b.dataset.w)],
+            duration: 900, ease: 'outExpo', delay: 260 + i * 110
+          }));
+        }
+        if (e.target.id === 'settlement') {
+          const out = document.getElementById('dayCount');
+          const counter = { n: 0 };
+          animate(counter, {
+            n: 147, duration: 1500, ease: 'outExpo',
+            onUpdate: () => { out.textContent = String(Math.round(counter.n)); }
+          });
+        }
+      }
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+
+    plates.forEach(p => { if (p.id !== 'opening') io.observe(p); });
+
+    // the numerals drift against the scroll
+    const nums = [...document.querySelectorAll('.numeral')];
+    addEventListener('scroll', () => {
+      for (const n of nums) {
+        const r = n.parentElement.getBoundingClientRect();
+        const t = (innerHeight - r.top) / (innerHeight + r.height);
+        n.style.transform = `translate3d(0, ${(0.5 - t) * 14}vh, 0)`;
+      }
+    }, { passive: true });
+
+    // protocol numbers lean out under the pointer
+    document.querySelectorAll('.proto').forEach(p => {
+      const n = p.querySelector('.proto-n');
+      p.addEventListener('pointerenter', () => animate(n, { x: 10, duration: 420, ease: 'outExpo' }));
+      p.addEventListener('pointerleave', () => animate(n, { x: 0, duration: 520, ease: 'outQuart' }));
+    });
+  } else {
+    revealAll();
+    build();
+    drawn = 1;
+    paintStage();
+  }
+} catch (err) {
+  // CDN blocked, offline, or an API that moved. Show everything, draw the grid flat.
+  console.warn('motion layer unavailable, falling back to static', err);
+  revealAll();
+  try { build(); drawn = 1; paintStage(); } catch (e) {}
+}
+
+let rt;
+addEventListener('resize', () => {
+  clearTimeout(rt);
+  rt = setTimeout(() => {
+    measureStack();
+    onScrollTick();
+    const d = drawn; build(); drawn = d; paintStage();
+  }, 150);
+}, { passive: true });
 </script>
 </body>
 </html>
