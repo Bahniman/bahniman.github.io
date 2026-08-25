@@ -180,6 +180,7 @@ html.light .numeral { color: var(--u-1); opacity: 0.35; }
   line-height: 1.05;
   letter-spacing: -0.03em;
   font-weight: 800;
+  text-wrap: balance;
 }
 
 .d-lg {
@@ -187,6 +188,7 @@ html.light .numeral { color: var(--u-1); opacity: 0.35; }
   line-height: 1.08;
   letter-spacing: -0.025em;
   font-weight: 800;
+  text-wrap: balance;
 }
 
 .d-md {
@@ -194,6 +196,7 @@ html.light .numeral { color: var(--u-1); opacity: 0.35; }
   line-height: 1.25;
   letter-spacing: -0.015em;
   font-weight: 700;
+  text-wrap: balance;
 }
 
 .label {
@@ -211,6 +214,7 @@ html.light .numeral { color: var(--u-1); opacity: 0.35; }
   line-height: 1.68;
   max-width: 66ch;
   color: var(--fg-2);
+  text-wrap: pretty;
 }
 
 html.light .prose { color: #2a2c38; }
@@ -222,6 +226,7 @@ html.light .prose { color: #2a2c38; }
   line-height: 1.55;
   max-width: 58ch;
   color: var(--fg-2);
+  text-wrap: pretty;
 }
 
 html.light .lede { color: #2a2c38; }
@@ -328,12 +333,11 @@ html.light .pillar-badge {
 }
 
 .statement-banner {
-  background: linear-gradient(135deg, var(--bg-3), var(--bg-2));
-  border: 1px solid var(--u-4);
-  border-left: 4px solid var(--u-2);
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
   border-radius: 8px;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  padding: clamp(1.75rem, 3.5vw, 2.75rem);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .quiet { color: var(--figure-2); }
