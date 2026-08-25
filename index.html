@@ -1504,20 +1504,26 @@ try {
       }, { passive: true });
     }
 
-    const hero = document.getElementById('hero');
-    const axis = { w: 78 };
-    createTimeline({ defaults: { ease: 'outExpo' } })
-      .add(hero.querySelectorAll('.line-in'), {
-        y: ['105%', '0%'], duration: 1000, delay: stagger(110)
-      })
-      .add(axis, {
-        w: [78, 104], duration: 1000, ease: 'outExpo',
-        onUpdate: () => { root.style.setProperty('--wdth', axis.w.toFixed(1)); },
-        onComplete: () => { root.style.setProperty('--wdth', '104'); }
-      }, '<')
-      .add('#opening .rise', {
-        opacity: [0, 1], y: [14, 0], duration: 720, delay: stagger(90)
-      }, '-=700');
+    const heroLines = document.querySelectorAll('#hero .line-in');
+    if (heroLines.length) {
+      animate(heroLines, {
+        y: ['105%', '0%'],
+        duration: 900,
+        ease: 'outExpo',
+        delay: stagger(100)
+      });
+    }
+
+    const openingRisers = document.querySelectorAll('#opening .rise');
+    if (openingRisers.length) {
+      animate(openingRisers, {
+        opacity: [0, 1],
+        y: [14, 0],
+        duration: 700,
+        ease: 'outQuart',
+        delay: stagger(70, { start: 160 })
+      });
+    }
 
     const io = new IntersectionObserver(entries => {
       for (const e of entries) {
