@@ -64,11 +64,20 @@ html.light {
 *::after { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  /* clip, not hidden: hidden makes html a scroll container and kills
-     position: sticky on the plates below */
   overflow-x: clip;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 body {
@@ -112,6 +121,7 @@ p { margin: 0; text-wrap: pretty; }
   border-top: 1px solid var(--rule);
   background: var(--ground);          /* opaque, or the plate beneath shows through */
   transform-origin: 50% 0;
+  will-change: transform;
 }
 
 .plate:first-of-type { border-top: 0; }
@@ -428,9 +438,11 @@ html.light .bar-track { background: #d3d4da; }
 .plate > .inner,
 .plate > .stage,
 .plate > .numeral {
-  transform: scale(var(--recede-s, 1));
+  transform: translate3d(0, 0, 0) scale(var(--recede-s, 1));
   opacity: var(--recede-o, 1);
   transform-origin: 50% 30%;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 html.motion .rise { opacity: 0; }
