@@ -1321,7 +1321,7 @@ function recede() {
   const vh = innerHeight;
   for (let i = 0; i < plates.length - 1; i++) {
     const next = plates[i + 1].getBoundingClientRect().top;
-    if (next > vh) {
+    if (next >= vh - 2) {
       plates[i].style.setProperty('--recede-s', '1');
       plates[i].style.setProperty('--recede-o', '1');
       continue;

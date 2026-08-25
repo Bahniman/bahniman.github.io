@@ -189,10 +189,12 @@ p { margin: 0; text-wrap: pretty; }
   will-change: transform;
 }
 
-.plate:first-of-type { border-top: 0; }
+.plate:first-of-type { border-top: 0; min-height: 100vh; min-height: 100svh; }
 .plate:last-of-type { position: relative; }
 
 .plate-tall {
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
