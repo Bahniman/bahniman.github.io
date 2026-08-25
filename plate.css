@@ -1,6 +1,6 @@
 /* ============================================================
    Bahniman Talukdar, Portfolio
-   Apple Design System (SF Pro / Glass Materials / Saturated Accents)
+   Apple Liquid Glass Design System (macOS / iOS Glassmorphism)
    ============================================================ */
 
 :root {
@@ -17,34 +17,38 @@
   /* Dark Stage (Apple iOS / macOS Dark Theme Default) */
   --bg: #000000;
   --bg-1: #0B0C10;
-  --bg-2: #1C1C1E;
-  --bg-3: #2C2C2E;
-  --bg-4: #3A3A3C;
+  --bg-2: rgba(28, 28, 32, 0.65);
+  --bg-3: rgba(44, 44, 48, 0.72);
+  --bg-4: rgba(58, 58, 62, 0.85);
 
   /* Apple Vibrancy & Labels */
   --label: #FFFFFF;
-  --label2: rgba(235, 235, 245, 0.64);
-  --label3: rgba(235, 235, 245, 0.35);
+  --label2: rgba(235, 235, 245, 0.68);
+  --label3: rgba(235, 235, 245, 0.38);
   --sep: rgba(84, 84, 88, 0.65);
   --sep-o: rgba(84, 84, 88, 0.35);
 
-  /* Glass Materials */
-  --mat-s: rgba(40, 40, 42, 0.72);
-  --mat-m: rgba(28, 28, 30, 0.82);
-  --mat-l: rgba(20, 20, 22, 0.88);
-  --blur-s: saturate(180%) blur(14px);
-  --blur-m: saturate(180%) blur(28px);
-  --blur-l: saturate(190%) blur(48px);
-  --rim: rgba(255, 255, 255, 0.12);
+  /* Apple Liquid Glass Materials */
+  --glass-bg: rgba(24, 24, 28, 0.65);
+  --glass-bg-hover: rgba(36, 36, 42, 0.78);
+  --glass-inset: rgba(255, 255, 255, 0.05);
+  --glass-inset-hover: rgba(255, 255, 255, 0.08);
+
+  --blur-s: saturate(180%) blur(16px);
+  --blur-m: saturate(190%) blur(28px);
+  --blur-l: saturate(200%) blur(48px);
+
+  --rim: rgba(255, 255, 255, 0.14);
+  --rim-top: rgba(255, 255, 255, 0.24);
   --rim-out: rgba(255, 255, 255, 0.06);
 
-  /* Shadows (Apple iOS / macOS Elevation Scale) */
-  --sh-s: 0 2px 8px rgba(0, 0, 0, 0.40), 0 1px 2px rgba(0, 0, 0, 0.25);
-  --sh-m: 0 8px 28px rgba(0, 0, 0, 0.48), 0 2px 6px rgba(0, 0, 0, 0.30);
-  --sh-l: 0 20px 56px rgba(0, 0, 0, 0.60), 0 4px 14px rgba(0, 0, 0, 0.36);
+  /* Shadows (Apple iOS / macOS Elevation Scale with Specular Glass Rims) */
+  --sh-s: 0 4px 16px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.20), inset 0 1px 0 var(--rim-top);
+  --sh-m: 0 14px 40px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.25), inset 0 1px 0 var(--rim-top), inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+  --sh-l: 0 24px 64px rgba(0, 0, 0, 0.65), 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.28);
 
   /* Radii */
-  --r-card: 18px;
+  --r-card: 20px;
   --r-in: 12px;
   --r-cap: 9999px;
 
@@ -83,30 +87,33 @@ html.light, :root[data-theme="light"] {
   --pink: #FF2D55;
 
   --label: #000000;
-  --label2: rgba(60, 60, 67, 0.64);
-  --label3: rgba(60, 60, 67, 0.30);
+  --label2: rgba(60, 60, 67, 0.68);
+  --label3: rgba(60, 60, 67, 0.32);
   --sep: rgba(60, 60, 67, 0.29);
   --sep-o: rgba(60, 60, 67, 0.13);
 
   --bg: #F2F2F7;
   --bg-1: #F2F2F7;
-  --bg-2: #FFFFFF;
-  --bg-3: #E5E5EA;
-  --bg-4: #D1D1D6;
+  --bg-2: rgba(255, 255, 255, 0.72);
+  --bg-3: rgba(240, 240, 245, 0.82);
+  --bg-4: rgba(225, 225, 230, 0.90);
 
-  --mat-s: rgba(255, 255, 255, 0.72);
-  --mat-m: rgba(255, 255, 255, 0.82);
-  --mat-l: rgba(255, 255, 255, 0.88);
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg-hover: rgba(255, 255, 255, 0.86);
+  --glass-inset: rgba(0, 0, 0, 0.03);
+  --glass-inset-hover: rgba(0, 0, 0, 0.06);
+
   --rim: rgba(0, 0, 0, 0.10);
+  --rim-top: rgba(255, 255, 255, 0.8);
   --rim-out: rgba(0, 0, 0, 0.05);
 
-  --sh-s: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --sh-m: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
-  --sh-l: 0 20px 52px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.07);
+  --sh-s: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04), inset 0 1px 0 var(--rim-top);
+  --sh-m: 0 12px 32px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.05), inset 0 1px 0 var(--rim-top);
+  --sh-l: 0 24px 56px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.06), inset 0 1px 0 var(--rim-top);
 
   --ground: #F2F2F7;
   --figure: #000000;
-  --figure-2: rgba(60, 60, 67, 0.64);
+  --figure-2: rgba(60, 60, 67, 0.68);
   --accent: var(--blue);
   --rule: rgba(0, 0, 0, 0.10);
 }
@@ -136,10 +143,10 @@ body {
   margin: 0;
   background-color: var(--ground);
   background-image:
-    radial-gradient(70vw 60vh at 4% -8%, rgba(10, 132, 255, 0.14), transparent 64%),
-    radial-gradient(60vw 55vh at 98% 2%, rgba(255, 55, 95, 0.10), transparent 62%),
-    radial-gradient(66vw 60vh at 82% 96%, rgba(191, 90, 242, 0.12), transparent 64%),
-    radial-gradient(56vw 50vh at 14% 88%, rgba(64, 200, 224, 0.10), transparent 62%);
+    radial-gradient(75vw 65vh at 5% -10%, rgba(10, 132, 255, 0.18), transparent 66%),
+    radial-gradient(65vw 60vh at 96% 4%, rgba(255, 55, 95, 0.13), transparent 64%),
+    radial-gradient(70vw 65vh at 80% 95%, rgba(191, 90, 242, 0.15), transparent 66%),
+    radial-gradient(60vw 55vh at 16% 86%, rgba(64, 200, 224, 0.13), transparent 64%);
   background-attachment: fixed;
   background-repeat: no-repeat;
   color: var(--figure);
@@ -153,10 +160,10 @@ body {
 
 html.light body {
   background-image:
-    radial-gradient(70vw 60vh at 4% -8%, rgba(0, 122, 255, 0.06), transparent 64%),
-    radial-gradient(60vw 55vh at 98% 2%, rgba(255, 45, 85, 0.05), transparent 62%),
-    radial-gradient(66vw 60vh at 82% 96%, rgba(175, 82, 222, 0.05), transparent 64%),
-    radial-gradient(56vw 50vh at 14% 88%, rgba(48, 176, 199, 0.04), transparent 62%);
+    radial-gradient(75vw 65vh at 5% -10%, rgba(0, 122, 255, 0.08), transparent 66%),
+    radial-gradient(65vw 60vh at 96% 4%, rgba(255, 45, 85, 0.06), transparent 64%),
+    radial-gradient(70vw 65vh at 80% 95%, rgba(175, 82, 222, 0.06), transparent 66%),
+    radial-gradient(60vw 55vh at 16% 86%, rgba(48, 176, 199, 0.05), transparent 64%);
 }
 
 h1, h2, h3 {
@@ -181,7 +188,7 @@ p { margin: 0; text-wrap: pretty; }
   z-index: var(--z-page);
   overflow: hidden;
   isolation: isolate;
-  padding: clamp(2.75rem, 5.5vw, 4.25rem) clamp(1.25rem, 4vw, 3.5rem);
+  padding: clamp(3.25rem, 6vw, 4.75rem) clamp(1.25rem, 4vw, 3.5rem);
   border-top: 1px solid var(--rule);
   background: var(--ground);
   box-shadow: 0 -1px 0 0 var(--rim-out), var(--sh-m);
@@ -294,13 +301,13 @@ html.light .prose { color: rgba(60, 60, 67, 0.82); }
 
 html.light .lede { color: #1c1c1e; }
 
-/* -------------------------- Apple Cards & Grid -------------------------- */
+/* -------------------------- Apple Glass Cards & Grid -------------------------- */
 
 .pillar-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.15rem;
-  margin-top: 1.75rem;
+  gap: 1.25rem;
+  margin-top: 1.85rem;
 }
 
 @media (min-width: 768px) {
@@ -310,21 +317,24 @@ html.light .lede { color: #1c1c1e; }
 }
 
 .pillar-card {
-  background: var(--bg-2);
+  background: var(--glass-bg);
+  backdrop-filter: var(--blur-m);
+  -webkit-backdrop-filter: var(--blur-m);
   border: 1px solid var(--rim);
   border-radius: var(--r-card);
-  padding: 1.4rem 1.5rem;
+  padding: 1.45rem 1.6rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  box-shadow: var(--sh-s), inset 0 1px 0 var(--rim);
-  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: var(--sh-m);
+  transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
 }
 
 .pillar-card:hover {
-  border-color: rgba(10, 132, 255, 0.35);
-  transform: translateY(-2px);
-  box-shadow: var(--sh-m), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: var(--glass-bg-hover);
+  border-color: rgba(10, 132, 255, 0.45);
+  transform: translateY(-3px);
+  box-shadow: var(--sh-l), 0 0 24px rgba(10, 132, 255, 0.16);
 }
 
 .pillar-head {
@@ -338,32 +348,35 @@ html.light .lede { color: #1c1c1e; }
 .pillar-badge {
   font-family: var(--sf);
   font-size: 11.5px;
-  font-weight: 600;
+  font-weight: 650;
   letter-spacing: -0.006em;
-  padding: 3px 9px;
+  padding: 3px 10px;
   border-radius: var(--r-cap);
-  background: rgba(10, 132, 255, 0.14);
+  background: rgba(10, 132, 255, 0.15);
   color: var(--blue);
-  border: 1px solid rgba(10, 132, 255, 0.22);
+  border: 1px solid rgba(10, 132, 255, 0.32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
   white-space: nowrap;
 }
 
 html.light .pillar-badge {
   background: rgba(0, 122, 255, 0.12);
   color: var(--blue);
-  border-color: rgba(0, 122, 255, 0.2);
+  border-color: rgba(0, 122, 255, 0.24);
 }
 
 .meta-strip {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.85rem;
-  margin-top: 2rem;
-  padding: 1.1rem 1.35rem;
-  background: var(--bg-2);
+  margin-top: 2.25rem;
+  padding: 1.15rem 1.4rem;
+  background: var(--glass-bg);
+  backdrop-filter: var(--blur-m);
+  -webkit-backdrop-filter: var(--blur-m);
   border: 1px solid var(--rim);
   border-radius: var(--r-card);
-  box-shadow: var(--sh-s), inset 0 1px 0 var(--rim);
+  box-shadow: var(--sh-m);
 }
 
 @media (min-width: 640px) {
@@ -381,30 +394,43 @@ html.light .pillar-badge {
 .meta-item {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
+  background: var(--glass-inset);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+html.light .meta-item {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .meta-label {
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 10.5px;
+  font-weight: 650;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   color: var(--label3);
 }
 
 .meta-value {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--label);
 }
 
 .statement-banner {
-  background: var(--bg-2);
+  background: var(--glass-bg);
+  backdrop-filter: var(--blur-m);
+  -webkit-backdrop-filter: var(--blur-m);
   border: 1px solid var(--rim);
   border-radius: var(--r-card);
-  padding: clamp(1.75rem, 3.5vw, 2.75rem);
-  box-shadow: var(--sh-m), inset 0 1px 0 var(--rim);
+  padding: clamp(1.85rem, 4vw, 3rem);
+  box-shadow: var(--sh-l);
 }
 
 .quiet { color: var(--label2); }
@@ -424,24 +450,34 @@ a:hover { opacity: 0.82; }
 .stage { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .stage canvas { display: block; width: 100%; height: 100%; }
 
-/* --------------------------- Apple Frosted Topbar ------------------------- */
+/* --------------------------- Apple Floating Glass Dynamic Island ------------------------- */
 
 .marker {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - clamp(20px, 4vw, 56px));
+  max-width: 1140px;
   z-index: var(--z-marker);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.75rem clamp(1.25rem, 5vw, 4.5rem);
+  padding: 0.6rem 1.25rem;
   font-size: 13.5px;
   color: var(--label2);
-  background: var(--mat-m);
+  background: rgba(22, 22, 26, 0.75);
   backdrop-filter: var(--blur-m);
   -webkit-backdrop-filter: var(--blur-m);
-  border-bottom: 0.5px solid var(--sep-o);
-  box-shadow: inset 0 -0.5px 0 var(--rim-out);
+  border: 1px solid var(--rim);
+  border-radius: var(--r-cap);
+  box-shadow: var(--sh-m), 0 16px 40px rgba(0, 0, 0, 0.55);
+}
+
+html.light .marker {
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: var(--sh-m);
 }
 
 .marker-name { position: relative; display: inline-block; overflow: hidden; height: 1.45em; font-weight: 600; color: var(--label); }
@@ -473,19 +509,21 @@ a:hover { opacity: 0.82; }
 
 .menu {
   position: fixed;
-  top: 3.25rem;
-  left: clamp(1.25rem, 5vw, 4.5rem);
+  top: 4.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - clamp(20px, 4vw, 56px));
+  max-width: 320px;
   z-index: var(--z-marker);
   display: flex;
   flex-direction: column;
-  min-width: 16rem;
-  padding: 0.45rem;
-  background: var(--mat-l);
+  padding: 0.5rem;
+  background: var(--glass-bg);
   backdrop-filter: var(--blur-l);
   -webkit-backdrop-filter: var(--blur-l);
   border: 1px solid var(--rim);
-  border-radius: var(--r-in);
-  box-shadow: var(--sh-l), inset 0 1px 0 var(--rim);
+  border-radius: 16px;
+  box-shadow: var(--sh-l);
 }
 
 .menu[hidden] { display: none; }
@@ -495,28 +533,28 @@ a:hover { opacity: 0.82; }
   align-items: baseline;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: 0.55rem 0.85rem;
+  padding: 0.6rem 0.9rem;
   color: var(--label);
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 14px;
   font-weight: 520;
   letter-spacing: -0.01em;
   transition: background 140ms ease;
 }
 
-.menu a:hover { background: rgba(120, 120, 128, 0.18); }
+.menu a:hover { background: rgba(120, 120, 128, 0.2); }
 
-.menu a[aria-current="true"] { background: rgba(10, 132, 255, 0.18); color: var(--blue); font-weight: 600; }
+.menu a[aria-current="true"] { background: rgba(10, 132, 255, 0.2); color: var(--blue); font-weight: 600; }
 html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); color: var(--blue); }
 
 .menu a .n { font-size: 12px; color: var(--label3); font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
 .marker button {
-  background: rgba(120, 120, 128, 0.14);
+  background: rgba(120, 120, 128, 0.16);
   border: 0.5px solid var(--rim);
   border-radius: var(--r-cap);
   padding: 0.35rem 0.8rem;
-  min-height: 34px;
+  min-height: 32px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -526,10 +564,11 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   font-size: 12.5px;
   font-weight: 560;
   cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
   transition: background 160ms ease, transform 120ms ease;
 }
 
-.marker button:hover { background: rgba(120, 120, 128, 0.24); transform: scale(1.02); }
+.marker button:hover { background: rgba(120, 120, 128, 0.26); transform: scale(1.02); }
 .marker button:active { transform: scale(0.97); }
 
 .progress {
@@ -554,9 +593,23 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 .record-row {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  padding-bottom: 1.1rem;
-  border-bottom: 0.5px solid var(--sep-o);
+  gap: 0.25rem;
+  padding: 0.85rem 1.1rem;
+  background: var(--glass-inset);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  margin-bottom: 0.65rem;
+  transition: background 180ms ease;
+}
+
+.record-row:hover {
+  background: var(--glass-inset-hover);
+}
+
+html.light .record-row {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.06);
 }
 
 @media (min-width: 640px) {
@@ -584,6 +637,25 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   backface-visibility: hidden;
 }
 
+html.motion .rise { opacity: 0; }
+html.motion .wipe > span { display: block; }
+html.motion .wipe .line-in { display: block; transform: translateY(105%); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  html.motion .rise { opacity: 1; }
+  html.motion .wipe .line-in { transform: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   GAMIFICATION, SIMULATORS & INTERACTIVE HUD
+   ============================================================ */
+
 /* ------------------ Marker HUD & Clearance ------------------ */
 
 .marker-tools {
@@ -597,9 +669,10 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.3rem 0.75rem;
-  background: rgba(48, 209, 88, 0.12);
-  border: 1px solid rgba(48, 209, 88, 0.28);
+  padding: 0.3rem 0.8rem;
+  background: rgba(48, 209, 88, 0.14);
+  border: 1px solid rgba(48, 209, 88, 0.32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
   border-radius: var(--r-cap);
   font-family: var(--sf);
   font-size: 11.5px;
@@ -612,7 +685,7 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 }
 
 .clearance-badge:hover {
-  background: rgba(48, 209, 88, 0.22);
+  background: rgba(48, 209, 88, 0.24);
   border-color: var(--green);
   transform: translateY(-1px);
 }
@@ -637,11 +710,13 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 /* ---------------- Realium Dynamic Waterfall ---------------- */
 
 .waterfall-box {
-  background: var(--bg-2);
+  background: var(--glass-bg);
+  backdrop-filter: var(--blur-m);
+  -webkit-backdrop-filter: var(--blur-m);
   border: 1px solid var(--rim);
-  padding: clamp(1.4rem, 3.5vw, 2.25rem);
+  padding: clamp(1.5rem, 3.8vw, 2.4rem);
   border-radius: var(--r-card);
-  box-shadow: var(--sh-m), inset 0 1px 0 var(--rim);
+  box-shadow: var(--sh-m);
   margin-top: 2rem;
 }
 
@@ -688,7 +763,7 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   width: 100%;
   height: 6px;
   border-radius: 3px;
-  background: rgba(120, 120, 128, 0.24);
+  background: rgba(120, 120, 128, 0.28);
   outline: none;
   cursor: pointer;
   touch-action: pan-x;
@@ -715,9 +790,10 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 .wf-ratio-pills {
   display: flex;
   gap: 4px;
-  background: rgba(120, 120, 128, 0.16);
+  background: rgba(120, 120, 128, 0.18);
   padding: 3px;
   border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .wf-pill-btn {
@@ -738,16 +814,17 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 .wf-pill-btn.active {
   background: var(--blue);
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(10, 132, 255, 0.35);
+  box-shadow: 0 2px 8px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .wf-live-track {
   height: 10px;
-  background: rgba(120, 120, 128, 0.16);
+  background: rgba(120, 120, 128, 0.18);
   border-radius: 5px;
   overflow: hidden;
   display: flex;
   margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .wf-seg-advance {
@@ -788,10 +865,10 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 
 .wf-card {
   padding: 1.15rem;
-  background: var(--bg-3);
-  border: 1px solid var(--rim);
+  background: var(--glass-inset);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--r-in);
-  box-shadow: var(--sh-s), inset 0 1px 0 var(--rim);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
 .wf-card .wf-card-title {
@@ -826,11 +903,13 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 
 .turnstile-box {
   margin-top: 1.5rem;
-  background: var(--bg-2);
+  background: var(--glass-bg);
+  backdrop-filter: var(--blur-m);
+  -webkit-backdrop-filter: var(--blur-m);
   border: 1px solid var(--rim);
   border-radius: var(--r-in);
   overflow: hidden;
-  box-shadow: var(--sh-s), inset 0 1px 0 var(--rim);
+  box-shadow: var(--sh-m);
 }
 
 .turnstile-nav {
@@ -838,16 +917,17 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   align-items: center;
   justify-content: space-between;
   padding: 0.65rem 1rem;
-  background: rgba(120, 120, 128, 0.1);
+  background: rgba(120, 120, 128, 0.12);
   border-bottom: 0.5px solid var(--sep-o);
 }
 
 .turnstile-pills {
   display: flex;
   gap: 3px;
-  background: rgba(120, 120, 128, 0.16);
+  background: rgba(120, 120, 128, 0.18);
   padding: 3px;
   border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .ts-toggle-btn {
@@ -870,7 +950,7 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 .ts-toggle-btn.active {
   background: var(--blue);
   color: #ffffff;
-  box-shadow: 0 2px 6px rgba(10, 132, 255, 0.3);
+  box-shadow: 0 2px 6px rgba(10, 132, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .ts-status-tag {
@@ -900,11 +980,11 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 }
 
 .ts-tile {
-  background: var(--bg-3);
-  border: 1px solid var(--rim);
+  background: var(--glass-inset);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 0.85rem;
   border-radius: 10px;
-  box-shadow: inset 0 1px 0 var(--rim);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .ts-tile-k { font-size: 11px; color: var(--label2); margin-bottom: 3px; }
@@ -917,8 +997,8 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 .ts-code-pre {
   margin: 0;
   padding: 1rem;
-  background: var(--bg-3);
-  border: 1px solid var(--rim);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   font-family: var(--mono);
   font-size: 12px;
@@ -931,7 +1011,7 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   position: absolute;
   top: 8px;
   right: 8px;
-  background: rgba(120, 120, 128, 0.24);
+  background: rgba(120, 120, 128, 0.28);
   border: 0.5px solid var(--rim);
   color: var(--label);
   font-family: var(--sf);
@@ -939,12 +1019,13 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   font-weight: 600;
   padding: 3px 9px;
   border-radius: var(--r-cap);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
   cursor: pointer;
   transition: background 120ms ease;
 }
 
 .ts-copy-btn:hover {
-  background: rgba(120, 120, 128, 0.38);
+  background: rgba(120, 120, 128, 0.42);
 }
 
 /* ---------------- Darwinbox Edge Matrix ---------------- */
@@ -955,20 +1036,21 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   align-items: center;
   gap: 0.5rem;
   padding: 0.55rem 1.1rem;
-  background: rgba(10, 132, 255, 0.12);
-  border: 1px solid rgba(10, 132, 255, 0.28);
+  background: rgba(10, 132, 255, 0.15);
+  border: 1px solid rgba(10, 132, 255, 0.32);
   border-radius: var(--r-cap);
   color: var(--blue);
   font-family: var(--sf);
   font-weight: 650;
   font-size: 13px;
   letter-spacing: -0.01em;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
   cursor: pointer;
   transition: all 160ms ease;
 }
 
 .edge-toggle-btn:hover {
-  background: rgba(10, 132, 255, 0.22);
+  background: rgba(10, 132, 255, 0.26);
   border-color: var(--blue);
   transform: translateY(-1px);
 }
@@ -992,7 +1074,7 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   font-weight: 650;
   letter-spacing: -0.006em;
   color: var(--label2);
-  background: rgba(120, 120, 128, 0.08);
+  background: rgba(120, 120, 128, 0.1);
 }
 
 .edge-table td:first-child {
@@ -1000,7 +1082,7 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   color: var(--label);
 }
 
-/* ---------------- Apple Sheet Dialogs ---------------- */
+/* ---------------- Apple Glass Sheet Dialogs ---------------- */
 
 .cmd-backdrop {
   position: fixed;
@@ -1026,12 +1108,12 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 .cmd-panel {
   width: 92%;
   max-width: 600px;
-  background: var(--mat-l);
+  background: var(--glass-bg);
   backdrop-filter: var(--blur-l);
   -webkit-backdrop-filter: var(--blur-l);
   border: 1px solid var(--rim);
-  border-radius: 20px;
-  box-shadow: var(--sh-l), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  box-shadow: var(--sh-l);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1047,7 +1129,7 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 
 .cmd-input {
   flex: 1;
-  background: rgba(120, 120, 128, 0.16);
+  background: rgba(120, 120, 128, 0.18);
   border: none;
   outline: none;
   font-family: var(--sf);
@@ -1056,10 +1138,11 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   color: var(--label);
   padding: 8px 12px;
   border-radius: 10px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .cmd-input::placeholder { color: var(--label3); }
-.cmd-input:focus { box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.3); }
+.cmd-input:focus { box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.35); }
 
 .cmd-results {
   max-height: 340px;
@@ -1093,7 +1176,7 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 
 .cmd-item[aria-selected="true"],
 .cmd-item:hover {
-  background: rgba(10, 132, 255, 0.22);
+  background: rgba(10, 132, 255, 0.24);
   color: var(--blue);
 }
 
@@ -1107,21 +1190,21 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   display: flex;
   gap: 14px;
   padding: 10px 18px;
-  background: rgba(120, 120, 128, 0.08);
+  background: rgba(120, 120, 128, 0.1);
   border-top: 0.5px solid var(--sep-o);
   font-size: 12px;
   color: var(--label2);
 }
 
 .cmd-footer kbd {
-  background: rgba(120, 120, 128, 0.2);
+  background: rgba(120, 120, 128, 0.24);
   border: 0.5px solid var(--rim);
   padding: 1px 5px;
   border-radius: 4px;
   font-family: var(--mono);
 }
 
-/* ---------------- Apple Toast Notifications ---------------- */
+/* ---------------- Apple Glass Toast Notifications ---------------- */
 
 .toast-portal {
   position: fixed;
@@ -1141,12 +1224,12 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   gap: 12px;
   width: 320px;
   padding: 14px 16px;
-  background: var(--mat-l);
+  background: var(--glass-bg);
   backdrop-filter: var(--blur-l);
   -webkit-backdrop-filter: var(--blur-l);
-  border: 1px solid rgba(255, 215, 0, 0.35);
-  border-radius: 16px;
-  box-shadow: var(--sh-l), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 215, 0, 0.38);
+  border-radius: 18px;
+  box-shadow: var(--sh-l), 0 0 20px rgba(255, 215, 0, 0.12);
   color: var(--label);
   font-family: var(--sf);
   transform: translateY(20px);
@@ -1155,11 +1238,11 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
 }
 
 .toast-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: rgba(255, 215, 0, 0.16);
-  border: 1px solid rgba(255, 215, 0, 0.35);
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255, 215, 0, 0.18);
+  border: 1px solid rgba(255, 215, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1189,7 +1272,7 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
   font-family: var(--mono);
   font-weight: 700;
   color: var(--green);
-  background: rgba(48, 209, 88, 0.12);
+  background: rgba(48, 209, 88, 0.15);
   padding: 1px 5px;
   border-radius: 4px;
 }
@@ -1227,7 +1310,7 @@ html.light .menu a[aria-current="true"] { background: rgba(0, 122, 255, 0.12); c
     align-items: center;
     gap: 6px;
     padding: 0.5rem 1.1rem;
-    background: var(--mat-m);
+    background: var(--glass-bg);
     backdrop-filter: var(--blur-m);
     -webkit-backdrop-filter: var(--blur-m);
     border: 1px solid var(--rim);
