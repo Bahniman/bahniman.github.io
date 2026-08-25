@@ -14,32 +14,32 @@
   --indigo: #5E5CE6;
   --pink: #FF375F;
 
-  /* Dark Stage (Apple iOS / macOS Dark Theme Default) */
+  /* Dark Stage (Solid, Non-Bleeding Apple Decks) */
   --bg: #000000;
   --bg-1: #0B0C10;
-  --bg-2: rgba(28, 28, 32, 0.65);
-  --bg-3: rgba(44, 44, 48, 0.72);
-  --bg-4: rgba(58, 58, 62, 0.85);
+  --bg-2: #12141C;
+  --bg-3: #181B26;
+  --bg-4: #1F2332;
 
   /* Apple Vibrancy & Labels */
   --label: #FFFFFF;
-  --label2: rgba(235, 235, 245, 0.68);
-  --label3: rgba(235, 235, 245, 0.38);
+  --label2: rgba(235, 235, 245, 0.72);
+  --label3: rgba(235, 235, 245, 0.40);
   --sep: rgba(84, 84, 88, 0.65);
   --sep-o: rgba(84, 84, 88, 0.35);
 
-  /* Apple Liquid Glass Materials */
-  --glass-bg: rgba(24, 24, 28, 0.65);
-  --glass-bg-hover: rgba(36, 36, 42, 0.78);
+  /* Apple Liquid Glass Materials (High-Density Frosting, Zero Bleed-Through) */
+  --glass-bg: rgba(24, 26, 36, 0.92);
+  --glass-bg-hover: rgba(30, 33, 46, 0.98);
   --glass-inset: rgba(255, 255, 255, 0.05);
   --glass-inset-hover: rgba(255, 255, 255, 0.08);
 
-  --blur-s: saturate(180%) blur(16px);
-  --blur-m: saturate(190%) blur(28px);
-  --blur-l: saturate(200%) blur(48px);
+  --blur-s: saturate(180%) blur(20px);
+  --blur-m: saturate(190%) blur(36px);
+  --blur-l: saturate(200%) blur(56px);
 
-  --rim: rgba(255, 255, 255, 0.14);
-  --rim-top: rgba(255, 255, 255, 0.24);
+  --rim: rgba(255, 255, 255, 0.12);
+  --rim-top: rgba(255, 255, 255, 0.22);
   --rim-out: rgba(255, 255, 255, 0.06);
 
   /* Shadows (Apple iOS / macOS Elevation Scale with Specular Glass Rims) */
@@ -94,12 +94,12 @@ html.light, :root[data-theme="light"] {
 
   --bg: #F2F2F7;
   --bg-1: #F2F2F7;
-  --bg-2: rgba(255, 255, 255, 0.72);
-  --bg-3: rgba(240, 240, 245, 0.82);
-  --bg-4: rgba(225, 225, 230, 0.90);
+  --bg-2: #FFFFFF;
+  --bg-3: #E8E8ED;
+  --bg-4: #DCDCE2;
 
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-bg-hover: rgba(255, 255, 255, 0.86);
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --glass-bg-hover: rgba(255, 255, 255, 0.98);
   --glass-inset: rgba(0, 0, 0, 0.03);
   --glass-inset-hover: rgba(0, 0, 0, 0.06);
 
@@ -467,16 +467,18 @@ a:hover { opacity: 0.82; }
   padding: 0.6rem 1.25rem;
   font-size: 13.5px;
   color: var(--label2);
-  background: rgba(22, 22, 26, 0.75);
-  backdrop-filter: var(--blur-m);
-  -webkit-backdrop-filter: var(--blur-m);
+  background: rgba(18, 20, 26, 0.90);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
   border: 1px solid var(--rim);
   border-radius: var(--r-cap);
   box-shadow: var(--sh-m), 0 16px 40px rgba(0, 0, 0, 0.55);
 }
 
 html.light .marker {
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(245, 245, 247, 0.92);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
   box-shadow: var(--sh-m);
 }
 
