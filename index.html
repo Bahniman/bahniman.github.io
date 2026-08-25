@@ -800,17 +800,24 @@ class AchievementManager {
     this.renderToast(item);
   }
 
+  renderCustomToast(title, desc, tag = "Action Complete", xp = 0) {
+    this.queue.push({ title, desc, tag, xp });
+    this.processQueue();
+  }
+
   renderToast(item) {
     const toast = document.createElement('div');
     toast.className = 'achievement-toast';
+    const tag = item.tag || 'Milestone Unlocked';
+    const xpBadge = (item.xp && item.xp > 0) ? `<span class="toast-xp">+${item.xp} XP</span>` : '';
     toast.innerHTML = `
       <div class="toast-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       </div>
       <div class="toast-body">
         <div class="toast-head">
-          <span class="toast-tag">Milestone Unlocked</span>
-          <span class="toast-xp">+${item.xp} XP</span>
+          <span class="toast-tag">${tag}</span>
+          ${xpBadge}
         </div>
         <div class="toast-title">${item.title}</div>
         <p class="toast-desc">${item.desc}</p>
@@ -1035,9 +1042,14 @@ const COMMANDS = [
   { title: "Toggle Audio Synthesizer", cat: "System", shortcut: "M", action: () => audioBtn.click() },
   { title: "Toggle Light / Dark Stage", cat: "System", shortcut: "T", action: () => btn.click() },
   { title: "Copy Email (bahniman30@gmail.com)", cat: "Actions", shortcut: "E", action: () => {
-    navigator.clipboard.writeText("bahniman30@gmail.com");
-    soundEngine.playAchievementChime();
-    alert("Email address copied to clipboard: bahniman30@gmail.com");
+    try {
+      navigator.clipboard.writeText("bahniman30@gmail.com").then(() => {
+        soundEngine.playAchievementChime();
+        achievements.renderCustomToast("Email Copied", "bahniman30@gmail.com copied to clipboard.", "Action Complete", 0);
+      });
+    } catch (e) {
+      achievements.renderCustomToast("bahniman30@gmail.com", "Copy failed or unsupported.", "Notice", 0);
+    }
   }}
 ];
 

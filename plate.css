@@ -577,6 +577,7 @@ html.light .clearance-badge {
   background: var(--rule);
   outline: none;
   cursor: pointer;
+  touch-action: pan-x;
 }
 
 .wf-slider::-webkit-slider-thumb {
