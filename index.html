@@ -564,26 +564,14 @@ try {
   console.warn('Lenis could not be initialized, continuing with native scroll', e);
 }
 
-function getPlateScrollTop(target) {
-  const el = typeof target === 'string' ? document.querySelector(target) : target;
-  if (!el) return 0;
-  const idx = plates.indexOf(el);
-  if (idx <= 0) return 0;
-  let top = 0;
-  for (let i = 0; i < idx; i++) {
-    top += plates[i].offsetHeight;
-  }
-  return top;
-}
-
 function scrollToTarget(target) {
   const el = typeof target === 'string' ? document.querySelector(target) : target;
   if (!el) return;
-  const targetTop = getPlateScrollTop(el);
   if (window.lenis) {
-    window.lenis.scrollTo(targetTop, { duration: 1.15, lock: true });
+    window.lenis.scrollTo(el, { offset: -54, duration: 1.15 });
   } else {
-    window.scrollTo({ top: targetTop, behavior: 'smooth' });
+    const top = el.getBoundingClientRect().top + window.scrollY - 54;
+    window.scrollTo({ top, behavior: 'smooth' });
   }
 }
 
@@ -1053,7 +1041,7 @@ if (toggleEdgeMatrix && edgeMatrixCard) {
     toggleEdgeMatrix.setAttribute('aria-expanded', String(isHidden));
     soundEngine.playClick();
     if (isHidden) achievements.unlock('edge_cases_matrix');
-    setTimeout(measureStack, 60);
+    if (window.lenis) window.lenis.resize();
   });
 }
 
@@ -1282,36 +1270,10 @@ addEventListener('click', e => {
 });
 let currentName = 'Opening';
 
-function measureStack() {
-  const vh = innerHeight;
-  plates.forEach((p, i) => {
-    if (i === plates.length - 1) { p.style.top = ''; return; }
-    const h = p.offsetHeight;
-    p.style.top = h <= vh ? '0px' : `${Math.round(vh - h)}px`;
-  });
-  if (window.lenis) window.lenis.resize();
-}
-
-function recede() {
-  const vh = innerHeight;
-  for (let i = 0; i < plates.length - 1; i++) {
-    const next = plates[i + 1].getBoundingClientRect().top;
-    if (next > vh) {
-      plates[i].style.setProperty('--recede-s', '1');
-      plates[i].style.setProperty('--recede-o', '1');
-      continue;
-    }
-    const t = Math.min(1, Math.max(0, 1 - next / vh));
-    plates[i].style.setProperty('--recede-s', (1 - t * 0.055).toFixed(4));
-    plates[i].style.setProperty('--recede-o', (1 - t * 0.55).toFixed(3));
-  }
-}
-
 function onScrollTick() {
   const scrollYPos = window.lenis ? window.lenis.scroll : window.scrollY;
   const h = document.documentElement.scrollHeight - innerHeight;
   progressEl.style.transform = `scaleX(${h > 0 ? Math.min(1, Math.max(0, scrollYPos / h)) : 0})`;
-  if (motion) recede();
 
   // Smooth parallax on numerals synchronized with Lenis
   const nums = document.querySelectorAll('.numeral');
@@ -1323,7 +1285,10 @@ function onScrollTick() {
 
   let name = plates[0].dataset.name;
   for (const p of plates) {
-    if (p.getBoundingClientRect().top <= innerHeight * 0.35) name = p.dataset.name;
+    const r = p.getBoundingClientRect();
+    if (r.top <= innerHeight * 0.45 && r.bottom >= 0) {
+      name = p.dataset.name;
+    }
   }
   if (name !== currentName) {
     currentName = name;
@@ -1334,7 +1299,7 @@ function onScrollTick() {
     });
     if (window.__anime) {
       window.__anime.animate(nameEl.firstElementChild, {
-        y: ['100%', '0%'], duration: 420, ease: 'outExpo'
+        y: ['100%', '0%'], duration: 360, ease: 'outExpo'
       });
     }
   }
@@ -1345,16 +1310,13 @@ if (window.lenis) {
 } else {
   addEventListener('scroll', onScrollTick, { passive: true });
 }
-measureStack();
 onScrollTick();
 if (document.fonts && document.fonts.ready) {
   document.fonts.ready.then(() => {
-    measureStack();
     if (window.lenis) window.lenis.resize();
   });
 }
 addEventListener('load', () => {
-  measureStack();
   if (window.lenis) window.lenis.resize();
 });
 
@@ -1566,7 +1528,7 @@ let rt;
 addEventListener('resize', () => {
   clearTimeout(rt);
   rt = setTimeout(() => {
-    measureStack();
+    if (window.lenis) window.lenis.resize();
     onScrollTick();
     const d = drawn; build(); drawn = d; paintStage();
   }, 150);
