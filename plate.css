@@ -448,11 +448,16 @@ html.light .menu a[aria-current="true"] { color: var(--u-4); }
 .marker button {
   background: none;
   border: 1px solid var(--rule);
-  padding: 0.3rem 0.7rem;
+  padding: 0.35rem 0.75rem;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
   color: var(--figure-2);
   font: inherit;
   cursor: pointer;
-  transition: color 160ms linear, border-color 160ms linear;
+  transition: color 160ms linear, border-color 160ms linear, background 160ms linear;
 }
 
 .marker button:hover { color: var(--figure); border-color: var(--u-3); }
