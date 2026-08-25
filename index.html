@@ -37,7 +37,15 @@
     <svg class="chev" viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
   </button>
   <nav id="sectionMenu" class="menu" hidden aria-label="Sections"></nav>
-  <button type="button" id="themeBtn" aria-label="Switch between light and dark">Light</button>
+  <div class="marker-tools">
+    <button type="button" class="clearance-badge" id="clearanceBadge" title="Click to view clearance milestones">
+      <span class="clearance-dot"></span>
+      <span id="clearanceText">Clearance L1</span>
+    </button>
+    <button type="button" id="audioBtn" aria-label="Toggle procedural sound feedback">Sound: Off</button>
+    <button type="button" id="themeBtn" aria-label="Switch between light and dark">Light</button>
+    <button type="button" id="cmdBtn" class="cmd-kbd-hint" aria-label="Open Command Menu"><kbd>⌘K</kbd></button>
+  </div>
 </div>
 
 <main>
@@ -159,6 +167,45 @@
             never built.
           </p>
         </article>
+
+        <div class="rise" style="margin-top:2.5rem">
+          <button type="button" class="edge-toggle-btn" id="toggleEdgeMatrix" aria-expanded="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            <span>Inspect PRD Edge-Case &amp; Adoption Matrix</span>
+          </button>
+          <div id="edgeMatrixCard" class="edge-matrix-card" hidden>
+            <table class="edge-table">
+              <thead>
+                <tr>
+                  <th>Core Workflow</th>
+                  <th>Without PRD Edge Spec</th>
+                  <th>Engineered PRD Solution</th>
+                  <th>Outcome</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Bulk Employee Import</td>
+                  <td>Manual support cleanup on error</td>
+                  <td>Pre-import format validator and guidance</td>
+                  <td>1st-attempt success</td>
+                </tr>
+                <tr>
+                  <td>Multi-Language Strings</td>
+                  <td>Hard-coded, per-module split files</td>
+                  <td>Centralized client localization engine</td>
+                  <td>50+ languages live</td>
+                </tr>
+                <tr>
+                  <td>Feature Discoverability</td>
+                  <td>Zero visibility into unread release notes</td>
+                  <td>Pendo usage funnels and contextual UX</td>
+                  <td>-45% action time</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -220,6 +267,57 @@
             <a href="https://bahniman.github.io/turnstile/">demo</a> or the
             <a href="https://github.com/Bahniman/turnstile" target="_blank" rel="noreferrer">source</a>.
           </p>
+
+          <div class="turnstile-box body-indent">
+            <div class="turnstile-nav">
+              <div class="ts-status-tag">
+                <span class="clearance-dot"></span>
+                <span>TURNSTILE DUAL INSPECTOR</span>
+              </div>
+              <div class="turnstile-pills" role="radiogroup" aria-label="Turnstile Inspector Mode">
+                <button type="button" class="ts-toggle-btn active" id="tsBtnHuman" role="radio" aria-checked="true">Human View</button>
+                <button type="button" class="ts-toggle-btn" id="tsBtnAgent" role="radio" aria-checked="false">Agent JSON</button>
+              </div>
+            </div>
+            <div class="ts-stage-body">
+              <div id="tsViewHuman">
+                <div class="ts-human-grid">
+                  <div class="ts-tile">
+                    <div class="ts-tile-k">Session Classification</div>
+                    <div class="ts-tile-v">Verified Human Browser</div>
+                  </div>
+                  <div class="ts-tile">
+                    <div class="ts-tile-k">Checkout Recovery</div>
+                    <div class="ts-tile-v">100% Cart Retained</div>
+                  </div>
+                  <div class="ts-tile">
+                    <div class="ts-tile-k">Latency Overhead</div>
+                    <div class="ts-tile-v">&lt; 12ms Edge Transit</div>
+                  </div>
+                </div>
+              </div>
+              <div id="tsViewAgent" class="ts-code-wrap" hidden>
+                <button type="button" class="ts-copy-btn" id="tsCopyBtn">Copy Payload</button>
+                <pre class="ts-code-pre"><code id="tsCodeBlock">{
+  "protocol": "turnstile/v1",
+  "client_type": "autonomous_agent",
+  "auth": {
+    "signature": "ed25519:6c2a8f910b...",
+    "verified": true
+  },
+  "storefront_schema": {
+    "format": "application/vnd.agent.store+json",
+    "catalog_items": 4,
+    "instant_checkout_ready": true
+  },
+  "telemetry": {
+    "status": "APPROVED",
+    "overhead_ms": 4.2
+  }
+}</code></pre>
+              </div>
+            </div>
+          </div>
         </article>
 
         <article class="proto step-4 rise">
@@ -251,30 +349,57 @@
         demo. Financing terms are stated assumptions, not committed rates.
       </p>
 
-      <div class="stack-lg" style="margin-top:clamp(3.5rem,6vw,5.5rem)">
-        <div class="rise">
-          <span class="d-lg money">&#8377;18,63,900</span>
-          <div class="bar-track"><div class="bar" data-w="1"></div></div>
-          <p class="prose" style="margin-top:0.9rem">signed on site on day zero, geo-tagged and quantity checked</p>
+      <div class="waterfall-box rise">
+        <div class="wf-ctrl-row">
+          <div>
+            <div class="wf-label-group">
+              <span>Verified Invoice Face Value</span>
+              <span class="wf-val-display" id="wfInvoiceVal">&#8377;18,63,900</span>
+            </div>
+            <input type="range" class="wf-slider" id="wfSlider" min="500000" max="5000000" step="50000" value="1863900" aria-label="Invoice face value slider">
+          </div>
+          <div>
+            <div class="wf-label-group">
+              <span>Bank Advance Rate</span>
+              <span class="wf-val-display" id="wfRateVal">60%</span>
+            </div>
+            <div class="wf-ratio-pills" role="radiogroup" aria-label="Bank advance rate">
+              <button type="button" class="wf-pill-btn" data-rate="0.50">50%</button>
+              <button type="button" class="wf-pill-btn active" data-rate="0.60">60%</button>
+              <button type="button" class="wf-pill-btn" data-rate="0.75">75%</button>
+            </div>
+          </div>
         </div>
-        <div class="rise">
-          <span class="d-lg money">&#8377;11,18,340</span>
-          <div class="bar-track"><div class="bar" data-w="0.6"></div></div>
-          <p class="prose" style="margin-top:0.9rem">released by the bank on day one, sixty percent against the verified receivable</p>
+
+        <div class="wf-live-track" aria-hidden="true">
+          <div class="wf-seg-advance" id="wfSegAdvance" style="width:60%" title="Day 0 Advance"></div>
+          <div class="wf-seg-remainder" id="wfSegRemainder" style="width:37%" title="Net Maturity Remainder"></div>
+          <div class="wf-seg-fee" id="wfSegFee" style="width:3%" title="Discount Fee"></div>
         </div>
-        <div class="rise">
-          <span class="d-lg money">&#8377;6,89,156</span>
-          <div class="bar-track"><div class="bar" data-w="0.37"></div></div>
-          <p class="prose" style="margin-top:0.9rem">the remainder, once treasury settles and the holdback waterfall clears on day 148</p>
-        </div>
-        <div class="rise">
-          <span class="d-lg money">&#8377;18,07,496</span>
-          <div class="bar-track"><div class="bar" data-w="0.97"></div></div>
-          <p class="prose" style="margin-top:0.9rem">reaching the contractor after charges, 97.0 percent of face value</p>
+
+        <div class="wf-metrics-grid">
+          <div class="wf-card">
+            <div class="wf-card-title">Day 0 Advance (T+0)</div>
+            <div class="wf-card-num accent" id="wfOutAdvance">&#8377;11,18,340</div>
+            <div class="wf-card-sub">Released by the bank on day one, against the verified Ed25519 attestation</div>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-title">Day 148 Remainder</div>
+            <div class="wf-card-num" id="wfOutRemainder">&#8377;6,89,156</div>
+            <div class="wf-card-sub">Once treasury settles and the holdback waterfall clears on day 148</div>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-title">Contractor Net Yield</div>
+            <div class="wf-card-num" id="wfOutNet">&#8377;18,07,496</div>
+            <div class="wf-card-sub">Reaching contractor after charges, 97.0 percent realization</div>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-title">Working Capital Saved</div>
+            <div class="wf-card-num accent" id="wfOutDays">147 Days</div>
+            <div class="wf-card-sub">Wait time removed entirely from the contractor billing cycle</div>
+          </div>
         </div>
       </div>
-
-      <div class="d-xl rise" style="margin-top:clamp(3.5rem,6vw,5.5rem)"><span id="dayCount">147</span> days removed</div>
     </div>
   </section>
 
@@ -374,6 +499,52 @@
 
 </main>
 
+<!-- Command Palette Modal -->
+<div id="cmdDialog" class="cmd-backdrop" role="dialog" aria-modal="true" aria-label="Command Palette" hidden>
+  <div class="cmd-panel">
+    <div class="cmd-header">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--figure-2);flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="cmdInput" class="cmd-input" type="text" role="combobox" autocomplete="off" spellcheck="false" aria-expanded="true" aria-autocomplete="list" aria-controls="cmdList" placeholder="Search plates, live protocols, or actions...">
+      <kbd class="cmd-kbd-hint" style="background:var(--bg-3);padding:2px 6px;border:1px solid var(--rule);border-radius:4px">ESC</kbd>
+    </div>
+    <div id="cmdList" class="cmd-results" role="listbox" aria-label="Actions"></div>
+    <div class="cmd-footer">
+      <span><kbd>&uarr;</kbd> <kbd>&darr;</kbd> Navigate</span>
+      <span><kbd>&crarr;</kbd> Select</span>
+      <span><kbd>ESC</kbd> Close</span>
+    </div>
+  </div>
+</div>
+
+<!-- Achievements & Clearance Modal -->
+<div id="achievementsModal" class="cmd-backdrop" role="dialog" aria-modal="true" aria-label="Clearance Milestones" hidden>
+  <div class="cmd-panel" style="max-width:560px">
+    <div class="cmd-header" style="justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="clearance-dot"></span>
+        <span style="font-weight:700;font-size:14px;color:var(--figure)" id="modalClearanceTitle">Clearance L1: Observer</span>
+      </div>
+      <button type="button" id="closeAchievementsBtn" style="background:none;border:0;color:var(--figure-2);font-size:20px;cursor:pointer;line-height:1">&times;</button>
+    </div>
+    <div style="padding:1rem 1.25rem;max-height:360px;overflow-y:auto" id="achievementsList">
+      <!-- Populated dynamically -->
+    </div>
+    <div class="cmd-footer" style="justify-content:space-between">
+      <span id="modalTotalXp">Progress: 0 / 450 XP</span>
+      <span>Press <kbd>ESC</kbd> to exit</span>
+    </div>
+  </div>
+</div>
+
+<!-- Achievement Toasts Portal -->
+<div id="toastContainer" class="toast-portal" role="status" aria-live="polite"></div>
+
+<!-- Mobile Command FAB Trigger -->
+<button type="button" id="cmdMobileTrigger" class="cmd-fab" aria-label="Open Command Menu">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  <span>Menu (⌘K)</span>
+</button>
+
 <script type="module">
 const root = document.documentElement;
 const motion = root.classList.contains('motion');
@@ -387,7 +558,139 @@ function revealAll() {
 }
 const failsafe = setTimeout(revealAll, 2500);
 
-/* ---------------------------- theme ---------------------------- */
+/* ============================================================
+   PROCEDURAL WEB AUDIO SYNTHESIZER
+   Zero external files. Real-time oscillator synthesis.
+   ============================================================ */
+class SoundEngine {
+  constructor() {
+    this.ctx = null;
+    this.isMuted = localStorage.getItem('audio_muted') === 'true';
+    this.lastTickTime = 0;
+    this.tickThrottleMs = 35;
+    this.bindUnlockGesture();
+  }
+
+  ensureContext() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) this.ctx = new AudioCtx();
+    }
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+    return this.ctx;
+  }
+
+  bindUnlockGesture() {
+    const unlock = () => {
+      this.ensureContext();
+      window.removeEventListener('pointerdown', unlock);
+      window.removeEventListener('keydown', unlock);
+    };
+    window.addEventListener('pointerdown', unlock, { once: true });
+    window.addEventListener('keydown', unlock, { once: true });
+  }
+
+  toggleMute() {
+    this.isMuted = !this.isMuted;
+    try { localStorage.setItem('audio_muted', String(this.isMuted)); } catch (e) {}
+    return this.isMuted;
+  }
+
+  playClick() {
+    if (this.isMuted) return;
+    const ctx = this.ensureContext();
+    if (!ctx) return;
+    try {
+      const t = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(320, t);
+      osc.frequency.exponentialRampToValueAtTime(110, t + 0.045);
+      gain.gain.setValueAtTime(0.08, t);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(t);
+      osc.stop(t + 0.048);
+      osc.onended = () => { osc.disconnect(); gain.disconnect(); };
+    } catch (e) {}
+  }
+
+  playSliderTick() {
+    if (this.isMuted) return;
+    const now = performance.now();
+    if (now - this.lastTickTime < this.tickThrottleMs) return;
+    this.lastTickTime = now;
+    const ctx = this.ensureContext();
+    if (!ctx) return;
+    try {
+      const t = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, t);
+      osc.frequency.exponentialRampToValueAtTime(440, t + 0.015);
+      gain.gain.setValueAtTime(0.035, t);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.015);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(t);
+      osc.stop(t + 0.018);
+      osc.onended = () => { osc.disconnect(); gain.disconnect(); };
+    } catch (e) {}
+  }
+
+  playAchievementChime() {
+    if (this.isMuted) return;
+    const ctx = this.ensureContext();
+    if (!ctx) return;
+    try {
+      const notes = [
+        { freq: 622.25, delay: 0.00 },
+        { freq: 783.99, delay: 0.07 },
+        { freq: 932.33, delay: 0.14 },
+        { freq: 1046.50, delay: 0.22 }
+      ];
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0.12, ctx.currentTime);
+      master.connect(ctx.destination);
+
+      notes.forEach(n => {
+        const nt = ctx.currentTime + n.delay;
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(n.freq, nt);
+        g.gain.setValueAtTime(0.0001, nt);
+        g.gain.exponentialRampToValueAtTime(0.28, nt + 0.008);
+        g.gain.exponentialRampToValueAtTime(0.0001, nt + 0.65);
+        osc.connect(g);
+        g.connect(master);
+        osc.start(nt);
+        osc.stop(nt + 0.68);
+        osc.onended = () => { osc.disconnect(); g.disconnect(); };
+      });
+    } catch (e) {}
+  }
+}
+const soundEngine = new SoundEngine();
+
+/* ---------------- Audio Toggle ---------------- */
+const audioBtn = document.getElementById('audioBtn');
+const updateAudioBtn = () => {
+  audioBtn.textContent = soundEngine.isMuted ? 'Sound: Off' : 'Sound: On';
+};
+updateAudioBtn();
+audioBtn.addEventListener('click', () => {
+  const muted = soundEngine.toggleMute();
+  updateAudioBtn();
+  if (!muted) soundEngine.playClick();
+});
+
+/* ---------------- Theme Toggle ---------------- */
 const btn = document.getElementById('themeBtn');
 const paint = () => { btn.textContent = root.classList.contains('light') ? 'Dark' : 'Light'; };
 paint();
@@ -395,17 +698,500 @@ btn.addEventListener('click', () => {
   const light = root.classList.toggle('light');
   try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {}
   paint();
+  soundEngine.playClick();
 });
 
-/* ---------------------- marker and progress --------------------- */
+/* ============================================================
+   ACHIEVEMENTS & PROGRESSION MANAGER
+   ============================================================ */
+const ACHIEVEMENTS_REGISTRY = {
+  welcome_explorer: {
+    title: "Surveyor's Arrival",
+    desc: "Initiated navigation through the portfolio plates.",
+    xp: 25
+  },
+  waterfall_simulated: {
+    title: "Settlement Liquidity Solved",
+    desc: "Configured invoice cashflow to release day-zero capital.",
+    xp: 75
+  },
+  turnstile_agent_inspected: {
+    title: "Agentic Schema Lens",
+    desc: "Inspected the machine-readable storefront JSON payload.",
+    xp: 75
+  },
+  edge_cases_matrix: {
+    title: "Zero-Hour Edge Hunter",
+    desc: "Examined Darwinbox PRD validation matrices and adoption funnels.",
+    xp: 75
+  },
+  survey_beacon_dropped: {
+    title: "Geodetic Pulse",
+    desc: "Placed active survey pins onto the surveyed lattice network.",
+    xp: 50
+  },
+  cmd_power_user: {
+    title: "Terminal Operator",
+    desc: "Opened the command palette via keyboard shortcut.",
+    xp: 50
+  },
+  master_architect_konami: {
+    title: "Principal Architect",
+    desc: "Unlocked master protocol clearance via the Konami sequence.",
+    xp: 100
+  }
+};
+
+class AchievementManager {
+  constructor() {
+    this.container = document.getElementById('toastContainer');
+    this.badgeText = document.getElementById('clearanceText');
+    this.queue = [];
+    this.isDisplaying = false;
+    this.storageKey = 'portfolio_unlocked_achievements';
+    this.unlocked = new Set();
+    try {
+      const saved = JSON.parse(localStorage.getItem(this.storageKey) || '[]');
+      this.unlocked = new Set(saved);
+    } catch (e) {}
+    this.updateClearance();
+    setTimeout(() => this.unlock('welcome_explorer'), 1500);
+  }
+
+  calculateProgress() {
+    let totalXp = 0;
+    for (const id of this.unlocked) {
+      if (ACHIEVEMENTS_REGISTRY[id]) totalXp += ACHIEVEMENTS_REGISTRY[id].xp;
+    }
+    const count = this.unlocked.size;
+    const totalCount = Object.keys(ACHIEVEMENTS_REGISTRY).length;
+    let level = 'L1', rank = 'Observer';
+    if (totalXp >= 350) { level = 'L4'; rank = 'Principal Architect'; }
+    else if (totalXp >= 225) { level = 'L3'; rank = 'Protocol Engineer'; }
+    else if (totalXp >= 100) { level = 'L2'; rank = 'Systems Explorer'; }
+
+    return { totalXp, count, totalCount, level, rank };
+  }
+
+  updateClearance() {
+    const { count, totalCount, level, rank } = this.calculateProgress();
+    if (this.badgeText) {
+      this.badgeText.textContent = `Clearance ${level} [${count}/${totalCount}]`;
+    }
+    const modalTitle = document.getElementById('modalClearanceTitle');
+    const modalXp = document.getElementById('modalTotalXp');
+    if (modalTitle) modalTitle.textContent = `Clearance ${level}: ${rank}`;
+    if (modalXp) modalXp.textContent = `Progress: ${this.calculateProgress().totalXp} / 450 XP (${count}/${totalCount} unlocked)`;
+  }
+
+  unlock(id) {
+    if (!ACHIEVEMENTS_REGISTRY[id] || this.unlocked.has(id)) return false;
+    this.unlocked.add(id);
+    try {
+      localStorage.setItem(this.storageKey, JSON.stringify(Array.from(this.unlocked)));
+    } catch (e) {}
+    this.updateClearance();
+    this.queue.push({ id, ...ACHIEVEMENTS_REGISTRY[id] });
+    this.processQueue();
+    return true;
+  }
+
+  processQueue() {
+    if (this.isDisplaying || this.queue.length === 0) return;
+    this.isDisplaying = true;
+    const item = this.queue.shift();
+    this.renderToast(item);
+  }
+
+  renderToast(item) {
+    const toast = document.createElement('div');
+    toast.className = 'achievement-toast';
+    toast.innerHTML = `
+      <div class="toast-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="toast-body">
+        <div class="toast-head">
+          <span class="toast-tag">Milestone Unlocked</span>
+          <span class="toast-xp">+${item.xp} XP</span>
+        </div>
+        <div class="toast-title">${item.title}</div>
+        <p class="toast-desc">${item.desc}</p>
+      </div>
+    `;
+
+    this.container.appendChild(toast);
+    soundEngine.playAchievementChime();
+
+    requestAnimationFrame(() => {
+      toast.style.transform = 'translateY(0)';
+      toast.style.opacity = '1';
+    });
+
+    setTimeout(() => {
+      toast.style.transform = 'translateY(-14px)';
+      toast.style.opacity = '0';
+      setTimeout(() => {
+        toast.remove();
+        this.isDisplaying = false;
+        this.processQueue();
+      }, 300);
+    }, 3600);
+  }
+}
+const achievements = new AchievementManager();
+
+/* ---------------- Achievements Modal Drawer ---------------- */
+const clearanceBadge = document.getElementById('clearanceBadge');
+const achievementsModal = document.getElementById('achievementsModal');
+const closeAchievementsBtn = document.getElementById('closeAchievementsBtn');
+const achievementsList = document.getElementById('achievementsList');
+
+function renderAchievementsModal() {
+  achievementsList.innerHTML = Object.entries(ACHIEVEMENTS_REGISTRY).map(([id, item]) => {
+    const isUnlocked = achievements.unlocked.has(id);
+    return `
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule);opacity:${isUnlocked ? '1' : '0.45'}">
+        <div style="width:24px;height:24px;border-radius:4px;background:${isUnlocked ? 'rgba(63,185,80,0.15)' : 'var(--bg-3)'};border:1px solid ${isUnlocked ? '#3fb950' : 'var(--rule)'};display:flex;align-items:center;justify-content:center;color:${isUnlocked ? '#3fb950' : 'var(--figure-2)'};font-size:12px;font-weight:700;flex-shrink:0">
+          ${isUnlocked ? '✓' : '•'}
+        </div>
+        <div style="flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <span style="font-weight:700;font-size:13px;color:var(--figure)">${item.title}</span>
+            <span style="font-family:ui-monospace,monospace;font-size:11px;color:${isUnlocked ? '#3fb950' : 'var(--figure-2)'}">+${item.xp} XP</span>
+          </div>
+          <p style="font-family:var(--font-prose);font-size:12px;color:var(--figure-2);margin-top:2px">${item.desc}</p>
+        </div>
+      </div>
+    `;
+  }).join('');
+  achievements.updateClearance();
+}
+
+clearanceBadge.addEventListener('click', () => {
+  renderAchievementsModal();
+  achievementsModal.hidden = false;
+  soundEngine.playClick();
+});
+
+closeAchievementsBtn.addEventListener('click', () => {
+  achievementsModal.hidden = true;
+  soundEngine.playClick();
+});
+
+achievementsModal.addEventListener('click', e => {
+  if (e.target === achievementsModal) achievementsModal.hidden = true;
+});
+
+/* ============================================================
+   REALIUM DYNAMIC SETTLEMENT WATERFALL CONTROLLER
+   ============================================================ */
+function formatINR(val, compact = false) {
+  const num = Math.round(Number(val) || 0);
+  if (compact) {
+    if (num >= 10000000) return '₹' + (num / 10000000).toFixed(2).replace(/\.00$/, '') + ' Cr';
+    if (num >= 100000) return '₹' + (num / 100000).toFixed(2).replace(/\.00$/, '') + ' L';
+    if (num >= 1000) return '₹' + (num / 1000).toFixed(1).replace(/\.0$/, '') + ' k';
+  }
+  return '₹' + num.toLocaleString('en-IN');
+}
+
+const wfSlider = document.getElementById('wfSlider');
+const wfInvoiceVal = document.getElementById('wfInvoiceVal');
+const wfRateVal = document.getElementById('wfRateVal');
+const wfRatePills = document.querySelectorAll('.wf-pill-btn');
+const wfSegAdvance = document.getElementById('wfSegAdvance');
+const wfSegRemainder = document.getElementById('wfSegRemainder');
+const wfSegFee = document.getElementById('wfSegFee');
+const wfOutAdvance = document.getElementById('wfOutAdvance');
+const wfOutRemainder = document.getElementById('wfOutRemainder');
+const wfOutNet = document.getElementById('wfOutNet');
+let currentRate = 0.60;
+
+function updateWaterfall(interactive = true) {
+  const invoice = parseFloat(wfSlider.value) || 1863900;
+  const advance = Math.round(invoice * currentRate);
+  const discountFee = Math.round(invoice * 0.025) + 2500;
+  const remainderGross = invoice - advance;
+  const remainderNet = Math.max(0, remainderGross - discountFee);
+  const netContractor = advance + remainderNet;
+
+  wfInvoiceVal.textContent = formatINR(invoice);
+  wfRateVal.textContent = Math.round(currentRate * 100) + '%';
+  wfOutAdvance.textContent = formatINR(advance);
+  wfOutRemainder.textContent = formatINR(remainderNet);
+  wfOutNet.textContent = formatINR(netContractor);
+
+  const advPct = (advance / invoice) * 100;
+  const remPct = (remainderNet / invoice) * 100;
+  const feePct = (discountFee / invoice) * 100;
+
+  wfSegAdvance.style.width = advPct + '%';
+  wfSegRemainder.style.width = remPct + '%';
+  wfSegFee.style.width = feePct + '%';
+
+  if (interactive) {
+    soundEngine.playSliderTick();
+    achievements.unlock('waterfall_simulated');
+  }
+}
+
+if (wfSlider) {
+  wfSlider.addEventListener('input', () => updateWaterfall(true));
+  wfRatePills.forEach(btn => {
+    btn.addEventListener('click', () => {
+      wfRatePills.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentRate = parseFloat(btn.dataset.rate) || 0.60;
+      soundEngine.playClick();
+      updateWaterfall(true);
+    });
+  });
+  updateWaterfall(false);
+}
+
+/* ============================================================
+   TURNSTILE DUAL INSPECTOR CONTROLLER
+   ============================================================ */
+const tsBtnHuman = document.getElementById('tsBtnHuman');
+const tsBtnAgent = document.getElementById('tsBtnAgent');
+const tsViewHuman = document.getElementById('tsViewHuman');
+const tsViewAgent = document.getElementById('tsViewAgent');
+const tsCopyBtn = document.getElementById('tsCopyBtn');
+
+if (tsBtnHuman && tsBtnAgent) {
+  tsBtnHuman.addEventListener('click', () => {
+    tsBtnHuman.classList.add('active');
+    tsBtnHuman.setAttribute('aria-checked', 'true');
+    tsBtnAgent.classList.remove('active');
+    tsBtnAgent.setAttribute('aria-checked', 'false');
+    tsViewHuman.hidden = false;
+    tsViewAgent.hidden = true;
+    soundEngine.playClick();
+  });
+
+  tsBtnAgent.addEventListener('click', () => {
+    tsBtnAgent.classList.add('active');
+    tsBtnAgent.setAttribute('aria-checked', 'true');
+    tsBtnHuman.classList.remove('active');
+    tsBtnHuman.setAttribute('aria-checked', 'false');
+    tsViewHuman.hidden = true;
+    tsViewAgent.hidden = false;
+    soundEngine.playClick();
+    achievements.unlock('turnstile_agent_inspected');
+  });
+
+  if (tsCopyBtn) {
+    tsCopyBtn.addEventListener('click', () => {
+      const code = document.getElementById('tsCodeBlock').innerText;
+      try {
+        navigator.clipboard.writeText(code).then(() => {
+          tsCopyBtn.textContent = 'Copied!';
+          soundEngine.playClick();
+          setTimeout(() => { tsCopyBtn.textContent = 'Copy Payload'; }, 2000);
+        });
+      } catch (e) {}
+    });
+  }
+}
+
+/* ============================================================
+   DARWINBOX PRD EDGE MATRIX CONTROLLER
+   ============================================================ */
+const toggleEdgeMatrix = document.getElementById('toggleEdgeMatrix');
+const edgeMatrixCard = document.getElementById('edgeMatrixCard');
+
+if (toggleEdgeMatrix && edgeMatrixCard) {
+  toggleEdgeMatrix.addEventListener('click', () => {
+    const isHidden = edgeMatrixCard.hidden;
+    edgeMatrixCard.hidden = !isHidden;
+    toggleEdgeMatrix.setAttribute('aria-expanded', String(isHidden));
+    soundEngine.playClick();
+    if (isHidden) achievements.unlock('edge_cases_matrix');
+    setTimeout(measureStack, 60);
+  });
+}
+
+/* ============================================================
+   COMMAND PALETTE CONTROLLER (⌘K)
+   ============================================================ */
+const cmdDialog = document.getElementById('cmdDialog');
+const cmdInput = document.getElementById('cmdInput');
+const cmdList = document.getElementById('cmdList');
+const cmdBtn = document.getElementById('cmdBtn');
+const cmdMobileTrigger = document.getElementById('cmdMobileTrigger');
+
+const COMMANDS = [
+  { title: "Opening Plate", cat: "Navigation", shortcut: "G 1", action: () => location.hash = "#opening" },
+  { title: "Statement Plate", cat: "Navigation", shortcut: "G 2", action: () => location.hash = "#statement" },
+  { title: "Darwinbox Case Study", cat: "Navigation", shortcut: "G 3", action: () => location.hash = "#darwinbox" },
+  { title: "Protocol Suite (Realium, Turnstile, Heirloom, Windtunnel)", cat: "Navigation", shortcut: "G 4", action: () => location.hash = "#protocols" },
+  { title: "Realium Settlement Simulator", cat: "Navigation", shortcut: "G 5", action: () => location.hash = "#settlement" },
+  { title: "AURORA 4.0 Symposium", cat: "Navigation", shortcut: "G 6", action: () => location.hash = "#aurora" },
+  { title: "Record & Education", cat: "Navigation", shortcut: "G 7", action: () => location.hash = "#record" },
+  { title: "Contact & Reach Out", cat: "Navigation", shortcut: "G 8", action: () => location.hash = "#contact" },
+  { title: "Realium Live Protocol Demo", cat: "Protocols", shortcut: "↗", action: () => window.open("https://bahniman.github.io/realium/", "_blank") },
+  { title: "Heirloom Cryptographic Memory Demo", cat: "Protocols", shortcut: "↗", action: () => window.open("https://bahniman.github.io/heirloom/", "_blank") },
+  { title: "Turnstile Machine-Readable Commerce Demo", cat: "Protocols", shortcut: "↗", action: () => window.open("https://bahniman.github.io/turnstile/", "_blank") },
+  { title: "Windtunnel Synthetic Cohort Sim Demo", cat: "Protocols", shortcut: "↗", action: () => window.open("https://bahniman.github.io/windtunnel/", "_blank") },
+  { title: "View Clearance Milestones", cat: "System", shortcut: "C", action: () => clearanceBadge.click() },
+  { title: "Toggle Audio Synthesizer", cat: "System", shortcut: "M", action: () => audioBtn.click() },
+  { title: "Toggle Light / Dark Stage", cat: "System", shortcut: "T", action: () => btn.click() },
+  { title: "Copy Email (bahniman30@gmail.com)", cat: "Actions", shortcut: "E", action: () => {
+    navigator.clipboard.writeText("bahniman30@gmail.com");
+    soundEngine.playAchievementChime();
+    alert("Email address copied to clipboard: bahniman30@gmail.com");
+  }}
+];
+
+let cmdFiltered = [...COMMANDS];
+let cmdSelectedIdx = 0;
+
+function renderCommandList() {
+  cmdList.innerHTML = '';
+  if (cmdFiltered.length === 0) {
+    cmdList.innerHTML = '<div style="padding:12px;color:var(--figure-2);font-size:13px;text-align:center">No matching commands found</div>';
+    return;
+  }
+  const groups = {};
+  cmdFiltered.forEach((cmd, idx) => {
+    if (!groups[cmd.cat]) groups[cmd.cat] = [];
+    groups[cmd.cat].push({ cmd, idx });
+  });
+
+  Object.entries(groups).forEach(([cat, items]) => {
+    const groupEl = document.createElement('div');
+    groupEl.innerHTML = `<div class="cmd-group-label">${cat}</div>`;
+    items.forEach(({ cmd, idx }) => {
+      const itemEl = document.createElement('div');
+      itemEl.className = 'cmd-item';
+      itemEl.setAttribute('role', 'option');
+      itemEl.setAttribute('aria-selected', String(idx === cmdSelectedIdx));
+      itemEl.innerHTML = `
+        <span>${cmd.title}</span>
+        ${cmd.shortcut ? `<span class="cmd-item-k">${cmd.shortcut}</span>` : ''}
+      `;
+      itemEl.addEventListener('mouseenter', () => {
+        cmdSelectedIdx = idx;
+        updateCommandSelection();
+      });
+      itemEl.addEventListener('click', () => {
+        executeCommand(idx);
+      });
+      groupEl.appendChild(itemEl);
+    });
+    cmdList.appendChild(groupEl);
+  });
+  updateCommandSelection();
+}
+
+function updateCommandSelection() {
+  const items = cmdList.querySelectorAll('.cmd-item');
+  items.forEach((el, idx) => {
+    el.setAttribute('aria-selected', String(idx === cmdSelectedIdx));
+    if (idx === cmdSelectedIdx) el.scrollIntoView({ block: 'nearest' });
+  });
+}
+
+function executeCommand(idx) {
+  const cmd = cmdFiltered[idx];
+  if (cmd) {
+    closeCommandPalette();
+    soundEngine.playClick();
+    cmd.action();
+  }
+}
+
+function openCommandPalette() {
+  cmdDialog.hidden = false;
+  cmdInput.value = '';
+  cmdFiltered = [...COMMANDS];
+  cmdSelectedIdx = 0;
+  renderCommandList();
+  cmdInput.focus();
+  achievements.unlock('cmd_power_user');
+  soundEngine.playClick();
+}
+
+function closeCommandPalette() {
+  cmdDialog.hidden = true;
+}
+
+if (cmdBtn) cmdBtn.addEventListener('click', openCommandPalette);
+if (cmdMobileTrigger) cmdMobileTrigger.addEventListener('click', openCommandPalette);
+
+cmdDialog.addEventListener('click', e => {
+  if (e.target === cmdDialog) closeCommandPalette();
+});
+
+cmdInput.addEventListener('input', e => {
+  const q = e.target.value.toLowerCase().trim();
+  cmdFiltered = COMMANDS.filter(c => c.title.toLowerCase().includes(q) || c.cat.toLowerCase().includes(q));
+  cmdSelectedIdx = 0;
+  renderCommandList();
+});
+
+cmdInput.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (cmdFiltered.length) {
+      cmdSelectedIdx = (cmdSelectedIdx + 1) % cmdFiltered.length;
+      updateCommandSelection();
+    }
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (cmdFiltered.length) {
+      cmdSelectedIdx = (cmdSelectedIdx - 1 + cmdFiltered.length) % cmdFiltered.length;
+      updateCommandSelection();
+    }
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    executeCommand(cmdSelectedIdx);
+  } else if (e.key === 'Escape') {
+    closeCommandPalette();
+  }
+});
+
+addEventListener('keydown', e => {
+  const isInput = ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName);
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    cmdDialog.hidden ? openCommandPalette() : closeCommandPalette();
+  } else if (e.key === '/' && !isInput && cmdDialog.hidden) {
+    e.preventDefault();
+    openCommandPalette();
+  } else if (e.key === 'Escape') {
+    if (!cmdDialog.hidden) closeCommandPalette();
+    if (!achievementsModal.hidden) achievementsModal.hidden = true;
+  }
+});
+
+/* ============================================================
+   KONAMI CODE DETECTOR (EASTER EGG)
+   ============================================================ */
+const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+
+addEventListener('keydown', e => {
+  if (e.key.toLowerCase() === KONAMI_CODE[konamiIndex].toLowerCase()) {
+    konamiIndex++;
+    if (konamiIndex === KONAMI_CODE.length) {
+      konamiIndex = 0;
+      achievements.unlock('master_architect_konami');
+      soundEngine.playAchievementChime();
+      triggerGoldCanvasPulse();
+    }
+  } else {
+    konamiIndex = 0;
+  }
+});
+
+/* ============================================================
+   CORE NAVIGATION, STACK & MEASUREMENT
+   ============================================================ */
 const plates = [...document.querySelectorAll('.plate')];
 const nameEl = document.getElementById('plateName');
 const progressEl = document.getElementById('progress');
-
-/* ------------------------ section menu -------------------------- */
-/* The current section name is also the way to jump to any other one.
-   Built from the plates themselves, so it can never fall out of step
-   with the page. */
 const navBtn = document.getElementById('plateNav');
 const menu = document.getElementById('sectionMenu');
 
@@ -421,26 +1207,21 @@ function setMenu(open) {
 navBtn.addEventListener('click', e => {
   e.stopPropagation();
   setMenu(menu.hidden);
+  soundEngine.playClick();
 });
 
 menu.addEventListener('click', e => {
   const a = e.target.closest('a');
   if (!a) return;
   setMenu(false);
+  soundEngine.playClick();
 });
 
-addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 addEventListener('click', e => {
   if (!menu.hidden && !menu.contains(e.target)) setMenu(false);
 });
 let currentName = 'Opening', ticking = false;
 
-/* ------------------------- the stack ---------------------------- */
-/* Each plate pins and the next scrolls over it. A plate shorter than the
-   viewport pins at the top. A plate taller than the viewport pins at
-   100svh minus its own height, so its last line is readable before it
-   locks. Without that second case a tall section pins immediately and
-   everything below its first screen becomes unreachable. */
 function measureStack() {
   const vh = innerHeight;
   plates.forEach((p, i) => {
@@ -454,7 +1235,7 @@ function recede() {
   const vh = innerHeight;
   for (let i = 0; i < plates.length - 1; i++) {
     const next = plates[i + 1].getBoundingClientRect().top;
-    if (next > vh) {                       // next plate has not started covering yet
+    if (next > vh) {
       plates[i].style.setProperty('--recede-s', '1');
       plates[i].style.setProperty('--recede-o', '1');
       continue;
@@ -494,17 +1275,22 @@ function onScrollTick() {
 addEventListener('scroll', onScrollTick, { passive: true });
 measureStack();
 onScrollTick();
-// plate heights change with fonts loading and with wrapping, so remeasure
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureStack);
 addEventListener('load', measureStack);
 
-/* --------------------------- the stage -------------------------- */
-/* A set-out grid: surveyed points joined in the order a site engineer
-   would peg them, lit by a single moving source. It is the one image on
-   the page, and it is what the site claims: the plan before the build. */
+/* ============================================================
+   INTERACTIVE CANVAS SURVEY STAGE
+   Grid surveyed points with dynamic pointer light & beacon ripples
+   ============================================================ */
 const cv = document.getElementById('lattice');
 const ctx = cv.getContext('2d');
 let pts = [], W = 0, H = 0, cols = 0, drawn = 0, lx = 0, ly = 0, tx = 0, ty = 0, raf = null;
+let ripples = [];
+let goldPulse = 0;
+
+function triggerGoldCanvasPulse() {
+  goldPulse = 1.0;
+}
 
 function build() {
   const dpr = Math.min(devicePixelRatio || 1, 2);
@@ -540,15 +1326,39 @@ function paintStage() {
   const reach = Math.max(W, H) * 0.55;
   const shown = Math.floor(pts.length * drawn);
 
+  // Update active ripples
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    const rp = ripples[i];
+    rp.radius += 3.8;
+    rp.alpha *= 0.96;
+    if (rp.alpha < 0.02 || rp.radius > Math.max(W, H) * 0.5) {
+      ripples.splice(i, 1);
+    }
+  }
+  if (goldPulse > 0.01) goldPulse *= 0.97;
+
   for (let i = 0; i < shown; i++) {
     const p = pts[i];
-    const d = Math.hypot(p.x - lx, p.y - ly);
-    const lit = Math.max(0, 1 - d / reach);          // one light source, falling off
-    const a = 0.05 + lit * 0.42;
+    let d = Math.hypot(p.x - lx, p.y - ly);
+    let lit = Math.max(0, 1 - d / reach);
 
-    ctx.strokeStyle = light
-      ? `rgba(27,42,217,${a * 0.55})`
-      : `rgba(107,120,255,${a})`;
+    // Add lighting from beacon ripples
+    for (const rp of ripples) {
+      const distToRip = Math.abs(Math.hypot(p.x - rp.x, p.y - rp.y) - rp.radius);
+      if (distToRip < 45) {
+        lit += (1 - distToRip / 45) * rp.alpha * 0.8;
+      }
+    }
+
+    const a = Math.min(1, 0.05 + lit * 0.42);
+
+    if (goldPulse > 0.02) {
+      ctx.strokeStyle = `rgba(255, 215, 0, ${a * (1 + goldPulse)})`;
+    } else {
+      ctx.strokeStyle = light
+        ? `rgba(27,42,217,${a * 0.55})`
+        : `rgba(107,120,255,${a})`;
+    }
 
     const right = (p.c + 1 < cols) ? pts[i + 1] : null;
     const down = pts[i + cols];
@@ -559,32 +1369,47 @@ function paintStage() {
       ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(down.x, down.y); ctx.stroke();
     }
     if (lit > 0.45) {
-      ctx.fillStyle = light ? `rgba(11,12,16,${lit * 0.5})` : `rgba(242,241,239,${lit * 0.75})`;
+      if (goldPulse > 0.02) {
+        ctx.fillStyle = `rgba(255, 220, 100, ${lit * 0.9})`;
+      } else {
+        ctx.fillStyle = light ? `rgba(11,12,16,${lit * 0.5})` : `rgba(242,241,239,${lit * 0.75})`;
+      }
       ctx.fillRect(p.x - 1.5, p.y - 1.5, 3, 3);
     }
   }
 }
 
 function loop() {
-  lx += (tx - lx) * 0.045;                            // the light trails the pointer
+  lx += (tx - lx) * 0.045;
   ly += (ty - ly) * 0.045;
   paintStage();
   raf = requestAnimationFrame(loop);
 }
 
-/* ------------------------- anime.js layer ------------------------ */
+// Canvas click listener to place survey beacons
+cv.parentElement.style.pointerEvents = 'auto';
+cv.style.cursor = 'crosshair';
+cv.addEventListener('click', e => {
+  const r = cv.getBoundingClientRect();
+  const x = e.clientX - r.left;
+  const y = e.clientY - r.top;
+  ripples.push({ x, y, radius: 4, alpha: 1 });
+  soundEngine.playClick();
+  achievements.unlock('survey_beacon_dropped');
+});
+
+/* ============================================================
+   ANIME.JS MOTION LAYER
+   ============================================================ */
 try {
   const anime = await import('https://cdn.jsdelivr.net/npm/animejs@4/+esm');
-  const { animate, stagger, createTimeline, utils } = anime;
+  const { animate, stagger, createTimeline } = anime;
   window.__anime = anime;
 
   if (motion) {
     clearTimeout(failsafe);
-
     build();
     if (W && H) {
-      // the grid sets itself out, then the light keeps moving.
-      // reading from our own object, never from the callback's shape
       const setOut = { v: 0 };
       animate(setOut, {
         v: 1, duration: 2200, ease: 'inOutQuad',
@@ -599,15 +1424,12 @@ try {
       }, { passive: true });
     }
 
-    // the hero: lines wipe up, and the display face widens as they land
     const hero = document.getElementById('hero');
     const axis = { w: 78 };
     createTimeline({ defaults: { ease: 'outExpo' } })
       .add(hero.querySelectorAll('.line-in'), {
         y: ['105%', '0%'], duration: 1000, delay: stagger(110)
       })
-      // same start, same duration, same curve as the wipe above, so the
-      // width axis lands with the words instead of moving on after them
       .add(axis, {
         w: [78, 104], duration: 1000, ease: 'outExpo',
         onUpdate: () => { root.style.setProperty('--wdth', axis.w.toFixed(1)); },
@@ -617,7 +1439,6 @@ try {
         opacity: [0, 1], y: [14, 0], duration: 720, delay: stagger(90)
       }, '-=700');
 
-    // every other plate reveals on entry, and each headline wipes rather than fades
     const io = new IntersectionObserver(entries => {
       for (const e of entries) {
         if (!e.isIntersecting) continue;
@@ -633,27 +1454,11 @@ try {
             delay: stagger(70, { start: 120 })
           });
         }
-        const bars = e.target.querySelectorAll('.bar');
-        if (bars.length) {
-          bars.forEach((b, i) => animate(b, {
-            scaleX: [0, parseFloat(b.dataset.w)],
-            duration: 900, ease: 'outExpo', delay: 260 + i * 110
-          }));
-        }
-        if (e.target.id === 'settlement') {
-          const out = document.getElementById('dayCount');
-          const counter = { n: 0 };
-          animate(counter, {
-            n: 147, duration: 1500, ease: 'outExpo',
-            onUpdate: () => { out.textContent = String(Math.round(counter.n)); }
-          });
-        }
       }
     }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
 
     plates.forEach(p => { if (p.id !== 'opening') io.observe(p); });
 
-    // the numerals drift against the scroll
     const nums = [...document.querySelectorAll('.numeral')];
     addEventListener('scroll', () => {
       for (const n of nums) {
@@ -663,7 +1468,6 @@ try {
       }
     }, { passive: true });
 
-    // protocol numbers lean out under the pointer
     document.querySelectorAll('.proto').forEach(p => {
       const n = p.querySelector('.proto-n');
       p.addEventListener('pointerenter', () => animate(n, { x: 10, duration: 420, ease: 'outExpo' }));
@@ -676,7 +1480,6 @@ try {
     paintStage();
   }
 } catch (err) {
-  // CDN blocked, offline, or an API that moved. Show everything, draw the grid flat.
   console.warn('motion layer unavailable, falling back to static', err);
   revealAll();
   try { build(); drawn = 1; paintStage(); } catch (e) {}
@@ -694,3 +1497,4 @@ addEventListener('resize', () => {
 </script>
 </body>
 </html>
+
