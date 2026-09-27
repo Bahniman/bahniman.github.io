@@ -2,1621 +2,382 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bahniman Talukdar, Product Analyst</title>
-<meta name="description" content="Product analyst. Three and a half years writing the specs behind an enterprise HR product at Darwinbox, now PGDM-GM at XLRI Jamshedpur. Four open-source protocols for the agent economy.">
-<meta name="theme-color" content="#0B0C10">
-<meta property="og:title" content="Bahniman Talukdar, Product Analyst">
-<meta property="og:description" content="Somebody has to write down what gets built. For 45 months that was my job.">
-<meta property="og:type" content="profile">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bahniman Talukdar · Product</title>
+<meta name="description" content="Bahniman Talukdar. Senior Product Analyst at Darwinbox for 45 months, now PGDM (General Management) at XLRI Jamshedpur. Product specs, product analytics and the Startup Lab.">
+<meta property="og:title" content="Bahniman Talukdar">
+<meta property="og:description" content="I plan how things get built before anyone builds them. Product, analytics and the Startup Lab.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bahniman.github.io/">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141313" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23141313'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='28' fill='%23faf9f6'%3Eb%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Spectral:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="plate.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..650&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="site.css">
 <script>
-  // theme and motion flag before first paint. dark is the default stage.
   (function () {
-    var d = document.documentElement, s = null;
-    try { s = localStorage.getItem('theme'); } catch (e) {}
-    var light = s ? s === 'light' : matchMedia('(prefers-color-scheme: light)').matches;
-    if (light) d.classList.add('light');
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
-      d.classList.add('motion');
-    }
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    document.documentElement.classList.add('js');
   })();
 </script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<div class="progress" id="progress" aria-hidden="true"></div>
-
-<div class="marker">
-  <button type="button" class="marker-nav" id="plateNav" aria-expanded="false" aria-controls="sectionMenu">
-    <span class="marker-name" id="plateName"><span>Opening</span></span>
-    <svg class="chev" viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
-  </button>
-  <nav id="sectionMenu" class="menu" hidden aria-label="Sections" data-lenis-prevent></nav>
-  <div class="marker-tools">
-    <button type="button" class="clearance-badge" id="clearanceBadge" title="Click to view clearance milestones">
-      <span class="clearance-dot"></span>
-      <span id="clearanceText">Clearance L1</span>
+<header class="top" id="top">
+  <a class="logo" href="#hero" data-go aria-label="Bahniman Talukdar, back to top">
+    <i aria-hidden="true">b</i><span translate="no">Bahniman Talukdar</span>
+  </a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#work" data-go>Work</a>
+    <a href="#lab" data-go>Lab</a>
+    <a href="#record" data-go>Record</a>
+    <a href="#contact" data-go>Contact</a>
+  </nav>
+  <div class="top-end">
+    <a class="pill hide-sm" href="mailto:bahniman30@gmail.com">Email me</a>
+    <button class="cb" id="theme" type="button" aria-label="Switch colour theme">
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
     </button>
-    <button type="button" id="audioBtn" aria-label="Toggle procedural sound feedback">Sound: Off</button>
-    <button type="button" id="themeBtn" aria-label="Switch between light and dark">Light</button>
-    <button type="button" id="cmdBtn" class="cmd-kbd-hint" aria-label="Open Command Menu"><kbd>⌘K</kbd></button>
   </div>
-</div>
+  <span id="prog" aria-hidden="true"></span>
+</header>
 
-<main>
+<main id="main">
 
-  <!-- PLATE 1 : OPENING -->
-  <section class="plate plate-tall" id="opening" data-name="Opening">
-    <div class="stage" aria-hidden="true"><canvas id="lattice"></canvas></div>
-    <div class="inner">
-      <h1 class="d-xl wipe" id="hero">
-        <span><span class="line-in">Writing the blueprints.</span></span>
-        <span><span class="line-in">Shipping the systems.</span></span>
-      </h1>
-      <p class="lede rise" style="margin-top:1.25rem">
-        Senior Product Analyst with 45 months scaling Darwinbox across global markets,
-        200+ production PRDs shipped, and 322k+ enterprise users reached. Currently
-        pursuing PGDM-GM at XLRI Jamshedpur with a 99.67 percentile in Quantitative Aptitude and Data Interpretation.
-      </p>
-      <p class="prose rise" style="margin-top:0.85rem">
-        Specializing in enterprise SaaS architecture, high-throughput data ingestion pipelines,
-        event-driven product telemetry, and open-source cryptographic agent protocols. I thrive
-        at the intersection of ambiguous business requirements, strict technical constraints,
-        and scalable system design that runs reliably without 2 AM production alerts.
-      </p>
-      <div class="meta-strip rise">
-        <div class="meta-item">
-          <span class="meta-label">Identity</span>
-          <span class="meta-value">Bahniman Talukdar</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Location</span>
-          <span class="meta-value">Guwahati, Assam</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Education</span>
-          <span class="meta-value">PGDM-GM, XLRI (2026 to 27)</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Track Record</span>
-          <span class="meta-value">Ex-Sr PA, Darwinbox</span>
-        </div>
+<!-- ============ HERO ============ -->
+<section class="hero wrap" id="hero">
+  <div class="hero-copy">
+    <p class="kick h-in">Portfolio <span class="dot"></span> 2026</p>
+    <h1 class="h-in">I plan how things get built <em>before</em> anyone builds&nbsp;them.</h1>
+    <p class="dek h-in">Civil engineer turned product analyst. I spent 45 months on Core HRMS at Darwinbox writing the specs engineers build from, and I am now doing the PGDM in General Management at XLRI Jamshedpur.</p>
+    <div class="cta h-in">
+      <a class="btn pri" href="#work" data-go>See the work
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      <a class="btn" href="https://www.linkedin.com/in/bahniman-talukdar-ab97a416a" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/Bahniman" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="avail h-in"><span class="live" aria-hidden="true"></span>Open to product management, product analytics and technology consulting roles</p>
+  </div>
+
+  <figure class="sheet h-in" aria-label="A drawing sheet that maps a building frame to the parts of a product spec">
+    <svg viewBox="0 0 480 540" role="img" aria-hidden="true">
+      <defs>
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".9" class="gdot"/></pattern>
+        <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" class="hl"/></pattern>
+        <marker id="tick" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M2 8 8 2" class="ln"/></marker>
+      </defs>
+      <rect x="14" y="14" width="452" height="512" rx="4" fill="url(#grid)" class="frame draw" pathLength="1" style="--d:0"/>
+
+      <!-- column grid bubbles -->
+      <g class="axes">
+        <line x1="80" y1="60" x2="80" y2="360" class="ax draw" pathLength="1" style="--d:1"/>
+        <line x1="190" y1="60" x2="190" y2="360" class="ax draw" pathLength="1" style="--d:1.1"/>
+        <line x1="300" y1="60" x2="300" y2="360" class="ax draw" pathLength="1" style="--d:1.2"/>
+        <circle cx="80" cy="48" r="12" class="ln draw" pathLength="1" style="--d:1.3"/><text x="80" y="52" class="bub">A</text>
+        <circle cx="190" cy="48" r="12" class="ln draw" pathLength="1" style="--d:1.4"/><text x="190" y="52" class="bub">B</text>
+        <circle cx="300" cy="48" r="12" class="ln draw" pathLength="1" style="--d:1.5"/><text x="300" y="52" class="bub">C</text>
+      </g>
+
+      <!-- frame -->
+      <g class="struct">
+        <path d="M80 330V130M190 330V130M300 330V130" class="st draw" pathLength="1" style="--d:2"/>
+        <path d="M66 130H314M66 230H314" class="st draw" pathLength="1" style="--d:2.4"/>
+        <path d="M80 130l110 100M190 130l110 100" class="st thin draw" pathLength="1" style="--d:2.9"/>
+        <path d="M58 330h44v22H58zM168 330h44v22h-44zM278 330h44v22h-44z" class="st draw" pathLength="1" style="--d:3.2"/>
+        <rect x="30" y="352" width="420" height="18" fill="url(#hatch)" class="soil"/>
+        <line x1="30" y1="352" x2="450" y2="352" class="ln draw" pathLength="1" style="--d:3.4"/>
+      </g>
+
+      <!-- dimension line -->
+      <g class="dim">
+        <line x1="80" y1="96" x2="300" y2="96" class="ln draw" pathLength="1" marker-start="url(#tick)" marker-end="url(#tick)" style="--d:3.5"/>
+        <text x="190" y="89" class="lbl mid">SCOPE</text>
+      </g>
+
+      <!-- annotations: a legend column on the right -->
+      <g class="notes">
+        <path d="M245 130 L326 106 H340" class="lead draw" pathLength="1" style="--d:3.8"/>
+        <circle cx="245" cy="130" r="3.5" class="pt"/>
+        <text x="346" y="104" class="lbl tan">ACCEPTANCE</text>
+        <text x="346" y="117" class="lbl tan">CRITERIA</text>
+
+        <path d="M245 180 H340" class="lead draw" pathLength="1" style="--d:4"/>
+        <circle cx="245" cy="180" r="3.5" class="pt"/>
+        <text x="346" y="184" class="lbl tan">EDGE CASES</text>
+
+        <path d="M314 230 L326 240 H340" class="lead draw" pathLength="1" style="--d:4.2"/>
+        <circle cx="314" cy="230" r="3.5" class="pt"/>
+        <text x="346" y="238" class="lbl tan">MODULE</text>
+        <text x="346" y="251" class="lbl tan">IMPACTS</text>
+
+        <path d="M322 341 L332 306 H340" class="lead draw" pathLength="1" style="--d:4.4"/>
+        <circle cx="322" cy="341" r="3.5" class="pt"/>
+        <text x="346" y="310" class="lbl tan">MIGRATION</text>
+      </g>
+
+      <!-- title block -->
+      <g class="tblock">
+        <path d="M14 400H466M14 452H466M300 400V526M300 452H466M383 452V526" class="ln draw" pathLength="1" style="--d:4.6"/>
+        <text x="30" y="424" class="lbl">DRAWING</text>
+        <text x="30" y="442" class="tt">Load path of a product spec</text>
+        <text x="30" y="476" class="lbl">SEQUENCE</text>
+        <text x="30" y="496" class="tt sm">Civil  →  Product  →  Management</text>
+        <text x="30" y="514" class="lbl faint">THE MATERIAL CHANGED. THE THINKING DIDN’T.</text>
+        <text x="316" y="424" class="lbl">DRAWN</text>
+        <text x="316" y="442" class="tt sm">B. Talukdar</text>
+        <text x="316" y="476" class="lbl">SHEET</text>
+        <text x="316" y="498" class="tt">01</text>
+        <text x="399" y="476" class="lbl">STATUS</text>
+        <text x="399" y="498" class="tt sm tan">Open</text>
+      </g>
+    </svg>
+  </figure>
+
+  <dl class="facts h-in">
+    <div><dt>45 months</dt><dd>Darwinbox, Core HRMS</dd></div>
+    <div><dt>200+</dt><dd>PRDs authored</dd></div>
+    <div><dt>700+</dt><dd>features tagged in Pendo, from scratch</dd></div>
+    <div><dt>Top 3</dt><dd>ReEnvision 5.0, with Realium</dd></div>
+  </dl>
+</section>
+
+<!-- ============ THROUGHLINE ============ -->
+<section class="sec wrap" id="path" aria-labelledby="path-h">
+  <header class="sec-head reveal">
+    <p class="kick"><span class="n">01</span>Throughline</p>
+    <h2 id="path-h">The material changed. <em>The thinking didn’t.</em></h2>
+  </header>
+  <ol class="path">
+    <li class="reveal">
+      <p class="kick sm">2018 → 2022</p>
+      <h3>Civil engineering</h3>
+      <p class="org">NIT Silchar · B.Tech · CGPA 8.99</p>
+      <p>I come from a family of government civil engineers. Civil engineering taught me to work out the loads before anything gets poured.</p>
+    </li>
+    <li class="reveal">
+      <p class="kick sm">2022 → 2026</p>
+      <h3>Product</h3>
+      <p class="org">Darwinbox · Product Analyst → Senior Product Analyst</p>
+      <p>Darwinbox hired from campus, and the same structured thinking carried over to enterprise HR software. Promoted in April 2025.</p>
+    </li>
+    <li class="reveal">
+      <p class="kick sm">2026 → 2027</p>
+      <h3>Management</h3>
+      <p class="org">XLRI Jamshedpur · PGDM, General Management</p>
+      <p>XAT 94.88 percentile, 99.67 in Quant and DI. I came for the judgment layer I saw in my manager and director, both XLRI alumni.</p>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="sec wrap" id="work" aria-labelledby="work-h">
+  <div class="work">
+    <header class="work-side">
+      <div class="sticky reveal">
+        <p class="kick"><span class="n">02</span>Work</p>
+        <h2 id="work-h">Darwinbox</h2>
+        <p class="meta mono">JUL 2022 → MAR 2026 · 45 MONTHS · HYDERABAD</p>
+        <p class="lede">Core HRMS for an enterprise HR platform. I wrote the specs, built the analytics that showed whether they worked, and checked each release before it reached clients.</p>
+        <ul class="badges">
+          <li>Exemplary Contributor Award, 2024</li>
+          <li>Promoted to Senior Product Analyst, Apr 2025</li>
+          <li>Mentored 3 junior analysts</li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="work-list">
+      <article class="item reveal">
+        <p class="kick sm">Specs</p>
+        <div class="fig"><b>200+</b><span>PRDs</span></div>
+        <h3>Engineering-ready PRDs</h3>
+        <p>Authored 200+ PRDs with edge cases and acceptance criteria, which cut rework and back-and-forth. Owned Core HRMS features from PRD to launch and co-developed the module roadmap with a Senior PM.</p>
+      </article>
+      <article class="item reveal">
+        <p class="kick sm">Analytics</p>
+        <div class="fig"><b>700+</b><span>features tagged</span></div>
+        <h3>Pendo, built from scratch</h3>
+        <p>Set up product analytics from nothing and tagged 700+ features so adoption became measurable. Used paths and funnels to find drop-off points and fed the fixes into PRDs.</p>
+      </article>
+      <article class="item reveal">
+        <p class="kick sm">Research</p>
+        <div class="fig"><b>24,000+</b><span>survey responses</span></div>
+        <h3>From survey to backlog</h3>
+        <p>Configured in-app Pendo surveys from backend setup to live, then worked with Engineering and QA to turn 24,000+ responses into a prioritised backlog. The New Profile revamp scored 4.3 out of 5.</p>
+      </article>
+      <article class="item reveal">
+        <p class="kick sm">Analytics</p>
+        <div class="fig"><b>45%</b><span>less session time</span></div>
+        <h3>Dashboard revamp</h3>
+        <p>Ran the analytics behind the Dashboard revamp. Session time on key actions fell 45% for 322,000+ users.</p>
+      </article>
+      <article class="item reveal">
+        <p class="kick sm">Localisation</p>
+        <div class="fig"><b>10+</b><span>languages</span></div>
+        <h3>Translation workflow</h3>
+        <p>Reworked the backend translation workflow from unusable to a scalable in-team process, keeping translation and config work off engineering. Ran translation QA so users saw accurate local language.</p>
+      </article>
+      <article class="item reveal">
+        <p class="kick sm">Quality</p>
+        <div class="fig"><b>100+</b><span>issues caught</span></div>
+        <h3>Pre-release reviews</h3>
+        <p>Ran functional reviews before each release and surfaced 100+ issues before clients saw them. Ran a UI audit that reorganised 50+ inconsistent settings with UX and engineering.</p>
+      </article>
+    </div>
+  </div>
+
+  <!-- spec anatomy -->
+  <div class="spec reveal" aria-labelledby="spec-h">
+    <div class="spec-head">
+      <p class="kick">Inside a spec</p>
+      <h3 id="spec-h">What every one of my PRDs had to answer</h3>
+      <p>Written for everyone who touches a release: founders, the Product Head, marketing, consultants and the release-note writers. If a reader needed to ask me a question, the PRD was not finished.</p>
+    </div>
+    <ol class="spec-list">
+      <li><span>01</span>Current behaviour</li>
+      <li><span>02</span>Reason for the change</li>
+      <li><span>03</span>Impact on other modules</li>
+      <li><span>04</span>Where it sits in the UI</li>
+      <li><span>05</span>Paid-feature dependencies</li>
+      <li><span>06</span>Import, cron and API impacts</li>
+      <li><span>07</span>Notification variable changes</li>
+      <li><span>08</span>Migration of existing data</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ LAB ============ -->
+<section class="sec wrap" id="lab" aria-labelledby="lab-h">
+  <header class="sec-head split reveal">
+    <div>
+      <p class="kick"><span class="n">03</span>Startup Lab</p>
+      <h2 id="lab-h">The trust layer for the <em>agent economy.</em></h2>
+    </div>
+    <p class="lede">Everyone is building agents that can act. Few are building what that makes necessary: proof of authority, memory that outlives tools, and ways to measure and rehearse what agents do. These are open-source prototypes, each with a live demo.</p>
+  </header>
+
+  <article class="feature reveal">
+    <div class="feature-copy">
+      <p class="kick sm tan">01 · Settlement · Top 3, ReEnvision 5.0</p>
+      <h3>Realium</h3>
+      <p class="big">Money that moves at the speed of verified reality.</p>
+      <p>A settlement rail for public works. It turns site-verified construction progress into a financeable instrument through one connected chain. Placed top 3 at XLRI’s Digital Transformation Conclave in July 2026. My slides covered the Evidence, Authority and Liquidity layers.</p>
+      <div class="links">
+        <a class="btn pri" href="https://bahniman.github.io/realium/" target="_blank" rel="noopener">Live demo</a>
+        <a class="btn" href="https://github.com/Bahniman/realium" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
-  </section>
+    <ol class="chain" aria-label="Realium's three layers">
+      <li><span class="mono">L1</span><b>Evidence</b><small>Work verified on site</small></li>
+      <li><span class="mono">L2</span><b>Authority</b><small>An accountable sign-off</small></li>
+      <li><span class="mono">L3</span><b>Liquidity</b><small>A bankable instrument</small></li>
+    </ol>
+  </article>
 
-  <!-- PLATE 2 : STATEMENT -->
-  <section class="plate plate-tall lift-2" id="statement" data-name="Statement">
-    <div class="inner">
-      <div class="statement-banner rise">
-        <h2 class="d-xl wipe" style="max-width:18ch">
-          <span><span class="line-in">A great spec kills bugs</span></span>
-          <span><span class="line-in">before code is written.</span></span>
-        </h2>
-        <p class="prose" style="margin-top:1.25rem">
-          Most production fires start when edge cases are discovered in staging rather than
-          in the PRD. My civil engineering background taught me that if structural drawings
-          overlook soil load limits, the foundation cracks. Software systems operate on the
-          exact same physical reality.
-        </p>
-        <p class="prose" style="margin-top:0.85rem">
-          I write product specifications that map failure modes, data contracts, state
-          transitions, and security boundaries upfront. By resolving algorithmic ambiguity
-          before sprint planning, engineering velocity doubles, regressions drop toward zero,
-          and complex enterprise rollouts deploy without incident.
-        </p>
-      </div>
+  <ul class="projects">
+    <li class="reveal">
+      <p class="kick sm">02 · Memory</p>
+      <h3>Heirloom</h3>
+      <p>Organisational memory as a portable, permissioned asset. Each AI tool reads only what its user may see, and the memory survives resignations and vendor switches.</p>
+      <div class="plinks"><a href="https://bahniman.github.io/heirloom/" target="_blank" rel="noopener">Live demo <span aria-hidden="true">↗</span></a><a href="https://github.com/Bahniman/heirloom" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></div>
+    </li>
+    <li class="reveal">
+      <p class="kick sm">03 · Commerce</p>
+      <h3>Turnstile</h3>
+      <p>Analytics and storefronts for the agent-driven web. It spots AI shoppers, shows a store how many there are and what they buy, and serves them a clean machine-readable catalogue.</p>
+      <div class="plinks"><a href="https://bahniman.github.io/turnstile/" target="_blank" rel="noopener">Live demo <span aria-hidden="true">↗</span></a><a href="https://github.com/Bahniman/turnstile" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></div>
+    </li>
+    <li class="reveal">
+      <p class="kick sm">04 · Simulation</p>
+      <h3>Windtunnel</h3>
+      <p>A flight simulator for management decisions. It builds simulated customers from real reviews, tries a price change on them thousands of times and answers with a range, not a single number.</p>
+      <div class="plinks"><a href="https://bahniman.github.io/windtunnel/" target="_blank" rel="noopener">Live demo <span aria-hidden="true">↗</span></a><a href="https://github.com/Bahniman/windtunnel" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></div>
+    </li>
+  </ul>
+</section>
+
+<!-- ============ RECORD ============ -->
+<section class="sec wrap" id="record" aria-labelledby="record-h">
+  <header class="sec-head reveal">
+    <p class="kick"><span class="n">04</span>Record</p>
+    <h2 id="record-h">Degrees, roles and <em>the rest.</em></h2>
+  </header>
+
+  <div class="record">
+    <div class="col reveal">
+      <p class="kick sm">Education and roles</p>
+      <ul class="rows">
+        <li><span class="yr mono">2026–27</span><div><b>PGDM, General Management</b><small>XLRI Jamshedpur · XAT 94.88 percentile, 99.67 in QA &amp; DI</small></div></li>
+        <li><span class="yr mono">2025–26</span><div><b>Senior Product Analyst</b><small>Darwinbox · Apr 2025 to Mar 2026</small></div></li>
+        <li><span class="yr mono">2022–25</span><div><b>Product Analyst</b><small>Darwinbox · Jul 2022 to Mar 2025</small></div></li>
+        <li><span class="yr mono">2018–22</span><div><b>B.Tech, Civil Engineering</b><small>NIT Silchar · CGPA 8.99</small></div></li>
+      </ul>
     </div>
-  </section>
 
-  <!-- PLATE 3 : DARWINBOX -->
-  <section class="plate" id="darwinbox" data-name="Darwinbox">
-    <div class="numeral n-tr" aria-hidden="true">45</div>
-    <div class="inner">
-      <h2 class="d-lg wipe"><span><span class="line-in">Darwinbox</span></span></h2>
-      <p class="lede rise" style="margin-top:0.75rem">
-        Forty-five months scaling a unicorn enterprise HRMS across APAC, MENA, Europe, and North America.
-        Promoted from Product Analyst to Senior Product Analyst, mentored three incoming analysts, and
-        recognized with the Exemplary Contributor award for architectural rigor and operational delivery.
-      </p>
-
-      <div class="pillar-grid">
-        <article class="pillar-card rise">
-          <div class="pillar-head">
-            <h3 class="d-md">200+ Production PRDs Shipped</h3>
-            <span class="pillar-badge">5% to 60% Adoption</span>
-          </div>
-          <p class="prose">
-            Owned end-to-end functional specifications across the Core Employee Lifecycle,
-            multi-tenant Role-Based Access Control (RBAC), and enterprise organizational charts.
-            Achieved functional parity against global legacy leaders (Workday, SAP SuccessFactors),
-            driving enterprise module adoption from 5% to 60% across 140+ enterprise customer accounts.
-          </p>
-        </article>
-
-        <article class="pillar-card rise">
-          <div class="pillar-head">
-            <h3 class="d-md">Product Analytics from Scratch (Pendo &amp; SQL)</h3>
-            <span class="pillar-badge">-45% Action Time</span>
-          </div>
-          <p class="prose">
-            Instrumented a greenfield product usage analytics framework using Pendo, Mixpanel, and SQL data models.
-            Mapped core user funnels, identified drop-off friction points, and led a comprehensive UI/UX overhaul
-            for 322,000+ daily active enterprise users, reducing median task completion time by 45% and cutting
-            first-month support tickets by 28%.
-          </p>
-        </article>
-
-        <article class="pillar-card rise">
-          <div class="pillar-head">
-            <h3 class="d-md">Zero-Code Global Localization</h3>
-            <span class="pillar-badge">50+ Languages Live</span>
-          </div>
-          <p class="prose">
-            Architected a centralized localization and translation engine that replaced hardcoded string tables
-            across PHP services and Angular applications. Integrated dynamic ICU formatting and Right-to-Left (RTL)
-            layout rendering for Arabic and Hebrew, enabling rapid zero-dev market expansion across the Middle East and Southeast Asia.
-          </p>
-        </article>
-
-        <article class="pillar-card rise">
-          <div class="pillar-head">
-            <h3 class="d-md">Enterprise Bulk Ingestion Pipeline</h3>
-            <span class="pillar-badge">99.4% 1st-Pass Success</span>
-          </div>
-          <p class="prose">
-            Redesigned the asynchronous bulk data ingestion engine for 100,000+ record employee imports. Built
-            instant schema validation, proactive syntax correction, and interactive error remediation tables,
-            lifting first-attempt data upload success from 62% to 99.4% and eliminating manual implementation interventions.
-          </p>
-        </article>
-      </div>
-
-      <div class="rise" style="margin-top:1.5rem">
-        <button type="button" class="edge-toggle-btn" id="toggleEdgeMatrix" aria-haspopup="dialog">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-          <span>Inspect PRD Edge-Case &amp; Adoption Matrix</span>
-        </button>
-      </div>
+    <div class="col reveal">
+      <p class="kick sm">Recognition</p>
+      <ul class="rows">
+        <li><span class="yr mono">2026</span><div><b>3rd of 15 teams, ReEnvision 5.0</b><small>XLRI Digital Transformation Conclave, with Realium</small></div></li>
+        <li><span class="yr mono">2026</span><div><b>Top 3 of 20 teams</b><small>Aster DM Healthcare, IPO readiness assessment</small></div></li>
+        <li><span class="yr mono">2024</span><div><b>Exemplary Contributor Award</b><small>Darwinbox, for cross-team delivery</small></div></li>
+        <li><span class="yr mono">2019</span><div><b>2nd, AutoCAD event</b><small>NIRMAAN ’19, NIT Silchar</small></div></li>
+        <li><span class="yr mono">2018</span><div><b>3rd, ARCHENOVA smart city module</b><small>Tecnoesis ’18</small></div></li>
+      </ul>
     </div>
-  </section>
 
-  <!-- PLATE 4 : PROTOCOLS -->
-  <section class="plate lift-1" id="protocols" data-name="Protocols">
-    <div class="numeral n-bl" aria-hidden="true">4</div>
-    <div class="inner">
-      <h2 class="d-lg wipe" style="max-width:20ch">
-        <span><span class="line-in">The trust layer for</span></span>
-        <span><span class="line-in">the agent economy</span></span>
-      </h2>
-      <p class="lede rise" style="margin-top:0.75rem">
-        As autonomous software agents begin transacting, purchasing, and negotiating on behalf of enterprises,
-        system guardrails are required. These four open-source protocols provide the necessary cryptographic
-        attestation, data portability, and simulation infrastructure.
-      </p>
-
-      <div class="pillar-grid">
-        <article class="pillar-card rise">
-          <div class="pillar-head">
-            <h3 class="d-md">01 Realium, settlement</h3>
-            <span class="pillar-badge">ReEnvision Top 3</span>
-          </div>
-          <p class="prose">
-            Converts site-verified contractor construction milestones into bankable receivables on Day 0
-            via Ed25519 cryptographic attestations and geotagged sign-offs. Unlocks 60% immediate liquidity
-            and bridges the traditional 148-day payment backlog in infrastructure supply chains.
-          </p>
-          <div style="margin-top:0.85rem;display:flex;gap:12px;font-size:13px;font-weight:700">
-            <a href="https://bahniman.github.io/realium/">Live Demo &rarr;</a>
-            <a href="https://github.com/Bahniman/realium" target="_blank" rel="noreferrer">GitHub &rarr;</a>
-          </div>
-        </article>
-
-        <article class="pillar-card rise">
-          <div class="pillar-head">
-            <h3 class="d-md">02 Heirloom, memory</h3>
-            <span class="pillar-badge">RBAC Schema</span>
-          </div>
-          <p class="prose">
-            Preserves mission-critical institutional knowledge across leadership transitions and vendor handoffs.
-            Utilizes role-scoped cryptographic attestations, immutable change logs, and a standardized portable
-            schema that prevents operational amnesia during enterprise restructuring.
-          </p>
-          <div style="margin-top:0.85rem;display:flex;gap:12px;font-size:13px;font-weight:700">
-            <a href="https://bahniman.github.io/heirloom/">Live Demo &rarr;</a>
-            <a href="https://github.com/Bahniman/heirloom" target="_blank" rel="noreferrer">GitHub &rarr;</a>
-          </div>
-        </article>
-
-        <article class="pillar-card rise" style="grid-column:1 / -1">
-          <div class="pillar-head">
-            <h3 class="d-md">03 Turnstile, commerce</h3>
-            <span class="pillar-badge">Agent/Human Storefront</span>
-          </div>
-          <p class="prose">
-            An edge-routing middleware that differentiates autonomous AI agents from human shoppers. It provides
-            agents with a structured, machine-readable JSON catalog endpoint while preserving seamless checkout
-            and zero false-positive bot blocks for human visitors.
-          </p>
-          <div class="turnstile-box" style="margin-top:1rem">
-            <div class="turnstile-nav">
-              <div class="ts-status-tag">
-                <span class="clearance-dot"></span>
-                <span>TURNSTILE DUAL INSPECTOR</span>
-              </div>
-              <div class="turnstile-pills" role="radiogroup" aria-label="Turnstile Inspector Mode">
-                <button type="button" class="ts-toggle-btn active" id="tsBtnHuman" role="radio" aria-checked="true">Human View</button>
-                <button type="button" class="ts-toggle-btn" id="tsBtnAgent" role="radio" aria-checked="false">Agent JSON</button>
-              </div>
-            </div>
-            <div class="ts-stage-body">
-              <div id="tsViewHuman">
-                <div class="ts-human-grid">
-                  <div class="ts-tile">
-                    <div class="ts-tile-k">Session Classification</div>
-                    <div class="ts-tile-v">Verified Human Browser</div>
-                  </div>
-                  <div class="ts-tile">
-                    <div class="ts-tile-k">Checkout Recovery</div>
-                    <div class="ts-tile-v">100% Cart Retained</div>
-                  </div>
-                  <div class="ts-tile">
-                    <div class="ts-tile-k">Latency Overhead</div>
-                    <div class="ts-tile-v">&lt; 12ms Edge Transit</div>
-                  </div>
-                </div>
-              </div>
-              <div id="tsViewAgent" class="ts-code-wrap" hidden>
-                <button type="button" class="ts-copy-btn" id="tsCopyBtn">Copy Payload</button>
-                <pre class="ts-code-pre"><code id="tsCodeBlock">{
-  "protocol": "turnstile/v1",
-  "client_type": "autonomous_agent",
-  "auth": {
-    "signature": "ed25519:6c2a8f910b...",
-    "verified": true
-  },
-  "storefront_schema": {
-    "format": "application/vnd.agent.store+json",
-    "catalog_items": 4,
-    "instant_checkout_ready": true
-  },
-  "telemetry": {
-    "status": "APPROVED",
-    "overhead_ms": 4.2
-  }
-}</code></pre>
-              </div>
-            </div>
-          </div>
-          <div style="margin-top:0.85rem;display:flex;gap:12px;font-size:13px;font-weight:700">
-            <a href="https://bahniman.github.io/turnstile/">Live Demo &rarr;</a>
-            <a href="https://github.com/Bahniman/turnstile" target="_blank" rel="noreferrer">GitHub &rarr;</a>
-          </div>
-        </article>
-
-        <article class="pillar-card rise" style="grid-column:1 / -1">
-          <div class="pillar-head">
-            <h3 class="d-md">04 Windtunnel, simulation</h3>
-            <span class="pillar-badge">Synthetic Cohorts</span>
-          </div>
-          <p class="prose">
-            A high-entropy simulation harness that compiles thousands of synthetic user personas from historical
-            support logs and product analytics. Simulates user behavior paths across proposed pricing tiers and
-            permission changes before deploying to production.
-          </p>
-          <div style="margin-top:0.85rem;display:flex;gap:12px;font-size:13px;font-weight:700">
-            <a href="https://bahniman.github.io/windtunnel/">Live Demo &rarr;</a>
-            <a href="https://github.com/Bahniman/windtunnel" target="_blank" rel="noreferrer">GitHub &rarr;</a>
-          </div>
-        </article>
-      </div>
+    <div class="col reveal">
+      <p class="kick sm">Campus</p>
+      <ul class="rows">
+        <li><span class="yr mono">2026</span><div><b>Prodzion, XLRI’s product club</b><small>Elected club member, 8 of 118 students</small></div></li>
+        <li><span class="yr mono">2026</span><div><b>AURORA 4.0 organising team</b><small>Ran panel, travel and hospitality for 20+ industry leaders</small></div></li>
+      </ul>
+      <p class="kick sm off">Off the clock</p>
+      <ul class="rows">
+        <li><span class="yr mono">Keys</span><div><b>Keyboardist</b><small>Played with the cultural team at inter-college fests, including IIT Kharagpur and Guwahati</small></div></li>
+        <li><span class="yr mono">100+</span><div><b>Self-taught musician</b><small>Songs uploaded to my YouTube and Instagram channel</small></div></li>
+      </ul>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PLATE 5 : SETTLEMENT -->
-  <section class="plate" id="settlement" data-name="Settlement">
-    <div class="numeral n-tr2" aria-hidden="true">148</div>
-    <div class="inner">
-      <h2 class="d-lg wipe">
-        <span><span class="line-in">147 days of waiting,</span></span>
-        <span><span class="line-in">deleted.</span></span>
-      </h2>
-      <p class="lede rise" style="margin-top:1.5rem">
-        In the Indian construction and EPC sector, site work is approved on Day 0, yet payments take an average
-        of 148 days to clear treasury holdbacks. Realium solves this liquidity bottleneck by converting site-signed
-        Ed25519 milestone attestations into instant, bank-underwritten Day 0 capital.
-      </p>
-
-      <div class="waterfall-box rise">
-        <div class="wf-ctrl-row">
-          <div>
-            <div class="wf-label-group">
-              <span>Verified Invoice Face Value</span>
-              <span class="wf-val-display" id="wfInvoiceVal">&#8377;18,63,900</span>
-            </div>
-            <input type="range" class="wf-slider" id="wfSlider" min="500000" max="5000000" step="50000" value="1863900" aria-label="Invoice face value slider">
-          </div>
-          <div>
-            <div class="wf-label-group">
-              <span>Bank Advance Rate</span>
-              <span class="wf-val-display" id="wfRateVal">60%</span>
-            </div>
-            <div class="wf-ratio-pills" role="radiogroup" aria-label="Bank advance rate">
-              <button type="button" class="wf-pill-btn" data-rate="0.50">50%</button>
-              <button type="button" class="wf-pill-btn active" data-rate="0.60">60%</button>
-              <button type="button" class="wf-pill-btn" data-rate="0.75">75%</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="wf-live-track" aria-hidden="true">
-          <div class="wf-seg-advance" id="wfSegAdvance" style="width:60%" title="Day 0 Advance"></div>
-          <div class="wf-seg-remainder" id="wfSegRemainder" style="width:37%" title="Net Maturity Remainder"></div>
-          <div class="wf-seg-fee" id="wfSegFee" style="width:3%" title="Discount Fee"></div>
-        </div>
-
-        <div class="wf-metrics-grid">
-          <div class="wf-card">
-            <div class="wf-card-title">Day 0 Advance (T+0)</div>
-            <div class="wf-card-num accent" id="wfOutAdvance">&#8377;11,18,340</div>
-            <div class="wf-card-sub">Capital released immediately to the contractor against the verified cryptographic attestation</div>
-          </div>
-          <div class="wf-card">
-            <div class="wf-card-title">Day 148 Remainder</div>
-            <div class="wf-card-num" id="wfOutRemainder">&#8377;6,89,156</div>
-            <div class="wf-card-sub">Released when the final client treasury audit clears at invoice maturity</div>
-          </div>
-          <div class="wf-card">
-            <div class="wf-card-title">Contractor Net Yield</div>
-            <div class="wf-card-num" id="wfOutNet">&#8377;18,07,496</div>
-            <div class="wf-card-sub">Total realization after bank discounting fee (97.0% of gross value)</div>
-          </div>
-          <div class="wf-card">
-            <div class="wf-card-title">Working Capital Saved</div>
-            <div class="wf-card-num accent" id="wfOutDays">147 Days</div>
-            <div class="wf-card-sub">Working capital runway unlocked upfront, avoiding predatory credit lines</div>
-          </div>
-        </div>
-      </div>
+<!-- ============ CONTACT ============ -->
+<section class="contact wrap" id="contact" aria-labelledby="contact-h">
+  <div class="contact-in reveal">
+    <p class="kick">05 · Contact</p>
+    <h2 id="contact-h">If you are building something that needs a <em>clear spec,</em> let’s talk.</h2>
+    <div class="mail">
+      <a href="mailto:bahniman30@gmail.com" class="mail-link">bahniman30@gmail.com</a>
+      <button class="cb copy" type="button" id="copy" aria-label="Copy email address">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+      </button>
+      <span class="copied" id="copied" role="status" aria-live="polite"></span>
     </div>
-  </section>
-
-  <!-- PLATE 6 : AURORA -->
-  <section class="plate lift-1" id="aurora" data-name="AURORA 4.0">
-    <div class="numeral n-l" aria-hidden="true">08</div>
-    <div class="inner">
-      <h2 class="d-lg wipe"><span><span class="line-in">AURORA 4.0</span></span></h2>
-      <p class="label rise" style="margin-top:1.25rem">
-        National Product Management Symposium, Prodzion, XLRI Jamshedpur, August 2026
-      </p>
-
-      <div class="stack rise" style="margin-top:clamp(2rem,4vw,3rem);max-width:68ch">
-        <p class="prose">
-          Organising Team Member for AURORA 4.0, XLRI's national product management symposium organized by Prodzion.
-          Authored thematic panel question sets and host scripts across four live panels on navigating macro volatility.
-        </p>
-        <p class="prose" style="margin-top:0.85rem">
-          Served as point of contact for executive panelists (including ServiceNow and the Indian Register of Shipping),
-          managed guest hospitality and dry runs with student hosts, and supported conclave execution for 20+ industry leaders.
-        </p>
-      </div>
+    <div class="links">
+      <a class="btn" href="https://www.linkedin.com/in/bahniman-talukdar-ab97a416a" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+      <a class="btn" href="https://github.com/Bahniman" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
     </div>
-  </section>
-
-  <!-- PLATE 7 : RECORD -->
-  <section class="plate" id="record" data-name="Record">
-    <div class="numeral n-r" aria-hidden="true">6</div>
-    <div class="inner">
-      <h2 class="d-lg wipe"><span><span class="line-in">Record</span></span></h2>
-      <div class="stack-lg" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
-        <div class="record-row rise">
-          <span class="d-md">PGDM, General Management, XLRI Jamshedpur, 2026 to 27</span>
-          <span class="label">XAT 94.88, 99.67 QA&amp;DI</span>
-        </div>
-        <div class="record-row rise">
-          <span class="d-md">Senior Product Analyst, Darwinbox, Apr 2025 to Mar 2026</span>
-          <span class="label">Promoted, 200+ PRDs</span>
-        </div>
-        <div class="record-row rise">
-          <span class="d-md">Product Analyst, Darwinbox, Jul 2022 to Mar 2025</span>
-          <span class="label">Exemplary Contributor</span>
-        </div>
-        <div class="record-row rise">
-          <span class="d-md">B.Tech, Civil Engineering, NIT Silchar, 2022</span>
-          <span class="label">8.99 / 10 CGPA</span>
-        </div>
-        <div class="record-row rise">
-          <span class="d-md">AURORA 4.0 symposium, Prodzion, Aug 2026</span>
-          <span class="label">Organising Team</span>
-        </div>
-        <div class="record-row rise">
-          <span class="d-md">ReEnvision 5.0 conclave, team Realium, Jul 2026</span>
-          <span class="label">3rd of 15 teams</span>
-        </div>
-        <div class="record-row rise">
-          <span class="d-md">Aster DM Healthcare IPO Readiness case, Aug 2026</span>
-          <span class="label">Top 3 of 20 teams</span>
-        </div>
-      </div>
-      <p class="prose rise" style="margin-top:clamp(3rem,5vw,4.5rem)">
-        Civil engineering instilled a fundamental principle: when calculations are rigorous,
-        structures endure extreme loads. I apply the exact same rigor to product systems,
-        ensuring scalable architecture, unambiguous user journeys, and enduring business value.
-      </p>
-    </div>
-  </section>
-
-  <!-- PLATE 8 : CONTACT -->
-  <section class="plate plate-tall lift-2" id="contact" data-name="Contact">
-    <div class="inner">
-      <h2 class="d-xl wipe" style="max-width:15ch">
-        <span><span class="line-in">Let's build</span></span>
-        <span><span class="line-in">something serious.</span></span>
-      </h2>
-      <p class="prose rise" style="margin-top:clamp(1.75rem,3.5vw,2.5rem)">
-        Actively seeking Product Management, Product Analytics, and Technical Product Strategy roles.
-        Best suited for ambitious teams solving high-complexity problems where data rigor, clean specifications,
-        and scalable system design create outsized enterprise leverage.
-      </p>
-      <p class="prose rise" style="margin-top:1.5rem">
-        Write directly to <a href="mailto:bahniman30@gmail.com">bahniman30@gmail.com</a>, or connect via
-        <a href="https://www.linkedin.com/in/bahniman-talukdar-ab97a416a" target="_blank" rel="noreferrer">LinkedIn</a>
-        and explore open protocols on <a href="https://github.com/Bahniman" target="_blank" rel="noreferrer">GitHub</a>.
-      </p>
-    </div>
-  </section>
+  </div>
+  <footer class="foot">
+    <span>© 2026 Bahniman Talukdar</span>
+    <span class="mono">GUWAHATI · JAMSHEDPUR</span>
+  </footer>
+</section>
 
 </main>
 
-<!-- Command Palette Modal -->
-<div id="cmdDialog" class="cmd-backdrop" role="dialog" aria-modal="true" aria-label="Command Palette" hidden>
-  <div class="cmd-panel">
-    <div class="cmd-header">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--figure-2);flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input id="cmdInput" class="cmd-input" type="text" role="combobox" autocomplete="off" spellcheck="false" aria-expanded="true" aria-autocomplete="list" aria-controls="cmdList" placeholder="Search plates, live protocols, or actions...">
-      <kbd class="cmd-kbd-hint" style="background:var(--bg-3);padding:2px 6px;border:1px solid var(--rule);border-radius:4px">ESC</kbd>
-    </div>
-    <div id="cmdList" class="cmd-results" role="listbox" aria-label="Actions" data-lenis-prevent></div>
-    <div class="cmd-footer">
-      <span><kbd>&uarr;</kbd> <kbd>&darr;</kbd> Navigate</span>
-      <span><kbd>&crarr;</kbd> Select</span>
-      <span><kbd>ESC</kbd> Close</span>
-    </div>
-  </div>
-</div>
-
-<!-- Achievements & Clearance Modal -->
-<div id="achievementsModal" class="cmd-backdrop" role="dialog" aria-modal="true" aria-label="Clearance Milestones" hidden>
-  <div class="cmd-panel" style="max-width:560px">
-    <div class="cmd-header" style="justify-content:space-between">
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="clearance-dot"></span>
-        <span style="font-weight:700;font-size:14px;color:var(--figure)" id="modalClearanceTitle">Clearance L1: Observer</span>
-      </div>
-      <button type="button" id="closeAchievementsBtn" style="background:none;border:0;color:var(--figure-2);font-size:20px;cursor:pointer;line-height:1">&times;</button>
-    </div>
-    <div style="padding:1rem 1.25rem;max-height:360px;overflow-y:auto" id="achievementsList" data-lenis-prevent>
-      <!-- Populated dynamically -->
-    </div>
-    <div class="cmd-footer" style="justify-content:space-between">
-      <span id="modalTotalXp">Progress: 0 / 450 XP</span>
-      <span>Press <kbd>ESC</kbd> to exit</span>
-    </div>
-  </div>
-</div>
-
-<!-- PRD Edge-Case & Adoption Matrix Modal -->
-<div id="edgeMatrixModal" class="cmd-backdrop" role="dialog" aria-modal="true" aria-label="PRD Edge-Case & Adoption Matrix" hidden>
-  <div class="cmd-panel" style="max-width:720px">
-    <div class="cmd-header" style="justify-content:space-between">
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="clearance-dot"></span>
-        <span style="font-weight:700;font-size:14px;color:var(--figure)">PRD Edge-Case &amp; Adoption Matrix</span>
-      </div>
-      <button type="button" id="closeEdgeMatrixBtn" style="background:none;border:0;color:var(--figure-2);font-size:20px;cursor:pointer;line-height:1">&times;</button>
-    </div>
-    <div style="padding:1rem 1.25rem;max-height:420px;overflow-y:auto" data-lenis-prevent>
-      <table class="edge-table">
-        <thead>
-          <tr>
-            <th>Core Workflow</th>
-            <th>Without PRD Edge Spec</th>
-            <th>Engineered PRD Solution</th>
-            <th>Outcome</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Bulk Employee Import</td>
-            <td>Manual support cleanup on error</td>
-            <td>Pre-import format validator and guidance</td>
-            <td>1st-attempt success</td>
-          </tr>
-          <tr>
-            <td>Multi-Language Strings</td>
-            <td>Hard-coded, per-module split files</td>
-            <td>Centralized client localization engine</td>
-            <td>50+ languages live</td>
-          </tr>
-          <tr>
-            <td>Feature Discoverability</td>
-            <td>Zero visibility into unread release notes</td>
-            <td>Pendo usage funnels and contextual UX</td>
-            <td>-45% action time</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="cmd-footer" style="justify-content:space-between">
-      <span>Darwinbox Production Systems</span>
-      <span>Press <kbd>ESC</kbd> to exit</span>
-    </div>
-  </div>
-</div>
-
-<!-- Achievement Toasts Portal -->
-<div id="toastContainer" class="toast-portal" role="status" aria-live="polite"></div>
-
-<!-- Mobile Command FAB Trigger -->
-<button type="button" id="cmdMobileTrigger" class="cmd-fab" aria-label="Open Command Menu">
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-  <span>Menu (⌘K)</span>
+<button class="float" id="float" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" class="trk"/><circle cx="20" cy="20" r="17" class="ring" id="ring" pathLength="100"/></svg>
+  <span class="float-label" id="floatLabel">Top</span>
+  <svg class="up" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
 </button>
 
-<script type="module">
-import Lenis from 'https://cdn.jsdelivr.net/npm/lenis@1.3.26/+esm';
-
-const root = document.documentElement;
-const motion = root.classList.contains('motion');
-const plates = [...document.querySelectorAll('.plate')];
-
-/* ============================================================
-   LENIS ULTRA-SMOOTH SCROLL CONTROLLER
-   ============================================================ */
-let lenis = null;
-try {
-  lenis = new Lenis({
-    duration: 1.15,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    orientation: 'vertical',
-    gestureOrientation: 'vertical',
-    smoothWheel: true,
-    touchMultiplier: 1.1,
-    infinite: false,
-  });
-  window.lenis = lenis;
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-} catch (e) {
-  console.warn('Lenis could not be initialized, continuing with native scroll', e);
-}
-
-function getPlateScrollTop(target) {
-  const el = typeof target === 'string' ? document.querySelector(target) : target;
-  if (!el) return 0;
-  const idx = plates.indexOf(el);
-  if (idx <= 0) return 0;
-  let top = 0;
-  for (let i = 0; i < idx; i++) {
-    top += plates[i].offsetHeight;
-  }
-  return top;
-}
-
-function scrollToTarget(target) {
-  const el = typeof target === 'string' ? document.querySelector(target) : target;
-  if (!el) return;
-  const targetTop = getPlateScrollTop(el);
-  if (window.lenis) {
-    window.lenis.scrollTo(targetTop, { duration: 1.15, lock: true });
-  } else {
-    window.scrollTo({ top: targetTop, behavior: 'smooth' });
-  }
-}
-
-/* Nothing on this page is allowed to stay invisible because an animation
-   did not run. This clears every pre-state, and it runs whether anime.js
-   loads or not. */
-function revealAll() {
-  document.querySelectorAll('.rise').forEach(el => { el.style.opacity = '1'; });
-  document.querySelectorAll('.line-in').forEach(el => { el.style.transform = 'none'; });
-}
-const failsafe = setTimeout(revealAll, 2500);
-
-/* ============================================================
-   PROCEDURAL WEB AUDIO SYNTHESIZER
-   Zero external files. Real-time oscillator synthesis.
-   ============================================================ */
-class SoundEngine {
-  constructor() {
-    this.ctx = null;
-    this.isMuted = localStorage.getItem('audio_muted') === 'true';
-    this.lastTickTime = 0;
-    this.tickThrottleMs = 35;
-    this.bindUnlockGesture();
-  }
-
-  ensureContext() {
-    if (!this.ctx) {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (AudioCtx) this.ctx = new AudioCtx();
-    }
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
-    return this.ctx;
-  }
-
-  bindUnlockGesture() {
-    const unlock = () => {
-      this.ensureContext();
-      window.removeEventListener('pointerdown', unlock);
-      window.removeEventListener('keydown', unlock);
-    };
-    window.addEventListener('pointerdown', unlock, { once: true });
-    window.addEventListener('keydown', unlock, { once: true });
-  }
-
-  toggleMute() {
-    this.isMuted = !this.isMuted;
-    try { localStorage.setItem('audio_muted', String(this.isMuted)); } catch (e) {}
-    return this.isMuted;
-  }
-
-  playClick() {
-    if (this.isMuted) return;
-    const ctx = this.ensureContext();
-    if (!ctx) return;
-    try {
-      const t = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(320, t);
-      osc.frequency.exponentialRampToValueAtTime(110, t + 0.045);
-      gain.gain.setValueAtTime(0.08, t);
-      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(t);
-      osc.stop(t + 0.048);
-      osc.onended = () => { osc.disconnect(); gain.disconnect(); };
-    } catch (e) {}
-  }
-
-  playSliderTick() {
-    if (this.isMuted) return;
-    const now = performance.now();
-    if (now - this.lastTickTime < this.tickThrottleMs) return;
-    this.lastTickTime = now;
-    const ctx = this.ensureContext();
-    if (!ctx) return;
-    try {
-      const t = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(880, t);
-      osc.frequency.exponentialRampToValueAtTime(440, t + 0.015);
-      gain.gain.setValueAtTime(0.035, t);
-      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.015);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(t);
-      osc.stop(t + 0.018);
-      osc.onended = () => { osc.disconnect(); gain.disconnect(); };
-    } catch (e) {}
-  }
-
-  playAchievementChime() {
-    if (this.isMuted) return;
-    const ctx = this.ensureContext();
-    if (!ctx) return;
-    try {
-      const notes = [
-        { freq: 622.25, delay: 0.00 },
-        { freq: 783.99, delay: 0.07 },
-        { freq: 932.33, delay: 0.14 },
-        { freq: 1046.50, delay: 0.22 }
-      ];
-      const master = ctx.createGain();
-      master.gain.setValueAtTime(0.12, ctx.currentTime);
-      master.connect(ctx.destination);
-
-      notes.forEach(n => {
-        const nt = ctx.currentTime + n.delay;
-        const osc = ctx.createOscillator();
-        const g = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(n.freq, nt);
-        g.gain.setValueAtTime(0.0001, nt);
-        g.gain.exponentialRampToValueAtTime(0.28, nt + 0.008);
-        g.gain.exponentialRampToValueAtTime(0.0001, nt + 0.65);
-        osc.connect(g);
-        g.connect(master);
-        osc.start(nt);
-        osc.stop(nt + 0.68);
-        osc.onended = () => { osc.disconnect(); g.disconnect(); };
-      });
-    } catch (e) {}
-  }
-}
-const soundEngine = new SoundEngine();
-
-/* ---------------- Audio Toggle ---------------- */
-const audioBtn = document.getElementById('audioBtn');
-const updateAudioBtn = () => {
-  audioBtn.textContent = soundEngine.isMuted ? 'Sound: Off' : 'Sound: On';
-};
-updateAudioBtn();
-audioBtn.addEventListener('click', () => {
-  const muted = soundEngine.toggleMute();
-  updateAudioBtn();
-  if (!muted) soundEngine.playClick();
-});
-
-/* ---------------- Theme Toggle ---------------- */
-const btn = document.getElementById('themeBtn');
-const paint = () => { btn.textContent = root.classList.contains('light') ? 'Dark' : 'Light'; };
-paint();
-btn.addEventListener('click', () => {
-  const light = root.classList.toggle('light');
-  try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {}
-  paint();
-  soundEngine.playClick();
-});
-
-/* ============================================================
-   ACHIEVEMENTS & PROGRESSION MANAGER
-   ============================================================ */
-const ACHIEVEMENTS_REGISTRY = {
-  welcome_explorer: {
-    title: "Surveyor's Arrival",
-    desc: "Initiated navigation through the portfolio plates.",
-    xp: 25
-  },
-  waterfall_simulated: {
-    title: "Settlement Liquidity Solved",
-    desc: "Configured invoice cashflow to release day-zero capital.",
-    xp: 75
-  },
-  turnstile_agent_inspected: {
-    title: "Agentic Schema Lens",
-    desc: "Inspected the machine-readable storefront JSON payload.",
-    xp: 75
-  },
-  edge_cases_matrix: {
-    title: "Zero-Hour Edge Hunter",
-    desc: "Examined Darwinbox PRD validation matrices and adoption funnels.",
-    xp: 75
-  },
-  survey_beacon_dropped: {
-    title: "Geodetic Pulse",
-    desc: "Placed active survey pins onto the surveyed lattice network.",
-    xp: 50
-  },
-  cmd_power_user: {
-    title: "Terminal Operator",
-    desc: "Opened the command palette via keyboard shortcut.",
-    xp: 50
-  },
-  master_architect_konami: {
-    title: "Principal Architect",
-    desc: "Unlocked master protocol clearance via the Konami sequence.",
-    xp: 100
-  }
-};
-
-class AchievementManager {
-  constructor() {
-    this.container = document.getElementById('toastContainer');
-    this.badgeText = document.getElementById('clearanceText');
-    this.queue = [];
-    this.isDisplaying = false;
-    this.storageKey = 'portfolio_unlocked_achievements';
-    this.unlocked = new Set();
-    try {
-      const saved = JSON.parse(localStorage.getItem(this.storageKey) || '[]');
-      this.unlocked = new Set(saved);
-    } catch (e) {}
-    this.updateClearance();
-    setTimeout(() => this.unlock('welcome_explorer'), 1500);
-  }
-
-  calculateProgress() {
-    let totalXp = 0;
-    for (const id of this.unlocked) {
-      if (ACHIEVEMENTS_REGISTRY[id]) totalXp += ACHIEVEMENTS_REGISTRY[id].xp;
-    }
-    const count = this.unlocked.size;
-    const totalCount = Object.keys(ACHIEVEMENTS_REGISTRY).length;
-    let level = 'L1', rank = 'Observer';
-    if (totalXp >= 350) { level = 'L4'; rank = 'Principal Architect'; }
-    else if (totalXp >= 225) { level = 'L3'; rank = 'Protocol Engineer'; }
-    else if (totalXp >= 100) { level = 'L2'; rank = 'Systems Explorer'; }
-
-    return { totalXp, count, totalCount, level, rank };
-  }
-
-  updateClearance() {
-    const { count, totalCount, level, rank } = this.calculateProgress();
-    if (this.badgeText) {
-      this.badgeText.textContent = `Clearance ${level} [${count}/${totalCount}]`;
-    }
-    const modalTitle = document.getElementById('modalClearanceTitle');
-    const modalXp = document.getElementById('modalTotalXp');
-    if (modalTitle) modalTitle.textContent = `Clearance ${level}: ${rank}`;
-    if (modalXp) modalXp.textContent = `Progress: ${this.calculateProgress().totalXp} / 450 XP (${count}/${totalCount} unlocked)`;
-  }
-
-  unlock(id) {
-    if (!ACHIEVEMENTS_REGISTRY[id] || this.unlocked.has(id)) return false;
-    this.unlocked.add(id);
-    try {
-      localStorage.setItem(this.storageKey, JSON.stringify(Array.from(this.unlocked)));
-    } catch (e) {}
-    this.updateClearance();
-    this.queue.push({ id, ...ACHIEVEMENTS_REGISTRY[id] });
-    this.processQueue();
-    return true;
-  }
-
-  processQueue() {
-    if (this.isDisplaying || this.queue.length === 0) return;
-    this.isDisplaying = true;
-    const item = this.queue.shift();
-    this.renderToast(item);
-  }
-
-  renderCustomToast(title, desc, tag = "Action Complete", xp = 0) {
-    this.queue.push({ title, desc, tag, xp });
-    this.processQueue();
-  }
-
-  renderToast(item) {
-    const toast = document.createElement('div');
-    toast.className = 'achievement-toast';
-    const tag = item.tag || 'Milestone Unlocked';
-    const xpBadge = (item.xp && item.xp > 0) ? `<span class="toast-xp">+${item.xp} XP</span>` : '';
-    toast.innerHTML = `
-      <div class="toast-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      </div>
-      <div class="toast-body">
-        <div class="toast-head">
-          <span class="toast-tag">${tag}</span>
-          ${xpBadge}
-        </div>
-        <div class="toast-title">${item.title}</div>
-        <p class="toast-desc">${item.desc}</p>
-      </div>
-    `;
-
-    this.container.appendChild(toast);
-    soundEngine.playAchievementChime();
-
-    requestAnimationFrame(() => {
-      toast.style.transform = 'translateY(0)';
-      toast.style.opacity = '1';
-    });
-
-    setTimeout(() => {
-      toast.style.transform = 'translateY(-14px)';
-      toast.style.opacity = '0';
-      setTimeout(() => {
-        toast.remove();
-        this.isDisplaying = false;
-        this.processQueue();
-      }, 300);
-    }, 3600);
-  }
-}
-const achievements = new AchievementManager();
-
-/* ---------------- Achievements Modal Drawer ---------------- */
-const clearanceBadge = document.getElementById('clearanceBadge');
-const achievementsModal = document.getElementById('achievementsModal');
-const closeAchievementsBtn = document.getElementById('closeAchievementsBtn');
-const achievementsList = document.getElementById('achievementsList');
-
-function renderAchievementsModal() {
-  achievementsList.innerHTML = Object.entries(ACHIEVEMENTS_REGISTRY).map(([id, item]) => {
-    const isUnlocked = achievements.unlocked.has(id);
-    return `
-      <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule);opacity:${isUnlocked ? '1' : '0.45'}">
-        <div style="width:24px;height:24px;border-radius:4px;background:${isUnlocked ? 'rgba(63,185,80,0.15)' : 'var(--bg-3)'};border:1px solid ${isUnlocked ? '#3fb950' : 'var(--rule)'};display:flex;align-items:center;justify-content:center;color:${isUnlocked ? '#3fb950' : 'var(--figure-2)'};font-size:12px;font-weight:700;flex-shrink:0">
-          ${isUnlocked ? '✓' : '•'}
-        </div>
-        <div style="flex:1">
-          <div style="display:flex;justify-content:space-between;align-items:baseline">
-            <span style="font-weight:700;font-size:13px;color:var(--figure)">${item.title}</span>
-            <span style="font-family:ui-monospace,monospace;font-size:11px;color:${isUnlocked ? '#3fb950' : 'var(--figure-2)'}">+${item.xp} XP</span>
-          </div>
-          <p style="font-family:var(--font-prose);font-size:12px;color:var(--figure-2);margin-top:2px">${item.desc}</p>
-        </div>
-      </div>
-    `;
-  }).join('');
-  achievements.updateClearance();
-}
-
-clearanceBadge.addEventListener('click', () => {
-  renderAchievementsModal();
-  achievementsModal.hidden = false;
-  soundEngine.playClick();
-});
-
-closeAchievementsBtn.addEventListener('click', () => {
-  achievementsModal.hidden = true;
-  soundEngine.playClick();
-});
-
-achievementsModal.addEventListener('click', e => {
-  if (e.target === achievementsModal) achievementsModal.hidden = true;
-});
-
-/* ============================================================
-   REALIUM DYNAMIC SETTLEMENT WATERFALL CONTROLLER
-   ============================================================ */
-function formatINR(val, compact = false) {
-  const num = Math.round(Number(val) || 0);
-  if (compact) {
-    if (num >= 10000000) return '₹' + (num / 10000000).toFixed(2).replace(/\.00$/, '') + ' Cr';
-    if (num >= 100000) return '₹' + (num / 100000).toFixed(2).replace(/\.00$/, '') + ' L';
-    if (num >= 1000) return '₹' + (num / 1000).toFixed(1).replace(/\.0$/, '') + ' k';
-  }
-  return '₹' + num.toLocaleString('en-IN');
-}
-
-const wfSlider = document.getElementById('wfSlider');
-const wfInvoiceVal = document.getElementById('wfInvoiceVal');
-const wfRateVal = document.getElementById('wfRateVal');
-const wfRatePills = document.querySelectorAll('.wf-pill-btn');
-const wfSegAdvance = document.getElementById('wfSegAdvance');
-const wfSegRemainder = document.getElementById('wfSegRemainder');
-const wfSegFee = document.getElementById('wfSegFee');
-const wfOutAdvance = document.getElementById('wfOutAdvance');
-const wfOutRemainder = document.getElementById('wfOutRemainder');
-const wfOutNet = document.getElementById('wfOutNet');
-let currentRate = 0.60;
-
-function updateWaterfall(interactive = true) {
-  const invoice = parseFloat(wfSlider.value) || 1863900;
-  const advance = Math.round(invoice * currentRate);
-  const discountFee = Math.round(invoice * 0.025) + 2500;
-  const remainderGross = invoice - advance;
-  const remainderNet = Math.max(0, remainderGross - discountFee);
-  const netContractor = advance + remainderNet;
-
-  wfInvoiceVal.textContent = formatINR(invoice);
-  wfRateVal.textContent = Math.round(currentRate * 100) + '%';
-  wfOutAdvance.textContent = formatINR(advance);
-  wfOutRemainder.textContent = formatINR(remainderNet);
-  wfOutNet.textContent = formatINR(netContractor);
-
-  const advPct = (advance / invoice) * 100;
-  const remPct = (remainderNet / invoice) * 100;
-  const feePct = (discountFee / invoice) * 100;
-
-  wfSegAdvance.style.width = advPct + '%';
-  wfSegRemainder.style.width = remPct + '%';
-  wfSegFee.style.width = feePct + '%';
-
-  if (interactive) {
-    soundEngine.playSliderTick();
-    achievements.unlock('waterfall_simulated');
-  }
-}
-
-if (wfSlider) {
-  wfSlider.addEventListener('input', () => updateWaterfall(true));
-  wfRatePills.forEach(btn => {
-    btn.addEventListener('click', () => {
-      wfRatePills.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentRate = parseFloat(btn.dataset.rate) || 0.60;
-      soundEngine.playClick();
-      updateWaterfall(true);
-    });
-  });
-  updateWaterfall(false);
-}
-
-/* ============================================================
-   TURNSTILE DUAL INSPECTOR CONTROLLER
-   ============================================================ */
-const tsBtnHuman = document.getElementById('tsBtnHuman');
-const tsBtnAgent = document.getElementById('tsBtnAgent');
-const tsViewHuman = document.getElementById('tsViewHuman');
-const tsViewAgent = document.getElementById('tsViewAgent');
-const tsCopyBtn = document.getElementById('tsCopyBtn');
-
-if (tsBtnHuman && tsBtnAgent) {
-  tsBtnHuman.addEventListener('click', () => {
-    tsBtnHuman.classList.add('active');
-    tsBtnHuman.setAttribute('aria-checked', 'true');
-    tsBtnAgent.classList.remove('active');
-    tsBtnAgent.setAttribute('aria-checked', 'false');
-    tsViewHuman.hidden = false;
-    tsViewAgent.hidden = true;
-    soundEngine.playClick();
-  });
-
-  tsBtnAgent.addEventListener('click', () => {
-    tsBtnAgent.classList.add('active');
-    tsBtnAgent.setAttribute('aria-checked', 'true');
-    tsBtnHuman.classList.remove('active');
-    tsBtnHuman.setAttribute('aria-checked', 'false');
-    tsViewHuman.hidden = true;
-    tsViewAgent.hidden = false;
-    soundEngine.playClick();
-    achievements.unlock('turnstile_agent_inspected');
-  });
-
-  if (tsCopyBtn) {
-    tsCopyBtn.addEventListener('click', () => {
-      const code = document.getElementById('tsCodeBlock').innerText;
-      try {
-        navigator.clipboard.writeText(code).then(() => {
-          tsCopyBtn.textContent = 'Copied!';
-          soundEngine.playClick();
-          setTimeout(() => { tsCopyBtn.textContent = 'Copy Payload'; }, 2000);
-        });
-      } catch (e) {}
-    });
-  }
-}
-
-/* ============================================================
-   DARWINBOX PRD EDGE MATRIX CONTROLLER
-   ============================================================ */
-const toggleEdgeMatrix = document.getElementById('toggleEdgeMatrix');
-const edgeMatrixModal = document.getElementById('edgeMatrixModal');
-const closeEdgeMatrixBtn = document.getElementById('closeEdgeMatrixBtn');
-
-if (toggleEdgeMatrix && edgeMatrixModal) {
-  toggleEdgeMatrix.addEventListener('click', () => {
-    edgeMatrixModal.hidden = false;
-    soundEngine.playClick();
-    achievements.unlock('edge_cases_matrix');
-  });
-  if (closeEdgeMatrixBtn) {
-    closeEdgeMatrixBtn.addEventListener('click', () => {
-      edgeMatrixModal.hidden = true;
-      soundEngine.playClick();
-    });
-  }
-  edgeMatrixModal.addEventListener('click', e => {
-    if (e.target === edgeMatrixModal) edgeMatrixModal.hidden = true;
-  });
-}
-
-/* ============================================================
-   COMMAND PALETTE CONTROLLER (⌘K)
-   ============================================================ */
-const cmdDialog = document.getElementById('cmdDialog');
-const cmdInput = document.getElementById('cmdInput');
-const cmdList = document.getElementById('cmdList');
-const cmdBtn = document.getElementById('cmdBtn');
-const cmdMobileTrigger = document.getElementById('cmdMobileTrigger');
-
-const COMMANDS = [
-  { title: "Opening Plate", cat: "Navigation", shortcut: "G 1", action: () => scrollToTarget("#opening") },
-  { title: "Statement Plate", cat: "Navigation", shortcut: "G 2", action: () => scrollToTarget("#statement") },
-  { title: "Darwinbox Case Study", cat: "Navigation", shortcut: "G 3", action: () => scrollToTarget("#darwinbox") },
-  { title: "Protocol Suite (Realium, Turnstile, Heirloom, Windtunnel)", cat: "Navigation", shortcut: "G 4", action: () => scrollToTarget("#protocols") },
-  { title: "Realium Settlement Simulator", cat: "Navigation", shortcut: "G 5", action: () => scrollToTarget("#settlement") },
-  { title: "AURORA 4.0 Symposium", cat: "Navigation", shortcut: "G 6", action: () => scrollToTarget("#aurora") },
-  { title: "Record & Education", cat: "Navigation", shortcut: "G 7", action: () => scrollToTarget("#record") },
-  { title: "Contact & Reach Out", cat: "Navigation", shortcut: "G 8", action: () => scrollToTarget("#contact") },
-  { title: "Realium Live Protocol Demo", cat: "Protocols", shortcut: "↗", action: () => window.open("https://bahniman.github.io/realium/", "_blank") },
-  { title: "Heirloom Cryptographic Memory Demo", cat: "Protocols", shortcut: "↗", action: () => window.open("https://bahniman.github.io/heirloom/", "_blank") },
-  { title: "Turnstile Machine-Readable Commerce Demo", cat: "Protocols", shortcut: "↗", action: () => window.open("https://bahniman.github.io/turnstile/", "_blank") },
-  { title: "Windtunnel Synthetic Cohort Sim Demo", cat: "Protocols", shortcut: "↗", action: () => window.open("https://bahniman.github.io/windtunnel/", "_blank") },
-  { title: "View Clearance Milestones", cat: "System", shortcut: "C", action: () => clearanceBadge.click() },
-  { title: "Toggle Audio Synthesizer", cat: "System", shortcut: "M", action: () => audioBtn.click() },
-  { title: "Toggle Light / Dark Stage", cat: "System", shortcut: "T", action: () => btn.click() },
-  { title: "Copy Email (bahniman30@gmail.com)", cat: "Actions", shortcut: "E", action: () => {
-    try {
-      navigator.clipboard.writeText("bahniman30@gmail.com").then(() => {
-        soundEngine.playAchievementChime();
-        achievements.renderCustomToast("Email Copied", "bahniman30@gmail.com copied to clipboard.", "Action Complete", 0);
-      });
-    } catch (e) {
-      achievements.renderCustomToast("bahniman30@gmail.com", "Copy failed or unsupported.", "Notice", 0);
-    }
-  }}
-];
-
-let cmdFiltered = [...COMMANDS];
-let cmdSelectedIdx = 0;
-
-function renderCommandList() {
-  cmdList.innerHTML = '';
-  if (cmdFiltered.length === 0) {
-    cmdList.innerHTML = '<div style="padding:12px;color:var(--figure-2);font-size:13px;text-align:center">No matching commands found</div>';
-    return;
-  }
-  const groups = {};
-  cmdFiltered.forEach((cmd, idx) => {
-    if (!groups[cmd.cat]) groups[cmd.cat] = [];
-    groups[cmd.cat].push({ cmd, idx });
-  });
-
-  Object.entries(groups).forEach(([cat, items]) => {
-    const groupEl = document.createElement('div');
-    groupEl.innerHTML = `<div class="cmd-group-label">${cat}</div>`;
-    items.forEach(({ cmd, idx }) => {
-      const itemEl = document.createElement('div');
-      itemEl.className = 'cmd-item';
-      itemEl.setAttribute('role', 'option');
-      itemEl.setAttribute('aria-selected', String(idx === cmdSelectedIdx));
-      itemEl.innerHTML = `
-        <span>${cmd.title}</span>
-        ${cmd.shortcut ? `<span class="cmd-item-k">${cmd.shortcut}</span>` : ''}
-      `;
-      itemEl.addEventListener('mouseenter', () => {
-        cmdSelectedIdx = idx;
-        updateCommandSelection();
-      });
-      itemEl.addEventListener('click', () => {
-        executeCommand(idx);
-      });
-      groupEl.appendChild(itemEl);
-    });
-    cmdList.appendChild(groupEl);
-  });
-  updateCommandSelection();
-}
-
-function updateCommandSelection() {
-  const items = cmdList.querySelectorAll('.cmd-item');
-  items.forEach((el, idx) => {
-    el.setAttribute('aria-selected', String(idx === cmdSelectedIdx));
-    if (idx === cmdSelectedIdx) el.scrollIntoView({ block: 'nearest' });
-  });
-}
-
-function executeCommand(idx) {
-  const cmd = cmdFiltered[idx];
-  if (cmd) {
-    closeCommandPalette();
-    soundEngine.playClick();
-    cmd.action();
-  }
-}
-
-function openCommandPalette() {
-  cmdDialog.hidden = false;
-  cmdInput.value = '';
-  cmdFiltered = [...COMMANDS];
-  cmdSelectedIdx = 0;
-  renderCommandList();
-  cmdInput.focus();
-  achievements.unlock('cmd_power_user');
-  soundEngine.playClick();
-}
-
-function closeCommandPalette() {
-  cmdDialog.hidden = true;
-}
-
-if (cmdBtn) cmdBtn.addEventListener('click', openCommandPalette);
-if (cmdMobileTrigger) cmdMobileTrigger.addEventListener('click', openCommandPalette);
-
-cmdDialog.addEventListener('click', e => {
-  if (e.target === cmdDialog) closeCommandPalette();
-});
-
-cmdInput.addEventListener('input', e => {
-  const q = e.target.value.toLowerCase().trim();
-  cmdFiltered = COMMANDS.filter(c => c.title.toLowerCase().includes(q) || c.cat.toLowerCase().includes(q));
-  cmdSelectedIdx = 0;
-  renderCommandList();
-});
-
-cmdInput.addEventListener('keydown', e => {
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    if (cmdFiltered.length) {
-      cmdSelectedIdx = (cmdSelectedIdx + 1) % cmdFiltered.length;
-      updateCommandSelection();
-    }
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    if (cmdFiltered.length) {
-      cmdSelectedIdx = (cmdSelectedIdx - 1 + cmdFiltered.length) % cmdFiltered.length;
-      updateCommandSelection();
-    }
-  } else if (e.key === 'Enter') {
-    e.preventDefault();
-    executeCommand(cmdSelectedIdx);
-  } else if (e.key === 'Escape') {
-    closeCommandPalette();
-  }
-});
-
-addEventListener('keydown', e => {
-  const isInput = ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName);
-  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-    e.preventDefault();
-    cmdDialog.hidden ? openCommandPalette() : closeCommandPalette();
-  } else if (e.key === '/' && !isInput && cmdDialog.hidden) {
-    e.preventDefault();
-    openCommandPalette();
-  } else if (e.key === 'Escape') {
-    if (!cmdDialog.hidden) closeCommandPalette();
-    if (!achievementsModal.hidden) achievementsModal.hidden = true;
-    if (!edgeMatrixModal.hidden) edgeMatrixModal.hidden = true;
-  }
-});
-
-/* ============================================================
-   KONAMI CODE DETECTOR (EASTER EGG)
-   ============================================================ */
-const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-let konamiIndex = 0;
-
-addEventListener('keydown', e => {
-  if (e.key.toLowerCase() === KONAMI_CODE[konamiIndex].toLowerCase()) {
-    konamiIndex++;
-    if (konamiIndex === KONAMI_CODE.length) {
-      konamiIndex = 0;
-      achievements.unlock('master_architect_konami');
-      soundEngine.playAchievementChime();
-      triggerGoldCanvasPulse();
-    }
-  } else {
-    konamiIndex = 0;
-  }
-});
-
-/* ============================================================
-   CORE NAVIGATION, STACK & MEASUREMENT
-   ============================================================ */
-const nameEl = document.getElementById('plateName');
-const progressEl = document.getElementById('progress');
-const navBtn = document.getElementById('plateNav');
-const menu = document.getElementById('sectionMenu');
-
-menu.innerHTML = plates.map((p, i) =>
-  `<a href="#${p.id}" data-id="${p.id}">${p.dataset.name}<span class="n">${String(i + 1).padStart(2, '0')}</span></a>`
-).join('');
-
-function setMenu(open) {
-  menu.hidden = !open;
-  navBtn.setAttribute('aria-expanded', String(open));
-}
-
-navBtn.addEventListener('click', e => {
-  e.stopPropagation();
-  setMenu(menu.hidden);
-  soundEngine.playClick();
-});
-
-menu.addEventListener('click', e => {
-  const a = e.target.closest('a');
-  if (!a) return;
-  e.preventDefault();
-  setMenu(false);
-  soundEngine.playClick();
-  const id = a.getAttribute('href');
-  scrollToTarget(id);
-});
-
-addEventListener('click', e => {
-  if (!menu.hidden && !menu.contains(e.target)) setMenu(false);
-  const a = e.target.closest('a[href^="#"]');
-  if (a && !menu.contains(a)) {
-    const href = a.getAttribute('href');
-    if (href && href !== '#') {
-      e.preventDefault();
-      scrollToTarget(href);
-    }
-  }
-});
-let currentName = 'Opening';
-
-function measureStack() {
-  const vh = innerHeight;
-  plates.forEach((p, i) => {
-    if (i === plates.length - 1) { p.style.top = ''; return; }
-    const h = p.offsetHeight;
-    p.style.top = h <= vh ? '0px' : `${Math.round(vh - h)}px`;
-  });
-  if (window.lenis) window.lenis.resize();
-}
-
-function recede() {
-  const vh = innerHeight;
-  for (let i = 0; i < plates.length - 1; i++) {
-    const next = plates[i + 1].getBoundingClientRect().top;
-    if (next >= vh - 2) {
-      plates[i].style.setProperty('--recede-s', '1');
-      plates[i].style.setProperty('--recede-o', '1');
-      continue;
-    }
-    const t = Math.min(1, Math.max(0, 1 - next / vh));
-    plates[i].style.setProperty('--recede-s', (1 - t * 0.055).toFixed(4));
-    plates[i].style.setProperty('--recede-o', (1 - t * 0.55).toFixed(3));
-  }
-}
-
-function onScrollTick() {
-  const scrollYPos = window.lenis ? window.lenis.scroll : window.scrollY;
-  const h = document.documentElement.scrollHeight - innerHeight;
-  progressEl.style.transform = `scaleX(${h > 0 ? Math.min(1, Math.max(0, scrollYPos / h)) : 0})`;
-  if (motion) recede();
-
-  // Smooth parallax on numerals synchronized with Lenis
-  const nums = document.querySelectorAll('.numeral');
-  for (const n of nums) {
-    const r = n.parentElement.getBoundingClientRect();
-    const t = (innerHeight - r.top) / (innerHeight + r.height);
-    n.style.transform = `translate3d(0, ${(0.5 - t) * 14}vh, 0)`;
-  }
-
-  let name = plates[0].dataset.name;
-  for (const p of plates) {
-    if (p.getBoundingClientRect().top <= innerHeight * 0.35) name = p.dataset.name;
-  }
-  if (name !== currentName) {
-    currentName = name;
-    nameEl.innerHTML = `<span>${name}</span>`;
-    const activePlate = plates.find(p => p.dataset.name === name);
-    menu.querySelectorAll('a').forEach(a => {
-      a.setAttribute('aria-current', String(activePlate && a.getAttribute('data-id') === activePlate.id));
-    });
-    if (window.__anime) {
-      window.__anime.animate(nameEl.firstElementChild, {
-        y: ['100%', '0%'], duration: 360, ease: 'outExpo'
-      });
-    }
-  }
-}
-
-if (window.lenis) {
-  window.lenis.on('scroll', onScrollTick);
-} else {
-  addEventListener('scroll', onScrollTick, { passive: true });
-}
-measureStack();
-onScrollTick();
-if (document.fonts && document.fonts.ready) {
-  document.fonts.ready.then(() => {
-    measureStack();
-    if (window.lenis) window.lenis.resize();
-  });
-}
-addEventListener('load', () => {
-  measureStack();
-  if (window.lenis) window.lenis.resize();
-});
-
-/* ============================================================
-   INTERACTIVE CANVAS SURVEY STAGE
-   Grid surveyed points with dynamic pointer light & beacon ripples
-   ============================================================ */
-const cv = document.getElementById('lattice');
-const ctx = cv.getContext('2d');
-let pts = [], W = 0, H = 0, cols = 0, drawn = 0, lx = 0, ly = 0, tx = 0, ty = 0, raf = null;
-let ripples = [];
-let goldPulse = 0;
-
-function triggerGoldCanvasPulse() {
-  goldPulse = 1.0;
-}
-
-function build() {
-  const dpr = Math.min(devicePixelRatio || 1, 2);
-  const r = cv.parentNode.getBoundingClientRect();
-  W = r.width; H = r.height;
-  if (!W || !H) return;
-  cv.width = Math.round(W * dpr);
-  cv.height = Math.round(H * dpr);
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-  const step = W < 700 ? 68 : 96;
-  cols = Math.ceil(W / step) + 1;
-  const rows = Math.ceil(H / step) + 1;
-  pts = [];
-  for (let y = 0; y < rows; y++) {
-    for (let x = 0; x < cols; x++) {
-      const n = Math.sin((x * 12.9898 + y * 78.233) * 43758.5453);
-      pts.push({
-        x: x * step + (n - Math.floor(n) - 0.5) * step * 0.3,
-        y: y * step + Math.cos(n * 7.13) * step * 0.15,
-        c: x
-      });
-    }
-  }
-  if (!lx) { lx = tx = W * 0.62; ly = ty = H * 0.34; }
-}
-
-function paintStage() {
-  if (!pts.length) return;
-  const light = root.classList.contains('light');
-  ctx.clearRect(0, 0, W, H);
-  ctx.lineWidth = 1;
-  const reach = Math.max(W, H) * 0.55;
-  const shown = Math.floor(pts.length * drawn);
-
-  // Update active ripples
-  for (let i = ripples.length - 1; i >= 0; i--) {
-    const rp = ripples[i];
-    rp.radius += 3.8;
-    rp.alpha *= 0.96;
-    if (rp.alpha < 0.02 || rp.radius > Math.max(W, H) * 0.5) {
-      ripples.splice(i, 1);
-    }
-  }
-  if (goldPulse > 0.01) goldPulse *= 0.97;
-
-  for (let i = 0; i < shown; i++) {
-    const p = pts[i];
-    let d = Math.hypot(p.x - lx, p.y - ly);
-    let lit = Math.max(0, 1 - d / reach);
-
-    // Add lighting from beacon ripples
-    for (const rp of ripples) {
-      const distToRip = Math.abs(Math.hypot(p.x - rp.x, p.y - rp.y) - rp.radius);
-      if (distToRip < 45) {
-        lit += (1 - distToRip / 45) * rp.alpha * 0.8;
-      }
-    }
-
-    const a = Math.min(1, 0.05 + lit * 0.42);
-
-    if (goldPulse > 0.02) {
-      ctx.strokeStyle = `rgba(255, 215, 0, ${a * (1 + goldPulse)})`;
-    } else {
-      ctx.strokeStyle = light
-        ? `rgba(0, 122, 255, ${a * 0.45})`
-        : `rgba(10, 132, 255, ${a * 0.65})`;
-    }
-
-    const right = (p.c + 1 < cols) ? pts[i + 1] : null;
-    const down = pts[i + cols];
-    if (right && i + 1 < shown) {
-      ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(right.x, right.y); ctx.stroke();
-    }
-    if (down && i + cols < shown) {
-      ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(down.x, down.y); ctx.stroke();
-    }
-    if (lit > 0.45) {
-      if (goldPulse > 0.02) {
-        ctx.fillStyle = `rgba(255, 220, 100, ${lit * 0.9})`;
-      } else {
-        ctx.fillStyle = light ? `rgba(11,12,16,${lit * 0.5})` : `rgba(242,241,239,${lit * 0.75})`;
-      }
-      ctx.fillRect(p.x - 1.5, p.y - 1.5, 3, 3);
-    }
-  }
-}
-
-function loop() {
-  lx += (tx - lx) * 0.045;
-  ly += (ty - ly) * 0.045;
-  paintStage();
-  raf = requestAnimationFrame(loop);
-}
-
-// Canvas click listener to place survey beacons
-cv.parentElement.style.pointerEvents = 'auto';
-cv.style.cursor = 'crosshair';
-cv.addEventListener('click', e => {
-  const r = cv.getBoundingClientRect();
-  const x = e.clientX - r.left;
-  const y = e.clientY - r.top;
-  ripples.push({ x, y, radius: 4, alpha: 1 });
-  soundEngine.playClick();
-  achievements.unlock('survey_beacon_dropped');
-});
-
-/* ============================================================
-   ANIME.JS MOTION LAYER
-   ============================================================ */
-try {
-  const anime = await import('https://cdn.jsdelivr.net/npm/animejs@4/+esm');
-  const { animate, stagger, createTimeline } = anime;
-  window.__anime = anime;
-
-  if (motion) {
-    clearTimeout(failsafe);
-    build();
-    if (W && H) {
-      const setOut = { v: 0 };
-      animate(setOut, {
-        v: 1, duration: 2200, ease: 'inOutQuad',
-        onUpdate: () => { drawn = setOut.v; },
-        onComplete: () => { drawn = 1; }
-      });
-      raf = requestAnimationFrame(loop);
-      addEventListener('pointermove', e => {
-        const r = cv.getBoundingClientRect();
-        if (e.clientY > r.bottom) return;
-        tx = e.clientX - r.left; ty = e.clientY - r.top;
-      }, { passive: true });
-    }
-
-    const heroLines = document.querySelectorAll('#hero .line-in');
-    if (heroLines.length) {
-      animate(heroLines, {
-        y: ['105%', '0%'],
-        duration: 900,
-        ease: 'outExpo',
-        delay: stagger(100)
-      });
-    }
-
-    const openingRisers = document.querySelectorAll('#opening .rise');
-    if (openingRisers.length) {
-      animate(openingRisers, {
-        opacity: [0, 1],
-        y: [14, 0],
-        duration: 700,
-        ease: 'outQuart',
-        delay: stagger(70, { start: 160 })
-      });
-    }
-
-    const io = new IntersectionObserver(entries => {
-      for (const e of entries) {
-        if (!e.isIntersecting) continue;
-        io.unobserve(e.target);
-        const lines = e.target.querySelectorAll('.wipe .line-in');
-        if (lines.length) {
-          animate(lines, { y: ['105%', '0%'], duration: 900, ease: 'outExpo', delay: stagger(90) });
-        }
-        const risers = e.target.querySelectorAll('.rise');
-        if (risers.length) {
-          animate(risers, {
-            opacity: [0, 1], y: [16, 0], duration: 700, ease: 'outQuart',
-            delay: stagger(70, { start: 120 })
-          });
-        }
-      }
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
-
-    plates.forEach(p => { if (p.id !== 'opening') io.observe(p); });
-
-    document.querySelectorAll('.proto').forEach(p => {
-      const n = p.querySelector('.proto-n');
-      p.addEventListener('pointerenter', () => animate(n, { x: 10, duration: 420, ease: 'outExpo' }));
-      p.addEventListener('pointerleave', () => animate(n, { x: 0, duration: 520, ease: 'outQuart' }));
-    });
-  } else {
-    revealAll();
-    build();
-    drawn = 1;
-    paintStage();
-  }
-} catch (err) {
-  console.warn('motion layer unavailable, falling back to static', err);
-  revealAll();
-  try { build(); drawn = 1; paintStage(); } catch (e) {}
-}
-
-let rt;
-addEventListener('resize', () => {
-  clearTimeout(rt);
-  rt = setTimeout(() => {
-    measureStack();
-    if (window.lenis) window.lenis.resize();
-    onScrollTick();
-    const d = drawn; build(); drawn = d; paintStage();
-  }, 150);
-}, { passive: true });
-</script>
+<script src="lenis.min.js" defer></script>
+<script src="site.js" defer></script>
 </body>
 </html>
-
