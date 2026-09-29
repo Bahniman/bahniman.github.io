@@ -1,6 +1,6 @@
 /* Bahniman Talukdar · portfolio behaviour
    Lenis smooth wheel scroll, reveal-on-scroll, active nav, progress line,
-   floating back-to-top pill, circular theme switch, copy email. */
+   floating back-to-top pill, theme switch, copy email. */
 (function () {
   'use strict';
   var root = document.documentElement;
@@ -119,7 +119,7 @@
   window.addEventListener('resize', onScroll, { passive: true });
   update();
 
-  /* ---- theme: circular reveal from the button ---- */
+  /* ---- theme: apply immediately so all controls stay interactive ---- */
   var themeBtn = document.getElementById('theme');
   var mq = window.matchMedia('(prefers-color-scheme: dark)');
   function isDark() {
@@ -140,14 +140,7 @@
       try { localStorage.setItem('theme', next); } catch (e) {}
       syncMeta();
     };
-    if (!document.startViewTransition || reduce) { apply(); return; }
-    var r = themeBtn.getBoundingClientRect();
-    var x = r.left + r.width / 2, yy = r.top + r.height / 2;
-    var rad = Math.hypot(Math.max(x, innerWidth - x), Math.max(yy, innerHeight - yy));
-    root.style.setProperty('--vx', x + 'px');
-    root.style.setProperty('--vy', yy + 'px');
-    root.style.setProperty('--vr', rad + 'px');
-    document.startViewTransition(apply);
+    apply();
   });
 
   /* ---- figures count up once, when first seen ---- */

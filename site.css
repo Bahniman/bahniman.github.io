@@ -346,11 +346,6 @@ body.loaded .glance.h-in{animation-delay:.45s}
 .float .up{position:absolute;left:17px;width:18px;height:18px;transform:none;fill:none;stroke:#1d1a16;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .float-label{font-family:var(--mono);font-size:12px;font-weight:700;text-transform:uppercase;min-width:4ch}
 
-/* view transitions: circular theme reveal */
-::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
-::view-transition-new(root){animation:vt-reveal .6s var(--ease)}
-@keyframes vt-reveal{from{clip-path:circle(0 at var(--vx,100%) var(--vy,0))}to{clip-path:circle(var(--vr,150vmax) at var(--vx,100%) var(--vy,0))}}
-
 /* ---------- play: the games band, printed in blue ink ---------- */
 .arcade{position:relative;isolation:isolate;overflow:hidden;margin-top:clamp(40px,6vw,80px);padding-block:clamp(72px,10vw,136px);
   background:var(--blue-fill);color:#fffaf1;border-block:var(--bw) solid var(--ink)}
