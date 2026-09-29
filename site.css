@@ -288,8 +288,8 @@ body.loaded .glance.h-in{animation-delay:.45s}
 .record{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,4vw,48px)}
 .record .col:nth-child(2){transition-delay:.08s}.record .col:nth-child(3){transition-delay:.16s}
 .rows{list-style:none;margin:14px 0 0;padding:0;border-top:var(--bw) solid var(--ink)}
-.rows li{display:grid;grid-template-columns:70px 1fr;gap:14px;padding:15px 0;border-bottom:1.5px solid var(--line-2);transition:background .2s ease}
-.rows li:hover{background:var(--yellow);color:#1d1a16}
+.rows li{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:15px 14px;border-bottom:1.5px solid var(--line-2);border-radius:6px;transition:background .2s ease}
+.rows li:hover{background:var(--yellow);color:#1d1a16;border-bottom-color:transparent}
 .rows li:hover b,.rows li:hover small,.rows li:hover .yr{color:#1d1a16}
 .rows .yr{font-size:12px;color:var(--tan);padding-top:3px;font-weight:700}
 .rows b{display:block;font-weight:700;color:var(--ink);font-size:16px;letter-spacing:-.01em;line-height:1.35}
@@ -379,15 +379,7 @@ body.loaded .glance.h-in{animation-delay:.45s}
 .best-score{font-family:var(--mono);font-size:12px;font-weight:700;text-transform:uppercase;color:var(--tan)}
 
 /* launcher illustrations */
-.art .al{stroke:var(--line-2);stroke-width:2;stroke-dasharray:5 5}
-.art .al.c{stroke:var(--blue);stroke-dasharray:none;stroke-width:3}
-.art .al.m{stroke:var(--amber-l);stroke-width:3}
-.art .al.f{stroke:var(--pink);stroke-dasharray:none;stroke-width:2.5}
-.art .ad{fill:var(--card);stroke:var(--ink);stroke-width:2}
-.art .ad.c{fill:var(--blue)}.art .ad.m{fill:var(--yellow)}.art .ad.f{fill:var(--pink)}
-.art .at{font-family:var(--mono);font-size:10.5px;font-weight:700;fill:var(--ink)}
-.art .acore{fill:var(--pink);stroke:var(--ink);stroke-width:2.5}
-.art .acore-t,.map .core-t{font-family:var(--mono);font-size:8.5px;font-weight:700;fill:#1d1a16;text-anchor:middle}
+.map .core-t{font-family:var(--mono);font-size:8.5px;font-weight:700;fill:#1d1a16;text-anchor:middle}
 .rip circle{fill:none;stroke:var(--pink);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center;animation:ripple 3.4s var(--ease) infinite}
 .rip circle+circle{animation-delay:1.7s;stroke:var(--blue)}
 @keyframes ripple{0%{transform:scale(1);opacity:.8}100%{transform:scale(4.4);opacity:0}}
@@ -403,6 +395,27 @@ body.loaded .glance.h-in{animation-delay:.45s}
 .art .nw{font-family:var(--sans);font-size:13px;font-weight:800;fill:#1d1a16}
 .art .caret{fill:var(--blue);animation:blink 1.1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
+
+/* edge-case launcher: pasted paper tiles around a CHANGE sticker */
+.art .ht{opacity:.55}.art .htd{fill:var(--pink)}
+.art .cn{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.art .cn.c{stroke:var(--blue);stroke-width:4}
+.art .cn.m{stroke:var(--amber-l);stroke-width:4;stroke-dasharray:8 6}
+.art .cn.x{stroke:var(--line-2);stroke-width:2.5;stroke-dasharray:3 6}
+.art .tls{fill:var(--shc)}
+.art .tlb{fill:var(--card);stroke:var(--ink);stroke-width:2.5}
+.art .tlt{font-family:var(--mono);font-size:11.5px;font-weight:700;fill:var(--ink);text-anchor:middle}
+.art .tl.c .tlb{fill:var(--blue)}.art .tl.c .tlt{fill:#fffaf1}
+.art .tl.m .tlb{fill:var(--yellow)}.art .tl.m .tlt{fill:#1d1a16}
+.art .tl.x{opacity:.55}
+.art .chs{fill:var(--shc)}
+.art .chb{fill:var(--pink);stroke:var(--ink);stroke-width:3}
+.art .cht{font-family:var(--mono);font-size:10px;font-weight:700;fill:#1d1a16;text-anchor:middle}
+.art .ch{transform-box:fill-box;transform-origin:center;transition:transform .4s var(--ease)}
+.cab:hover .art .ch{transform:rotate(-12deg) scale(1.06)}
+.art .tms{fill:var(--shc)}
+.art .tmb{fill:var(--yellow);stroke:var(--ink);stroke-width:2.5}
+.art .tmt{font-family:var(--mono);font-size:12px;font-weight:700;fill:#1d1a16;text-anchor:middle}
 
 /* the stage: one big paper sheet on the blue */
 .stage{border-radius:6px;border:var(--bw) solid var(--ink);background:var(--card);color:var(--body);padding:clamp(18px,3vw,40px);box-shadow:12px 12px 0 var(--ink);animation:caseIn .5s var(--ease)}
