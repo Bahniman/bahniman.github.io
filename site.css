@@ -106,20 +106,20 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #theme .sun{display:none}:root:not([data-theme="light"]) #theme .moon{display:block}}
 
 /* ---------- hero: the poster ---------- */
-.hero{position:relative;padding-top:calc(var(--top) + clamp(32px,6vh,72px));padding-bottom:clamp(24px,4vw,48px);
+.hero{position:relative;padding-top:calc(var(--top) + clamp(20px,4vh,48px));padding-bottom:clamp(24px,4vw,48px);
   display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.9fr);column-gap:clamp(24px,3vw,48px);row-gap:clamp(40px,6vw,72px);align-items:start}
 .hero::before{right:-14vw;top:-8vw;width:62vw;height:62vw;max-width:880px;max-height:880px;z-index:-1;opacity:.9;
   background:radial-gradient(var(--pink) 1.7px,transparent 1.9px) 0 0/11px 11px;-webkit-mask-image:radial-gradient(circle,#000 25%,transparent 68%);mask-image:radial-gradient(circle,#000 25%,transparent 68%)}
 .hero::after{content:"";position:absolute;left:28%;top:52%;width:440px;height:440px;border-radius:50%;z-index:-1;pointer-events:none;opacity:.75;mix-blend-mode:var(--blend);
   background:radial-gradient(var(--blue) 1.7px,transparent 1.9px) 3px 3px/11px 11px;-webkit-mask-image:radial-gradient(circle,#000 18%,transparent 68%);mask-image:radial-gradient(circle,#000 18%,transparent 68%)}
 .poster{min-width:0}
-.big{font-size:clamp(76px,13.2vw,204px);line-height:.8;letter-spacing:-.065em;margin:26px 0 30px;font-weight:800}
+.big{font-size:clamp(72px,min(11.2vw,16.5vh),176px);line-height:.8;letter-spacing:-.065em;margin:18px 0 20px;font-weight:800}
 .big .a,.big .b{display:block;mix-blend-mode:var(--blend)}
 .big .a{color:var(--blue)}
 .big .b{color:var(--pink);margin-left:.5em;margin-top:-.04em}
 .big .c{display:block;font-family:var(--serif);font-style:italic;font-weight:400;font-size:.33em;line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin:.35em 0 0 .04em;max-width:15ch}
-.dek{font-family:var(--serif);font-style:italic;font-size:clamp(19px,1.6vw,23px);line-height:1.45;color:var(--ink);max-width:40ch}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.dek{font-family:var(--serif);font-style:italic;font-size:clamp(18px,1.45vw,21px);line-height:1.42;color:var(--ink);max-width:44ch}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
 
 .hero-cards{position:relative;min-height:640px;margin-top:40px}
 .sticker{position:absolute;right:-6px;top:-34px;z-index:3;width:118px;height:118px;border-radius:50%;background:var(--yellow);color:#1d1a16;border:var(--bw) solid var(--ink);
@@ -555,6 +555,42 @@ body.loaded .glance.h-in{animation-delay:.45s}
 .g-rules li::before{content:counter(r);width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--pink);border:2px solid var(--ink);font-family:var(--mono);font-size:12px;color:#1d1a16}
 .copied-note{font-family:var(--mono);font-size:12px;font-weight:700;text-transform:uppercase;color:var(--emer)}
 
+/* hero: a proof card linking to the first case study */
+.proof{display:flex;flex-direction:column;gap:4px;max-width:480px;margin-top:18px;padding:12px 16px;border:var(--bw) solid var(--ink);border-radius:6px;background:var(--card);
+  color:var(--ink);text-decoration:none;box-shadow:4px 4px 0 var(--blue);transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.proof:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--blue)}
+.proof b{font-size:17px;font-weight:800;letter-spacing:-.025em;line-height:1.2}
+.proof .go{font-family:var(--mono);font-size:12px;font-weight:700;text-transform:uppercase;color:var(--tan)}
+
+/* case studies */
+.studies{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,32px);align-items:start}
+.study{padding:clamp(24px,3vw,36px);background:var(--card);border:var(--bw) solid var(--ink);border-radius:6px;box-shadow:var(--sh)}
+.study.two{box-shadow:6px 6px 0 var(--blue)}
+.study h3{font-size:clamp(30px,3vw,42px);letter-spacing:-.05em;line-height:.98;margin:12px 0 20px}
+.steps{margin:0;display:grid;gap:0}
+.steps div{display:grid;grid-template-columns:118px minmax(0,1fr);gap:16px;padding:14px 0;border-top:1.5px solid var(--line-2)}
+.steps dt{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;color:var(--tan);padding-top:4px}
+.steps dd{margin:0;font-size:16px;line-height:1.65;color:var(--body)}
+.steps div:nth-child(3) dt{color:var(--blue)}
+.steps div:nth-child(3) dd{color:var(--ink)}
+
+/* prototypes: the honest caveat */
+.unproven{margin-top:14px;padding:10px 12px;border:2px dashed var(--line-2);border-radius:6px;font-size:14.5px;line-height:1.55;color:var(--sec)}
+.unproven b{color:var(--ink)}
+
+/* mobile section menu */
+.menu-btn{display:none}
+.mnav{position:absolute;top:calc(100% + 8px);right:var(--gut);display:grid;min-width:210px;padding:8px;background:var(--card);border:var(--bw) solid var(--ink);border-radius:6px;box-shadow:var(--sh)}
+.mnav[hidden]{display:none}
+.mnav a{font-family:var(--mono);font-size:15px;color:var(--ink);text-decoration:none;padding:11px 12px;border-radius:4px}
+.mnav a:hover,.mnav a:focus-visible{background:var(--yellow);color:#1d1a16}
+
+/* game 1: items that only need a check */
+.tile.check{border-style:dashed;background:var(--card)}.tile.check .tag{color:var(--sec)}
+.map .ln.check{stroke:var(--ink);stroke-dasharray:.015 .02;stroke-width:2;opacity:.6}
+.map .nd.check .dot{fill:var(--card);stroke-dasharray:3 3}
+.g-score .net{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:99px;border:2px solid var(--ink);font-family:var(--mono);font-size:13px;font-weight:700}
+
 /* ---------- responsive ---------- */
 @media (max-width:1080px){
   .hero{grid-template-columns:1fr}
@@ -562,7 +598,7 @@ body.loaded .glance.h-in{animation-delay:.45s}
   .hcard{position:relative;right:auto!important;top:auto!important;width:100%;max-width:520px}
   .hcard.two{justify-self:end}
   .sticker{top:-10px;right:0}
-  .work,.spec,.feature,.sec-head.split,.edge,.lab,.g-endscreen{grid-template-columns:1fr}
+  .work,.spec,.feature,.sec-head.split,.edge,.lab,.g-endscreen,.studies{grid-template-columns:1fr}
   .work-side .sticky,.edge-map,.admin{position:static}
   .record{grid-template-columns:repeat(2,minmax(0,1fr))}
   .path,.projects{grid-template-columns:1fr 1fr}
@@ -571,6 +607,13 @@ body.loaded .glance.h-in{animation-delay:.45s}
   :root{--top:60px}
   body{font-size:16px}
   .nav,.hide-sm{display:none}
+  .menu-btn{display:inline-grid}
+  .edge-side,.lab-side{order:-1}
+  .admin .arow.dim,.admin-bar span{display:none}
+  .admin-main{min-height:0}
+  .persona{padding:12px 14px}
+  .steps div{grid-template-columns:1fr;gap:4px}
+  .proof{max-width:none}
   .top-end{margin-left:auto}
   .logo span{font-size:12.5px}
   .big{font-size:clamp(64px,21vw,110px)}

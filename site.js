@@ -81,8 +81,8 @@
   /* ---- active section in nav ---- */
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
   var sections = navLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); });
-  var labels = { hero: 'Top', path: 'Path', play: 'Play', work: 'Work', lab: 'Lab', record: 'Record', ask: 'Ask', contact: 'Contact' };
-  var allSecs = ['hero', 'play', 'path', 'work', 'lab', 'record', 'ask', 'contact'].map(function (id) { return document.getElementById(id); });
+  var labels = { hero: 'Top', path: 'Path', play: 'Play', work: 'Work', studies: 'Cases', lab: 'Lab', record: 'Record', ask: 'Ask', contact: 'Contact' };
+  var allSecs = ['hero', 'play', 'path', 'work', 'studies', 'lab', 'record', 'ask', 'contact'].map(function (id) { return document.getElementById(id); });
 
   /* ---- one scroll handler, batched per frame ---- */
   var ticking = false;
@@ -289,7 +289,8 @@
       ['y', 'Connected systems', 'Payroll, single sign-on and other tools may read the name over the API. They need to know which name they get.'],
       ['n', 'Leave balances', 'Leave is tied to the employee ID, not the name. Nothing changes.'],
       ['n', 'Salary calculation', 'Pay is worked out from the employee ID and pay structure. The name plays no part.'],
-      ['n', 'Shift rosters', 'Rosters also use the employee ID. The new name simply shows up.']
+      ['n', 'Shift rosters', 'Rosters also use the employee ID. The new name simply shows up.'],
+      ['q', 'Mobile app', 'Only if the app stores names for offline use. Worth a quick check with the mobile team before promising a date.']
     ] },
     { req: 'Add a probation end date field to the employee profile.', items: [
       ['y', 'Existing employees', 'Thousands of current records have no value. Leave it blank, calculate it from the joining date, or ask HR to upload it?'],
@@ -300,7 +301,8 @@
       ['y', 'Confirmation approval', 'The date should start the confirmation approval, or HR keeps tracking it in a spreadsheet.'],
       ['n', 'Login page', 'Nothing about signing in changes.'],
       ['n', 'Holiday calendar', 'Holidays are set by location, not by a date on the profile.'],
-      ['n', 'Profile photo rules', 'A date field has no effect on photos.']
+      ['n', 'Profile photo rules', 'A date field has no effect on photos.'],
+      ['q', 'Leave eligibility', 'Some clients restrict leave during probation. Check whether any leave policy will start reading this date.']
     ] },
     { req: 'Let HR backdate a department transfer by two months.', items: [
       ['y', 'Cost centre in payroll', 'Salary already booked to the old department for those months may need to move.'],
@@ -310,7 +312,8 @@
       ['y', 'Data access', 'The new manager may now see records from before they managed this person. Is that allowed?'],
       ['n', 'Password policy', 'Unrelated to departments.'],
       ['n', 'Language settings', 'Language belongs to the user, not the department.'],
-      ['n', 'Profile photo', 'Unaffected.']
+      ['n', 'Profile photo', 'Unaffected.'],
+      ['q', 'Leave policy', 'Only matters if leave rules differ by department. Check how this client has set up its policies.']
     ] },
     { req: 'Make the mobile number mandatory on every employee profile.', items: [
       ['y', 'Existing employees', 'Profiles without a number can no longer be saved. The next edit to any of them fails until someone fills it in.'],
@@ -330,7 +333,8 @@
       ['y', 'Email templates', 'The notification needs approve and reject buttons, in every language the client uses.'],
       ['n', 'Org chart', 'Unaffected.'],
       ['n', 'Profile photo', 'Unaffected.'],
-      ['n', 'Expense currency', 'Leave approval has nothing to do with expenses.']
+      ['n', 'Expense currency', 'Leave approval has nothing to do with expenses.'],
+      ['q', 'Payroll cut-off', 'An approval that lands after payroll locks may move unpaid leave into next month. Check the cut-off rules.']
     ] },
     { req: 'Rename the "Grade" field to "Level" for one client.', items: [
       ['y', 'Other clients', 'The rename must be scoped to this client, or every customer sees "Level" tomorrow.'],
@@ -348,28 +352,28 @@
   /* Game 2 data: b = index of the clearest label */
   var LABELS = [
     { task: 'You want employees to see who their manager reports to.', now: 'Enable ESS visibility for RM hierarchy',
-      opts: ['RM hierarchy visibility (ESS)', 'Show employees their reporting chain', 'Enable hierarchy display for self-service users'], b: 1,
-      rule: 'Drop internal acronyms.', why: 'ESS and RM are words the product team uses. A new HR admin has never heard them.',
+      opts: ['Show reporting chain', 'Show employees their reporting chain on their profile', 'Show employees their manager'], b: 1,
+      rule: 'Say who sees what, and where.', why: '"Show employees their manager" sounds right but promises less than the setting does. "Show reporting chain" is short, but leaves out who sees it and where.',
       help: 'Employees see who they report to, and who that person reports to, on their profile.' },
     { task: 'You want HR to record a change that took effect last month.', now: 'Allow retro effective-dating of transactions',
-      opts: ['Transaction effectivity: retroactive', 'Enable past-dated transaction processing', 'Let HR backdate changes'], b: 2,
-      rule: 'Name the outcome, not the mechanism.', why: 'The admin wants to backdate a change. How the system stores it is not their problem.',
+      opts: ['Let HR edit past records', 'Allow backdated changes', 'Let HR backdate changes, with pay recalculated from that date'], b: 2,
+      rule: 'Name the consequence.', why: 'Backdating changes pay. An admin who does not know that will switch it on casually. "Edit past records" is wrong: nothing is overwritten, a change simply starts from an earlier date.',
       help: 'HR can set a change to apply from an earlier date. Payroll and reports update from that date.' },
     { task: 'You want onboarding tasks to start on a new joiner\'s first day.', now: 'Auto-trigger ONB workflow on DOJ',
-      opts: ['Start onboarding tasks on the joining date', 'Onboarding automation (DOJ-based)', 'Trigger workflow on joining'], b: 0,
-      rule: 'Say what happens and when.', why: '"Trigger workflow" leaves both open: which workflow, and at what moment.',
+      opts: ['Start onboarding tasks on the joining date', 'Automate onboarding', 'Send onboarding emails on the joining date'], b: 0,
+      rule: 'Say what happens and when.', why: '"Automate onboarding" is short and says nothing about when. "Send onboarding emails" sounds precise but describes the wrong thing: tasks start, not just emails.',
       help: 'On the joining date, the new joiner and their manager get their onboarding tasks.' },
     { task: 'You want phone numbers and home addresses hidden when HR downloads employee data.', now: 'Mask PII in exports',
-      opts: ['Export data sanitisation', 'PII masking for exports', 'Hide phone numbers and addresses in downloads'], b: 2,
-      rule: 'Name exactly what is affected.', why: '"PII" makes the admin guess which fields are hidden. Naming them removes the guess.',
+      opts: ['Hide personal data in downloads', 'Hide phone numbers and addresses in downloaded files', 'Hide phone numbers and addresses'], b: 1,
+      rule: 'Name exactly what is affected, and where.', why: '"Personal data" makes the admin guess which fields. "Hide phone numbers and addresses" reads as if they vanish from the screen too, which would alarm HR.',
       help: 'Downloaded files show phone numbers and addresses as hidden. The data on screen is unchanged.' },
     { task: 'You want employees to update their own bank details, but only after HR approves.', now: 'ESS edit: bank (maker-checker)',
-      opts: ['Maker-checker for bank edits', 'Let employees update bank details, with HR approval', 'Bank field self-service (approval-based)'], b: 1,
-      rule: 'Say who does what.', why: '"Maker-checker" is banking jargon. The admin needs to know who edits and who approves.',
+      opts: ['Let employees edit bank details', 'Bank detail changes need HR approval', 'Let employees update bank details, with HR approval'], b: 2,
+      rule: 'Say who does what.', why: 'The first option drops the approval, which is the part finance cares about. The second reads like a restriction and hides that employees can now edit at all.',
       help: 'Changes wait for HR approval before payroll uses the new account.' },
     { task: 'You want employees to see their payslip only after payroll is locked for the month.', now: 'Payslip publish post-lock',
-      opts: ['Show payslips to employees after payroll is locked', 'Post-lock payslip publication', 'Payslip visibility: lock-dependent'], b: 0,
-      rule: 'Write a sentence, not a pile of nouns.', why: '"Payslip publish post-lock" stacks four nouns. A sentence with a verb is read once and understood.',
+      opts: ['Delay payslips until payroll is locked', 'Show payslips to employees after payroll is locked', 'Payslip release after lock'], b: 1,
+      rule: 'Pick the verb that matches what happens.', why: '"Delay" suggests something is late or broken. Nothing is: employees see the payslip once it is final. "Payslip release after lock" is a pile of nouns.',
       help: 'Employees see this month\'s payslip once HR locks payroll. Until then they see last month\'s.' }
   ];
 
@@ -463,7 +467,7 @@
         '<div class="edge-side">' +
           '<p class="kick sm">Round ' + (eRound + 1) + ' of ' + EDGE.length + ' · the request</p>' +
           '<h3 class="g-req">"' + esc(sc.req) + '"</h3>' +
-          '<p class="g-hint">Tick every part of the system this could break, on the map or in the list. The clock starts on your first tick.</p>' +
+          '<p class="g-hint">Tick what this change will break, on the map or in the list. Every false alarm costs a point, and some items only need a check, so ticking everything will not work. The clock starts on your first tick.</p>' +
           '<div class="tiles">' + eItems.map(function (it, i) {
             return '<button type="button" class="tile" aria-pressed="false" data-i="' + i + '"><b>' + esc(it[1]) + '</b></button>';
           }).join('') + '</div>' +
@@ -498,7 +502,8 @@
         var tile = stageBody.querySelector('.tile[data-i="' + i + '"]');
         var real = it[0] === 'y', on = tile.getAttribute('aria-pressed') === 'true', cls, tag;
         if (real) total++;
-        if (real && on) { caught++; cls = 'caught'; tag = 'Caught'; }
+        if (it[0] === 'q') { cls = 'check'; tag = on ? 'Worth checking: no points either way' : 'Worth checking'; }
+        else if (real && on) { caught++; cls = 'caught'; tag = 'Caught'; }
         else if (real) { cls = 'missed'; tag = 'Missed'; }
         else if (on) { falses++; cls = 'false'; tag = 'False alarm: not affected'; }
         else { cls = 'clear'; tag = 'Not affected'; }
@@ -512,7 +517,8 @@
       eTot.caught += caught; eTot.total += total; eTot.falses += falses;
       var last = eRound === EDGE.length - 1;
       document.getElementById('eScore').innerHTML = 'You caught <b>' + caught + ' of ' + total + '</b>' +
-        (falses ? ', with ' + falses + ' false alarm' + (falses > 1 ? 's' : '') : '') + '.';
+        (falses ? ', with ' + falses + ' false alarm' + (falses > 1 ? 's' : '') : '') + '.' +
+        '<span class="net">Round score ' + Math.max(0, caught - falses) + ' / ' + total + '</span>';
       var old = document.getElementById('eCheck'), btn = old.cloneNode(false);
       btn.textContent = last ? 'See your result' : 'Next round';
       old.parentNode.replaceChild(btn, old);
@@ -521,16 +527,20 @@
       });
     };
     var edgeEnd = function () {
-      var pct = Math.round(eTot.caught / eTot.total * 100);
+      var net = Math.max(0, eTot.caught - eTot.falses);
+      var pct = Math.round(net / eTot.total * 100);
       var prev = +(store('bt-best-edge') || 0);
       if (pct > prev) store('bt-best-edge', String(pct));
       setDots(EDGE.length, EDGE.length);
       gTimer.hidden = true;
-      var verdict = pct >= 85 ? 'You would have saved the release.' : pct >= 60 ? 'Solid. A careful reviewer would catch the rest.' : 'This is why every PRD needs a module-impact section.';
+      var verdict = eTot.falses > eTot.caught / 2 ? 'Ticking everything is not a spec. Each false alarm is engineering time spent in the wrong place.'
+        : pct >= 85 ? 'You would have saved the release.'
+        : pct >= 60 ? 'Solid. A careful reviewer would catch the rest.'
+        : 'This is why every PRD needs a module-impact section.';
       stageBody.innerHTML = '<div class="g-endscreen">' +
-        '<div><p class="kick sm">Your result</p><p class="g-big">' + eTot.caught + '<small>/ ' + eTot.total + '</small></p>' +
+        '<div><p class="kick sm">Your score: breakages caught minus false alarms</p><p class="g-big">' + net + '<small>/ ' + eTot.total + '</small></p>' +
           '<p class="g-verdict">' + verdict + '</p>' +
-          '<p class="g-score" style="margin-top:10px">' + pct + '% of the breakages caught' + (eTot.falses ? ', ' + eTot.falses + ' false alarm' + (eTot.falses > 1 ? 's' : '') : '') + '.' + (prev && pct <= prev ? ' Your best is ' + prev + '%.' : '') + '</p></div>' +
+          '<p class="g-score" style="margin-top:10px">Caught ' + eTot.caught + ' of ' + eTot.total + ' breakages, ' + eTot.falses + ' false alarm' + (eTot.falses === 1 ? '' : 's') + '. Net ' + pct + '%.' + (prev && pct <= prev ? ' Your best is ' + prev + '%.' : '') + '</p></div>' +
         '<div><p class="kick sm">The habit behind it</p><p class="g-rule">Before writing a line of a spec, list every place the data is read, written, shown or sent: screens, emails, documents, imports, reports, other systems and the audit log. That list is what the module-impact section of every PRD I wrote was for.</p>' +
           '<div class="g-actions"><button type="button" class="btn pri" id="eAgain">Play again</button><button type="button" class="btn" id="eOther">Try Name the setting</button>' +
           '<button type="button" class="btn" id="eShare">Copy my score</button><span class="copied-note" id="eNote" aria-live="polite"></span></div></div>' +
@@ -538,7 +548,7 @@
       document.getElementById('eAgain').addEventListener('click', edgeStart);
       document.getElementById('eOther').addEventListener('click', function () { labelStart(); goTo(stage); });
       document.getElementById('eShare').addEventListener('click', function () {
-        copyText('I caught ' + eTot.caught + ' of ' + eTot.total + ' breakages in the edge-case game on Bahniman Talukdar\'s portfolio. Try it: ' + SITE, document.getElementById('eNote'));
+        copyText('I scored ' + net + ' of ' + eTot.total + ' (breakages caught minus false alarms) in the edge-case game on Bahniman Talukdar\'s portfolio. Try it: ' + SITE, document.getElementById('eNote'));
       });
     };
 
@@ -567,7 +577,7 @@
         '<div class="lab-side">' +
           '<p class="kick sm">Round ' + (lRound + 1) + ' of ' + LABELS.length + ' · the task</p>' +
           '<h3 class="g-req">' + esc(r.task) + '</h3>' +
-          '<p class="g-hint">The setting on screen does this today. Pick the label a first-week admin would understand without asking anyone.</p>' +
+          '<p class="g-hint">The setting on screen does this today. All three new labels are plain English; pick the one that is accurate as well as clear.</p>' +
           '<div class="opts">' + r.opts.map(function (o, i) {
             return '<button type="button" class="opt" data-i="' + i + '"><em>' + 'ABC'.charAt(i) + '</em>' + esc(o) + '</button>';
           }).join('') + '</div><div id="lWhy"></div>' +
@@ -646,6 +656,20 @@
     var rv = d.querySelector('.rv');
     d.addEventListener('toggle', function () { d.querySelector('summary').setAttribute('aria-label', (d.open ? 'Hide answer: ' : 'Show answer: ') + d.querySelector('summary b').textContent); });
   });
+
+  /* ---- phone section menu ---- */
+  var menuBtn = document.getElementById('menuBtn'), mnav = document.getElementById('mnav');
+  if (menuBtn && mnav) {
+    var setMenu = function (open) {
+      mnav.hidden = !open;
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuBtn.setAttribute('aria-label', open ? 'Close section menu' : 'Open section menu');
+    };
+    menuBtn.addEventListener('click', function (e) { e.stopPropagation(); setMenu(mnav.hidden); });
+    mnav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('click', function (e) { if (!mnav.hidden && !mnav.contains(e.target)) setMenu(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !mnav.hidden) { setMenu(false); menuBtn.focus(); } });
+  }
 
   /* ---- copy email ---- */
   var copyBtn = document.getElementById('copy');
