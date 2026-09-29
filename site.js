@@ -16,54 +16,59 @@
   function start() {
     document.body.classList.add('loaded');
   }
-  if (document.fonts && document.fonts.ready) {
-    Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 900); })]).then(start);
-  } else { start(); }
 
   /* ---- smooth wheel scrolling (Lenis) ---- */
-  /* The loop runs only while a glide is in progress and sleeps after three still frames,
-     so reading costs nothing. The leftover sub-pixel fraction of each glide goes on <main>
-     as a GPU transform, because browsers round page scroll to whole pixels. */
-  var lenis = null, loopOn = false, idle = 0;
-  var main = document.getElementById('main');
+  /* Sleep at rest, but exclude idle time from the animation clock on resume. */
+  var lenis = null, loopOn = false, idle = 0, lastFrame = 0, scrollTime = 0;
   function loop(t) {
     if (!lenis) { loopOn = false; return; }
-    lenis.raf(t);
+    if (lastFrame) scrollTime += Math.min(64, Math.max(0, t - lastFrame));
+    lastFrame = t;
+    lenis.raf(scrollTime);
     if (lenis.isScrolling) idle = 0; else idle++;
-    if (idle < 3) requestAnimationFrame(loop); else loopOn = false;
+    if (idle < 3) requestAnimationFrame(loop); else { loopOn = false; lastFrame = 0; }
   }
   function wake() { if (!loopOn && lenis) { loopOn = true; idle = 0; requestAnimationFrame(loop); } }
   if (!reduce && window.Lenis) {
     lenis = new window.Lenis({ lerp: 0.07, smoothWheel: true, syncTouch: false, autoRaf: false, anchors: false });
     lenis.on('virtual-scroll', wake);
-    lenis.on('scroll', function () {
-      var d = window.scrollY - lenis.animatedScroll;
-      main.style.transform = Math.abs(d) > 0.004 ? 'translate3d(0,' + d.toFixed(3) + 'px,0)' : '';
-    });
   }
   /* land each section's heading about 40px under the top bar, skipping its top padding */
-  function goTo(target) {
-    if (target === 0) {
-      if (lenis) { wake(); lenis.scrollTo(0, { duration: 1.1 }); } else window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-      return;
+  function goTo(target, immediate) {
+    var y = 0;
+    if (target !== 0) {
+      var pad = parseFloat(getComputedStyle(target).paddingTop) || 0;
+      var bar = topBar ? topBar.offsetHeight : 64;
+      y = target.getBoundingClientRect().top + window.scrollY + pad - bar - 40;
     }
-    var pad = parseFloat(getComputedStyle(target).paddingTop) || 0;
-    var bar = topBar ? topBar.offsetHeight : 64;
-    var y = target.getBoundingClientRect().top + window.scrollY + pad - bar - 40;
-    if (lenis) { wake(); lenis.scrollTo(Math.max(0, y), { duration: 1.1 }); }
-    else window.scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
+    if (lenis) {
+      lenis.resize();
+      lenis.scrollTo(Math.max(0, y), { duration: 1.1, lerp: 0, easing: function (t) { return 1 - Math.pow(1 - t, 3); }, immediate: !!immediate });
+      wake();
+    } else window.scrollTo({ top: Math.max(0, y), behavior: reduce || immediate ? 'auto' : 'smooth' });
   }
+  function visit(id, push) {
+    var el = id && id !== '#hero' ? document.getElementById(id.slice(1)) : null;
+    if (id && id !== '#hero' && !el) return;
+    if (push) {
+      var url = location.pathname + location.search + (el ? id : '');
+      if (location.pathname + location.search + location.hash !== url) history.pushState(null, '', url);
+    }
+    var focus = el || document.querySelector('.logo');
+    if (focus) { if (el) el.setAttribute('tabindex', '-1'); focus.focus({ preventScroll: true }); }
+    goTo(el || 0);
+  }
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   document.querySelectorAll('a[data-go]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var id = a.getAttribute('href');
-      var el = id === '#hero' ? null : document.querySelector(id);
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
-      goTo(el || 0);
-      if (history.replaceState) history.replaceState(null, '', id === '#hero' ? location.pathname : id);
-      if (el) { el.setAttribute('tabindex', '-1'); el.focus({ preventScroll: true }); }
+      visit(id, true);
     });
   });
-  if (floatBtn) floatBtn.addEventListener('click', function () { goTo(0); });
+  if (floatBtn) floatBtn.addEventListener('click', function () { visit('#hero', true); });
+  window.addEventListener('popstate', function () { visit(location.hash, false); });
 
   /* ---- reveal on scroll ---- */
   var reveals = document.querySelectorAll('.reveal');
@@ -214,7 +219,7 @@
       caseCount.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(items.length).padStart(2, '0');
       var n = items[i].querySelector('[data-count]');
       if (n && !reduce) countUp(n);
-      if (focus) tabs[i].focus();
+      if (focus) tabs[i].focus({ preventScroll: true });
     }
     function stopAuto() {
       if (!auto) return;
@@ -271,6 +276,12 @@
   function store(k, v) {
     try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {}
     return null;
+  }
+  function bestScore(key, max) {
+    var raw = store(key);
+    if (raw === null || !/^(0|[1-9]\d*)$/.test(raw)) return null;
+    var score = Number(raw);
+    return Number.isInteger(score) && score <= max ? score : null;
   }
   function copyText(txt, note) {
     var done = function () { note.textContent = 'Copied'; };
@@ -357,7 +368,7 @@
       help: 'Employees see who they report to, and who that person reports to, on their profile.' },
     { task: 'You want HR to record a change that took effect last month.', now: 'Allow retro effective-dating of transactions',
       opts: ['Let HR edit past records', 'Allow backdated changes', 'Let HR backdate changes, with pay recalculated from that date'], b: 2,
-      rule: 'Name the consequence.', why: 'Backdating changes pay. An admin who does not know that will switch it on casually. "Edit past records" is wrong: nothing is overwritten, a change simply starts from an earlier date.',
+      rule: 'Name the consequence.', why: 'In this setting, backdating also recalculates pay. An admin needs to know that before switching it on. "Edit past records" is wrong: nothing is overwritten, a change simply starts from an earlier date.',
       help: 'HR can set a change to apply from an earlier date. Payroll and reports update from that date.' },
     { task: 'You want onboarding tasks to start on a new joiner\'s first day.', now: 'Auto-trigger ONB workflow on DOJ',
       opts: ['Start onboarding tasks on the joining date', 'Automate onboarding', 'Send onboarding emails on the joining date'], b: 0,
@@ -387,9 +398,9 @@
     var SITE = 'https://bahniman.github.io/#play';
 
     var showBest = function () {
-      var e = store('bt-best-edge'), l = store('bt-best-label');
-      document.getElementById('bestEdge').textContent = e ? 'Your best: ' + e + '%' : '';
-      document.getElementById('bestLabel').textContent = l ? 'Your best: ' + l + ' of ' + LABELS.length : '';
+      var e = bestScore('bt-best-edge-v2', 100), l = bestScore('bt-best-label', LABELS.length);
+      document.getElementById('bestEdge').textContent = e !== null ? 'Your best: ' + e + '%' : '';
+      document.getElementById('bestLabel').textContent = l !== null ? 'Your best: ' + l + ' of ' + LABELS.length : '';
     };
     var setDots = function (n, cur) {
       var out = '';
@@ -410,13 +421,13 @@
       focusRound();
     };
     var closeGame = function () {
-      clearInterval(eTimer);
+      stopEdgeTimer();
       stage.hidden = true;
       arcPick.hidden = false;
       showBest();
-      goTo(document.getElementById('play'));
       var back = arcPick.querySelector('.btn[data-play="' + lastGame + '"]');
       if (back) back.focus({ preventScroll: true });
+      goTo(back ? back.closest('.cab') : document.getElementById('play'));
     };
     document.querySelectorAll('[data-play]').forEach(function (b) {
       b.addEventListener('click', function () { openGame(b.getAttribute('data-play')); });
@@ -425,7 +436,15 @@
     showBest();
 
     /* ---------- game 1: spot the edge cases ---------- */
-    var eRound = 0, eTot, eTimer = null, eLeft = 60, eDone = false, eItems = [];
+    var eRound = 0, eTot, eTimer = null, eDeadline = 0, eLeft = 60, eDone = false, eItems = [];
+    function stopEdgeTimer() { clearInterval(eTimer); eTimer = null; eDeadline = 0; }
+    function edgeTick() {
+      if (!eDeadline || eDone) return;
+      eLeft = Math.max(0, Math.ceil((eDeadline - Date.now()) / 1000));
+      timerShow();
+      if (eLeft === 0) edgeCheck();
+    }
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) edgeTick(); });
     var edgeStart = function () {
       eRound = 0; eTot = { caught: 0, total: 0, falses: 0 };
       stageTitle.textContent = 'Spot the edge cases';
@@ -468,7 +487,8 @@
     };
     var edgeRender = function () {
       var sc = EDGE[eRound];
-      eItems = shuffle(sc.items); eDone = false; eLeft = 60; clearInterval(eTimer); eTimer = null;
+      stopEdgeTimer();
+      eItems = shuffle(sc.items); eDone = false; eLeft = 60;
       setDots(EDGE.length, eRound);
       gTimer.hidden = false; timerShow();
       stageBody.innerHTML = '<div class="edge">' +
@@ -476,7 +496,7 @@
         '<div class="edge-side">' +
           '<p class="kick sm">Round ' + (eRound + 1) + ' of ' + EDGE.length + ' · the request</p>' +
           '<h3 class="g-req">"' + esc(sc.req) + '"</h3>' +
-          '<p class="g-hint">Tick what this change will break, on the map or in the list. Every false alarm costs a point, and some items only need a check, so ticking everything will not work. The clock starts on your first tick.</p>' +
+          '<p class="g-hint">Tick what this change will break, on the map or in the list. Every false alarm costs a point, and some items only need a check, so ticking everything will not work. Your 60 seconds start on the first tick and keep running if you leave this tab.</p>' +
           '<div class="tiles">' + eItems.map(function (it, i) {
             return '<button type="button" class="tile" aria-pressed="false" data-i="' + i + '"><b>' + esc(it[1]) + '</b></button>';
           }).join('') + '</div>' +
@@ -491,20 +511,21 @@
       document.getElementById('eCheck').addEventListener('click', edgeCheck);
     };
     var edgeToggle = function (i) {
+      edgeTick();
       if (eDone) return;
       var tile = stageBody.querySelector('.tile[data-i="' + i + '"]');
       var on = tile.getAttribute('aria-pressed') !== 'true';
       tile.setAttribute('aria-pressed', on ? 'true' : 'false');
       stageBody.querySelector('.nd[data-i="' + i + '"]').classList.toggle('on', on);
       stageBody.querySelector('.ln[data-i="' + i + '"]').classList.toggle('on', on);
-      if (!eTimer) eTimer = setInterval(function () {
-        eLeft--; timerShow();
-        if (eLeft <= 0) edgeCheck();
-      }, 1000);
+      if (!eTimer) {
+        eDeadline = Date.now() + 60000;
+        eTimer = setInterval(edgeTick, 250);
+      }
     };
-    var edgeCheck = function () {
+    var edgeCheck = function (event) {
       if (eDone) return;
-      eDone = true; clearInterval(eTimer);
+      eDone = true; stopEdgeTimer();
       var caught = 0, total = 0, falses = 0;
       stageBody.querySelector('.edge').classList.add('checked');
       eItems.forEach(function (it, i) {
@@ -529,22 +550,26 @@
         (falses ? ', with ' + falses + ' false alarm' + (falses > 1 ? 's' : '') : '') + '.' +
         '<span class="net">Round score ' + Math.max(0, caught - falses) + ' / ' + total + '</span>';
       var old = document.getElementById('eCheck'), btn = old.cloneNode(false);
+      var hadFocus = document.activeElement === old;
       btn.textContent = last ? 'See your result' : 'Next round';
       old.parentNode.replaceChild(btn, old);
+      if (hadFocus) btn.focus({ preventScroll: true });
+      if (event && event.type === 'click') goTo(btn);
       btn.addEventListener('click', function () {
-        if (last) edgeEnd(); else { eRound++; edgeRender(); goTo(stage); }
+        if (last) edgeEnd(); else { eRound++; edgeRender(); }
         focusRound();
+        goTo(stage);
       });
     };
     var edgeEnd = function () {
       var net = Math.max(0, eTot.caught - eTot.falses);
       var pct = Math.round(net / eTot.total * 100);
-      var prev = +(store('bt-best-edge') || 0);
-      if (pct > prev) store('bt-best-edge', String(pct));
+      var prev = bestScore('bt-best-edge-v2', 100);
+      if (prev === null || pct > prev) store('bt-best-edge-v2', String(pct));
       setDots(EDGE.length, EDGE.length);
       gTimer.hidden = true;
       var verdict = eTot.falses > eTot.caught / 2 ? 'Ticking everything is not a spec. Each false alarm is engineering time spent in the wrong place.'
-        : pct >= 85 ? 'You would have saved the release.'
+        : pct >= 85 ? 'Strong impact review. You caught most of the risks with few false alarms.'
         : pct >= 60 ? 'Solid. A careful reviewer would catch the rest.'
         : 'This is why every PRD needs a module-impact section.';
       stageBody.innerHTML = '<div class="g-endscreen">' +
@@ -555,7 +580,7 @@
           '<div class="g-actions"><button type="button" class="btn pri" id="eAgain">Play again</button><button type="button" class="btn" id="eOther">Try Name the setting</button>' +
           '<button type="button" class="btn" id="eShare">Copy my score</button><span class="copied-note" id="eNote" aria-live="polite"></span></div></div>' +
         '</div>';
-      document.getElementById('eAgain').addEventListener('click', function () { edgeStart(); focusRound(); });
+      document.getElementById('eAgain').addEventListener('click', function () { edgeStart(); focusRound(); goTo(stage); });
       document.getElementById('eOther').addEventListener('click', function () { lastGame = 'label'; labelStart(); goTo(stage); focusRound(); });
       document.getElementById('eShare').addEventListener('click', function () {
         copyText('I scored ' + net + ' of ' + eTot.total + ' (breakages caught minus false alarms) in the edge-case game on Bahniman Talukdar\'s portfolio. Try it: ' + SITE, document.getElementById('eNote'));
@@ -566,7 +591,7 @@
     var lRound = 0, lScore = 0;
     var FACE = '<svg class="face" viewBox="0 0 52 52" aria-hidden="true"><circle class="hd" cx="26" cy="20" r="11"/><path d="M8 50c2-10 9-15 18-15s16 5 18 15"/></svg>';
     var labelStart = function () {
-      clearInterval(eTimer);
+      stopEdgeTimer();
       lRound = 0; lScore = 0;
       stageTitle.textContent = 'Name the setting';
       gTimer.hidden = true;
@@ -590,7 +615,7 @@
           '<p class="g-hint">The setting on screen does this today. All three new labels are plain English; pick the one that is accurate as well as clear.</p>' +
           '<div class="opts">' + r.opts.map(function (o, i) {
             return '<button type="button" class="opt" data-i="' + i + '"><em>' + 'ABC'.charAt(i) + '</em>' + esc(o) + '</button>';
-          }).join('') + '</div><div id="lWhy"></div>' +
+          }).join('') + '</div><div id="lWhy" aria-live="polite" aria-atomic="true"></div><div class="g-actions" id="lActions"></div>' +
         '</div></div>';
       stageBody.querySelectorAll('.opt').forEach(function (b) {
         b.addEventListener('click', function () { labelPick(+b.getAttribute('data-i')); });
@@ -633,28 +658,29 @@
       }
       var last = lRound === LABELS.length - 1;
       document.getElementById('lWhy').innerHTML =
-        '<div class="g-why" aria-live="polite"><p class="kick sm">' + (right ? 'Right' : 'Not quite') + ' · Rule ' + (lRound + 1) + '</p>' +
-        '<p><b>' + esc(r.rule) + '</b> ' + esc(r.why) + '</p><p>Help text under it: ' + esc(r.help) + '</p></div>' +
-        '<div class="g-actions"><button type="button" class="btn pri" id="lNext">' + (last ? 'See your result' : 'Next round') + '</button></div>';
+        '<div class="g-why"><p class="kick sm">' + (right ? 'Right' : 'Not quite') + ' · Rule ' + (lRound + 1) + '</p>' +
+        '<p><b>' + esc(r.rule) + '</b> ' + esc(r.why) + '</p><p>Help text under it: ' + esc(r.help) + '</p></div>';
+      document.getElementById('lActions').innerHTML = '<button type="button" class="btn pri" id="lNext">' + (last ? 'See your result' : 'Next round') + '</button>';
       document.getElementById('lNext').addEventListener('click', function () {
-        if (last) labelEnd(); else { lRound++; labelRender(); goTo(stage); }
+        if (last) labelEnd(); else { lRound++; labelRender(); }
         focusRound();
+        goTo(stage);
       });
     };
     var labelEnd = function () {
-      var prev = +(store('bt-best-label') || 0);
-      if (lScore > prev) store('bt-best-label', String(lScore));
+      var prev = bestScore('bt-best-label', LABELS.length);
+      if (prev === null || lScore > prev) store('bt-best-label', String(lScore));
       setDots(LABELS.length, LABELS.length);
-      var verdict = lScore >= 5 ? 'Admins would never need to call support.' : lScore >= 3 ? 'Good instincts. The rules below close the gap.' : 'This is why settings get renamed.';
+      var verdict = lScore >= 5 ? 'Clear, accurate labels. You made these settings easier to understand.' : lScore >= 3 ? 'Good instincts. The rules below close the gap.' : 'This is why settings get renamed.';
       stageBody.innerHTML = '<div class="g-endscreen">' +
         '<div><p class="kick sm">Your result</p><p class="g-big">' + lScore + '<small>/ ' + LABELS.length + '</small></p><p class="g-verdict">' + verdict + '</p></div>' +
         '<div><p class="kick sm">Six rules to keep</p><ol class="g-rules">' +
           LABELS.map(function (r) { return '<li>' + esc(r.rule) + '</li>'; }).join('') + '</ol>' +
-          '<p class="g-rule">Nobody reads release notes, so the setting has to explain itself. When I renamed settings like these and added help text, usage of them went up.</p>' +
+          '<p class="g-rule">A setting should explain itself without relying on release notes. When I renamed settings like these and added help text, usage of them went up.</p>' +
           '<div class="g-actions"><button type="button" class="btn pri" id="lAgain">Play again</button><button type="button" class="btn" id="lOther">Try Spot the edge cases</button>' +
           '<button type="button" class="btn" id="lShare">Copy my score</button><span class="copied-note" id="lNote" aria-live="polite"></span></div></div>' +
         '</div>';
-      document.getElementById('lAgain').addEventListener('click', function () { labelStart(); focusRound(); });
+      document.getElementById('lAgain').addEventListener('click', function () { labelStart(); focusRound(); goTo(stage); });
       document.getElementById('lOther').addEventListener('click', function () { lastGame = 'edge'; edgeStart(); goTo(stage); focusRound(); });
       document.getElementById('lShare').addEventListener('click', function () {
         copyText('I picked the clearest label ' + lScore + ' of ' + LABELS.length + ' times in the settings game on Bahniman Talukdar\'s portfolio. Try it: ' + SITE, document.getElementById('lNote'));
@@ -671,6 +697,7 @@
   /* ---- phone section menu ---- */
   var menuBtn = document.getElementById('menuBtn'), mnav = document.getElementById('mnav');
   if (menuBtn && mnav) {
+    var compactNav = window.matchMedia('(max-width: 1080px)');
     var setMenu = function (open) {
       mnav.hidden = !open;
       menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -680,6 +707,15 @@
     mnav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
     document.addEventListener('click', function (e) { if (!mnav.hidden && !mnav.contains(e.target)) setMenu(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !mnav.hidden) { setMenu(false); menuBtn.focus(); } });
+    compactNav.addEventListener('change', function () {
+      if (!compactNav.matches) {
+        var active = document.activeElement;
+        var href = mnav.contains(active) ? active.getAttribute('href') : null;
+        setMenu(false);
+        if (href) document.querySelector('.nav a[href="' + href + '"]').focus({ preventScroll: true });
+        else if (active === menuBtn) document.querySelector('.logo').focus({ preventScroll: true });
+      }
+    });
   }
 
   /* ---- copy email ---- */
@@ -696,4 +732,9 @@
       navigator.clipboard.writeText(addr).then(done, function () { copied.textContent = 'Select and copy the address'; });
     } else { copied.textContent = 'Select and copy the address'; }
   });
+  /* Only conceal content once the enhancement and its observers are ready. */
+  root.classList.add('js');
+  if (document.fonts && document.fonts.ready) {
+    Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 900); })]).then(start);
+  } else { start(); }
 })();

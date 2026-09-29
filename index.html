@@ -14,6 +14,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Bahniman Talukdar portfolio: Spec it. Ship it. Then find out what it broke.">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://bahniman.github.io/">
 <meta name="theme-color" content="#f3ecdf" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#191613" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%231f5cff'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='28' fill='%23fffaf1'%3Eb%3C/text%3E%3C/svg%3E">
@@ -26,7 +27,6 @@
     var t = null;
     try { t = localStorage.getItem('theme'); } catch (e) {}
     if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
-    document.documentElement.classList.add('js');
   })();
 </script>
 </head>
@@ -77,7 +77,7 @@
       <a class="btn" href="#play" data-go>Play the games</a>
       <a class="btn" href="https://www.linkedin.com/in/bahniman-talukdar-ab97a416a" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-    <a class="proof h-in" href="#studies" data-go><span class="kick sm">Case study 01 · Product analytics</span><b>Low adoption that turned out to be a findability problem, not a demand problem</b><span class="go">Read it &rarr;</span></a>
+    <a class="proof h-in" href="#studies" data-go><span class="kick sm">Case study 01 · Product analytics</span><b>Low adoption that pointed to a findability problem</b><span class="go">Read it &rarr;</span></a>
   </div>
   <div class="hero-cards">
     <span class="sticker h-in" aria-hidden="true">2<br>games<br>inside</span>
@@ -87,7 +87,7 @@
   <aside class="glance h-in" aria-label="At a glance">
     <dl class="glance-facts">
       <div><dt><span data-count="45">45</span></dt><dd>months at Darwinbox, Core HRMS</dd></div>
-      <div><dt><span data-count="200">200</span>+</dt><dd>PRDs authored</dd></div>
+      <div><dt><span data-count="200">200</span>+</dt><dd>product specs and edge-case documents owned</dd></div>
       <div><dt><span data-count="700">700</span>+</dt><dd>features tagged in Pendo</dd></div>
       <div><dt>Top 3</dt><dd>ReEnvision 5.0, with Realium</dd></div>
     </dl>
@@ -201,8 +201,8 @@
     <div class="work-list" id="cases">
       <article class="item">
         <p class="kick sm">Specs</p>
-        <div class="fig"><b><span data-count="200">200</span>+</b><span>PRDs</span></div>
-        <h3>Engineering-ready PRDs</h3>
+        <div class="fig"><b><span data-count="200">200</span>+</b><span>Product specs</span></div>
+        <h3>Engineering-ready specs</h3>
         <p>The count is from Confluence: feature PRDs, change specs and edge-case documents I owned across Core, Travel and shared components. Every one carried edge cases and acceptance criteria up front, so QA could test against them word for word and engineers stopped coming back with question lists. I also worked on the Core HRMS roadmap with a Senior PM.</p>
       </article>
       <article class="item">
@@ -268,12 +268,12 @@
   <div class="studies">
     <article class="study reveal">
       <p class="kick sm">Case study 01 · Product analytics · Darwinbox</p>
-      <h3>Low adoption that was really a findability problem</h3>
+      <h3>Low adoption that pointed to a findability problem</h3>
       <dl class="steps">
         <div><dt>The problem</dt><dd>Core had no behavioural analytics. Pendo had been bought, but two or three people used it only to send surveys, so after a release nobody could say whether a feature was being used. Roadmap calls ran on escalations and memory.</dd></div>
         <div><dt>What I did</dt><dd>I took Pendo on, defined a tagging taxonomy and tagged 700+ features, then built funnel and path views over the key Core flows: imports, lifecycle changes and settings.</dd></div>
-        <div><dt>The call</dt><dd>Several features had poor adoption, and the instinctive read was that clients did not want them, so build something new. The path data said otherwise: people entered the flows right next to those features and never reached them. They were not rejecting the features; they could not find them. So I fixed findability instead of building replacements: plain-language setting names, help text, and settings moved to where admins actually look.</dd></div>
-        <div><dt>What happened</dt><dd>Adoption moved without a single new feature being built; the cost was a UI reorganisation instead of a redundant build cycle. The same approach grew into an audit that regrouped 50+ settings by what admins were trying to do, after which self-serve configuration went up and "where do I configure this" tickets went down.</dd></div>
+        <div><dt>The call</dt><dd>Several features had poor adoption, and the instinctive read was that clients did not want them, so build something new. The path data pointed to a different explanation: people entered nearby flows but never reached those features. I treated that as a findability problem and prioritised plain-language setting names, help text, and settings moved to where admins actually look.</dd></div>
+        <div><dt>What happened</dt><dd>We shipped clearer names, help text and a reorganisation of existing settings instead of a replacement feature build. That approach also informed the broader settings audit described in Work.</dd></div>
       </dl>
     </article>
     <article class="study two reveal">
@@ -281,7 +281,7 @@
       <h3>Translations that were correct and still wrong</h3>
       <dl class="steps">
         <div><dt>The problem</dt><dd>Localisation looked solved and kept breaking. Strings were translated one at a time and hard-coded, and native-speaking clients kept flagging translations that were literally correct but made no sense in context.</dd></div>
-        <div><dt>The first fix</dt><dd>Leadership brought in an architect and centralised translations on an internal page, and from their side it was done. For client-facing teams it got harder: each client's page sat behind a hidden link nobody owned, strings were scattered across PHP and Angular files, and routine updates still needed an engineer.</dd></div>
+        <div><dt>The first fix</dt><dd>Leadership brought in an architect and centralised translations on an internal page, and considered the work complete. For client-facing teams it got harder: each client's page sat behind a hidden link nobody owned, strings were scattered across PHP and Angular files, and routine updates still needed an engineer.</dd></div>
         <div><dt>The call</dt><dd>The alternative was to keep patching strings one by one as clients raised them. Because I knew how the settings and their dependencies connected, I could see the real problem was the workflow and its ownership gaps, not individual bad translations. I mapped every issue, raised it, and when it became a roadmap item I owned the PRD end to end. I did not design the page from scratch; I took a workflow that did not work and made it work.</dd></div>
         <div><dt>What happened</dt><dd>Translation updates became a product-team operation with no engineering involvement per cycle, and turnaround went from waiting for a sprint to the same release cycle, across 10+ languages.</dd></div>
       </dl>
@@ -290,9 +290,9 @@
       <p class="kick sm">Case study 03 · Strategy · XLRI Jamshedpur</p>
       <h3>An IPO-readiness deck where every number had to survive a question</h3>
       <dl class="steps">
-        <div><dt>The problem</dt><dd>Our team was assessing whether Aster DM Healthcare's Gulf business was organisationally ready for an IPO, for a panel. The argument rested on listed-peer comparisons, regulation and penalty figures, and much of that first turned up in secondary sources.</dd></div>
+        <div><dt>The problem</dt><dd>Our team assessed for a panel whether Aster DM Healthcare's Gulf business was organisationally ready for an IPO. The argument rested on listed-peer comparisons, regulation and penalty figures, and much of that first turned up in secondary sources.</dd></div>
         <div><dt>What I did</dt><dd>Before we presented, I traced every figure in our deck to a primary or named source, with one rule: anything that could not be traced was removed, not softened.</dd></div>
-        <div><dt>The call</dt><dd>The hardest catch was two real, sourced numbers sitting side by side: one listed peer's fall since its IPO next to another's twelve-month fall. Both were true and the comparison was false, so I found the second peer's offer price and restated both on the same basis. The same pass replaced a penalty figure taken from the wrong company-size band and cut a legal claim that went further than the law does.</dd></div>
+        <div><dt>The call</dt><dd>The hardest catch was two real, sourced numbers sitting side by side: one listed peer's share-price decline since its IPO next to another's twelve-month decline. Both were true and the comparison was false, so I found the second peer's offer price and restated both on the same basis. The same pass replaced a penalty figure taken from the wrong company-size band and cut a legal claim that went further than the law does.</dd></div>
         <div><dt>What happened</dt><dd>Eight errors fixed before the panel, and a top 3 finish out of 20 teams. Where no defensible number existed, such as what a readiness programme would cost, the deck named who should own it instead of inventing a figure.</dd></div>
       </dl>
     </article>
@@ -339,7 +339,7 @@
       <p class="kick sm">03 · Commerce</p>
       <h3>Turnstile</h3>
       <p>Shows an online store which of its visitors are AI shopping agents, how many there are and what they buy, and gives those agents a product catalogue they can read without scraping the page.</p>
-      <p class="unproven"><b>Still unproven:</b> whether shoppers want an assistant buying for them at all. Early agent checkout products have struggled, and my read that the cause was interface and trust rather than demand is a judgement, not data.</p>
+      <p class="unproven"><b>Still unproven:</b> whether shoppers want an assistant buying for them at all. My hypothesis is that clearer controls and trust could make the experience useful, but demand has not been validated.</p>
       <div class="plinks"><a href="https://bahniman.github.io/turnstile/" target="_blank" rel="noopener">Live demo <span aria-hidden="true">↗</span></a><a href="https://github.com/Bahniman/turnstile" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></div>
     </li>
     <li class="reveal">
@@ -384,7 +384,7 @@
       <p class="kick sm">Off the clock</p>
       <ul class="rows">
         <li><span class="yr mono">Keys</span><div><b>Keyboardist</b><small>Played with the cultural team at inter-college fests, including IIT Kharagpur and Guwahati</small></div></li>
-        <li><span class="yr mono">100+</span><div><b>Self-taught musician</b><small>Songs uploaded to my YouTube and Instagram channel</small></div></li>
+        <li><span class="yr mono">100+</span><div><b>Self-taught musician</b><small>Songs uploaded to my YouTube and Instagram accounts</small></div></li>
       </ul>
     </div>
   </div>
