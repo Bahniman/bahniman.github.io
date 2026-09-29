@@ -11,12 +11,10 @@
   var ring = document.getElementById('ring');
   var floatLabel = document.getElementById('floatLabel');
   var hero = document.getElementById('hero');
-  var sheet = document.querySelector('.sheet');
 
   /* ---- load-in ---- */
   function start() {
     document.body.classList.add('loaded');
-    if (sheet) sheet.classList.add('go');
   }
   if (document.fonts && document.fonts.ready) {
     Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 900); })]).then(start);
@@ -160,7 +158,7 @@
     }
     requestAnimationFrame(step);
   }
-  var counters = document.querySelectorAll('.facts [data-count]');
+  var counters = document.querySelectorAll('.glance [data-count]');
   if ('IntersectionObserver' in window) {
     var cio = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
@@ -270,7 +268,7 @@
   /* ---- ask cards: swap the pill text ---- */
   document.querySelectorAll('details.ask').forEach(function (d) {
     var rv = d.querySelector('.rv');
-    d.addEventListener('toggle', function () { rv.textContent = d.open ? 'Hide' : 'Reveal'; });
+    d.addEventListener('toggle', function () { d.querySelector('summary').setAttribute('aria-label', (d.open ? 'Hide answer: ' : 'Show answer: ') + d.querySelector('summary b').textContent); });
   });
 
   /* ---- copy email ---- */
