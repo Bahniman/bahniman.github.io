@@ -574,6 +574,9 @@ body.loaded .glance.h-in{animation-delay:.45s}
 .steps div:nth-child(3) dt{color:var(--blue)}
 .steps div:nth-child(3) dd{color:var(--ink)}
 
+.study.three{grid-column:1 / -1;box-shadow:6px 6px 0 var(--pink)}
+.study.three .steps{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(20px,3vw,40px)}
+
 /* prototypes: the honest caveat */
 .unproven{margin-top:14px;padding:10px 12px;border:2px dashed var(--line-2);border-radius:6px;font-size:14.5px;line-height:1.55;color:var(--sec)}
 .unproven b{color:var(--ink)}
@@ -595,6 +598,7 @@ body.loaded .glance.h-in{animation-delay:.45s}
 
 /* ---------- responsive ---------- */
 @media (max-width:1080px){
+  .study.three .steps{grid-template-columns:1fr}
   .hero{grid-template-columns:1fr}
   .hero-cards{min-height:0;margin-top:0;display:grid;gap:34px;padding:30px 12px 10px}
   .hcard{position:relative;right:auto!important;top:auto!important;width:100%;max-width:520px}
@@ -619,6 +623,7 @@ body.loaded .glance.h-in{animation-delay:.45s}
   .admin-main{min-height:0}
   .persona{padding:12px 14px}
   .steps div{grid-template-columns:1fr;gap:4px}
+  .study.three .steps{grid-template-columns:1fr}
   .proof{max-width:none}
   .top-end{margin-left:auto}
   .logo span{font-size:12.5px}
