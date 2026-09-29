@@ -72,7 +72,7 @@
       <a class="btn" href="#studies" data-go>Read the case studies</a>
       <a class="btn" href="https://www.linkedin.com/in/bahniman-talukdar-ab97a416a" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-    <a class="proof h-in" href="#studies" data-go><span class="kick sm">Case study 01 · Product analytics</span><b>Useful settings nobody could find, and how usage of them went up</b><span class="go">Read it &rarr;</span></a>
+    <a class="proof h-in" href="#studies" data-go><span class="kick sm">Case study 01 · Product analytics</span><b>Low adoption that turned out to be a findability problem, not a demand problem</b><span class="go">Read it &rarr;</span></a>
   </div>
   <div class="hero-cards">
     <span class="sticker h-in" aria-hidden="true">2<br>games<br>inside</span>
@@ -198,13 +198,13 @@
         <p class="kick sm">Specs</p>
         <div class="fig"><b><span data-count="200">200</span>+</b><span>PRDs</span></div>
         <h3>Engineering-ready PRDs</h3>
-        <p>Each PRD covered edge cases, acceptance criteria and what the change would touch elsewhere: imports, crons, APIs, notifications and existing data. Features I specified reached 5 to 60% account-level adoption in the quarters after launch. I also worked on the Core HRMS roadmap with a Senior PM.</p>
+        <p>The count is from Confluence: feature PRDs, change specs and edge-case documents I owned across Core, Travel and shared components. Every one carried edge cases and acceptance criteria up front, so QA could test against them word for word and engineers stopped coming back with question lists. I also worked on the Core HRMS roadmap with a Senior PM.</p>
       </article>
       <article class="item">
         <p class="kick sm">Analytics</p>
         <div class="fig"><b><span data-count="700">700</span>+</b><span>features tagged</span></div>
         <h3>Usage tracking in Pendo</h3>
-        <p>When I joined, the Core team used Pendo only to send in-app surveys. I set up usage tracking and tagged 700+ features. The data showed good features going unused because they were hard to find or their setting names made no sense, so I renamed settings in plain language, added help text and moved them where people looked. Usage of those settings went up.</p>
+        <p>I defined a tagging taxonomy a PM could search without asking me, and re-tagged whenever the UI changed so the history stayed comparable. That discipline is why the team ended up with three continuous years of adoption records instead of fragments, and why roadmap discussions started from usage data rather than escalations.</p>
       </article>
       <article class="item">
         <p class="kick sm">Research</p>
@@ -215,8 +215,8 @@
       <article class="item">
         <p class="kick sm">Analytics</p>
         <div class="fig"><b><span data-count="45">45</span>%</b><span>less time on key actions</span></div>
-        <h3>Dashboard revamp</h3>
-        <p>I worked on the analytics for the Dashboard revamp, which reached 322,000+ users. Time spent on key actions fell 45% while engagement went up, which meant people finished tasks faster rather than leaving. The numbers were used to argue for further investment in the platform.</p>
+        <h3>Measuring the Dashboard revamp</h3>
+        <p>I owned the measurement behind the Dashboard revamp, not its design. I instrumented the old dashboard, defined the key actions people came to do, timed them, and ran the same measurement on the redesign. Across 322,000+ users, time on those actions fell 45% while completions held or rose, so people were finishing faster, not giving up. The analysis became the business case for further platform investment.</p>
       </article>
       <article class="item">
         <p class="kick sm">Localisation</p>
@@ -263,22 +263,22 @@
   <div class="studies">
     <article class="study reveal">
       <p class="kick sm">Case study 01 · Product analytics · Darwinbox</p>
-      <h3>Useful settings nobody could find</h3>
+      <h3>Low adoption that was really a findability problem</h3>
       <dl class="steps">
-        <div><dt>The problem</dt><dd>When I joined, the Core team used Pendo only to send in-app surveys. Nobody was looking at how people actually moved through the product, so a bad feature and a hidden one looked the same: low usage.</dd></div>
-        <div><dt>What I did</dt><dd>Pendo came to me from my manager. I set up usage tracking and tagged 700+ features, then used funnels and click paths to see where people stopped. Several useful features were barely used because they sat deep in menus, or because their setting names meant nothing to the admins reading them.</dd></div>
-        <div><dt>The call</dt><dd>The obvious fix was another round of release notes. I did not think that would work: people skim release notes once and forget them, so the product has to explain itself. I rewrote configuration names in plain language, added help text, and moved settings to where admins and our own teams actually looked.</dd></div>
-        <div><dt>What happened</dt><dd>Pendo showed usage of those settings climbing once people could understand them. I was partway through adding hover descriptions across the whole system when I left for XLRI.</dd></div>
+        <div><dt>The problem</dt><dd>Core had no behavioural analytics. Pendo had been bought, but two or three people used it only to send surveys, so after a release nobody could say whether a feature was being used. Roadmap calls ran on escalations and memory.</dd></div>
+        <div><dt>What I did</dt><dd>I took Pendo on, defined a tagging taxonomy and tagged 700+ features, then built funnel and path views over the key Core flows: imports, lifecycle changes and settings.</dd></div>
+        <div><dt>The call</dt><dd>Several features had poor adoption, and the instinctive read was that clients did not want them, so build something new. The path data said otherwise: people entered the flows right next to those features and never reached them. They were not rejecting the features; they could not find them. So I fixed findability instead of building replacements: plain-language setting names, help text, and settings moved to where admins actually look.</dd></div>
+        <div><dt>What happened</dt><dd>Adoption moved without a single new feature being built; the cost was a UI reorganisation instead of a redundant build cycle. The same approach grew into an audit that regrouped 50+ settings by what admins were trying to do, after which self-serve configuration went up and "where do I configure this" tickets went down.</dd></div>
       </dl>
     </article>
     <article class="study two reveal">
       <p class="kick sm">Case study 02 · Localisation · Darwinbox</p>
       <h3>Translations that were correct and still wrong</h3>
       <dl class="steps">
-        <div><dt>The problem</dt><dd>Each new string was translated on its own and hard-coded. Clients kept flagging translations that were literally correct but made no sense to a native speaker, because meaning depends on context and the process had no way to see it.</dd></div>
-        <div><dt>The first fix</dt><dd>I pushed my manager and director to make translation scalable. A tech architect built a central page to view and edit translations, and it was treated as done. In practice it made the consultants' work harder: each client's page sat behind its own hidden link with no clear owner for access, strings lived in different files for each module across PHP and Angular code, and finding one broken string was slow.</dd></div>
-        <div><dt>The call</dt><dd>The alternative was to keep correcting strings one at a time as clients raised them. Because I knew the settings and how they depended on each other, I could fix it at the system level instead. I documented the problems and raised them, and it became a roadmap item.</dd></div>
-        <div><dt>What happened</dt><dd>I owned the PRD for the enhancements end to end. The page became usable for the client-facing teams, who had been the ones struggling with it.</dd></div>
+        <div><dt>The problem</dt><dd>Localisation looked solved and kept breaking. Strings were translated one at a time and hard-coded, and native-speaking clients kept flagging translations that were literally correct but made no sense in context.</dd></div>
+        <div><dt>The first fix</dt><dd>Leadership brought in an architect and centralised translations on an internal page, and from their side it was done. For client-facing teams it got harder: each client's page sat behind a hidden link nobody owned, strings were scattered across PHP and Angular files, and routine updates still needed an engineer.</dd></div>
+        <div><dt>The call</dt><dd>The alternative was to keep patching strings one by one as clients raised them. Because I knew how the settings and their dependencies connected, I could see the real problem was the workflow and its ownership gaps, not individual bad translations. I mapped every issue, raised it, and when it became a roadmap item I owned the PRD end to end. I did not design the page from scratch; I took a workflow that did not work and made it work.</dd></div>
+        <div><dt>What happened</dt><dd>Translation updates became a product-team operation with no engineering involvement per cycle, and turnaround went from waiting for a sprint to the same release cycle, across 10+ languages.</dd></div>
       </dl>
     </article>
   </div>
@@ -378,7 +378,7 @@
 <section class="sec wrap" id="ask" aria-labelledby="ask-h">
   <header class="sec-head reveal">
     <p class="kick"><span class="n">06</span>Ask me</p>
-    <h2 id="ask-h">Three questions <em>I get asked.</em></h2>
+    <h2 id="ask-h">Four questions <em>I get asked.</em></h2>
   </header>
   <div class="asks">
     <details class="ask reveal">
@@ -392,6 +392,10 @@
     <details class="ask reveal">
       <summary><span class="kick sm">Working style</span><b>How do you keep engineers unblocked?</b><span class="rv" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></summary>
       <div class="ans"><p>I wrote each PRD to answer its own questions: edge cases, what to test and what it might affect. I tracked which developer would pick up which PRD in the coming sprint and scheduled the knowledge transfer before anyone got stuck. Most questions were answered in the document or the handover, so only the genuinely hard calls reached me, and the work closed within office hours.</p></div>
+    </details>
+    <details class="ask reveal">
+      <summary><span class="kick sm">Judgement</span><b>What do you do when your own feature does not land?</b><span class="rv" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+      <div class="ans"><p>Features I owned landed anywhere from 5% to 60% account-level adoption, and one I was proud of sat at the low end. I had half-convinced myself it was a rollout problem. Instead I pulled my own drop-off data and treated the design as the suspect, and the data showed the feature, as designed, was not earning its place. I would rather break my own assumption in a planning room than have clients break it later at a higher cost.</p></div>
     </details>
   </div>
 </section>
