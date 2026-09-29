@@ -396,11 +396,18 @@
       for (var i = 0; i < n; i++) out += '<li class="' + (i < cur ? 'done' : i === cur ? 'on' : '') + '"></li>';
       dotsEl.innerHTML = out;
     };
+    var lastGame = 'edge';
+    var focusRound = function () {
+      var hd = stageBody.querySelector('.g-req, .g-big');
+      if (hd) { hd.setAttribute('tabindex', '-1'); hd.focus({ preventScroll: true }); }
+    };
     var openGame = function (name) {
+      lastGame = name;
       arcPick.hidden = true;
       stage.hidden = false;
       if (name === 'edge') edgeStart(); else labelStart();
       goTo(stage);
+      focusRound();
     };
     var closeGame = function () {
       clearInterval(eTimer);
@@ -408,6 +415,8 @@
       arcPick.hidden = false;
       showBest();
       goTo(document.getElementById('play'));
+      var back = arcPick.querySelector('.btn[data-play="' + lastGame + '"]');
+      if (back) back.focus({ preventScroll: true });
     };
     document.querySelectorAll('[data-play]').forEach(function (b) {
       b.addEventListener('click', function () { openGame(b.getAttribute('data-play')); });
@@ -524,6 +533,7 @@
       old.parentNode.replaceChild(btn, old);
       btn.addEventListener('click', function () {
         if (last) edgeEnd(); else { eRound++; edgeRender(); goTo(stage); }
+        focusRound();
       });
     };
     var edgeEnd = function () {
@@ -545,8 +555,8 @@
           '<div class="g-actions"><button type="button" class="btn pri" id="eAgain">Play again</button><button type="button" class="btn" id="eOther">Try Name the setting</button>' +
           '<button type="button" class="btn" id="eShare">Copy my score</button><span class="copied-note" id="eNote" aria-live="polite"></span></div></div>' +
         '</div>';
-      document.getElementById('eAgain').addEventListener('click', edgeStart);
-      document.getElementById('eOther').addEventListener('click', function () { labelStart(); goTo(stage); });
+      document.getElementById('eAgain').addEventListener('click', function () { edgeStart(); focusRound(); });
+      document.getElementById('eOther').addEventListener('click', function () { lastGame = 'label'; labelStart(); goTo(stage); focusRound(); });
       document.getElementById('eShare').addEventListener('click', function () {
         copyText('I scored ' + net + ' of ' + eTot.total + ' (breakages caught minus false alarms) in the edge-case game on Bahniman Talukdar\'s portfolio. Try it: ' + SITE, document.getElementById('eNote'));
       });
@@ -628,6 +638,7 @@
         '<div class="g-actions"><button type="button" class="btn pri" id="lNext">' + (last ? 'See your result' : 'Next round') + '</button></div>';
       document.getElementById('lNext').addEventListener('click', function () {
         if (last) labelEnd(); else { lRound++; labelRender(); goTo(stage); }
+        focusRound();
       });
     };
     var labelEnd = function () {
@@ -643,8 +654,8 @@
           '<div class="g-actions"><button type="button" class="btn pri" id="lAgain">Play again</button><button type="button" class="btn" id="lOther">Try Spot the edge cases</button>' +
           '<button type="button" class="btn" id="lShare">Copy my score</button><span class="copied-note" id="lNote" aria-live="polite"></span></div></div>' +
         '</div>';
-      document.getElementById('lAgain').addEventListener('click', labelStart);
-      document.getElementById('lOther').addEventListener('click', function () { edgeStart(); goTo(stage); });
+      document.getElementById('lAgain').addEventListener('click', function () { labelStart(); focusRound(); });
+      document.getElementById('lOther').addEventListener('click', function () { lastGame = 'edge'; edgeStart(); goTo(stage); focusRound(); });
       document.getElementById('lShare').addEventListener('click', function () {
         copyText('I picked the clearest label ' + lScore + ' of ' + LABELS.length + ' times in the settings game on Bahniman Talukdar\'s portfolio. Try it: ' + SITE, document.getElementById('lNote'));
       });
