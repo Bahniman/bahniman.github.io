@@ -9,12 +9,12 @@
 <meta property="og:description" content="45 months writing product specs and running product analytics for Core HRMS at Darwinbox. Now at XLRI Jamshedpur.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bahniman.github.io/">
-<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141313" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23141313'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='28' fill='%23faf9f6'%3Eb%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#f3ecdf" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191613" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%231f5cff'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='28' fill='%23fffaf1'%3Eb%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..650&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Space+Mono:wght@400;700&display=swap">
 <link rel="stylesheet" href="site.css">
 <script>
   (function () {
@@ -34,6 +34,7 @@
     <i aria-hidden="true">b</i><span translate="no">Bahniman Talukdar</span>
   </a>
   <nav class="nav" aria-label="Sections">
+    <a href="#play" data-go>Play</a>
     <a href="#work" data-go>Work</a>
     <a href="#lab" data-go>Lab</a>
     <a href="#record" data-go>Record</a>
@@ -54,18 +55,22 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero wrap" id="hero">
-  <div class="hero-copy">
-    <p class="kick h-in">Portfolio <span class="dot"></span> 2026</p>
-    <h1 class="h-in">I spent 45 months writing the specs <em>Darwinbox engineers built&nbsp;from.</em></h1>
-    <p class="dek h-in">I studied civil engineering at NIT Silchar, joined Darwinbox as a Product Analyst and left as a Senior Product Analyst. I am now in the PGDM General Management programme at XLRI Jamshedpur.</p>
+  <div class="poster">
+    <p class="kick h-in">Bahniman Talukdar · product analyst · XLRI Jamshedpur</p>
+    <h1 class="big h-in"><span class="a">Spec it.</span> <span class="b">Ship it.</span> <span class="c">then find out what it broke.</span></h1>
+    <p class="dek h-in">I spent 45 months writing the specs Darwinbox engineers built from, and checking what each release would break before clients saw it. Civil engineering at NIT Silchar before that; the PGDM in General Management at XLRI Jamshedpur now.</p>
     <div class="cta h-in">
-      <a class="btn pri" href="#work" data-go>See the work
+      <a class="btn pri" href="#play" data-go>Play the games
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      <a class="btn" href="#work" data-go>See the work</a>
       <a class="btn" href="https://www.linkedin.com/in/bahniman-talukdar-ab97a416a" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://github.com/Bahniman" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
-
+  <div class="hero-cards">
+    <span class="sticker h-in" aria-hidden="true">2<br>games<br>inside</span>
+    <button type="button" class="hcard one h-in" data-play="edge"><span class="kick sm">Game 01 · 6 rounds</span><b>Spot the edge cases</b><span class="hp">A small feature request walks in. Find everything it quietly breaks before the clock hits zero.</span><span class="go">Play &rarr;</span></button>
+    <button type="button" class="hcard two h-in" data-play="label"><span class="kick sm">Game 02 · 6 rounds</span><b>Name the setting</b><span class="hp">"Auto-trigger ONB workflow on DOJ." Pick the label a first-week HR admin would understand.</span><span class="go">Play &rarr;</span></button>
+  </div>
   <aside class="glance h-in" aria-label="At a glance">
     <dl class="glance-facts">
       <div><dt><span data-count="45">45</span></dt><dd>months at Darwinbox, Core HRMS</dd></div>
@@ -80,6 +85,59 @@
       <li><span class="mono">Aiming for</span><div><b>Product management, product analytics, technology consulting</b></div></li>
     </ul>
   </aside>
+</section>
+
+<!-- ============ PLAY ============ -->
+<section class="arcade" id="play" aria-labelledby="play-h">
+  <div class="wrap">
+    <header class="arc-head reveal">
+      <p class="kick"><span class="n">Play</span>Two games from my job</p>
+      <h2 id="play-h">Learn what a product analyst does <em>by doing it.</em></h2>
+      <p class="lede">At Darwinbox two questions came up with almost every change: what will this break, and will people understand the setting we ship. Each game gives you six rounds of one of them, with the reasoning after every answer.</p>
+    </header>
+
+    <div class="arc-pick" id="arcPick">
+      <article class="cab reveal">
+        <button type="button" class="cab-art" data-play="edge" aria-label="Play Spot the edge cases"><svg viewBox="0 0 480 280" class="art" aria-hidden="true"><g class="rip"><circle cx="240" cy="140" r="24"/><circle cx="240" cy="140" r="24"/></g><line class="al c" x1="240" y1="140" x2="240.0" y2="40.0"/><line class="al c" x1="240" y1="140" x2="361.6" y2="69.3"/><line class="al m" x1="240" y1="140" x2="412.0" y2="140.0"/><line class="al c" x1="240" y1="140" x2="361.6" y2="210.7"/><line class="al x" x1="240" y1="140" x2="240.0" y2="240.0"/><line class="al m" x1="240" y1="140" x2="118.4" y2="210.7"/><line class="al x" x1="240" y1="140" x2="68.0" y2="140.0"/><line class="al f" x1="240" y1="140" x2="118.4" y2="69.3"/><circle class="acore" cx="240" cy="140" r="24"/><text class="acore-t" x="240" y="144">CHANGE</text><circle class="ad c" cx="240.0" cy="40.0" r="6"/><text class="at" x="240.0" y="27.0" text-anchor="middle">EMAILS</text><circle class="ad c" cx="361.6" cy="69.3" r="6"/><text class="at" x="373.6" y="73.3" text-anchor="start">PAYSLIPS</text><circle class="ad m" cx="412.0" cy="140.0" r="6"/><text class="at" x="424.0" y="144.0" text-anchor="start">SEARCH</text><circle class="ad c" cx="361.6" cy="210.7" r="6"/><text class="at" x="373.6" y="214.7" text-anchor="start">AUDIT LOG</text><circle class="ad x" cx="240.0" cy="240.0" r="6"/><text class="at" x="240.0" y="260.0" text-anchor="middle">IMPORTS</text><circle class="ad m" cx="118.4" cy="210.7" r="6"/><text class="at" x="106.4" y="214.7" text-anchor="end">REPORTS</text><circle class="ad x" cx="68.0" cy="140.0" r="6"/><text class="at" x="56.0" y="144.0" text-anchor="end">API</text><circle class="ad f" cx="118.4" cy="69.3" r="6"/><text class="at" x="106.4" y="73.3" text-anchor="end">ROSTERS</text></svg></button>
+        <div class="cab-body">
+          <p class="kick sm">Game 1 · 6 rounds · about 5 minutes</p>
+          <h3>Spot the edge cases</h3>
+          <p>A feature request lands and it sounds small. Find everything it breaks before the clock runs out, then see what you missed and why.</p>
+          <div class="cab-foot"><button type="button" class="btn pri" data-play="edge">Play</button><span class="best-score" id="bestEdge"></span></div>
+        </div>
+      </article>
+      <article class="cab reveal">
+        <button type="button" class="cab-art" data-play="label" aria-label="Play Name the setting"><svg viewBox="0 0 480 280" class="art" aria-hidden="true">
+  <rect class="w" x="36" y="26" width="408" height="228" rx="14"/>
+  <circle class="wd" cx="56" cy="44" r="4"/><circle class="wd" cx="70" cy="44" r="4"/><circle class="wd" cx="84" cy="44" r="4"/>
+  <line class="wl" x1="36" y1="62" x2="444" y2="62"/><line class="wl" x1="128" y1="62" x2="128" y2="254"/>
+  <rect class="sb" x="52" y="80" width="56" height="7" rx="3"/><rect class="sb" x="52" y="100" width="44" height="7" rx="3"/><rect class="sb on" x="52" y="120" width="60" height="7" rx="3"/><rect class="sb" x="52" y="140" width="40" height="7" rx="3"/><rect class="sb" x="52" y="160" width="50" height="7" rx="3"/>
+  <rect class="row" x="144" y="78" width="284" height="36" rx="8"/><rect class="sb" x="158" y="93" width="120" height="7" rx="3"/><rect class="tg" x="392" y="88" width="24" height="15" rx="7.5"/>
+  <text class="old" x="158" y="140">Auto-trigger ONB workflow on DOJ</text><line class="strike" x1="156" y1="136" x2="352" y2="136"/>
+  <path class="arrow" d="M170 150 v14 m-5 -5 l5 5 l5 -5"/>
+  <rect class="row new" x="144" y="172" width="284" height="40" rx="8"/><text class="nw" x="158" y="196">Start onboarding on the joining date</text><rect class="caret" x="386" y="185" width="2" height="15"/>
+  <rect class="tg on" x="392" y="184" width="24" height="15" rx="7.5"/><circle class="knob" cx="408" cy="191.5" r="5"/>
+  <rect class="sb" x="144" y="226" width="150" height="7" rx="3"/>
+</svg></button>
+        <div class="cab-body">
+          <p class="kick sm">Game 2 · 6 rounds · about 3 minutes</p>
+          <h3>Name the setting</h3>
+          <p>A new HR admin has to find the right switch in their first week. Pick the label they would understand without asking anyone.</p>
+          <div class="cab-foot"><button type="button" class="btn pri" data-play="label">Play</button><span class="best-score" id="bestLabel"></span></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="stage" id="stage" hidden>
+      <div class="stage-bar">
+        <button type="button" class="back" id="stageBack"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>All games</button>
+        <p class="stage-title" id="stageTitle"></p>
+        <ol class="dots" id="dots" aria-hidden="true"></ol>
+        <span class="g-timer" id="gTimer" hidden><i></i><span>60s</span></span>
+      </div>
+      <div class="stage-body" id="stageBody"></div>
+    </div>
+  </div>
 </section>
 
 <!-- ============ THROUGHLINE ============ -->
