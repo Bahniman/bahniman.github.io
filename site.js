@@ -407,6 +407,7 @@
     };
     var openGame = function (name) {
       lastGame = name;
+      document.body.classList.add('game-open');
       arcPick.hidden = true;
       stage.hidden = false;
       if (name === 'edge') edgeStart(); else labelStart();
@@ -421,6 +422,7 @@
       var back = arcPick.querySelector('.btn[data-play="' + lastGame + '"]');
       if (back) back.focus({ preventScroll: true });
       goTo(back ? back.closest('.cab') : document.getElementById('play'));
+      document.body.classList.remove('game-open');
     };
     document.querySelectorAll('[data-play]').forEach(function (b) {
       b.addEventListener('click', function () { openGame(b.getAttribute('data-play')); });
@@ -469,7 +471,7 @@
           L.map(function (t, k) { return '<tspan x="' + tx.toFixed(1) + '" dy="' + (k ? 17 : 0) + '">' + esc(t) + '</tspan>'; }).join('') + '</text></g>';
       });
       return '<svg class="map" viewBox="0 0 720 500" aria-hidden="true">' +
-        '<g class="rip"><circle cx="' + cx + '" cy="' + cy + '" r="40"/><circle cx="' + cx + '" cy="' + cy + '" r="40"/></g>' + lines +
+        lines +
         '<circle class="core" cx="' + cx + '" cy="' + cy + '" r="40"/><text class="core-t" x="' + cx + '" y="' + (cy - 2) + '">THE</text><text class="core-t" x="' + cx + '" y="' + (cy + 11) + '">CHANGE</text>' +
         nodes + '</svg>';
     };
@@ -490,10 +492,10 @@
           '<p class="kick sm">Round ' + (eRound + 1) + ' of ' + EDGE.length + ' · the request</p>' +
           '<h3 class="g-req">"' + esc(sc.req) + '"</h3>' +
           '<p class="g-hint">Tick what this change will break, on the map or in the list. Every false alarm costs a point, and some items only need a check, so ticking everything will not work. Your 60 seconds start on the first tick and keep running if you leave this tab.</p>' +
+          '<div class="g-actions"><button type="button" class="btn pri" id="eCheck">Check my answer</button><p class="g-score" id="eScore" aria-live="polite"></p></div>' +
           '<div class="tiles">' + eItems.map(function (it, i) {
             return '<button type="button" class="tile" aria-pressed="false" data-i="' + i + '"><b>' + esc(it[1]) + '</b></button>';
           }).join('') + '</div>' +
-          '<div class="g-actions"><button type="button" class="btn pri" id="eCheck">Check my answer</button><p class="g-score" id="eScore" aria-live="polite"></p></div>' +
         '</div></div>';
       stageBody.querySelectorAll('.tile').forEach(function (b) {
         b.addEventListener('click', function () { edgeToggle(+b.getAttribute('data-i')); });
@@ -547,7 +549,6 @@
       btn.textContent = last ? 'See your result' : 'Next round';
       old.parentNode.replaceChild(btn, old);
       if (hadFocus) btn.focus({ preventScroll: true });
-      if (event && event.type === 'click') goTo(btn);
       btn.addEventListener('click', function () {
         if (last) edgeEnd(); else { eRound++; edgeRender(); }
         focusRound();
@@ -561,10 +562,10 @@
       if (prev === null || pct > prev) store('bt-best-edge-v2', String(pct));
       setDots(EDGE.length, EDGE.length);
       gTimer.hidden = true;
-      var verdict = eTot.falses > eTot.caught / 2 ? 'Ticking everything is not a spec. Each false alarm is engineering time spent in the wrong place.'
+      var verdict = eTot.falses > eTot.caught / 2 ? 'Focus on impacts you can justify. Each false alarm adds engineering work that the change may not need.'
         : pct >= 85 ? 'Strong impact review. You caught most of the risks with few false alarms.'
-        : pct >= 60 ? 'Solid. A careful reviewer would catch the rest.'
-        : 'This is why every PRD needs a module-impact section.';
+        : pct >= 60 ? 'Solid coverage. Reviewing the remaining dependencies would make it more complete.'
+        : 'Review the missed dependencies to strengthen the impact assessment.';
       stageBody.innerHTML = '<div class="g-endscreen">' +
         '<div><p class="kick sm">Your score: breakages caught minus false alarms</p><p class="g-big">' + net + '<small>/ ' + eTot.total + '</small></p>' +
           '<p class="g-verdict">' + verdict + '</p>' +
@@ -664,7 +665,7 @@
       var prev = bestScore('bt-best-label', LABELS.length);
       if (prev === null || lScore > prev) store('bt-best-label', String(lScore));
       setDots(LABELS.length, LABELS.length);
-      var verdict = lScore >= 5 ? 'Clear, accurate labels. You made these settings easier to understand.' : lScore >= 3 ? 'Good instincts. The rules below close the gap.' : 'This is why settings get renamed.';
+      var verdict = lScore >= 5 ? 'Clear, accurate labels. You made these settings easier to understand.' : lScore >= 3 ? 'Good instincts. The rules below help refine the labels.' : 'Use the six rules below to make the labels clearer and more accurate.';
       stageBody.innerHTML = '<div class="g-endscreen">' +
         '<div><p class="kick sm">Your result</p><p class="g-big">' + lScore + '<small>/ ' + LABELS.length + '</small></p><p class="g-verdict">' + verdict + '</p></div>' +
         '<div><p class="kick sm">Six rules to keep</p><ol class="g-rules">' +
