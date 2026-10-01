@@ -19,6 +19,8 @@ The page uses the same Riso-inspired visual language as the project demos: cream
 
 Accessibility features include a skip link, semantic landmarks and headings, labeled navigation, native buttons and links, selected/pressed states, live game feedback, keyboard-operable controls, and reduced-motion styling. This is a description of implemented affordances, not a claim of formal WCAG certification.
 
+Display and body text use theme-specific ink variants for readability. Game introductions retain cream text on blue, and case studies describe individual contributions while crediting the shared work they build on.
+
 ## Run locally
 
 This is a static HTML, CSS, and JavaScript site. No package installation or build step is required. From the repository root, serve the files with any local static server; for example:
