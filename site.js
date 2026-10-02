@@ -15,6 +15,11 @@
   /* ---- load-in ---- */
   function start() {
     document.body.classList.add('loaded');
+    /* An entrance animation with fill "forwards" keeps owning the transform, which blocks the hover lift.
+       Drop it once it has played; the resting styles are identical to its last frame. */
+    document.querySelectorAll('.hcard').forEach(function (card) {
+      card.addEventListener('animationend', function () { card.classList.add('settled'); }, { once: true });
+    });
   }
 
   /* ---- smooth wheel scrolling (Lenis) ---- */

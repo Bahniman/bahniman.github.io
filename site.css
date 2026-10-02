@@ -133,6 +133,8 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 .hcard.two{right:70px;top:330px;transform:rotate(-4deg);background:var(--blue-fill);color:#fffaf1;box-shadow:8px 8px 0 var(--pink)}
 .hcard.two .kick{color:#fffaf1}
 .hcard.two .go{background:#fffaf1}
+/* invisible margin that lifts with the card, so the pointer stays on it at the edges */
+.hcard::after{content:"";position:absolute;inset:-14px;border-radius:12px}
 .hcard.one:hover{transform:rotate(1.5deg) translate(-4px,-6px);box-shadow:12px 14px 0 var(--shc)}
 .hcard.two:hover{transform:rotate(-2deg) translate(-4px,-6px);box-shadow:12px 14px 0 var(--pink)}
 
@@ -164,6 +166,12 @@ body.loaded .hcard.two{animation:cardin2 .9s var(--ease) .4s forwards}
 body.loaded .sticker{animation:stick .6s var(--ease) .7s forwards}
 body.loaded .glance.h-in{animation-delay:.45s}
 @keyframes rise{to{opacity:1;transform:none}}
+/* After the entrance plays, hand the transform back to normal styles so the hover lift can run. */
+body.loaded .hcard.settled{animation:none;opacity:1}
+.js .hcard.one.settled{transform:rotate(3.5deg)}
+.js .hcard.two.settled{transform:rotate(-4deg)}
+.js .hcard.one.settled:hover{transform:rotate(1.5deg) translate(-4px,-6px)}
+.js .hcard.two.settled:hover{transform:rotate(-2deg) translate(-4px,-6px)}
 @keyframes cardin1{from{opacity:0;transform:rotate(12deg) translateY(40px)}to{opacity:1;transform:rotate(3.5deg)}}
 @keyframes cardin2{from{opacity:0;transform:rotate(-12deg) translateY(40px)}to{opacity:1;transform:rotate(-4deg)}}
 @keyframes stick{from{opacity:0;transform:rotate(-30deg) scale(.4)}to{opacity:1;transform:rotate(14deg) scale(1)}}
