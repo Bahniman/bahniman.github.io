@@ -1,4 +1,4 @@
-# Bahniman Talukdar — Portfolio
+# Bahniman Talukdar: portfolio
 
 *Last updated: 1 October 2026*
 
@@ -33,10 +33,10 @@ Then open <http://localhost:8000/>. Keep `index.html`, `site.css`, `site.js`, an
 
 ## Source map
 
-- `index.html` — content, navigation, and semantic structure.
-- `site.css` — responsive layout, themes, and reduced-motion rules.
-- `site.js` — section navigation, carousel, checklist, FAQs, contact copy action, game logic, score storage, and scroll behavior.
-- `lenis.min.js` — bundled smooth-scroll library.
-- `og.png` — social preview image.
+- `index.html`: content, navigation, and semantic structure.
+- `site.css`: responsive layout, themes, and reduced-motion rules.
+- `site.js`: section navigation, carousel, checklist, FAQs, contact copy action, game logic, score storage, and scroll behavior.
+- `lenis.min.js`: bundled smooth-scroll library.
+- `og.png`: social preview image.
 
 There is no application build or type-check command in this repository. The static site is published at the live URL through GitHub Pages; the repository does not include a separate deployment workflow. No root `LICENSE` file is present; no repository-wide license is stated.
