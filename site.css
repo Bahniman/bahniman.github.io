@@ -285,13 +285,13 @@ body.loaded .hcard.settled{animation:none;opacity:1}
 .chain span{grid-row:1 / 3;justify-self:center;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#1d1a16;background:var(--yellow);border:2px solid #1d1a16}
 .chain b{font-weight:800;font-size:22px;letter-spacing:-.03em}
 .chain small{font-size:13.5px;color:#665e52}
-.projects{list-style:none;margin:clamp(28px,4vw,40px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.projects{list-style:none;margin:clamp(28px,4vw,40px) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
 .projects li{padding:24px;display:flex;flex-direction:column;background:var(--card);border:var(--bw) solid var(--ink);border-radius:6px;box-shadow:var(--sh);transition:transform .3s var(--ease)}
-.projects li:nth-child(1){transform:rotate(-1deg)}.projects li:nth-child(3){transform:rotate(1deg)}
+.projects li:nth-child(1){transform:rotate(-1deg)}.projects li:nth-child(4){transform:rotate(1deg)}
 .projects li:hover{transform:rotate(0) translateY(-6px)}
 .projects h3{font-size:36px;letter-spacing:-.05em;margin:12px 0 10px}
-.projects p{font-size:16px;line-height:1.65;flex:1}
-.projects li:nth-child(2){transition-delay:.08s}.projects li:nth-child(3){transition-delay:.16s}
+.projects p{font-size:16px;line-height:1.65;flex:1}.projects p.kick,.projects p.unproven{flex:none}
+.projects li:nth-child(2){transition-delay:.08s}.projects li:nth-child(3){transition-delay:.16s}.projects li:nth-child(4){transition-delay:.24s}
 .plinks{display:flex;gap:18px;margin-top:18px}
 .plinks a{font-family:var(--mono);font-size:13px;font-weight:700;text-decoration:underline;text-decoration-color:var(--pink);text-decoration-thickness:3px;text-underline-offset:4px;color:var(--ink)}
 .plinks a:hover{background:var(--yellow);color:#1d1a16}
