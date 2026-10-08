@@ -4,12 +4,12 @@
 
 **Live site:** <https://bahniman.github.io/>
 
-A personal portfolio about product work, analytics, and strategy. It covers Bahniman Talukdar’s documented work on Core HRMS at Darwinbox, current study at XLRI Jamshedpur, selected case studies, and four product concepts.
+A personal portfolio about product work, analytics, and strategy. It covers Bahniman Talukdar’s documented work on Core HRMS at Darwinbox, current study at XLRI Jamshedpur, selected case studies, and five product concepts.
 
 ## What you can explore
 
 - Work history, six product-work examples, and three case studies.
-- Four linked concept sites: Realium, Heirloom, Turnstile, and Windtunnel.
+- Five linked concept sites: Realium, Heirloom, Turnstile, Windtunnel, and Heir.
 - Two short decision games: **Spot the edge cases** has six timed rounds; **Name the setting** has six plain-language label choices. Both show the result and explain the underlying rules. Personal bests are stored in this browser.
 - A selectable eight-question product-spec checklist, case-study carousel, FAQs, and contact links.
 
