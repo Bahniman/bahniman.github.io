@@ -44,6 +44,15 @@
   const ctx = el.canvas.getContext('2d');
   let S = 0, R = 0, r = 0, balls = [];
 
+  // What the x-ray lens prints on each capsule: its headline number, else a short name.
+  const short = t => (t.length > 13 ? t.slice(0, 12).trim() + '…' : t);
+  const label = Object.fromEntries(items.map(a => {
+    const big = a.querySelector('.big'), cat = a.dataset.cat;
+    const name = big ? big.textContent : cat === 'lab' ? a.querySelector('h3').textContent : a.querySelector('.kicker').textContent.split('·').pop().trim();
+    return [a.id, short(name.trim())];
+  }));
+  const lens = { x: 0, y: 0, tx: 0, ty: 0, on: 0, want: 0 };
+
   function size() {
     const old = S;
     const dpr = Math.min(devicePixelRatio || 1, 2);
@@ -121,7 +130,50 @@
       ctx.beginPath(); ctx.ellipse(-r * .38, -r * .5, r * .2, r * .11, -.6, 0, Math.PI * 2); ctx.fill();
       ctx.restore();
     }
+    drawLens();
   }
+
+  // Peek-through: a lens follows the pointer over the glass and x-rays the capsules under it.
+  function drawLens() {
+    lens.on += (lens.want - lens.on) * (reduced ? 1 : .18);
+    lens.x += (lens.tx - lens.x) * (reduced ? 1 : .22); lens.y += (lens.ty - lens.y) * (reduced ? 1 : .22);
+    if (lens.on < .02) return;
+    const LR = S * .27 * (.6 + .4 * lens.on), a = lens.on;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(lens.x, lens.y, LR, 0, Math.PI * 2); ctx.clip();
+    ctx.fillStyle = `rgba(29,23,58,${.86 * a})`; ctx.fillRect(lens.x - LR, lens.y - LR, LR * 2, LR * 2);
+    ctx.strokeStyle = `rgba(148,184,255,${.18 * a})`; ctx.lineWidth = 1;
+    for (let gx = -LR; gx <= LR; gx += S * .03) { ctx.beginPath(); ctx.moveTo(lens.x + gx, lens.y - LR); ctx.lineTo(lens.x + gx, lens.y + LR); ctx.stroke(); }
+    for (let gy = -LR; gy <= LR; gy += S * .03) { ctx.beginPath(); ctx.moveTo(lens.x - LR, lens.y + gy); ctx.lineTo(lens.x + LR, lens.y + gy); ctx.stroke(); }
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (const b of balls) {
+      if (Math.hypot(b.x - lens.x, b.y - lens.y) > LR - r * .2) continue;
+      ctx.globalAlpha = a;
+      ctx.lineWidth = 2; ctx.strokeStyle = ink[b.cat];
+      ctx.beginPath(); ctx.arc(b.x, b.y, r - 1, 0, Math.PI * 2); ctx.stroke();
+      ctx.setLineDash([3, 4]); ctx.beginPath(); ctx.moveTo(b.x - r + 3, b.y); ctx.lineTo(b.x + r - 3, b.y); ctx.stroke(); ctx.setLineDash([]);
+      const txt = label[b.id], fs = Math.max(9, Math.min(r * .62, (r * 2.6) / Math.max(4, txt.length) * 1.5));
+      ctx.font = `700 ${fs}px "Space Mono", ui-monospace, monospace`;
+      ctx.fillStyle = '#fffaf0'; ctx.fillText(txt, b.x, b.y - fs * .55);
+      ctx.font = `700 ${Math.max(8, fs * .6)}px "Space Mono", ui-monospace, monospace`; ctx.fillStyle = ink[b.cat];
+      ctx.fillText(String(serial[b.id]).padStart(2, '0'), b.x, b.y + fs * .7);
+    }
+    ctx.restore();
+    ctx.globalAlpha = a;
+    ctx.lineWidth = 4; ctx.strokeStyle = INK; ctx.beginPath(); ctx.arc(lens.x, lens.y, LR, 0, Math.PI * 2); ctx.stroke();
+    ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(255,250,240,.8)'; ctx.beginPath(); ctx.arc(lens.x, lens.y, LR - 4, -2.6, -1.6); ctx.stroke();
+    ctx.font = `700 ${Math.max(9, S * .026)}px "Space Mono", ui-monospace, monospace`; ctx.fillStyle = INK; ctx.textAlign = 'center';
+    ctx.fillText(balls.length ? 'X-RAY' : 'EMPTY', lens.x, lens.y + LR + Math.max(12, S * .035));
+    ctx.globalAlpha = 1;
+  }
+  const dome = el.canvas.parentElement;
+  const aim = e => { const b = el.canvas.getBoundingClientRect(); lens.tx = (e.clientX - b.left) * S / b.width; lens.ty = (e.clientY - b.top) * S / b.height; };
+  dome.addEventListener('pointerenter', e => { aim(e); if (lens.on < .05) { lens.x = lens.tx; lens.y = lens.ty; } if (e.pointerType === 'mouse') lens.want = 1; });
+  dome.addEventListener('pointermove', aim);
+  dome.addEventListener('pointerdown', e => { aim(e); lens.x = lens.tx; lens.y = lens.ty; lens.want = 1; });
+  dome.addEventListener('pointerup', e => { if (e.pointerType !== 'mouse') lens.want = 0; });
+  dome.addEventListener('pointerleave', () => { lens.want = 0; });
+  dome.addEventListener('pointercancel', () => { lens.want = 0; });
 
   let last = 0, acc = 0;
   function loop(t) {
@@ -207,7 +259,7 @@
     const drop = document.createElement('button');
     drop.type = 'button'; drop.className = 'drop'; drop.dataset.cat = b.cat;
     drop.setAttribute('aria-label', `Open the ${CAT_LABEL[b.cat]} capsule`);
-    drop.innerHTML = '<span class="half top"></span><span class="half bot"></span><span class="drop-tag">tap to open</span>';
+    drop.innerHTML = `<span class="burst"></span><span class="slip">No. ${String(serial[b.id]).padStart(2, '0')}</span><span class="half top"></span><span class="half bot"></span><span class="drop-tag">tap to open</span>`;
     drop.addEventListener('click', () => openDrop(drop, b.id), { once: true });
     el.chute.append(drop);
     pending = drop; busy = false;
@@ -223,7 +275,7 @@
       el.chute.classList.remove('open');
       if (!collected.includes(id)) collected.push(id);
       save(); renderTray(id); showCard(id, true);
-    }, reduced ? 0 : 380);
+    }, reduced ? 0 : 640);
   }
 
   /* ---------------- the ticket ---------------- */
