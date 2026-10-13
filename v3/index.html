@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bahniman Talukdar · Capsule edition</title>
+<meta name="description" content="Bahniman Talukdar's portfolio as a capsule-toy machine. Turn the crank for 45 months of Darwinbox product work, three case studies, five prototypes and the rest.">
+<meta property="og:title" content="Bahniman Talukdar · Capsule edition">
+<meta property="og:description" content="Turn the crank. Every capsule is a real piece of work: specs, case studies, prototypes, and the odd keyboard solo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bahniman.github.io/v3/">
+<meta property="og:image" content="https://bahniman.github.io/og.png">
+<meta name="theme-color" content="#f7f0e3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<a class="skip" href="#catalogue" data-tip>Skip the machine and see everything</a>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-run">
+  <span>Spec it</span><i>✦</i><span>Ship it</span><i>✦</i><span>Then find out what it broke</span><i>✦</i>
+  <span>Spec it</span><i>✦</i><span>Ship it</span><i>✦</i><span>Then find out what it broke</span><i>✦</i>
+  <span>Spec it</span><i>✦</i><span>Ship it</span><i>✦</i><span>Then find out what it broke</span><i>✦</i>
+</div></div>
+
+<header class="bar">
+  <p class="who"><b>Bahniman Talukdar</b> <span>Product · Analytics · Strategy</span></p>
+  <nav aria-label="Elsewhere">
+    <a href="mailto:bahniman30@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/bahniman-talukdar-ab97a416a">LinkedIn</a>
+    <a href="https://github.com/Bahniman">GitHub</a>
+    <a href="../">Classic site</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="stage" aria-label="Capsule machine">
+    <div class="machine-wrap">
+      <div class="machine" id="machine">
+        <div class="dome">
+          <canvas id="globe" aria-hidden="true"></canvas>
+          <div class="glass" aria-hidden="true"></div>
+          <p class="empty-note" id="emptyNote" hidden>All out!<br><button type="button" id="refill">Refill the machine</button></p>
+        </div>
+        <div class="neck" aria-hidden="true"></div>
+        <div class="body">
+          <div class="plate">
+            <p class="plate-name">Bahniman</p>
+            <p class="plate-sub">Capsule No. 3 · <span id="left">27</span> inside</p>
+          </div>
+          <div class="controls">
+            <button class="crank" id="crank" type="button" aria-describedby="crankHelp">
+              <span class="crank-arm" aria-hidden="true"><span class="crank-knob"></span></span>
+              <span class="sr">Turn the crank</span>
+            </button>
+            <div class="chute" id="chute">
+              <span class="flap" aria-hidden="true"></span>
+            </div>
+          </div>
+          <p class="coin" aria-hidden="true">₹0 / turn</p>
+        </div>
+        <div class="feet" aria-hidden="true"><span></span><span></span></div>
+        <p class="sticker" aria-hidden="true">turn me!</p>
+      </div>
+      <p class="help" id="crankHelp">Click or drag the crank. Space works too.<br>Hover or press the glass to x-ray what is left inside.</p>
+    </div>
+
+    <div class="output">
+      <div class="card-slot" id="cardSlot" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="tray-wrap" aria-labelledby="trayTitle">
+    <div class="tray-head">
+      <h2 id="trayTitle">Your collection <span id="count">0 / 27</span></h2>
+      <button type="button" class="tip" id="tip" data-tip>Tip the whole machine out</button>
+    </div>
+    <ol class="tray" id="tray"></ol>
+    <ul class="legend" aria-label="Capsule colours">
+      <li data-cat="path">The path</li>
+      <li data-cat="work">Darwinbox work</li>
+      <li data-cat="case">Case studies</li>
+      <li data-cat="lab">Startup Lab</li>
+      <li data-cat="record">Record</li>
+      <li data-cat="ask">Ask me</li>
+      <li data-cat="contact">Contact (rare)</li>
+    </ul>
+  </section>
+
+  <!-- Every capsule's contents. The machine draws from this list; "tip it out" shows it whole. -->
+  <section class="catalogue" id="catalogue" aria-labelledby="catTitle">
+    <h2 id="catTitle">Everything in the machine</h2>
+    <div class="cat-grid" id="catGrid">
+
+      <article class="item" data-cat="intro" id="intro">
+        <p class="kicker">45 months building enterprise HR software · now at XLRI Jamshedpur</p>
+        <h3 class="hero">Spec it. Ship it. <em>Then find out what it broke.</em></h3>
+        <p>I spent 45 months at Darwinbox writing clear product specs with engineering, QA and consultants, and reviewing releases before they reached clients. Civil engineering at NIT Silchar before that; the PGDM in General Management at XLRI Jamshedpur now.</p>
+        <p class="nudge">27 capsules inside: the path, the work, three case studies, five prototypes, and the odd keyboard solo. Turn the crank.</p>
+      </article>
+
+      <!-- The path -->
+      <article class="item" data-cat="path" id="civil">
+        <p class="kicker">2018 → 2022 · NIT Silchar</p>
+        <p class="big">8.99</p>
+        <h3>Civil engineering</h3>
+        <p>B.Tech, CGPA 8.99. Most of my family are civil engineers in government service, and I picked the branch over the others my JEE rank allowed. What I kept from it is the habit of settling a design on paper before work starts on site.</p>
+      </article>
+      <article class="item" data-cat="path" id="darwinbox">
+        <p class="kicker">Jul 2022 → Mar 2026 · Hyderabad</p>
+        <p class="big">45 mo</p>
+        <h3>Darwinbox, Core HRMS</h3>
+        <p>Product Analyst, then Senior Product Analyst from April 2025. Core HRMS is the part every other module depends on: employee records, organisation structure, access control and bulk imports. Exemplary Contributor Award in 2024; mentored 3 junior analysts.</p>
+      </article>
+      <article class="item" data-cat="path" id="xlri">
+        <p class="kicker">2026 → 2027 · Jamshedpur</p>
+        <p class="big">PGDM</p>
+        <h3>XLRI, General Management</h3>
+        <p>I wanted a broader business perspective on top of the product work. My manager and director, both XLRI alumni, encouraged me to apply. XAT 94.88 percentile, 99.67 in Quant and DI. Aiming for product management, product analytics and technology consulting.</p>
+      </article>
+
+      <!-- Darwinbox work -->
+      <article class="item" data-cat="work" id="specs">
+        <p class="kicker">Darwinbox · Specs</p>
+        <p class="big">200+</p>
+        <h3>Engineering-ready specs</h3>
+        <p>Feature PRDs, change specs and edge-case documents I owned across Core, Travel and shared components, counted from Confluence. Edge cases and acceptance criteria went in up front, so engineering had one reference and QA had explicit test conditions.</p>
+      </article>
+      <article class="item" data-cat="work" id="pendo">
+        <p class="kicker">Darwinbox · Analytics</p>
+        <p class="big">700+</p>
+        <h3>Features tagged in Pendo</h3>
+        <p>I defined a consistent, searchable tagging taxonomy and kept it current as the UI changed. That gave three continuous years of comparable adoption records, and roadmap talks a usage-data reference alongside client feedback.</p>
+      </article>
+      <article class="item" data-cat="work" id="survey">
+        <p class="kicker">Darwinbox · Research</p>
+        <p class="big">24,000+</p>
+        <h3>From survey to backlog</h3>
+        <p>In-app feedback for the new Profile page went live within days of its release. 24,000+ responses came back; I sorted them with Engineering and QA into a ranked backlog for the same quarter. The page scored 4.3 out of 5.</p>
+      </article>
+      <article class="item" data-cat="work" id="dashboard">
+        <p class="kicker">Darwinbox · Analytics</p>
+        <p class="big">−45%</p>
+        <h3>Measuring the Dashboard revamp</h3>
+        <p>I owned the measurement, not the design. I timed the key actions on the old dashboard and the redesign across 322,000+ users: time fell 45% while completions held or rose. People were finishing faster, not giving up, and the analysis became the case for more platform investment.</p>
+      </article>
+      <article class="item" data-cat="work" id="l10n">
+        <p class="kicker">Darwinbox · Localisation</p>
+        <p class="big">10+</p>
+        <h3>Translation workflow</h3>
+        <p>I owned the platform's translation workflow so the product team could run routine updates themselves. Each release I checked the languages I covered and used native-speaking clients' feedback to validate meaning in context.</p>
+      </article>
+      <article class="item" data-cat="work" id="qa">
+        <p class="kicker">Darwinbox · Quality</p>
+        <p class="big">100+</p>
+        <h3>Issues caught before release</h3>
+        <p>Logged in pre-release reviews and resolved before they reached clients. I also audited the settings screens and, with UX and engineering, regrouped 50+ settings so their names and placement were consistent.</p>
+      </article>
+      <article class="item" data-cat="work" id="prd">
+        <p class="kicker">Darwinbox · Inside a spec</p>
+        <p class="big">8 Qs</p>
+        <h3>What every PRD had to answer</h3>
+        <ol class="checks">
+          <li>Current behaviour</li><li>Reason for the change</li><li>Impact on other modules</li><li>Where it sits in the UI</li>
+          <li>Paid-feature dependencies</li><li>Import, cron and API impacts</li><li>Notification variable changes</li><li>Migration of existing data</li>
+        </ol>
+      </article>
+
+      <!-- Case studies -->
+      <article class="item" data-cat="case" id="case1">
+        <p class="kicker">Case study 01 · Product analytics</p>
+        <h3>Low adoption that pointed to a findability problem</h3>
+        <dl>
+          <dt>Problem</dt><dd>Pendo was mostly used for surveys, so adoption after a release was hard to judge and roadmap talks leaned on escalations.</dd>
+          <dt>What I did</dt><dd>Tagged 700+ features and built funnel and path views over imports, lifecycle changes and settings.</dd>
+          <dt>The call</dt><dd>People entered nearby flows but never reached the features. That is findability, not demand, so plain names, help text and placement came before any rebuild.</dd>
+          <dt>Result</dt><dd>Clearer names, help text and a reorganised settings area shipped, and the approach shaped the wider settings audit.</dd>
+        </dl>
+      </article>
+      <article class="item" data-cat="case" id="case2">
+        <p class="kicker">Case study 02 · Localisation</p>
+        <h3>Making localisation work in context</h3>
+        <dl>
+          <dt>Problem</dt><dd>Strings were translated one by one and hard-coded; native-speaking clients said some literal translations did not fit where they appeared.</dd>
+          <dt>Foundation</dt><dd>An earlier effort had centralised translations. I built on it with a workflow for client-facing teams: navigation, access, ownership, and one way to update strings across PHP and Angular.</dd>
+          <dt>The call</dt><dd>I mapped recurring issues across settings, raised the workflow for the roadmap, and owned the PRD end to end once it was prioritised.</dd>
+          <dt>Result</dt><dd>Turnaround went from waiting for a sprint to the same release cycle, across 10+ languages.</dd>
+        </dl>
+      </article>
+      <article class="item" data-cat="case" id="case3">
+        <p class="kicker">Case study 03 · Strategy · XLRI</p>
+        <h3>An IPO-readiness deck where every number had to survive a question</h3>
+        <dl>
+          <dt>Problem</dt><dd>Was Aster DM Healthcare's Gulf business ready for an IPO? The argument leaned on peer comparisons and penalty figures, many from secondary sources.</dd>
+          <dt>What I did</dt><dd>Traced every figure to a primary or named source. Anything untraceable was removed, not softened.</dd>
+          <dt>The call</dt><dd>Two peers' share-price declines covered different periods, so I found the offer price and restated both on the same basis.</dd>
+          <dt>Result</dt><dd>Eight corrections before the panel, and a top 3 finish out of 20 teams.</dd>
+        </dl>
+      </article>
+
+      <!-- Startup Lab -->
+      <article class="item" data-cat="lab" id="realium">
+        <p class="kicker">Lab 01 · Settlement · 3rd of 15, ReEnvision 5.0</p>
+        <h3>Realium</h3>
+        <p class="lede">A ₹18.6 lakh road bill, 60% paid the day after sign-off.</p>
+        <p>Public-works contractors wait months to be paid. Realium turns site-verified progress and an engineer's accountable sign-off into a claim a bank will fund: 97% of the bill reaches the contractor, against 92.7% borrowing informally at 18%.</p>
+        <p class="links"><a href="https://bahniman.github.io/realium/">Live demo ↗</a> <a href="https://github.com/Bahniman/realium">GitHub ↗</a></p>
+      </article>
+      <article class="item" data-cat="lab" id="heirloom">
+        <p class="kicker">Lab 02 · Memory</p>
+        <h3>Heirloom</h3>
+        <p>Keeps a firm's knowledge as records the firm owns, so it survives people leaving and AI vendors changing. Ask the demo vault as three roles, make a partner leave, export everything as one file.</p>
+        <p class="unproven">Still unproven: whether anyone buys memory on its own.</p>
+        <p class="links"><a href="https://bahniman.github.io/heirloom/">Live demo ↗</a> <a href="https://github.com/Bahniman/heirloom">GitHub ↗</a></p>
+      </article>
+      <article class="item" data-cat="lab" id="turnstile">
+        <p class="kicker">Lab 03 · Commerce</p>
+        <h3>Turnstile</h3>
+        <p>Tells people, AI shopping agents and scrapers apart in a store's traffic, then serves each the right thing: the normal page, a clean product feed, or nothing. Tune the rules and watch six sessions re-sort.</p>
+        <p class="unproven">Still unproven: whether shoppers want an assistant buying for them at all.</p>
+        <p class="links"><a href="https://bahniman.github.io/turnstile/">Live demo ↗</a> <a href="https://github.com/Bahniman/turnstile">GitHub ↗</a></p>
+      </article>
+      <article class="item" data-cat="lab" id="windtunnel">
+        <p class="kicker">Lab 04 · Simulation</p>
+        <h3>Windtunnel</h3>
+        <p>Plays a price increase out 500 times across three customer groups and shows who leaves. A flat 12% rise holds up; at 30% it loses money in more than half the runs.</p>
+        <p class="unproven">Still unproven: customer behaviour is set by hand.</p>
+        <p class="links"><a href="https://bahniman.github.io/windtunnel/">Live demo ↗</a> <a href="https://github.com/Bahniman/windtunnel">GitHub ↗</a></p>
+      </article>
+      <article class="item" data-cat="lab" id="heir">
+        <p class="kicker">Lab 05 · Agents · Manakriti 3.0</p>
+        <h3>Heir</h3>
+        <p>Student committees change every year and their promises leave with them. Heir is five agents on one ledger: they read the club's mail and files, catch what the handover doc missed, and draft every email for a member to approve. Built with Team Ghost Protocol.</p>
+        <p class="unproven">Still unproven: it has only run on a mock club.</p>
+        <p class="links"><a href="https://bahniman.github.io/heir/">Live demo ↗</a> <a href="https://github.com/Bahniman/heir">GitHub ↗</a></p>
+      </article>
+      <article class="item" data-cat="lab" id="games">
+        <p class="kicker">Lab bonus · 2 games</p>
+        <h3>Make the calls I made</h3>
+        <p><b>Spot the edge cases:</b> a small feature request walks in; find everything it breaks before the clock hits zero. <b>Name the setting:</b> pick the label a first-week HR admin would understand.</p>
+        <p class="links"><a href="../#play">Play them ↗</a></p>
+      </article>
+
+      <!-- Record -->
+      <article class="item" data-cat="record" id="awards">
+        <p class="kicker">Record · Recognition</p>
+        <h3>Podiums, 2018 to 2026</h3>
+        <ul class="rows">
+          <li><b>2026</b> 3rd of 15, ReEnvision 5.0, with Realium</li>
+          <li><b>2026</b> Top 3 of 20, Aster DM IPO readiness</li>
+          <li><b>2024</b> Exemplary Contributor Award, Darwinbox</li>
+          <li><b>2019</b> 2nd, AutoCAD, NIRMAAN '19</li>
+          <li><b>2018</b> 3rd, ARCHENOVA smart city, Tecnoesis '18</li>
+          <li><b>2018</b> 2nd, Model Making, Swachhata Hi Seva</li>
+        </ul>
+      </article>
+      <article class="item" data-cat="record" id="campus">
+        <p class="kicker">Record · Campus</p>
+        <p class="big">8 / 118</p>
+        <h3>Prodzion and AURORA 4.0</h3>
+        <p>Elected to Prodzion, XLRI's product club, as one of 8 from 118 students. On the AURORA 4.0 organising team I ran panel, travel and hospitality end to end for 20+ industry leaders.</p>
+      </article>
+      <article class="item" data-cat="record" id="music">
+        <p class="kicker">Record · Off the clock</p>
+        <p class="big">100+</p>
+        <h3>Keyboardist, self-taught</h3>
+        <p>Played keys with the cultural team at inter-college fests including IIT Kharagpur and Guwahati, and uploaded 100+ songs to YouTube and Instagram.</p>
+      </article>
+
+      <!-- Ask me -->
+      <article class="item" data-cat="ask" id="ask1">
+        <p class="kicker">Ask me · Career</p>
+        <h3>Why move from civil engineering to software?</h3>
+        <p>Darwinbox came to campus early and I applied out of curiosity. Product work showed me the habit of planning a build in detail carries over. A PRD does for a software team what a good drawing does for a site.</p>
+      </article>
+      <article class="item" data-cat="ask" id="ask2">
+        <p class="kicker">Ask me · Career</p>
+        <h3>Why an MBA after 45 months?</h3>
+        <p>To build on the product work with a broader business view. Working with my manager and director showed me how decisions bring client needs, team priorities and business goals together. Both are XLRI alumni and backed my application.</p>
+      </article>
+      <article class="item" data-cat="ask" id="ask3">
+        <p class="kicker">Ask me · Working style</p>
+        <h3>How do you keep engineers unblocked?</h3>
+        <p>Edge cases, acceptance criteria and dependencies in every PRD, then a knowledge transfer with the developers before the sprint. The document carries the shared understanding; follow-ups are only for decisions that need one.</p>
+      </article>
+      <article class="item" data-cat="ask" id="ask4">
+        <p class="kicker">Ask me · Judgement</p>
+        <h3>What if your own feature doesn't land?</h3>
+        <p>My features reached 5% to 60% account-level adoption, and one I had high hopes for sat at the low end. I suspected rollout, then the drop-off data made me reconsider the design itself. I'd rather test assumptions in planning than let clients find the limits.</p>
+      </article>
+
+      <!-- Contact -->
+      <article class="item" data-cat="contact" id="contact">
+        <p class="kicker">Rare capsule · Contact</p>
+        <h3>Email is the quickest way to reach me.</h3>
+        <p class="links big-links"><a href="mailto:bahniman30@gmail.com">bahniman30@gmail.com</a></p>
+        <p class="links"><a href="https://www.linkedin.com/in/bahniman-talukdar-ab97a416a">LinkedIn ↗</a> <a href="https://github.com/Bahniman">GitHub ↗</a></p>
+        <p>Guwahati · Jamshedpur</p>
+      </article>
+
+    </div>
+  </section>
+</main>
+
+<footer class="foot"><p>© 2026 Bahniman Talukdar · Capsule edition, printed in five inks</p></footer>
+
+<div class="sr" id="announce" aria-live="assertive"></div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -31,6 +31,10 @@ python -m http.server 8000
 
 Then open <http://localhost:8000/>. Keep `index.html`, `site.css`, `site.js`, and `lenis.min.js` together. Google Fonts are requested remotely; system font fallbacks are defined in the stylesheet.
 
+## Capsule edition (v3)
+
+`v3/` is an experimental redesign: the same content dispensed from a capsule-toy machine. Turn the crank to drop a capsule, open it to print a ticket, and fill the collection tray; "Tip the whole machine out" shows every capsule at once. It is self-contained (`v3/index.html`, `v3/style.css`, `v3/app.js`) and served at `/v3/`.
+
 ## Source map
 
 - `index.html`: content, navigation, and semantic structure.
