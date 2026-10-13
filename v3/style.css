@@ -57,7 +57,7 @@ main{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
 .machine.shake{animation:shake .5s ease}
 @keyframes shake{20%{transform:rotate(-1.6deg)}40%{transform:rotate(1.4deg)}60%{transform:rotate(-1deg)}80%{transform:rotate(.6deg)}}
 
-.dome{position:relative;width:calc(var(--w) * .9);aspect-ratio:1;border-radius:50%;border:5px solid var(--ink);background:radial-gradient(circle at 50% 40%,rgba(255,250,240,.75),rgba(201,177,255,.28) 70%,rgba(148,184,255,.35));overflow:hidden;z-index:2}
+.dome{cursor:zoom-in;touch-action:pan-y;position:relative;width:calc(var(--w) * .9);aspect-ratio:1;border-radius:50%;border:5px solid var(--ink);background:radial-gradient(circle at 50% 40%,rgba(255,250,240,.75),rgba(201,177,255,.28) 70%,rgba(148,184,255,.35));overflow:hidden;z-index:2}
 .dome canvas{position:absolute;inset:0;width:100%;height:100%}
 .glass{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:
   radial-gradient(ellipse 22% 34% at 28% 26%,rgba(255,255,255,.85),rgba(255,255,255,0) 70%),
@@ -99,13 +99,21 @@ main{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
 
 /* the capsule that drops out of the chute */
 .drop{position:absolute;left:50%;bottom:8px;width:64px;height:64px;margin-left:-32px;border:none;background:none;padding:0;z-index:5;animation:dropIn .7s var(--bounce) both}
-.drop .half{position:absolute;left:0;width:64px;height:32px;border:3.5px solid var(--ink);transition:transform .45s var(--bounce),opacity .45s}
+.drop .half{position:absolute;z-index:1;left:0;width:64px;height:32px;border:3.5px solid var(--ink);transition:transform .45s var(--bounce),opacity .45s}
 .drop .top{top:0;border-radius:32px 32px 0 0;background:var(--c);border-bottom-width:2px}
 .drop .bot{bottom:0;border-radius:0 0 32px 32px;background:rgba(255,250,240,.92);border-top-width:2px}
 .drop .top::after{content:"";position:absolute;left:12px;top:7px;width:14px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);transform:rotate(-25deg)}
 .drop:hover .top{transform:translateY(-3px) rotate(-6deg)}
-.drop.open .top{transform:translate(-30px,-50px) rotate(-60deg);opacity:0}
-.drop.open .bot{transform:translate(26px,40px) rotate(40deg);opacity:0}
+.drop.open .top{transform:translate(-44px,-74px) rotate(-38deg);opacity:0;transition:transform .5s var(--ease),opacity .25s .38s}
+.drop.open .bot{transform:translate(40px,46px) rotate(26deg);opacity:0;transition:transform .5s var(--ease),opacity .25s .38s}
+/* exploded open: the halves fly apart and the serial slip jumps out before the ticket prints */
+.drop .slip{position:absolute;left:50%;top:50%;width:58px;margin:-12px 0 0 -29px;padding:3px 0;text-align:center;font-family:var(--mono);font-size:11px;font-weight:700;background:var(--stock);border:2px solid var(--ink);border-radius:4px;border-top:6px solid var(--c);opacity:0;transform:scale(.4);z-index:0}
+.drop.open .slip{animation:slipOut .62s var(--bounce) forwards}
+@keyframes slipOut{0%{opacity:0;transform:scale(.4)}35%{opacity:1;transform:translateY(-58px) scale(1.25) rotate(-8deg)}80%{opacity:1;transform:translateY(-64px) scale(1.2) rotate(-6deg)}100%{opacity:0;transform:translateY(-80px) scale(.9) rotate(-6deg)}}
+.drop .burst{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px;border-radius:50%;border:3px dashed var(--c);opacity:0;pointer-events:none}
+.drop.open .burst{animation:burst .5s var(--ease) forwards}
+@keyframes burst{0%{opacity:1;transform:scale(.6)}100%{opacity:0;transform:scale(2.4) rotate(40deg)}}
+.drop.open .drop-tag{opacity:0;transition:opacity .15s}
 .drop-tag{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:16px;white-space:nowrap;font-family:var(--mono);font-size:12px;font-weight:700;background:var(--yellow);border:2px solid var(--ink);border-radius:999px;padding:3px 10px;animation:pulse 1.2s ease-in-out infinite}
 @keyframes dropIn{0%{transform:translateY(-70px) scale(.5) rotate(-90deg);opacity:0}60%{opacity:1}100%{transform:none}}
 @keyframes pulse{50%{transform:translateX(-50%) scale(1.08)}}
