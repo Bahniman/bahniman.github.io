@@ -123,8 +123,13 @@
     marks = [];
     document.querySelectorAll('[data-scene]').forEach(function (el) {
       var r = el.getBoundingClientRect();
-      marks.push({ el: el, top: r.top + window.scrollY, h: Math.max(1, r.height), tod: parseFloat(el.getAttribute('data-tod')) || 0 });
+      marks.push({ el: el, top: r.top + window.scrollY, h: Math.max(1, r.height), tod: parseFloat(el.getAttribute('data-tod')) || 0, scene: el.getAttribute('data-scene') });
     });
+  }
+  function sceneAt(y) {
+    var s = marks.length ? marks[0].scene : '';
+    for (var i = 0; i < marks.length; i++) if (marks[i].top <= y) s = marks[i].scene;
+    return s;
   }
   function todAt(y) {
     var idx = 0;
@@ -140,7 +145,15 @@
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
   var LABELS = { hero: 'Top', glance: 'In short', play: 'Play', path: 'Throughline', work: 'Work', studies: 'Cases', lab: 'Lab', record: 'Record', ask: 'Ask', contact: 'Contact' };
   var allSecs = Object.keys(LABELS).map(function (id) { return document.getElementById(id); }).filter(Boolean);
-  var lastClock = '', lastSec = null, lastTone = '';
+  var lastClock = '', lastSec = null, lastTone = '', lastScene = '', lastSplit = null;
+  var paneCap = document.getElementById('paneCap');
+  var PLACES = {
+    tea: 'A tea estate in the morning mist, Assam',
+    village: 'A riverside village with chang ghar on stilts, Assam',
+    kaziranga: 'Grassland at Kaziranga, Assam',
+    river: 'The Brahmaputra at sunset',
+    rootbridge: 'A living root bridge, Meghalaya'
+  };
   var ticking = false;
   function update() {
     ticking = false;
@@ -153,8 +166,12 @@
     var p = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0;
     var tone = cur && cur.classList.contains('night') ? 'night' : 'day';
     var c = clockText(todAt(y + vh * 0.25));
+    var sc = sceneAt(y + vh * 0.5);
+    var split = window.innerWidth >= 1100 && hero && y > hero.offsetHeight * 0.55;
     /* writes */
     topBar.classList.toggle('solid', y > 24);
+    if (split !== lastSplit) { root.classList.toggle('split', split); lastSplit = split; }
+    if (paneCap && sc !== lastScene) { paneCap.textContent = PLACES[sc] || ''; lastScene = sc; }
     if (tone !== lastTone) { root.setAttribute('data-tone', tone); lastTone = tone; }
     if (floatBtn) floatBtn.classList.toggle('show', y > heroEnd);
     if (ring) ring.style.strokeDashoffset = String(100 - p * 100);
