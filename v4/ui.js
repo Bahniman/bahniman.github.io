@@ -123,8 +123,13 @@
     marks = [];
     document.querySelectorAll('[data-scene]').forEach(function (el) {
       var r = el.getBoundingClientRect();
-      marks.push({ el: el, top: r.top + window.scrollY, h: Math.max(1, r.height), tod: parseFloat(el.getAttribute('data-tod')) || 0 });
+      marks.push({ el: el, top: r.top + window.scrollY, h: Math.max(1, r.height), tod: parseFloat(el.getAttribute('data-tod')) || 0, scene: el.getAttribute('data-scene') });
     });
+  }
+  function sceneAt(y) {
+    var s = marks.length ? marks[0].scene : '';
+    for (var i = 0; i < marks.length; i++) if (marks[i].top <= y) s = marks[i].scene;
+    return s;
   }
   function todAt(y) {
     var idx = 0;
@@ -140,7 +145,17 @@
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
   var LABELS = { hero: 'Top', glance: 'In short', play: 'Play', path: 'Throughline', work: 'Work', studies: 'Cases', lab: 'Lab', record: 'Record', ask: 'Ask', contact: 'Contact' };
   var allSecs = Object.keys(LABELS).map(function (id) { return document.getElementById(id); }).filter(Boolean);
-  var lastClock = '', lastSec = null, lastTone = '';
+  var lastClock = '', lastSec = null, lastTone = '', lastScene = '', lastSplit = null;
+  var paneCap = document.getElementById('paneCap');
+  var PLACES = {
+    tea: 'A tea estate in the morning mist, Assam',
+    bridge: 'Bogibeel Bridge, Assam. Civil engineering came first.',
+    rootbridge: 'A living root bridge, Meghalaya. Core HRMS was the part every other module depends on.',
+    majuli: 'The Brahmaputra around Majuli. In case study 01, the path data showed where people stopped short.',
+    bamboo: 'Bamboo shaped by hand, Assam. Each Lab prototype has a working demo you can try.',
+    river: 'Sunset on the Brahmaputra',
+    night: 'A tea garden after dark, Assam'
+  };
   var ticking = false;
   function update() {
     ticking = false;
@@ -153,8 +168,12 @@
     var p = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0;
     var tone = cur && cur.classList.contains('night') ? 'night' : 'day';
     var c = clockText(todAt(y + vh * 0.25));
+    var sc = sceneAt(y + vh * 0.5);
+    var split = window.innerWidth >= 1100 && hero && y > hero.offsetHeight * 0.55;
     /* writes */
     topBar.classList.toggle('solid', y > 24);
+    if (split !== lastSplit) { root.classList.toggle('split', split); lastSplit = split; }
+    if (paneCap && sc !== lastScene) { paneCap.textContent = PLACES[sc] || ''; lastScene = sc; }
     if (tone !== lastTone) { root.setAttribute('data-tone', tone); lastTone = tone; }
     if (floatBtn) floatBtn.classList.toggle('show', y > heroEnd);
     if (ring) ring.style.strokeDashoffset = String(100 - p * 100);

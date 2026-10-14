@@ -21,13 +21,8 @@
 <link rel="preload" href="fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 <script>
-  /* pick the scene style before first paint so the right placeholder shows */
   (function () {
-    var s = null;
-    try { s = new URLSearchParams(location.search).get('set'); } catch (e) {}
-    if (s !== 'photo' && s !== 'painted') { try { s = localStorage.getItem('v4-scene-set'); } catch (e) {} }
-    if (s !== 'photo' && s !== 'painted') s = 'photo';
-    document.documentElement.setAttribute('data-set', s);
+    document.documentElement.setAttribute('data-set', 'photo');
     document.documentElement.classList.add('js');
   })();
 </script>
@@ -35,8 +30,6 @@
 <body>
 <div class="scene" aria-hidden="true">
   <div class="still" data-still="tea"></div>
-  <div class="still" data-still="river"></div>
-  <div class="still" data-still="rootbridge"></div>
   <canvas id="sceneGl"></canvas>
   <canvas id="sceneFx"></canvas>
 </div>
@@ -69,13 +62,10 @@
       <a href="#ask" data-go>Ask</a>
       <a href="#contact" data-go>Contact</a>
     </nav>
-    <div class="set-switch" role="group" aria-label="Scene style">
-      <span class="set-label">Scene style</span>
-      <button type="button" data-set-btn="photo" aria-pressed="true">Photo</button>
-      <button type="button" data-set-btn="painted" aria-pressed="false">Painted</button>
-    </div>
   </div>
 </header>
+
+<p class="pane-cap" id="paneCap" aria-hidden="true"></p>
 
 <button class="float" id="float" type="button" aria-label="Back to top">
   <svg class="ring" viewBox="0 0 36 36" aria-hidden="true"><circle class="ring-bg" cx="18" cy="18" r="16"/><circle class="ring-fg" id="ring" cx="18" cy="18" r="16" pathLength="100"/><path class="ring-up" d="M18 23V13m-4.5 4.5L18 13l4.5 4.5"/></svg>
@@ -137,7 +127,7 @@
 </section>
 
 <!-- ============ PLAY ============ -->
-<section class="sec" id="play" data-scene="tea" data-tod="0.55" aria-labelledby="play-h">
+<section class="sec" id="play" data-scene="tea" data-tod="0.6" aria-labelledby="play-h">
   <div class="wrap">
     <header class="sec-head reveal">
       <p class="kick"><span class="n">Play</span><span class="hour">7:40 am</span></p>
@@ -173,7 +163,7 @@
 </section>
 
 <!-- ============ THROUGHLINE ============ -->
-<section class="sec" id="path" data-scene="tea" data-tod="0.8" aria-labelledby="path-h">
+<section class="sec" id="path" data-scene="bridge" data-tod="1.0" aria-labelledby="path-h">
   <div class="wrap">
     <header class="sec-head-in reveal">
       <p class="kick"><span class="n">01</span>Throughline <span class="hour">8:40 am</span></p>
@@ -203,7 +193,7 @@
 </section>
 
 <!-- ============ WORK ============ -->
-<section class="sec" id="work" data-scene="tea" data-tod="1.1" aria-labelledby="work-h">
+<section class="sec" id="work" data-scene="rootbridge" data-tod="1.3" aria-labelledby="work-h">
   <div class="wrap">
     <header class="sec-head work-head reveal">
       <div>
@@ -281,10 +271,9 @@
   </div>
 </section>
 
-<div class="vista" data-scene="river" data-tod="1.6" aria-hidden="true"><p class="vista-cap">Late morning on the Brahmaputra</p></div>
 
 <!-- ============ CASE STUDIES · the river ============ -->
-<section class="sec" id="studies" data-scene="river" data-tod="1.8" aria-labelledby="studies-h">
+<section class="sec" id="studies" data-scene="majuli" data-tod="2.0" aria-labelledby="studies-h">
   <div class="wrap">
     <header class="sec-head reveal">
       <p class="kick"><span class="n">03</span>Case studies <span class="hour">12:40 pm</span></p>
@@ -331,7 +320,7 @@
 </section>
 
 <!-- ============ LAB · the river ============ -->
-<section class="sec" id="lab" data-scene="river" data-tod="2.3" aria-labelledby="lab-h">
+<section class="sec" id="lab" data-scene="bamboo" data-tod="2.6" aria-labelledby="lab-h">
   <div class="wrap">
     <header class="sec-head split reveal">
       <div>
@@ -392,10 +381,9 @@
   </div>
 </section>
 
-<div class="vista" data-scene="rootbridge" data-tod="2.9" aria-hidden="true"><p class="vista-cap dark">Dusk at a living root bridge, Meghalaya</p></div>
 
 <!-- ============ RECORD · the root bridge ============ -->
-<section class="sec night" id="record" data-scene="rootbridge" data-tod="3.1" aria-labelledby="record-h">
+<section class="sec night" id="record" data-scene="river" data-tod="3.0" aria-labelledby="record-h">
   <div class="wrap">
     <header class="sec-head reveal">
       <p class="kick"><span class="n">05</span>Record <span class="hour">6:20 pm</span></p>
@@ -432,7 +420,7 @@
 </section>
 
 <!-- ============ ASK ============ -->
-<section class="sec night" id="ask" data-scene="rootbridge" data-tod="3.5" aria-labelledby="ask-h">
+<section class="sec night" id="ask" data-scene="river" data-tod="3.4" aria-labelledby="ask-h">
   <div class="wrap">
     <header class="sec-head-in reveal">
       <p class="kick"><span class="n">06</span>Ask me <span class="hour">7:45 pm</span></p>
@@ -460,7 +448,7 @@
 </section>
 
 <!-- ============ CONTACT · night, fireflies ============ -->
-<section class="sec night contact" id="contact" data-scene="rootbridge" data-tod="4" aria-labelledby="contact-h">
+<section class="sec night contact" id="contact" data-scene="night" data-tod="4" aria-labelledby="contact-h">
   <div class="wrap">
     <div class="contact-in reveal">
       <p class="kick"><span class="n">07</span>Contact <span class="hour">9:30 pm</span></p>
@@ -484,14 +472,9 @@
         <span class="caps">Guwahati, Assam</span>
       </div>
       <div class="foot-row">
-        <div class="set-switch" role="group" aria-label="Scene style">
-          <span class="set-label">Scene style</span>
-          <button type="button" data-set-btn="photo" aria-pressed="true">Photo</button>
-          <button type="button" data-set-btn="painted" aria-pressed="false">Painted</button>
-        </div>
         <a class="foot-link" href="../">Previous edition</a>
       </div>
-      <p class="credit">The scenes of Assam and Meghalaya were generated with Figma AI and Gamma, then brought to life in the browser with WebGL. The day on this page runs from first light over the tea slopes to fireflies at the root bridge.</p>
+      <p class="credit">The scenes were generated with Gemini, then brought to life in the browser with WebGL. Each one stands for the section beside it, and the day runs from mist over the tea slopes to fireflies in the same gardens at night.</p>
     </footer>
   </div>
 </section>

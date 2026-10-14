@@ -1,7 +1,11 @@
-/* Bahniman Talukdar, v4: living scene engine + small UI.
-   One fixed WebGL canvas paints the active scene (tea, river, rootbridge) with
-   foliage sway, mist, water ripple and a time-of-day grade that follows scroll.
-   A 2D canvas on top carries falling leaves (tea) and fireflies (rootbridge).
+/* Bahniman Talukdar, v4: living scene engine.
+   One fixed WebGL canvas paints a day in Assam (tea estate, Bogibeel Bridge, a
+   living root bridge, Majuli, bamboo work, the Brahmaputra at sunset, the tea
+   garden at night), each scene matched to its section, with foliage sway, mist,
+   water ripple and a time-of-day grade that follows scroll. On wide screens the
+   text column covers the left side after the opening screen, and each photo
+   slides so its subject sits in the open pane on the right.
+   A 2D canvas on top carries falling leaves (tea) and fireflies (night).
    Without WebGL, CSS background layers crossfade instead. */
 (function () {
   'use strict';
@@ -10,7 +14,7 @@
   var mqReduce = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
   var reduce = mqReduce.matches;
   var touch = window.matchMedia ? matchMedia('(pointer: coarse)').matches : false;
-  var SCENES = ['tea', 'river', 'rootbridge'];
+  var SCENES = ['tea', 'bridge', 'rootbridge', 'majuli', 'bamboo', 'river', 'night'];
 
   /* ------------------------------------------------------------------
      Per-image config. All coordinates are fractions of the image
@@ -23,55 +27,59 @@
      water: {quad:[tl,tr,br,bl], rip (px), excl rect kept still}
      leaves:{x:[a,b], y:[a,b]} screen-fraction spawn box, tea scenes only
   ------------------------------------------------------------------ */
+  /* pane: the point kept centred in the open pane in split mode */
   var CONFIG = {
     photo: {
       tea: {
-        src: 'assets/photo-tea.webp', w: 2400, h: 1340,
-        focal: [0.6, 0.58], sway: 2.0, fg: [0, 0, 0, 0], fgY: 0.6,
-        mist: { x: [0.0, 1.0], y: [0.34, 0.52], amt: 0.34 },
+        src: 'assets/tea.webp', w: 2000, h: 890,
+        focal: [0.5, 0.5], pane: [0.72, 0.62], sway: 2.0, fg: [0, 0.55, 0.55, 1.0], fgY: 0.75,
+        mist: { x: [0.3, 1.0], y: [0.15, 0.55], amt: 0.22 },
         water: null,
-        leaves: { x: [0.7, 1.05], y: [-0.08, 0.3] }
+        leaves: { x: [0.55, 1.0], y: [-0.05, 0.2] }
       },
-      river: {
-        src: 'assets/photo-river.webp', w: 2048, h: 1143,
-        focal: [0.56, 0.62], sway: 2.2, fg: [0.7, 0.05, 1.0, 1.0], fgY: 0.86,
-        mist: { x: [0.0, 0.72], y: [0.4, 0.52], amt: 0.28 },
-        water: { quad: [[0.0, 0.465], [0.665, 0.465], [0.71, 0.86], [0.0, 0.95]], rip: 2.2, excl: [0.425, 0.69, 0.7, 0.815] }
+      bridge: {
+        src: 'assets/bridge.webp', w: 1780, h: 1116,
+        focal: [0.5, 0.5], pane: [0.6, 0.55], sway: 2.4, fg: [0, 0.62, 0.45, 1.0], fgY: 0.8,
+        mist: { x: [0.2, 1.0], y: [0.5, 0.58], amt: 0.25 },
+        water: { quad: [[0.3, 0.53], [1.0, 0.53], [1.0, 0.86], [0.42, 0.8]], rip: 1.2, excl: [0.38, 0.66, 0.84, 0.86] }
       },
       rootbridge: {
-        src: 'assets/photo-rootbridge.webp', w: 2048, h: 1152,
-        focal: [0.5, 0.52], sway: 1.8, fg: [0, 0, 0, 0], fgY: 0.55,
-        mist: { x: [0.36, 0.7], y: [0.04, 0.36], amt: 0.3 },
-        water: { quad: [[0.39, 0.69], [0.61, 0.69], [0.95, 1.0], [0.2, 1.0]], rip: 1.2, excl: [0, 0, 0, 0] }
-      }
-    },
-    painted: {
-      tea: {
-        src: 'assets/painted-tea.webp', w: 2048, h: 1143,
-        focal: [0.52, 0.56], sway: 2.4, fg: [0.58, 0.0, 1.0, 0.5], fgY: 0.7,
-        mist: { x: [0.3, 1.0], y: [0.34, 0.56], amt: 0.32 },
-        water: null,
-        leaves: { x: [0.62, 0.98], y: [0.0, 0.3] }
+        src: 'assets/rootbridge.webp', w: 1335, h: 837,
+        focal: [0.5, 0.5], pane: [0.52, 0.55], sway: 2.0, fg: [0.8, 0, 1.0, 0.5], fgY: 0.85,
+        mist: { x: [0.35, 0.7], y: [0.1, 0.4], amt: 0.2 },
+        water: { quad: [[0.38, 0.6], [0.6, 0.6], [0.75, 1.0], [0.25, 1.0]], rip: 1.3, excl: [0, 0, 0, 0] }
+      },
+      majuli: {
+        src: 'assets/majuli.webp', w: 1780, h: 1116,
+        focal: [0.5, 0.5], pane: [0.55, 0.6], sway: 1.0, fg: [0, 0, 0, 0], fgY: 1.2,
+        mist: { x: [0.0, 1.0], y: [0.14, 0.22], amt: 0.15 },
+        water: { quad: [[0.0, 0.3], [1.0, 0.3], [1.0, 1.0], [0.0, 1.0]], rip: 0.9, excl: [0, 0, 0, 0] }
+      },
+      bamboo: {
+        src: 'assets/bamboo.webp', w: 1780, h: 1116,
+        focal: [0.5, 0.5], pane: [0.66, 0.52], sway: 1.8, fg: [0, 0, 0, 0], fgY: 1.2,
+        mist: { x: [0.5, 1.0], y: [0.0, 0.35], amt: 0.12 },
+        water: null
       },
       river: {
-        src: 'assets/painted-river.webp', w: 2048, h: 1143,
-        focal: [0.34, 0.62], sway: 2.2, fg: [0.62, 0.1, 1.0, 1.0], fgY: 0.88,
-        mist: { x: [0.0, 0.66], y: [0.52, 0.63], amt: 0.3 },
-        water: { quad: [[0.0, 0.575], [0.6, 0.575], [0.74, 1.0], [0.0, 1.0]], rip: 2.0, excl: [0.17, 0.685, 0.38, 0.79] }
+        src: 'assets/river.webp', w: 1780, h: 1116,
+        focal: [0.48, 0.48], pane: [0.55, 0.55], sway: 2.0, fg: [0.66, 0.4, 1.0, 1.0], fgY: 0.9,
+        mist: { x: [0.0, 0.65], y: [0.34, 0.41], amt: 0.1 },
+        water: { quad: [[0.0, 0.41], [0.84, 0.41], [0.56, 1.0], [0.0, 1.0]], rip: 1.8, excl: [0.49, 0.66, 0.86, 0.93] }
       },
-      rootbridge: {
-        src: 'assets/painted-rootbridge.webp', w: 2048, h: 1143,
-        focal: [0.52, 0.55], sway: 1.8, fg: [0, 0, 0, 0], fgY: 0.6,
-        mist: { x: [0.34, 0.7], y: [0.0, 0.46], amt: 0.28 },
-        water: { quad: [[0.43, 0.69], [0.6, 0.69], [0.86, 1.0], [0.37, 1.0]], rip: 1.4, excl: [0, 0, 0, 0] }
+      night: {
+        src: 'assets/night.webp', w: 1780, h: 1116,
+        focal: [0.5, 0.5], pane: [0.55, 0.55], sway: 1.6, fg: [0, 0.6, 1.0, 1.0], fgY: 0.85,
+        mist: { x: [0.25, 0.9], y: [0.44, 0.56], amt: 0.3 },
+        water: null
       }
     }
   };
 
-  /* ---------------- scene style (photo / painted) ---------------- */
+  /* ---------------- scene set (one set: photo) ---------------- */
   var params = null;
   try { params = new URLSearchParams(location.search); } catch (e) {}
-  var set = root.getAttribute('data-set') === 'painted' ? 'painted' : 'photo';
+  var set = 'photo';
   var setBtns = document.querySelectorAll('[data-set-btn]');
   function markSet(name, busy) {
     setBtns.forEach(function (b) {
@@ -85,15 +93,23 @@
 
   /* ---------------- layout model ---------------- */
   var stills = {};
-  document.querySelectorAll('.still').forEach(function (el) { stills[el.getAttribute('data-still')] = el; });
   var sceneBox = document.querySelector('.scene');
+  document.querySelectorAll('.still').forEach(function (el) { stills[el.getAttribute('data-still')] = el; });
+  SCENES.forEach(function (sc) {
+    if (stills[sc] || !sceneBox) return;
+    var d = document.createElement('div'); d.className = 'still'; d.setAttribute('data-still', sc);
+    sceneBox.insertBefore(d, sceneBox.querySelector('canvas'));
+    stills[sc] = d;
+  });
   var marks = [];        // every [data-scene] block, in page order
   var bounds = [];       // scene changes
   var ranges = {};       // first/last y of each scene
-  var vw = innerWidth, vh = innerHeight;
+  var vw = innerWidth, vh = innerHeight, heroH = innerHeight;
+  var heroEl = document.getElementById('hero');
 
   function measure() {
     vw = innerWidth; vh = innerHeight;
+    heroH = heroEl ? heroEl.offsetHeight : vh;
     marks = [];
     document.querySelectorAll('[data-scene]').forEach(function (el) {
       var r = el.getBoundingClientRect();
@@ -141,8 +157,14 @@
     var r = ranges[scene]; if (!r) return 0;
     return Math.min(1, Math.max(0, (scrollY + vh * 0.5 - r.a) / Math.max(1, r.b - r.a)));
   }
+  /* split screen: 0 over the opening scene, 1 once the text column has arrived */
+  function splitAmt() {
+    if (vw < 1100) return 0;
+    return smooth((scrollY - heroH * 0.25) / (heroH * 0.55));
+  }
   function weights(st) {
-    var w = { tea: 0, river: 0, rootbridge: 0 };
+    var w = {};
+    SCENES.forEach(function (sc) { w[sc] = 0; });
     w[st.a] += 1 - st.mix;
     if (st.b) w[st.b] += st.mix;
     return w;
@@ -221,10 +243,10 @@
     '  float l = dot(c, vec3(.2126, .7152, .0722));',
     '  vec3 dawn = c * vec3(1.03, 1., .97) + vec3(.018, .01, 0.);',
     '  vec3 morn = sat(c, 1.06) * vec3(1.01, 1.02, 1.02) * 1.03;',
-    '  vec3 noon = sat(c, 1.1) * vec3(1.07, 1.02, .9);',
-    '  vec3 dusk = sat(c, 1.08) * vec3(1.14, .93, .74) * .94 + vec3(.03, .005, .02) * (1. - l);',
-    '  vec3 nb = sat(c, .55) * vec3(.82, .92, 1.08);',
-    '  nb = nb * nb * 1.1 + nb * .42 + vec3(.01, .016, .032);',
+    '  vec3 noon = sat(c, 1.04) * vec3(1.02, 1.01, .98);',
+    '  vec3 dusk = sat(c, 1.04) * vec3(1.06, .98, .9);',
+    '  vec3 nb = sat(c, .72) * vec3(.86, .94, 1.02);',
+    '  nb = nb * nb * .9 + nb * .5 + vec3(.008, .012, .022);',
     '  float warm = smoothstep(.35, .7, l) * smoothstep(.06, .22, c.r - c.b);',
     '  vec3 nt = mix(nb, c * 1.12, warm);',
     '  vec3 g = mix(dawn, morn, clamp(k, 0., 1.));',
@@ -278,7 +300,7 @@
   }
 
   /* ---------------- textures, lazy per style set ---------------- */
-  var store = { photo: {}, painted: {} };   // store[set][scene] = { tex, img, ready }
+  var store = { photo: {} };   // store[set][scene] = { tex, img, ready }
   var shown = set;                           // set whose textures are on screen
   function loadImage(src) {
     return new Promise(function (res, rej) {
@@ -349,6 +371,13 @@
     if (as > ai) view = [1 / zoom, (ai / as) / zoom];
     else view = [(as / ai) / zoom, 1 / zoom];
     var cx = cfg.focal[0], cy = cfg.focal[1] - 0.02 + 0.05 * p;
+    var sp = splitAmt();
+    if (sp > 0) {
+      /* keep the subject centred in the open pane to the right of the text column */
+      var col = Math.min(vw * 0.56, 900) / vw, pc = (col + 1) / 2, pf = cfg.pane || cfg.focal;
+      cx += (pf[0] - (pc - 0.5) * view[0] - cx) * sp;
+      cy += (pf[1] - cfg.focal[1]) * sp;
+    }
     if (!reduce) { cx += (mouse.sx - 0.5) * -0.012; cy += (mouse.sy - 0.5) * -0.008; }
     cx = Math.min(1 - view[0] / 2, Math.max(view[0] / 2, cx));
     cy = Math.min(1 - view[1] / 2, Math.max(view[1] / 2, cy));
@@ -425,7 +454,7 @@
     }
     /* fireflies near the root bridge */
     var maxF = vw < 720 ? 24 : 40;
-    var want = Math.round(maxF * Math.min(1, w.rootbridge * 1.15));
+    var want = Math.round(maxF * 0.7 * Math.min(1, w.night * 1.15));
     while (flies.length < want) flies.push(spawnFly());
     if (flies.length > want) flies.length = want;
     if (!flies.length) return;
@@ -440,7 +469,7 @@
       if (f.x < -0.05) f.x = 1.05; if (f.x > 1.05) f.x = -0.05;
       if (f.y < 0.15) f.vy += 0.004; if (f.y > 1.0) f.vy -= 0.004;
       var blink = Math.pow(0.5 + 0.5 * Math.sin(t * f.sp + f.ph), 3);
-      var al = blink * w.rootbridge * night;
+      var al = blink * w.night * night;
       if (al < 0.02) continue;
       var size = (10 + 14 * f.s) * dpr;
       ctx.globalAlpha = Math.min(1, al);
@@ -553,7 +582,7 @@
 
   /* ---------------- switching style sets ---------------- */
   function applySet(name, save) {
-    if (name !== 'photo' && name !== 'painted') return;
+    if (!CONFIG[name]) return;
     set = name;
     root.setAttribute('data-set', name);
     if (save) {

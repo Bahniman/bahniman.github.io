@@ -47,6 +47,7 @@
   --dur: .24s;
 
   --gutter: 16px;
+  --col: min(56vw, 900px);
   --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
   --sans: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
   color-scheme: light;
@@ -107,8 +108,7 @@ main:focus, section:focus { outline: none; }
 }
 .still.full { filter: none; transform: none; }
 .still[data-still="tea"] { opacity: 1; }
-html[data-set="photo"] .still[data-still="tea"] { background-color: #7d7d72; background-image: url(assets/photo-tea-ph.webp); background-position: 60% 58%; }
-html[data-set="painted"] .still[data-still="tea"] { background-color: #748372; background-image: url(assets/painted-tea-ph.webp); background-position: 50% 55%; }
+.still[data-still="tea"] { background-color: #8c9a88; background-image: url(assets/tea-ph.webp); background-position: 50% 50%; }
 .scene.gl-on .still { opacity: 0 !important; }
 #sceneFx { z-index: 1; }
 
@@ -217,43 +217,52 @@ p + p { margin-top: 16px; }
 }
 .btn.pri:hover { background: var(--accent-2); color: var(--on-accent); }
 
-/* ---------- fog: text sits in the scene's own mist ---------- */
+/* ---------- text on solid ground, the scene in the open ---------- */
+/* phones and tablets: chapters, each section solid, a window onto the scene between them */
 .panel { color: var(--ink); }
-.sec { position: relative; isolation: isolate; padding-block: 160px 96px; }
-.sec::before {
-  content: ''; position: absolute; z-index: -1; pointer-events: none;
-  left: 0; right: 0; top: 64px; bottom: 0;
-  background: linear-gradient(180deg,
-    rgba(var(--mist-rgb), 0) 0,
-    rgba(var(--mist-rgb), calc(var(--fog) * .7)) 96px,
-    rgba(var(--mist-rgb), var(--fog)) 176px,
-    rgba(var(--mist-rgb), var(--fog)) calc(100% - 96px),
-    rgba(var(--mist-rgb), 0) 100%);
-}
+.sec { position: relative; padding-block: 96px; background: rgb(var(--mist-rgb)); }
+.sec:not(.glance-sec) { margin-top: 56vh; }
 .sec .wrap { display: grid; gap: 64px; }
 .sec-head { max-width: 960px; }
 .sec-head-in { margin-bottom: 48px; }
 .sec-head .lede { margin-top: 24px; }
 .sec-head.split { max-width: none; display: grid; gap: 24px; align-items: end; }
 @media (min-width: 900px) { .sec-head.split { grid-template-columns: 1.4fr 1fr; gap: 64px; } .sec-head.split .lede { margin-top: 0; } }
-@media (max-width: 719px) { .sec { padding-block: 128px 64px; } .sec .wrap { gap: 48px; } }
+@media (max-width: 719px) { .sec { padding-block: 72px; } .sec .wrap { gap: 48px; } }
 
 .grid-2, .grid-3 { display: grid; gap: 40px; }
 @media (min-width: 720px) { .grid-2, .grid-3 { grid-template-columns: 1fr 1fr; gap: 48px 40px; } }
-@media (min-width: 1100px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* wide screens: split. A solid text column on the left, the living scene open on the right */
+@media (min-width: 1100px) {
+  .sec { margin-top: 0 !important; padding-block: 128px; background: linear-gradient(to right, rgb(var(--mist-rgb)) 0, rgb(var(--mist-rgb)) var(--col), transparent var(--col)); }
+  .sec .wrap { width: calc(var(--col) - 2 * var(--gutter)); margin-left: var(--gutter); margin-right: auto; }
+  .contact { min-height: 100vh; }
+  .work-head, .glance-grid, .spec, .feature, .edge, .lab, .g-endscreen, .sec-head.split, .path { grid-template-columns: 1fr !important; }
+  .sec-head.split .lede { margin-top: 0; }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .glance-side { grid-template-columns: 1fr 1fr; }
+  .edge-map, .admin { position: static !important; }
+  .path { gap: 32px; }
+  .path li { grid-template-columns: 160px 1fr; column-gap: 32px; }
+  .path li > * { grid-column: 2; }
+  .path li > .kick { grid-column: 1; grid-row: 1 / span 3; padding-top: 8px; }
+}
+
+/* the open pane names the place it shows */
+.pane-cap {
+  position: fixed; z-index: 2; left: calc(var(--col) + 32px); bottom: 32px; margin: 0;
+  max-width: min(440px, calc(100vw - var(--col) - 240px));
+  padding: 12px 16px; border-radius: var(--r-box); background: rgba(238, 240, 233, .94); color: #1c2a21;
+  font: italic 400 17px/1.35 var(--serif);
+  opacity: 0; transform: translateY(8px); transition: opacity .5s var(--ease), transform .5s var(--ease);
+  pointer-events: none;
+}
+html.split .pane-cap { opacity: 1; transform: none; }
+@media (max-width: 1099px) { .pane-cap { display: none; } }
 
 /* ruled items: a hairline above each block instead of a box around it */
 .item, .game, .projects li, .record > div, .link-card, .study, .feature { border-top: 1px solid var(--rule); padding-top: 24px; }
-
-/* open views of the scene between chapters */
-.vista { height: 72vh; position: relative; }
-.vista-cap {
-  position: absolute; left: var(--gutter); bottom: 32px;
-  display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: var(--r-pill);
-  background: rgba(238, 240, 233, .92); color: #1c2a21;
-  font: italic 400 17px/1.3 var(--serif);
-}
-.vista-cap.dark { background: rgba(11, 21, 28, .88); color: #eef0e9; }
 
 /* ---------- hero ---------- */
 .hero { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding: 128px 0 96px; overflow: hidden; overflow: clip; }
@@ -410,7 +419,6 @@ h1 .soft { display: block; margin-top: 16px; font-style: italic; font-size: .52e
 
 /* ---------- contact ---------- */
 .contact { min-height: 88vh; padding-bottom: 112px; display: flex; flex-direction: column; justify-content: flex-end; }
-.contact.sec::before { top: 30%; }
 .contact .wrap { gap: 64px; }
 .contact-in h2 { max-width: 20ch; }
 .mail { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
@@ -474,8 +482,7 @@ html[data-tone="night"] .float { --mist: #0b151c; --ink: #eef0e9; --ink-2: #b4c0
 .js .hero-cue.h-in { transform: translate(-50%, 16px); }
 .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
 .js .reveal.in { opacity: 1; transform: none; }
-.grid-3 > .reveal:nth-child(3n+2), .grid-2 > .reveal:nth-child(2n), .path > .reveal:nth-child(2) { transition-delay: .08s; }
-.grid-3 > .reveal:nth-child(3n), .path > .reveal:nth-child(3) { transition-delay: .16s; }
+.grid-3 > .reveal:nth-child(2n), .grid-2 > .reveal:nth-child(2n) { transition-delay: .08s; }
 
 /* ---------- case study tabs ---------- */
 .case-tabs { display: none; flex-wrap: wrap; gap: 8px; margin-bottom: -24px; }
