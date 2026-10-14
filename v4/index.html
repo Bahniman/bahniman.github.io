@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bahniman Talukdar · Product, analytics and strategy</title>
-<meta name="description" content="Bahniman Talukdar. What I built in 45 months on Core HRMS at Darwinbox, the calls behind it, and what I have done since at XLRI Jamshedpur. Three case studies, two games built from real decisions, and the Startup Lab.">
+<meta name="description" content="Bahniman Talukdar, from Assam. What I built in 45 months on Core HRMS at Darwinbox, the calls behind it, and what I have done since at XLRI. Three case studies, two games built from real decisions, and the Startup Lab.">
 <meta property="og:title" content="Bahniman Talukdar">
-<meta property="og:description" content="What I built at Darwinbox, the calls behind it, and two games that let you make the same calls. Now at XLRI Jamshedpur.">
+<meta property="og:description" content="What I built at Darwinbox, the calls behind it, and two games that let you make the same calls. Now at XLRI.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bahniman.github.io/v4/">
 <meta property="og:image" content="https://bahniman.github.io/og.png">
@@ -15,9 +15,9 @@
 <meta property="og:image:alt" content="Bahniman Talukdar portfolio: Spec it. Ship it. Then find out what it broke.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://bahniman.github.io/v4/">
-<meta name="theme-color" content="#f7f3ea">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%231f5cff'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='28' fill='%23fffaf1'%3Eb%3C/text%3E%3C/svg%3E">
-<link rel="preload" href="fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="theme-color" content="#eef0e9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%232f4a2c'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='30' fill='%23eef0e9'%3Eb%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="fonts/fraunces-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 <script>
@@ -44,35 +44,30 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="top" id="top">
-  <a class="name pill-solid" href="#hero" aria-label="Bahniman Talukdar, back to top"><span translate="no">Bahniman Talukdar</span></a>
+  <a class="name" href="#hero" data-go aria-label="Bahniman Talukdar, back to top"><span translate="no">Bahniman Talukdar</span></a>
   <div class="top-end">
-    <nav class="nav pill-solid" aria-label="Sections">
-      <a href="#play">Play</a>
-      <a href="#work">Work</a>
-      <a href="#studies">Cases</a>
-      <a href="#lab">Lab</a>
-      <a href="#record">Record</a>
-      <a href="#ask">Ask</a>
-      <a href="#contact">Contact</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#play" data-go>Play</a>
+      <a href="#work" data-go>Work</a>
+      <a href="#studies" data-go>Cases</a>
+      <a href="#lab" data-go>Lab</a>
+      <a href="#record" data-go>Record</a>
+      <a href="#ask" data-go>Ask</a>
+      <a href="#contact" data-go>Contact</a>
     </nav>
-    <div class="set-switch pill-solid hide-sm" role="group" aria-label="Scene style">
-      <span class="set-label">Scene style</span>
-      <button type="button" data-set-btn="photo" aria-pressed="true">Photo</button>
-      <button type="button" data-set-btn="painted" aria-pressed="false">Painted</button>
-    </div>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu">
       <span class="menu-txt">Menu</span>
     </button>
   </div>
-  <div class="menu panel" id="menu" hidden>
+  <div class="menu" id="menu" hidden>
     <nav aria-label="Sections">
-      <a href="#play">Play</a>
-      <a href="#work">Work</a>
-      <a href="#studies">Case studies</a>
-      <a href="#lab">Lab</a>
-      <a href="#record">Record</a>
-      <a href="#ask">Ask</a>
-      <a href="#contact">Contact</a>
+      <a href="#play" data-go>Play</a>
+      <a href="#work" data-go>Work</a>
+      <a href="#studies" data-go>Case studies</a>
+      <a href="#lab" data-go>Lab</a>
+      <a href="#record" data-go>Record</a>
+      <a href="#ask" data-go>Ask</a>
+      <a href="#contact" data-go>Contact</a>
     </nav>
     <div class="set-switch" role="group" aria-label="Scene style">
       <span class="set-label">Scene style</span>
@@ -82,129 +77,139 @@
   </div>
 </header>
 
+<button class="float" id="float" type="button" aria-label="Back to top">
+  <svg class="ring" viewBox="0 0 36 36" aria-hidden="true"><circle class="ring-bg" cx="18" cy="18" r="16"/><circle class="ring-fg" id="ring" cx="18" cy="18" r="16" pathLength="100"/><path class="ring-up" d="M18 23V13m-4.5 4.5L18 13l4.5 4.5"/></svg>
+  <span class="float-txt"><span class="clock" id="clock">5:30 am</span><span class="float-sec" id="floatSec">Top</span></span>
+</button>
+
 <main id="main" tabindex="-1">
 
-<!-- ============ HERO (tea) ============ -->
+<!-- ============ HERO · tea estate at first light ============ -->
 <section class="hero" id="hero" data-scene="tea" data-tod="0" aria-labelledby="hero-h">
   <div class="wrap">
     <div class="hero-copy">
-      <p class="kick">From Assam · 45 months building enterprise HR software · now at XLRI Jamshedpur</p>
-      <h1 id="hero-h"><span>Spec it.</span> <span>Ship it.</span> <span class="soft">Then find out what it broke.</span></h1>
-      <p class="dek">I spent 45 months at Darwinbox working with engineering, QA and consultants on clear product specs and release reviews. Civil engineering at NIT Silchar before that; the PGDM in General Management at XLRI Jamshedpur now.</p>
-      <div class="cta">
-        <a class="btn pri" href="#studies">Read the case studies</a>
-        <a class="btn" href="../#play">Play the games</a>
+      <p class="kick h-in">From Assam · 45 months building enterprise HR software · now at XLRI</p>
+      <h1 id="hero-h" class="h-in"><span>Spec it.</span> <span>Ship it.</span> <span class="soft">Then find out what it broke.</span></h1>
+      <p class="dek h-in">Home is Assam. I studied civil engineering at NIT Silchar, then spent 45 months at Darwinbox writing the specs that engineering, QA and consultants built from, and reviewing what each release would change. Now I am doing the PGDM in General Management at XLRI.</p>
+      <div class="cta h-in">
+        <a class="btn pri" href="#studies" data-go>Read the case studies</a>
+        <a class="btn" href="#play" data-go>Make two of my calls</a>
         <a class="btn" href="https://www.linkedin.com/in/bahniman-talukdar-ab97a416a" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
   </div>
+  <p class="hero-cue h-in" aria-hidden="true">Scroll, and the day moves with you</p>
 </section>
 
-<!-- ============ AT A GLANCE (tea) ============ -->
-<section class="sec glance-sec" id="glance" data-scene="tea" data-tod="0.3" aria-label="At a glance">
+<!-- ============ THE SHORT VERSION ============ -->
+<section class="sec glance-sec" id="glance" data-scene="tea" data-tod="0.3" aria-label="The short version">
   <div class="wrap glance-grid">
-    <div class="panel glance">
-      <p class="kick sm">At a glance</p>
+    <div class="glance reveal">
+      <p class="kick">The short version <span class="hour">6:40 am</span></p>
       <dl class="facts">
-        <div><dt>45</dt><dd>months at Darwinbox, Core HRMS</dd></div>
-        <div><dt>200+</dt><dd>product specs and edge-case documents owned</dd></div>
-        <div><dt>700+</dt><dd>features tagged in Pendo</dd></div>
+        <div><dt data-count>45</dt><dd>months at Darwinbox, on Core HRMS</dd></div>
+        <div><dt data-count>200+</dt><dd>product specs and edge-case documents owned</dd></div>
+        <div><dt data-count>700+</dt><dd>features tagged in Pendo</dd></div>
         <div><dt>Top 3</dt><dd>ReEnvision 5.0, with Realium</dd></div>
       </dl>
       <ul class="rows glance-rows">
-        <li><span class="yr">Now</span><div><b>PGDM, General Management</b><small>XLRI Jamshedpur · 2026 to 2027</small></div></li>
+        <li><span class="yr">Now</span><div><b>PGDM, General Management</b><small>XLRI · 2026 to 2027</small></div></li>
         <li><span class="yr">Before</span><div><b>Senior Product Analyst</b><small>Darwinbox · Jul 2022 to Mar 2026</small></div></li>
         <li><span class="yr">Degree</span><div><b>B.Tech, Civil Engineering</b><small>NIT Silchar · CGPA 8.99</small></div></li>
         <li><span class="yr">Aiming for</span><div><b>Product management, product analytics, technology consulting</b></div></li>
       </ul>
     </div>
     <div class="glance-side">
-      <a class="panel link-card" href="#studies">
-        <span class="kick sm">Case study 01 · Product analytics</span>
+      <a class="link-card reveal" href="#studies" data-go>
+        <span class="kick sm">Start here · Case study 01</span>
         <b>Low adoption that pointed to a findability problem</b>
-        <span class="go">Read it &rarr;</span>
+        <span class="hp">700+ features tagged, then path data that showed people getting close to features and never reaching them.</span>
+        <span class="go">Read it</span>
       </a>
-      <a class="panel link-card" href="../#play">
-        <span class="kick sm">Game 01 · 6 rounds</span>
-        <b>Spot the edge cases</b>
-        <span class="hp">A small feature request walks in. Find everything it quietly breaks before the clock hits zero.</span>
-        <span class="go">Play &rarr;</span>
-      </a>
-      <a class="panel link-card" href="../#play">
-        <span class="kick sm">Game 02 · 6 rounds</span>
-        <b>Name the setting</b>
-        <span class="hp">"Auto-trigger ONB workflow on DOJ." Pick the label a first-week HR admin would understand.</span>
-        <span class="go">Play &rarr;</span>
+      <a class="link-card reveal" href="#lab" data-go>
+        <span class="kick sm">From the Lab · Realium</span>
+        <b>A ₹18.6 lakh road bill, 60% paid the day after sign-off</b>
+        <span class="hp">3rd of 15 at ReEnvision 5.0. A live demo you can click through.</span>
+        <span class="go">See the Lab</span>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ============ PLAY (tea) ============ -->
+<!-- ============ PLAY ============ -->
 <section class="sec" id="play" data-scene="tea" data-tod="0.55" aria-labelledby="play-h">
   <div class="wrap">
-    <header class="panel sec-head">
-      <p class="kick"><span class="n">Play</span>Two calls from my work</p>
+    <header class="sec-head reveal">
+      <p class="kick"><span class="n">Play</span><span class="hour">7:40 am</span></p>
       <h2 id="play-h">Make the calls I made, <em>then see mine.</em></h2>
       <p class="lede">At Darwinbox almost every change raised two questions: what will this break, and will the people using it understand it. Each game puts you in front of six of those decisions, then shows the reasoning I would have used.</p>
     </header>
-    <div class="grid-2">
-      <article class="panel game">
+
+    <div class="arc-pick grid-2" id="arcPick">
+      <article class="game reveal">
         <p class="kick sm">Game 1 · 6 rounds · 60 seconds each</p>
         <h3>Spot the edge cases</h3>
         <p>A feature request lands and it sounds small. Find everything it breaks before the clock runs out, then see what you missed and why.</p>
-        <div class="game-foot"><a class="btn pri" href="../#play">Play</a><span class="note">Opens on the main site</span></div>
+        <div class="game-foot"><button type="button" class="btn pri" data-play="edge">Play</button><span class="best-score" id="bestEdge"></span></div>
       </article>
-      <article class="panel game">
+      <article class="game reveal">
         <p class="kick sm">Game 2 · 6 rounds · about 3 minutes</p>
         <h3>Name the setting</h3>
         <p>A new HR admin has to find the right switch in their first week. Pick the label they would understand without asking anyone.</p>
-        <div class="game-foot"><a class="btn pri" href="../#play">Play</a><span class="note">Opens on the main site</span></div>
+        <div class="game-foot"><button type="button" class="btn pri" data-play="label">Play</button><span class="best-score" id="bestLabel"></span></div>
       </article>
     </div>
-  </div>
-</section>
 
-<!-- ============ THROUGHLINE (tea) ============ -->
-<section class="sec" id="path" data-scene="tea" data-tod="0.8" aria-labelledby="path-h">
-  <div class="wrap">
-    <div class="panel">
-      <header class="sec-head-in">
-        <p class="kick"><span class="n">01</span>Throughline</p>
-        <h2 id="path-h">From site drawings <em>to software specs.</em></h2>
-      </header>
-      <ol class="path">
-        <li>
-          <p class="kick sm">2018 → 2022</p>
-          <h3>Civil engineering</h3>
-          <p class="org">NIT Silchar · B.Tech · CGPA 8.99</p>
-          <p>Most of my family are civil engineers in government service, and I picked the branch over the others my JEE rank allowed. What I kept from it is the habit of settling a design on paper before work starts on site.</p>
-        </li>
-        <li>
-          <p class="kick sm">2022 → 2026</p>
-          <h3>Product</h3>
-          <p class="org">Darwinbox · Product Analyst → Senior Product Analyst</p>
-          <p>I joined Darwinbox through campus placements. My role focused on defining product requirements and documenting them clearly for engineering, QA and consultants. Promoted in April 2025.</p>
-        </li>
-        <li>
-          <p class="kick sm">2026 → 2027</p>
-          <h3>Management</h3>
-          <p class="org">XLRI Jamshedpur · PGDM, General Management</p>
-          <p>I wanted to build on my product experience with a broader business perspective. My manager and director, both XLRI alumni, encouraged me to apply. XAT 94.88 percentile, 99.67 in Quant and DI.</p>
-        </li>
-      </ol>
+    <div class="stage" id="stage" hidden>
+      <div class="stage-bar">
+        <button type="button" class="back" id="stageBack"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>Both games</button>
+        <p class="stage-title" id="stageTitle"></p>
+        <ol class="dots" id="dots" aria-hidden="true"></ol>
+        <span class="g-timer" id="gTimer" hidden><i></i><span>60s</span></span>
+      </div>
+      <div class="stage-body" id="stageBody"></div>
     </div>
   </div>
 </section>
 
-<!-- ============ WORK (tea) ============ -->
+<!-- ============ THROUGHLINE ============ -->
+<section class="sec" id="path" data-scene="tea" data-tod="0.8" aria-labelledby="path-h">
+  <div class="wrap">
+    <header class="sec-head-in reveal">
+      <p class="kick"><span class="n">01</span>Throughline <span class="hour">8:40 am</span></p>
+      <h2 id="path-h">From site drawings <em>to software specs.</em></h2>
+    </header>
+    <ol class="path">
+      <li class="reveal">
+        <p class="kick sm">2018 → 2022</p>
+        <h3>Civil engineering</h3>
+        <p class="org">NIT Silchar · B.Tech · CGPA 8.99</p>
+        <p>Most of my family are civil engineers in government service, and I picked the branch over the others my JEE rank allowed. What I kept from it is the habit of settling a design on paper before work starts on site.</p>
+      </li>
+      <li class="reveal">
+        <p class="kick sm">2022 → 2026</p>
+        <h3>Product</h3>
+        <p class="org">Darwinbox · Product Analyst → Senior Product Analyst</p>
+        <p>I joined Darwinbox through campus placements. My role focused on defining product requirements and documenting them clearly for engineering, QA and consultants. Promoted in April 2025.</p>
+      </li>
+      <li class="reveal">
+        <p class="kick sm">2026 → 2027</p>
+        <h3>Management</h3>
+        <p class="org">XLRI · PGDM, General Management</p>
+        <p>I wanted to build on my product experience with a broader business perspective. My manager and director, both XLRI alumni, encouraged me to apply. XAT 94.88 percentile, 99.67 in Quant and DI.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
 <section class="sec" id="work" data-scene="tea" data-tod="1.1" aria-labelledby="work-h">
   <div class="wrap">
-    <header class="panel sec-head work-head">
+    <header class="sec-head work-head reveal">
       <div>
-        <p class="kick"><span class="n">02</span>Work</p>
-        <h2 id="work-h">Darwinbox</h2>
-        <p class="meta">JUL 2022 → MAR 2026 · 45 MONTHS · HYDERABAD</p>
+        <p class="kick"><span class="n">02</span>Work <span class="hour">9:50 am</span></p>
+        <h2 id="work-h">Darwinbox, <em>and the module everything else stands on.</em></h2>
+        <p class="meta">Jul 2022 → Mar 2026 · 45 months · Hyderabad</p>
       </div>
       <div>
         <p class="lede">Darwinbox sells HR software to large companies across Asia, the Middle East, Europe and North America. I worked on Core HRMS, the part every other module depends on: employee records, organisation structure, access control and bulk imports.</p>
@@ -216,46 +221,46 @@
       </div>
     </header>
 
-    <div class="grid-3" id="cases">
-      <article class="panel item">
+    <div class="grid-3">
+      <article class="item reveal">
         <p class="kick sm">Specs</p>
-        <div class="fig"><b>200+</b><span>Product specs</span></div>
+        <div class="fig"><b data-count>200+</b><span>product specs</span></div>
         <h3>Engineering-ready specs</h3>
         <p>The count is from Confluence: feature PRDs, change specs and edge-case documents I owned across Core, Travel and shared components. These included edge cases and acceptance criteria up front, giving engineering a shared implementation reference and QA explicit test conditions. I also worked on the Core HRMS roadmap with a Senior PM.</p>
       </article>
-      <article class="panel item">
+      <article class="item reveal">
         <p class="kick sm">Analytics</p>
-        <div class="fig"><b>700+</b><span>features tagged</span></div>
+        <div class="fig"><b data-count>700+</b><span>features tagged</span></div>
         <h3>Usage tracking in Pendo</h3>
         <p>I defined a consistent, searchable tagging taxonomy and maintained it as the UI changed, keeping adoption records comparable. This supported three continuous years of records and gave roadmap discussions a usage-data reference alongside client feedback and escalations.</p>
       </article>
-      <article class="panel item">
+      <article class="item reveal">
         <p class="kick sm">Research</p>
-        <div class="fig"><b>24,000+</b><span>survey responses</span></div>
+        <div class="fig"><b data-count>24,000+</b><span>survey responses</span></div>
         <h3>From survey to backlog</h3>
         <p>I set up in-app feedback for the new Profile page within days of its release. 24,000+ responses came back, and I sorted them with Engineering and QA into a ranked backlog for the same quarter. The page scored 4.3 out of 5.</p>
       </article>
-      <article class="panel item">
+      <article class="item reveal">
         <p class="kick sm">Analytics</p>
-        <div class="fig"><b>45%</b><span>less time on key actions</span></div>
+        <div class="fig"><b data-count>45%</b><span>less time on key actions</span></div>
         <h3>Measuring the Dashboard revamp</h3>
         <p>I owned the measurement behind the Dashboard revamp, not its design. I instrumented the old dashboard, defined the key actions people came to do, timed them, and ran the same measurement on the redesign. Across 322,000+ users, time on those actions fell 45% while completions held or rose, so people were finishing faster, not giving up. The analysis became the business case for further platform investment.</p>
       </article>
-      <article class="panel item">
+      <article class="item reveal">
         <p class="kick sm">Localisation</p>
-        <div class="fig"><b>10+</b><span>languages</span></div>
+        <div class="fig"><b data-count>10+</b><span>languages</span></div>
         <h3>Translation workflow</h3>
         <p>I owned the platform's translation workflow so the product team could manage routine updates independently. Each release I checked the languages I covered and used feedback from native-speaking clients to validate meaning and context.</p>
       </article>
-      <article class="panel item">
+      <article class="item reveal">
         <p class="kick sm">Quality</p>
-        <div class="fig"><b>100+</b><span>issues caught</span></div>
+        <div class="fig"><b data-count>100+</b><span>issues caught</span></div>
         <h3>Pre-release reviews</h3>
         <p>I logged 100+ issues during pre-release reviews, helping resolve them before they reached clients. I also audited the settings screens and, with UX and engineering, regrouped 50+ settings to make their names and placement more consistent.</p>
       </article>
     </div>
 
-    <div class="panel spec" aria-labelledby="spec-h">
+    <div class="spec reveal" aria-labelledby="spec-h">
       <div class="spec-head">
         <p class="kick">Inside a spec</p>
         <h3 id="spec-h">Eight questions every PRD had to answer</h3>
@@ -276,17 +281,22 @@
   </div>
 </section>
 
-<div class="vista" data-scene="river" data-tod="1.6" aria-hidden="true"></div>
+<div class="vista" data-scene="river" data-tod="1.6" aria-hidden="true"><p class="vista-cap">Late morning on the Brahmaputra</p></div>
 
-<!-- ============ CASE STUDIES (river) ============ -->
+<!-- ============ CASE STUDIES · the river ============ -->
 <section class="sec" id="studies" data-scene="river" data-tod="1.8" aria-labelledby="studies-h">
   <div class="wrap">
-    <header class="panel sec-head">
-      <p class="kick"><span class="n">03</span>Case studies</p>
-      <h2 id="studies-h">Three problems, <em>start to finish.</em></h2>
+    <header class="sec-head reveal">
+      <p class="kick"><span class="n">03</span>Case studies <span class="hour">12:40 pm</span></p>
+      <h2 id="studies-h">Three problems, <em>from the first signal to the result.</em></h2>
     </header>
+    <div class="case-tabs reveal" role="tablist" aria-label="Case studies">
+      <button type="button" role="tab" id="tab-c1" aria-controls="c1" aria-selected="true"><span class="no">01</span>Product analytics</button>
+      <button type="button" role="tab" id="tab-c2" aria-controls="c2" aria-selected="false" tabindex="-1"><span class="no">02</span>Localisation</button>
+      <button type="button" role="tab" id="tab-c3" aria-controls="c3" aria-selected="false" tabindex="-1"><span class="no">03</span>Strategy</button>
+    </div>
     <div class="studies">
-      <article class="panel study">
+      <article class="study" id="c1" role="tabpanel" aria-labelledby="tab-c1">
         <p class="kick sm">Case study 01 · Product analytics · Darwinbox</p>
         <h3>Low adoption that pointed to a findability problem</h3>
         <dl class="steps">
@@ -296,7 +306,7 @@
           <div><dt>What happened</dt><dd>We shipped clearer names, help text and a reorganisation of existing settings to improve findability and comprehension. The same approach informed the broader settings audit described in Work.</dd></div>
         </dl>
       </article>
-      <article class="panel study">
+      <article class="study" id="c2" role="tabpanel" aria-labelledby="tab-c2">
         <p class="kick sm">Case study 02 · Localisation · Darwinbox</p>
         <h3>Making localisation work in context</h3>
         <dl class="steps">
@@ -306,8 +316,8 @@
           <div><dt>What happened</dt><dd>Product teams could manage routine translation updates without engineering support each cycle. Turnaround improved from waiting for a sprint to the same release cycle, across 10+ languages.</dd></div>
         </dl>
       </article>
-      <article class="panel study">
-        <p class="kick sm">Case study 03 · Strategy · XLRI Jamshedpur</p>
+      <article class="study" id="c3" role="tabpanel" aria-labelledby="tab-c3">
+        <p class="kick sm">Case study 03 · Strategy · XLRI</p>
         <h3>An IPO-readiness deck where every number had to survive a question</h3>
         <dl class="steps">
           <div><dt>The problem</dt><dd>Our team assessed for a panel whether Aster DM Healthcare's Gulf business was organisationally ready for an IPO. The argument rested on listed-peer comparisons, regulation and penalty figures, and much of that first turned up in secondary sources.</dd></div>
@@ -320,18 +330,18 @@
   </div>
 </section>
 
-<!-- ============ LAB (river) ============ -->
+<!-- ============ LAB · the river ============ -->
 <section class="sec" id="lab" data-scene="river" data-tod="2.3" aria-labelledby="lab-h">
   <div class="wrap">
-    <header class="panel sec-head split">
+    <header class="sec-head split reveal">
       <div>
-        <p class="kick"><span class="n">04</span>Startup Lab</p>
-        <h2 id="lab-h">Five prototypes, <em>each with a live demo.</em></h2>
+        <p class="kick"><span class="n">04</span>Startup Lab <span class="hour">2:50 pm</span></p>
+        <h2 id="lab-h">Five prototypes <em>you can walk through.</em></h2>
       </div>
-      <p class="lede">Each one has a working demo you can click through, and the code for all five is public on GitHub.</p>
+      <p class="lede">Each one has a working demo you can click through, and the code for all five is public on GitHub. The other four also say plainly what is still unproven.</p>
     </header>
 
-    <article class="panel feature">
+    <article class="feature reveal">
       <div class="feature-copy">
         <p class="kick sm">01 · Settlement · Top 3, ReEnvision 5.0</p>
         <h3>Realium</h3>
@@ -350,28 +360,28 @@
     </article>
 
     <ul class="grid-2 projects">
-      <li class="panel">
+      <li class="reveal">
         <p class="kick sm">02 · Memory</p>
         <h3>Heirloom</h3>
         <p>Keeps a firm's knowledge as records the firm owns, so it survives people leaving and AI vendors changing. The demo vault lets you ask as three different roles, make a partner leave, and export everything as one file.</p>
         <p class="unproven"><b>Still unproven:</b> whether anyone buys memory on its own rather than bundled with an assistant. The likeliest first buyer is a regulated firm that has lived through a costly migration.</p>
         <div class="plinks"><a href="https://bahniman.github.io/heirloom/" target="_blank" rel="noopener">Live demo <span aria-hidden="true">↗</span></a><a href="https://github.com/Bahniman/heirloom" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></div>
       </li>
-      <li class="panel">
+      <li class="reveal">
         <p class="kick sm">03 · Commerce</p>
         <h3>Turnstile</h3>
         <p>Tells people, AI shopping agents and scrapers apart in a store's traffic, then serves each the right thing: the normal page, a clean product feed, or nothing. The demo lets you tune the rules and watch six sessions re-sort.</p>
         <p class="unproven"><b>Still unproven:</b> whether shoppers want an assistant buying for them at all. My bet is that clear controls and a visible receipt would earn that trust.</p>
         <div class="plinks"><a href="https://bahniman.github.io/turnstile/" target="_blank" rel="noopener">Live demo <span aria-hidden="true">↗</span></a><a href="https://github.com/Bahniman/turnstile" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></div>
       </li>
-      <li class="panel">
+      <li class="reveal">
         <p class="kick sm">04 · Simulation</p>
         <h3>Windtunnel</h3>
         <p>Plays a price increase out 500 times across three customer groups and shows who leaves and how often the move backfires. A flat 12% rise holds up; at 30% it loses money in more than half the runs.</p>
         <p class="unproven"><b>Still unproven:</b> the customer behaviour, which is set by hand. The next step is checking the model against real past price changes.</p>
         <div class="plinks"><a href="https://bahniman.github.io/windtunnel/" target="_blank" rel="noopener">Live demo <span aria-hidden="true">↗</span></a><a href="https://github.com/Bahniman/windtunnel" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></div>
       </li>
-      <li class="panel">
+      <li class="reveal">
         <p class="kick sm">05 · Agents · Manakriti 3.0</p>
         <h3>Heir</h3>
         <p>Student committees change every year, and what the old team promised sponsors, speakers and campus offices leaves with them. Heir is five agents on one ledger: they read the club's own mail and files, catch what the handover doc missed, plan the next event and draft every email for a member to approve. The demo is a game: take over a club, then run it with Heir. Built with Team Ghost Protocol for XLRI's Manakriti 3.0 agent challenge.</p>
@@ -382,17 +392,17 @@
   </div>
 </section>
 
-<div class="vista" data-scene="rootbridge" data-tod="2.9" aria-hidden="true"></div>
+<div class="vista" data-scene="rootbridge" data-tod="2.9" aria-hidden="true"><p class="vista-cap dark">Dusk at a living root bridge, Meghalaya</p></div>
 
-<!-- ============ RECORD (rootbridge) ============ -->
+<!-- ============ RECORD · the root bridge ============ -->
 <section class="sec night" id="record" data-scene="rootbridge" data-tod="3.1" aria-labelledby="record-h">
   <div class="wrap">
-    <header class="panel sec-head">
-      <p class="kick"><span class="n">05</span>Record</p>
-      <h2 id="record-h">Recognition <em>and life outside work.</em></h2>
+    <header class="sec-head reveal">
+      <p class="kick"><span class="n">05</span>Record <span class="hour">6:20 pm</span></p>
+      <h2 id="record-h">Recognition, <em>and the music after hours.</em></h2>
     </header>
     <div class="grid-3 record">
-      <div class="panel">
+      <div class="reveal">
         <p class="kick sm">Recognition</p>
         <ul class="rows">
           <li><span class="yr">2026</span><div><b>3rd of 15 teams, ReEnvision 5.0</b><small>XLRI Digital Transformation Conclave, with Realium</small></div></li>
@@ -403,15 +413,15 @@
           <li><span class="yr">2018</span><div><b>2nd, Model Making</b><small>Swachhata Hi Seva 2018, Ministry of Human Resource Development</small></div></li>
         </ul>
       </div>
-      <div class="panel">
+      <div class="reveal">
         <p class="kick sm">Campus</p>
         <ul class="rows">
           <li><span class="yr">2026</span><div><b>Prodzion, XLRI's product club</b><small>Elected club member, 8 of 118 students</small></div></li>
           <li><span class="yr">2026</span><div><b>AURORA 4.0 organising team</b><small>End-to-end panel, travel and hospitality for 20+ industry leaders</small></div></li>
         </ul>
       </div>
-      <div class="panel">
-        <p class="kick sm">Off the clock</p>
+      <div class="reveal">
+        <p class="kick sm">After hours</p>
         <ul class="rows">
           <li><span class="yr">Keys</span><div><b>Keyboardist</b><small>Played with the cultural team at inter-college fests, including IIT Kharagpur and Guwahati</small></div></li>
           <li><span class="yr">100+</span><div><b>Self-taught musician</b><small>Songs uploaded to my YouTube and Instagram accounts</small></div></li>
@@ -421,41 +431,39 @@
   </div>
 </section>
 
-<!-- ============ ASK (rootbridge) ============ -->
+<!-- ============ ASK ============ -->
 <section class="sec night" id="ask" data-scene="rootbridge" data-tod="3.5" aria-labelledby="ask-h">
   <div class="wrap">
-    <div class="panel">
-      <header class="sec-head-in">
-        <p class="kick"><span class="n">06</span>Ask me</p>
-        <h2 id="ask-h">Four questions <em>I get asked.</em></h2>
-      </header>
-      <div class="asks">
-        <details class="ask">
-          <summary><span class="kick sm">Career</span><b>Why move from civil engineering to software?</b><span class="rv" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="v" d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
-          <div class="ans"><p>Civil engineering is still close to me. Most of my family works in it, and I still enjoy seeing how things get built. Darwinbox came to campus early, and I applied out of curiosity. Moving into product work showed me how the habit of planning a build in detail could carry over to software. A PRD does for a software team what a good drawing does for a site. I found a new setting in which to use that skill.</p></div>
-        </details>
-        <details class="ask">
-          <summary><span class="kick sm">Career</span><b>Why an MBA after 45 months at Darwinbox?</b><span class="rv" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="v" d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
-          <div class="ans"><p>I wanted to build on my product experience and develop a broader business perspective. Working with my manager and director helped me understand how decisions bring client needs, team priorities and business goals together. Both are XLRI alumni and encouraged and supported my application.</p></div>
-        </details>
-        <details class="ask">
-          <summary><span class="kick sm">Working style</span><b>How do you keep engineers unblocked?</b><span class="rv" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="v" d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
-          <div class="ans"><p>I documented edge cases, acceptance criteria and dependencies in each PRD. Before the coming sprint, I coordinated with the developers taking up the work and scheduled a knowledge transfer. The document and handover established a shared understanding, while follow-up discussions focused on decisions that needed clarification.</p></div>
-        </details>
-        <details class="ask">
-          <summary><span class="kick sm">Judgement</span><b>What do you do when your own feature does not land?</b><span class="rv" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="v" d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
-          <div class="ans"><p>Features I owned reached anywhere from 5% to 60% account-level adoption, and one I had high hopes for was at the low end. I initially thought rollout might explain it, then reviewed the drop-off data and reconsidered the design. The evidence did not support the value I had expected it to deliver. I would rather test my assumptions during planning than have clients encounter avoidable limitations after release.</p></div>
-        </details>
-      </div>
+    <header class="sec-head-in reveal">
+      <p class="kick"><span class="n">06</span>Ask me <span class="hour">7:45 pm</span></p>
+      <h2 id="ask-h">Four questions <em>people ask me.</em></h2>
+    </header>
+    <div class="asks reveal">
+      <details class="ask">
+        <summary><span class="kick sm">Career</span><b>Why move from civil engineering to software?</b><span class="rv" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="v" d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+        <div class="ans"><p>Civil engineering is still close to me. Most of my family works in it, and I still enjoy seeing how things get built. Darwinbox came to campus early, and I applied out of curiosity. Moving into product work showed me how the habit of planning a build in detail could carry over to software. A PRD does for a software team what a good drawing does for a site. I found a new setting in which to use that skill.</p></div>
+      </details>
+      <details class="ask">
+        <summary><span class="kick sm">Career</span><b>Why an MBA after 45 months at Darwinbox?</b><span class="rv" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="v" d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+        <div class="ans"><p>I wanted to build on my product experience and develop a broader business perspective. Working with my manager and director helped me understand how decisions bring client needs, team priorities and business goals together. Both are XLRI alumni and encouraged and supported my application.</p></div>
+      </details>
+      <details class="ask">
+        <summary><span class="kick sm">Working style</span><b>How do you keep engineers unblocked?</b><span class="rv" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="v" d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+        <div class="ans"><p>I documented edge cases, acceptance criteria and dependencies in each PRD. Before the coming sprint, I coordinated with the developers taking up the work and scheduled a knowledge transfer. The document and handover established a shared understanding, while follow-up discussions focused on decisions that needed clarification.</p></div>
+      </details>
+      <details class="ask">
+        <summary><span class="kick sm">Judgement</span><b>What do you do when your own feature does not land?</b><span class="rv" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="v" d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+        <div class="ans"><p>Features I owned reached anywhere from 5% to 60% account-level adoption, and one I had high hopes for was at the low end. I initially thought rollout might explain it, then reviewed the drop-off data and reconsidered the design. The evidence did not support the value I had expected it to deliver. I would rather test my assumptions during planning than have clients encounter avoidable limitations after release.</p></div>
+      </details>
     </div>
   </div>
 </section>
 
-<!-- ============ CONTACT (rootbridge, night) ============ -->
+<!-- ============ CONTACT · night, fireflies ============ -->
 <section class="sec night contact" id="contact" data-scene="rootbridge" data-tod="4" aria-labelledby="contact-h">
   <div class="wrap">
-    <div class="panel contact-in">
-      <p class="kick"><span class="n">07</span>Contact</p>
+    <div class="contact-in reveal">
+      <p class="kick"><span class="n">07</span>Contact <span class="hour">9:30 pm</span></p>
       <h2 id="contact-h">Email is the quickest way <em>to reach me.</em></h2>
       <div class="mail">
         <a href="mailto:bahniman30@gmail.com" class="mail-link">bahniman30@gmail.com</a>
@@ -465,14 +473,15 @@
         <span class="copied" id="copied" role="status" aria-live="polite"></span>
       </div>
       <div class="links">
+        <a class="btn pri" href="mailto:bahniman30@gmail.com">Write to me</a>
         <a class="btn" href="https://www.linkedin.com/in/bahniman-talukdar-ab97a416a" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
         <a class="btn" href="https://github.com/Bahniman" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
       </div>
     </div>
-    <footer class="panel foot">
+    <footer class="foot">
       <div class="foot-row">
         <span>© 2026 Bahniman Talukdar</span>
-        <span class="caps">GUWAHATI · JAMSHEDPUR</span>
+        <span class="caps">Guwahati, Assam</span>
       </div>
       <div class="foot-row">
         <div class="set-switch" role="group" aria-label="Scene style">
@@ -480,15 +489,18 @@
           <button type="button" data-set-btn="photo" aria-pressed="true">Photo</button>
           <button type="button" data-set-btn="painted" aria-pressed="false">Painted</button>
         </div>
-        <a class="foot-link" href="../">Main site</a>
+        <a class="foot-link" href="../">Previous edition</a>
       </div>
-      <p class="credit">The background scenes of Assam and Meghalaya were generated with Figma AI and Gamma, then animated in the browser with WebGL.</p>
+      <p class="credit">The scenes of Assam and Meghalaya were generated with Figma AI and Gamma, then brought to life in the browser with WebGL. The day on this page runs from first light over the tea slopes to fireflies at the root bridge.</p>
     </footer>
   </div>
 </section>
 
 </main>
 
+<script src="lenis.min.js" defer></script>
 <script src="scene.js" defer></script>
+<script src="ui.js" defer></script>
+<script src="games.js" defer></script>
 </body>
 </html>

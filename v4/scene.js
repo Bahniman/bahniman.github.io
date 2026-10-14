@@ -453,17 +453,6 @@
   /* ---------------- render loop ---------------- */
   var mode = 'none';   // 'gl' | 'css'
   var raf = 0, t0 = performance.now(), last = t0, dirty = true, firstFrame = false;
-  var navLinks = document.querySelectorAll('.nav a, .menu nav a');
-  var currentSec = null;
-  function markNav(st) {
-    var id = st.el && st.el.id ? st.el.id : '';
-    if (id === currentSec) return;
-    currentSec = id;
-    navLinks.forEach(function (a) {
-      if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
-    });
-  }
-
   function frame(now) {
     raf = 0;
     var dt = Math.min(0.05, Math.max(0, (now - last) / 1000)); last = now;
@@ -474,7 +463,6 @@
     mouse.sx += (mouse.x - mouse.sx) * Math.min(1, dt * 2.5);
     mouse.sy += (mouse.y - mouse.sy) * Math.min(1, dt * 2.5);
     var st = readScroll();
-    markNav(st);
     var w = weights(st);
     var wind = 0.55 * Math.sin(t * 0.55) + 0.3 * Math.sin(t * 1.3 + 1.7);
 
@@ -601,64 +589,4 @@
   loadSet(set, startScene).then(function () { markSet(set, false); }).catch(function () {});
   kick();
 
-  /* ================== UI ================== */
-
-  /* menu (small screens) */
-  var menuBtn = document.getElementById('menuBtn'), menu = document.getElementById('menu');
-  function setMenu(open) {
-    menu.hidden = !open;
-    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    menuBtn.querySelector('.menu-txt').textContent = open ? 'Close' : 'Menu';
-    if (open) { var f = menu.querySelector('a'); if (f) f.focus(); }
-  }
-  if (menuBtn && menu) {
-    menuBtn.addEventListener('click', function (e) { e.stopPropagation(); setMenu(menu.hidden); });
-    menu.addEventListener('click', function (e) { e.stopPropagation(); if (e.target.closest('a')) setMenu(false); });
-    document.addEventListener('click', function () { if (!menu.hidden) setMenu(false); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { setMenu(false); menuBtn.focus(); } });
-  }
-
-  /* move focus with in-page jumps so keyboard users land in the section */
-  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-    a.addEventListener('click', function () {
-      var id = a.getAttribute('href').slice(1);
-      var el = id && document.getElementById(id);
-      if (!el) return;
-      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
-      setTimeout(function () { el.focus({ preventScroll: true }); }, 0);
-    });
-  });
-
-  /* spec checklist */
-  var specBtns = document.querySelectorAll('.spec-list button');
-  var specBar = document.getElementById('specBar');
-  var specStatus = document.getElementById('specStatus');
-  function specUpdate() {
-    var n = document.querySelectorAll('.spec-list button[aria-pressed="true"]').length, all = specBtns.length;
-    if (specBar) specBar.style.transform = 'scaleX(' + (n / all) + ')';
-    if (specStatus) {
-      specStatus.textContent = n === all ? 'All eight answered · ready for engineering' : 'Tick each one off · ' + n + ' of ' + all;
-      specStatus.classList.toggle('done', n === all);
-    }
-  }
-  specBtns.forEach(function (b) {
-    b.addEventListener('click', function () {
-      b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
-      specUpdate();
-    });
-  });
-
-  /* copy email */
-  var copyBtn = document.getElementById('copy'), copied = document.getElementById('copied');
-  if (copyBtn && copied) copyBtn.addEventListener('click', function () {
-    var addr = 'bahniman30@gmail.com';
-    var done = function () {
-      copied.textContent = 'Copied';
-      clearTimeout(copyBtn._t);
-      copyBtn._t = setTimeout(function () { copied.textContent = ''; }, 2200);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(addr).then(done, function () { copied.textContent = 'Select and copy the address'; });
-    } else { copied.textContent = 'Select and copy the address'; }
-  });
 })();
