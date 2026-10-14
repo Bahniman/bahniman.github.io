@@ -1,10 +1,11 @@
 /* Bahniman Talukdar, v4: living scene engine.
-   One fixed WebGL canvas paints a day in Assam (tea estate, riverside village,
-   Kaziranga, the Brahmaputra, a root bridge at night) with foliage sway, mist,
+   One fixed WebGL canvas paints a day in Assam (tea estate, Bogibeel Bridge, a
+   living root bridge, Majuli, bamboo work, the Brahmaputra at sunset, the tea
+   garden at night), each scene matched to its section, with foliage sway, mist,
    water ripple and a time-of-day grade that follows scroll. On wide screens the
    text column covers the left side after the opening screen, and each photo
    slides so its subject sits in the open pane on the right.
-   A 2D canvas on top carries falling leaves (tea) and fireflies (root bridge).
+   A 2D canvas on top carries falling leaves (tea) and fireflies (night).
    Without WebGL, CSS background layers crossfade instead. */
 (function () {
   'use strict';
@@ -13,7 +14,7 @@
   var mqReduce = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
   var reduce = mqReduce.matches;
   var touch = window.matchMedia ? matchMedia('(pointer: coarse)').matches : false;
-  var SCENES = ['tea', 'village', 'kaziranga', 'river', 'rootbridge'];
+  var SCENES = ['tea', 'bridge', 'rootbridge', 'majuli', 'bamboo', 'river', 'night'];
 
   /* ------------------------------------------------------------------
      Per-image config. All coordinates are fractions of the image
@@ -36,17 +37,29 @@
         water: null,
         leaves: { x: [0.55, 1.0], y: [-0.05, 0.2] }
       },
-      village: {
-        src: 'assets/village.webp', w: 1780, h: 1116,
-        focal: [0.42, 0.5], pane: [0.42, 0.55], sway: 2.2, fg: [0, 0.38, 0.2, 0.78], fgY: 0.82,
-        mist: { x: [0.6, 1.0], y: [0.33, 0.42], amt: 0.14 },
-        water: { quad: [[0.0, 0.64], [0.66, 0.6], [0.78, 1.0], [0.0, 1.0]], rip: 1.6, excl: [0.33, 0.56, 0.54, 0.69] }
+      bridge: {
+        src: 'assets/bridge.webp', w: 1780, h: 1116,
+        focal: [0.5, 0.5], pane: [0.6, 0.55], sway: 2.4, fg: [0, 0.62, 0.45, 1.0], fgY: 0.8,
+        mist: { x: [0.2, 1.0], y: [0.5, 0.58], amt: 0.25 },
+        water: { quad: [[0.3, 0.53], [1.0, 0.53], [1.0, 0.86], [0.42, 0.8]], rip: 1.2, excl: [0.38, 0.66, 0.84, 0.86] }
       },
-      kaziranga: {
-        src: 'assets/kaziranga.webp', w: 1780, h: 1116,
-        focal: [0.55, 0.52], pane: [0.57, 0.58], sway: 2.8, fg: [0, 0, 0, 0], fgY: 0.45,
-        mist: { x: [0.0, 1.0], y: [0.27, 0.34], amt: 0.12 },
-        water: { quad: [[0.0, 0.38], [1.0, 0.38], [1.0, 1.0], [0.0, 1.0]], rip: 1.1, excl: [0.5, 0.53, 0.64, 0.64] }
+      rootbridge: {
+        src: 'assets/rootbridge.webp', w: 1335, h: 837,
+        focal: [0.5, 0.5], pane: [0.52, 0.55], sway: 2.0, fg: [0.8, 0, 1.0, 0.5], fgY: 0.85,
+        mist: { x: [0.35, 0.7], y: [0.1, 0.4], amt: 0.2 },
+        water: { quad: [[0.38, 0.6], [0.6, 0.6], [0.75, 1.0], [0.25, 1.0]], rip: 1.3, excl: [0, 0, 0, 0] }
+      },
+      majuli: {
+        src: 'assets/majuli.webp', w: 1780, h: 1116,
+        focal: [0.5, 0.5], pane: [0.55, 0.6], sway: 1.0, fg: [0, 0, 0, 0], fgY: 1.2,
+        mist: { x: [0.0, 1.0], y: [0.14, 0.22], amt: 0.15 },
+        water: { quad: [[0.0, 0.3], [1.0, 0.3], [1.0, 1.0], [0.0, 1.0]], rip: 0.9, excl: [0, 0, 0, 0] }
+      },
+      bamboo: {
+        src: 'assets/bamboo.webp', w: 1780, h: 1116,
+        focal: [0.5, 0.5], pane: [0.66, 0.52], sway: 1.8, fg: [0, 0, 0, 0], fgY: 1.2,
+        mist: { x: [0.5, 1.0], y: [0.0, 0.35], amt: 0.12 },
+        water: null
       },
       river: {
         src: 'assets/river.webp', w: 1780, h: 1116,
@@ -54,11 +67,11 @@
         mist: { x: [0.0, 0.65], y: [0.34, 0.41], amt: 0.1 },
         water: { quad: [[0.0, 0.41], [0.84, 0.41], [0.56, 1.0], [0.0, 1.0]], rip: 1.8, excl: [0.49, 0.66, 0.86, 0.93] }
       },
-      rootbridge: {
-        src: 'assets/rootbridge.webp', w: 2048, h: 1152,
-        focal: [0.5, 0.52], pane: [0.5, 0.55], sway: 1.8, fg: [0, 0, 0, 0], fgY: 0.55,
-        mist: { x: [0.36, 0.7], y: [0.04, 0.36], amt: 0.3 },
-        water: { quad: [[0.39, 0.69], [0.61, 0.69], [0.95, 1.0], [0.2, 1.0]], rip: 1.2, excl: [0, 0, 0, 0] }
+      night: {
+        src: 'assets/night.webp', w: 1780, h: 1116,
+        focal: [0.5, 0.5], pane: [0.55, 0.55], sway: 1.6, fg: [0, 0.6, 1.0, 1.0], fgY: 0.85,
+        mist: { x: [0.25, 0.9], y: [0.44, 0.56], amt: 0.3 },
+        water: null
       }
     }
   };
@@ -441,7 +454,7 @@
     }
     /* fireflies near the root bridge */
     var maxF = vw < 720 ? 24 : 40;
-    var want = Math.round(maxF * Math.min(1, w.rootbridge * 1.15));
+    var want = Math.round(maxF * 0.7 * Math.min(1, w.night * 1.15));
     while (flies.length < want) flies.push(spawnFly());
     if (flies.length > want) flies.length = want;
     if (!flies.length) return;
@@ -456,7 +469,7 @@
       if (f.x < -0.05) f.x = 1.05; if (f.x > 1.05) f.x = -0.05;
       if (f.y < 0.15) f.vy += 0.004; if (f.y > 1.0) f.vy -= 0.004;
       var blink = Math.pow(0.5 + 0.5 * Math.sin(t * f.sp + f.ph), 3);
-      var al = blink * w.rootbridge * night;
+      var al = blink * w.night * night;
       if (al < 0.02) continue;
       var size = (10 + 14 * f.s) * dpr;
       ctx.globalAlpha = Math.min(1, al);

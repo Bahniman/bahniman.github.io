@@ -149,10 +149,12 @@
   var paneCap = document.getElementById('paneCap');
   var PLACES = {
     tea: 'A tea estate in the morning mist, Assam',
-    village: 'A riverside village with chang ghar on stilts, Assam',
-    kaziranga: 'Grassland at Kaziranga, Assam',
-    river: 'The Brahmaputra at sunset',
-    rootbridge: 'A living root bridge, Meghalaya'
+    bridge: 'Bogibeel Bridge, Assam. Civil engineering came first.',
+    rootbridge: 'A living root bridge, Meghalaya. Core HRMS was the part every other module depends on.',
+    majuli: 'The Brahmaputra around Majuli. In case study 01, the path data showed where people stopped short.',
+    bamboo: 'Bamboo shaped by hand, Assam. Each Lab prototype has a working demo you can try.',
+    river: 'Sunset on the Brahmaputra',
+    night: 'A tea garden after dark, Assam'
   };
   var ticking = false;
   function update() {
